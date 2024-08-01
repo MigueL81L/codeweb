@@ -1,0 +1,96 @@
+<x-app-layout>
+    <!--El método asset hace referencia a mi carpeta public-->
+    <!--Cabecera, Buscador-->
+    <section style="background-image: url({{ asset('img/home/pexelsHome.jpg') }})" class="bg-cover">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
+            <div class="w-full md:w-3/4 lg:w-1/2">
+                <h1 class="text-white font-bold text-4xl">Domina la tecnología web con CodeWeb</h1>
+                <p class="text-white text-lg mt-2 mb-4">En CodeWeb encontrarás cursos, manuales y artículos que 
+                    te ayudarán a convertirte en un profesional del desarrollo web</p>
+
+                {{--Código buscador encapsulado en componente livewire--}}
+                @livewire('search')
+        </div>
+    </section>
+    <!--Contenido-->
+    <section class="mt-24">
+        <h1 class="text-gray-600 text-center text-3xl mb-6">Contenido</h1>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
+            <article>
+                <figure>
+                    <img class="rounded-xl w-full h-72 object-cover" src="{{ asset('img/home/turkey.jpg') }}" alt="">
+                </figure>
+                <header class="mt-2">
+                    <h1 class="text-center text-xl text-gray-700">Cursos y Proyectos</h1>
+                    <p class="text-sm text-gray-500">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam corporis, non, repudiandae cupiditate voluptate, 
+                    </p>
+                </header>
+            </article>
+            <article>
+                <figure>
+                    <img class="rounded-xl w-full h-72 object-cover" src="{{ asset('img/home/frogs.jpg') }}" alt="">
+                </figure>
+                <header class="mt-2">
+                    <h1 class="text-center text-xl text-gray-700">Manual de Laravel</h1>
+                    <p class="text-sm text-gray-500">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam corporis, non, repudiandae cupiditate voluptate, 
+                    </p>
+                </header>
+            </article>
+            <article>
+                <figure>
+                    <img class="rounded-xl w-full h-72 object-cover" src="{{ asset('img/home/gorilla.jpg') }}" alt="">
+                </figure>
+                <header class="mt-2">
+                    <h1 class="text-center text-xl text-gray-700">Blog</h1>
+                    <p class="text-sm text-gray-500">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam corporis, non, repudiandae cupiditate voluptate, 
+                    </p>
+                </header>
+            </article>
+            <article>
+                <figure>
+                    <img class="rounded-xl w-full h-72 object-cover" src="{{ asset('img/home/owl.jpg') }}" alt="">
+                </figure>
+                <header class="mt-2">
+                    <h1 class="text-center text-xl text-gray-700">Desarrollo Web</h1>
+                    <p class="text-sm text-gray-500">
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam corporis, non, repudiandae cupiditate voluptate, 
+                    </p>
+                </header>
+            </article>
+        </div>
+    </section>
+
+    <!--Filtro-->
+    <section class="mt-24 bg-gray-700 py-12">
+        <h1 class="text-center text-white text-3xl">¿No sabes que curso te puede interesar?</h1>
+        <p class="text-center text-white">
+            Dirígete al catálogo de cursos y filtralos por categoría o nivel
+        </p>
+        <div class="flex justify-center mt-4">
+            <a href="{{ route('courses.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Catálogo de Cursos
+            </a>
+        </div>
+    </section>
+
+    <!--Listado últimos cursos-->
+    <section class="my-24">
+        <h1 class="text-center text-3xl text-gray-600">Ultimos Cursos</h1>
+        <p class="text-center text-gray-500 text-sm mb-6">Siempre estamos subiendo Cursos</p>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
+            @foreach ($courses as $course)
+
+                <!--Código encapsulado en un componente-->
+                <x-instructor.course-card :course="$course" />
+
+            @endforeach
+        </div>
+    </section>
+</x-app-layout>
+
+
+
