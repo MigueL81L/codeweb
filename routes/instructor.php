@@ -12,7 +12,7 @@ use App\Livewire\Instructor\InstructorCourses;
 Route::middleware(['auth'])->group(function () {
 
     // Redirigir a la lista de cursos cuando se navega a /instructor
-    Route::redirect('/', '/instructor/courses')->name('home');
+    Route::redirect('/', '/instructor/courses')->name('instructor');
 
 
     // Las 7 rutas típicas del CRUD de courses
@@ -41,9 +41,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Ruta para la pagina del instructor, que mostrará los courses de este
-    Route::get('/instructor-courses/{user}', [InstructorController::class, 'bring'])
-                ->middleware('can:Leer cursos')
-                ->name('instructor.instructor-courses');
+    // Route::get('/instructor-courses/{user}', [InstructorController::class, 'bring'])
+    //             ->middleware('can:Leer cursos')
+    //             ->name('instructor.instructor-courses');
 
 });
 
