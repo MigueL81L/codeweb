@@ -223,27 +223,41 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-
-        // Verifica si el usuario autenticado tiene el permiso de 'Actualizar cursos'
-        // y si es el creador del curso (usuario autenticado debe ser el mismo que el creador del curso)
+        // Verifica si el usuario tiene permiso y es el creador del curso
         if (Gate::denies('Eliminar cursos') || $course->user_id !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
-
-        // Elimina la imagen si existe
-        if ($course->courseImage) {
-            Storage::delete($course->courseImage->path);
-            $course->courseImage->delete();
+    
+        // Eliminar la imagen del curso si existe
+        if ($course->image_path && Storage::exists($course->image_path)) {
+            Storage::delete($course->image_path); // Elimina la imagen
         }
     
-        // Elimina el curso
+        // Eliminar el video promocional si existe
+        if ($course->video_path && Storage::exists($course->video_path)) {
+            Storage::delete($course->video_path);
+        }
+    
+        // Eliminar todas las lecciones asociadas
+        foreach ($course->lessons as $lesson) {
+            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                Storage::delete($lesson->video_path); // Elimina el video de la lección
+            }
+            
+            if ($lesson->image_path && Storage::exists($lesson->image_path)) {
+                Storage::delete($lesson->image_path); // Elimina la imagen de la lección (si aplica)
+            }
+    
+            $lesson->delete(); // Borra la lección de la base de datos
+        }
+    
+        // Finalmente, elimina el curso
         $course->delete();
     
-        // Redirige a la vista de la lista de cursos con un mensaje de éxito
         session()->flash('flash.banner', "El curso '{$course->title}' ha sido eliminado con éxito."); 
-    
         return redirect()->route('instructor.courses.index');
     }
+    
     
     
 

@@ -131,34 +131,23 @@ class ManageLessons extends Component
         $lesson = Lesson::find($lessonId);
     
         // Verificar y eliminar el video asociado a la lección
-        if ($lesson->video_path) {
-            if (Storage::exists($lesson->video_path)) {
-                Storage::delete($lesson->video_path);
-            }
+        if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+            Storage::delete($lesson->video_path);
         }
     
         // Verificar y eliminar la imagen de portada asociada a la lección (si aplica)
-        if ($lesson->image_path) {
-            if (Storage::exists($lesson->image_path)) {
-                Storage::delete($lesson->image_path);
-            }
+        if ($lesson->image_path && Storage::exists($lesson->image_path)) {
+            Storage::delete($lesson->image_path);
         }
-        
-        // Verificar si los archivos se eliminaron correctamente antes de borrar la lección de la base de datos
-        $videoDeleted = (!$lesson->video_path || !Storage::exists($lesson->video_path));
-        $posterDeleted = (!$lesson->image_path || !Storage::exists($lesson->image_path));
     
-        if ($videoDeleted && $posterDeleted) {
-            // Eliminar la lección de la base de datos
-            $lesson->delete();
+        // Eliminar la lección de la base de datos
+        $lesson->delete();
     
-            // Actualizar la lista de lecciones y otras acciones si la eliminación fue exitosa
-            $this->getLessons();
-            $this->dispatch('refreshOrderLessons');
-        } else {
-            return response()->json(['message' => 'Error al eliminar los archivos asociados'], 500);
-        }
+        // Actualizar la lista de lecciones
+        $this->getLessons();
+        $this->dispatch('refreshOrderLessons');
     }
+    
 
     public function render()
     {
