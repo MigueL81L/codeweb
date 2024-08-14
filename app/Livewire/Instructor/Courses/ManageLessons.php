@@ -52,8 +52,7 @@ class ManageLessons extends Component
         ];
     
         if ($this->lessonCreate['platform'] == 1) {
-            // Aumentar el tamaño del archivo a 250MB = 250 * 1024 KB = 256000 KB
-            $rules['video'] = 'required|file|mimes:mp4,mov,avi,wmv,flv,3gp|max:256000'; 
+            $rules['video'] = 'required|mimes:mp4,mov,avi,wmv,flv,3gp';
         } else {
             $rules['url'] = ['required', 'regex:/^(?:https?:\/\/)?(?:www\.)?(youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=))([\w-]{10,12})/'];
         }
