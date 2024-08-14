@@ -62,36 +62,54 @@ class ManageLessons extends Component
 
     public function store()
     {
+        Log::info('Inicio del proceso de almacenamiento de lección.');
+    
         $this->validate();
+        Log::info('Validación completada con éxito.');
     
         $this->lessonCreate['section_id'] = $this->section->id;
     
         if ($this->lessonCreate['platform'] == 1) {
+            Log::info('Plataforma seleccionada: Video normal.');
+    
             $this->lessonCreate['video_original_name'] = $this->video->getClientOriginalName();
+            Log::info('Nombre original del video:', [$this->lessonCreate['video_original_name']]);
     
-            // Asegurarte de que el video esté aprobado para la carga
             if ($this->video) {
-                // Guarda temporalmente el archivo para verificar
-                $temporaryFilePath = $this->video->store('courses/lessons', 'public');
+                Log::info('Archivo de video disponible para cargar.');
     
-                // Registra el resultado para verificar que se está almacenando
-                Log::info('Video subido exitosamente:', [$temporaryFilePath]);
+                try {
+                    $temporaryFilePath = $this->video->store('courses/lessons', 'public');
+                    Log::info('Video subido exitosamente.', [$temporaryFilePath]);
     
-                $lesson = $this->section->lessons()->create($this->lessonCreate);
-                $lesson->video_path = $temporaryFilePath;
-                $lesson->save();
+                    $lesson = $this->section->lessons()->create($this->lessonCreate);
+                    $lesson->video_path = $temporaryFilePath;
+                    $lesson->save();
+                    Log::info('Lección creada y video_path guardado.', ['lesson_id' => $lesson->id]);
+                } catch (\Exception $e) {
+                    Log::error('Error subiendo video:', [$e->getMessage()]);
+                }
+            } else {
+                Log::warning('No se encontró archivo de video para cargar.');
             }
         } else {
+            Log::info('Plataforma seleccionada: YouTube.');
+            
             $this->lessonCreate['video_original_name'] = $this->url;
             $lesson = $this->section->lessons()->create($this->lessonCreate);
+            Log::info('Lección creada con video de YouTube.', ['lesson_id' => $lesson->id]);
         }
     
         VideoUploaded::dispatch($lesson);
+        Log::info('Evento VideoUploaded despachado.');
     
         $this->reset(['url', 'lessonCreate', 'video']);
         $this->getLessons();
         $this->dispatch('refreshOrderLessons');
+        
+        Log::info('Completados los pasos finales y interfaz de usuario actualizada.');
     }
+    
     
 
     public function edit($lessonId)
