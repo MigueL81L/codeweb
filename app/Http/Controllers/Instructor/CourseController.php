@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Policies\CoursePolicy;
 use Illuminate\Support\Facades\Gate;
+use Exception;
+
 
 class CourseController extends Controller
 {
@@ -227,36 +229,59 @@ class CourseController extends Controller
         if (Gate::denies('Eliminar cursos') || $course->user_id !== auth()->id()) {
             abort(403, 'Unauthorized action.');
         }
+        
+        try {
+            // Eliminar todos los reviews
+            $course->reviews()->delete();
     
-        // Eliminar la imagen del curso si existe
-        if ($course->image_path && Storage::exists($course->image_path)) {
-            Storage::delete($course->image_path); // Elimina la imagen
-        }
+            // Eliminar goals asociados
+            $course->goals()->delete();
     
-        // Eliminar el video promocional si existe
-        if ($course->video_path && Storage::exists($course->video_path)) {
-            Storage::delete($course->video_path);
-        }
+            // Eliminar requerimientos asociados
+            $course->requirements()->delete();
     
-        // Eliminar todas las lecciones asociadas
-        foreach ($course->lessons as $lesson) {
-            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-                Storage::delete($lesson->video_path); // Elimina el video de la lección
+            // Recorrer y eliminar cada lección
+            foreach ($course->lessons as $lesson) {
+                if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                    Storage::delete($lesson->video_path);
+                }
+    
+                if ($lesson->image_path && Storage::exists($lesson->image_path)) {
+                    Storage::delete($lesson->image_path);
+                }
+    
+                $lesson->delete();
             }
-            
-            if ($lesson->image_path && Storage::exists($lesson->image_path)) {
-                Storage::delete($lesson->image_path); // Elimina la imagen de la lección (si aplica)
+    
+            // Eliminar secciones
+            $course->sections()->delete();
+    
+            // Eliminar la imagen del curso
+            if ($course->courseImage) {
+                if (Storage::exists($course->courseImage->path)) {
+                    Storage::delete($course->courseImage->path);
+                }
+                $course->courseImage->delete();
             }
     
-            $lesson->delete(); // Borra la lección de la base de datos
+            // Eliminar videos del curso si existe
+            if ($course->video_path && Storage::exists($course->video_path)) {
+                Storage::delete($course->video_path);
+            }
+    
+            // Finalmente, elimina el curso
+            $course->delete();
+    
+            session()->flash('flash.banner', "El curso '{$course->title}' ha sido eliminado con éxito.");
+        } catch (Exception $e) {
+            // Controla o registra el error
+            report($e);
+            return back()->withErrors(['msg' => 'Error al intentar eliminar el curso: ' . $e->getMessage()]);
         }
     
-        // Finalmente, elimina el curso
-        $course->delete();
-    
-        session()->flash('flash.banner', "El curso '{$course->title}' ha sido eliminado con éxito."); 
         return redirect()->route('instructor.courses.index');
     }
+    
     
     
     
