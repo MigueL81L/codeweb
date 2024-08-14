@@ -7,7 +7,7 @@
     x-on:livewire-upload-progress="progress = $event.detail.progress"
 >
     <!-- File Input -->
-    <input type="file" {{$attributes->merge(['wire:model' => 'video'])}}>
+    <input type="file" {{$attributes->wire('model')}}>
 
     <!-- Progress Bar -->
     <div x-show="uploading">

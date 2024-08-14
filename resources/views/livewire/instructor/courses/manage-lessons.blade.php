@@ -157,7 +157,6 @@
                         <x-label>Video</x-label>
                         {{-- Componente creado para mostrar barra de progreso --}}
                         <x-progress-indicators wire:model="video" />
-                        <x-input-error for="video" />
                     </div>
                     <div class="mt-2" x-show="platform == 2" x-cloak>
                         <x-label>Video Youtube</x-label>
@@ -171,7 +170,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> 
 
 
 
