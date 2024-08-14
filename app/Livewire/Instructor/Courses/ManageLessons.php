@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 use App\Events\VideoUploaded; // Importa el evento
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Storage; // Importa la clase Storage de Laravel
+use Illuminate\Support\Facades\Log;
 
 class ManageLessons extends Component
 {
@@ -62,28 +63,36 @@ class ManageLessons extends Component
     public function store()
     {
         $this->validate();
-
+    
         $this->lessonCreate['section_id'] = $this->section->id;
-
+    
         if ($this->lessonCreate['platform'] == 1) {
             $this->lessonCreate['video_original_name'] = $this->video->getClientOriginalName();
+    
+            // Asegurarte de que el video esté aprobado para la carga
+            if ($this->video) {
+                // Guarda temporalmente el archivo para verificar
+                $temporaryFilePath = $this->video->store('courses/lessons', 'public');
+    
+                // Registra el resultado para verificar que se está almacenando
+                Log::info('Video subido exitosamente:', [$temporaryFilePath]);
+    
+                $lesson = $this->section->lessons()->create($this->lessonCreate);
+                $lesson->video_path = $temporaryFilePath;
+                $lesson->save();
+            }
         } else {
             $this->lessonCreate['video_original_name'] = $this->url;
+            $lesson = $this->section->lessons()->create($this->lessonCreate);
         }
-
-        $lesson = $this->section->lessons()->create($this->lessonCreate);
-
-        if ($this->lessonCreate['platform'] == 1 && $this->video) {
-            $lesson->video_path = $this->video->store('courses/lessons');
-            $lesson->save();
-        }
-
+    
         VideoUploaded::dispatch($lesson);
-
+    
         $this->reset(['url', 'lessonCreate', 'video']);
         $this->getLessons();
         $this->dispatch('refreshOrderLessons');
     }
+    
 
     public function edit($lessonId)
     {
