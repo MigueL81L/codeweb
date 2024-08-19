@@ -1,10 +1,10 @@
 {{-- resources/views/livewire/course-status.blade.php --}}
-
-<div x-data="{ current: @entangle('current') }">
+<div>
     <div class="mt-8">
-        <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2" x-bind:key="current.id">
+        <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
+            <div class="lg:col-span-2">
                 @if ($this->current)
+                    
                     @if ($this->current->platform == 2)
                         <div class="embed-responsive">
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>

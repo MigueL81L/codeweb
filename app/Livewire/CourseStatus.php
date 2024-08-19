@@ -55,9 +55,6 @@ class CourseStatus extends Component
         });
 
         $this->updatePrevNext();
-
-        // Emitir un evento para notificar que la lección ha cambiado
-        $this->dispatchBrowserEvent('lesson-changed');
     }
 
     private function updatePrevNext()
