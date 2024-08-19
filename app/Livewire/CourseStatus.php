@@ -47,10 +47,12 @@ class CourseStatus extends Component
         $this->authorize('enrolled', $course);
     }
 
-    public function changeLesson(Lesson $lesson)
+    public function changeLesson($lessonId)
     {
+        $lesson = $this->lfs->firstWhere('id', $lessonId);
+    
         if (!$lesson) {
-            abort(404, "Lección no encontrada");
+            abort(404, "Lección no encontrada: " . $lessonId);
         }
     
         $this->current = $lesson;
@@ -58,8 +60,10 @@ class CourseStatus extends Component
     
         $this->updatePrevNext();
     
+        // Emitir el evento correctamente
         $this->dispatchBrowserEvent('lesson-changed', ['id' => $lesson->id]);
     }
+    
     
     
 
