@@ -1,28 +1,23 @@
 {{-- resources/views/livewire/course-status.blade.php --}}
-<div x-data="{ currentVideoKey: 0 }" @lesson-changed.window="currentVideoKey++">
+<div>
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
                 
                 @if ($current)
-                    {{-- Comprueba la plataforma del vídeo para decidir si usar iframe o video --}}
                     @if ($current->platform == 2)
                         <div class="embed-responsive">
-                            {{-- Renderiza un iframe para videos de YouTube --}}
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
-                        {{-- Usa la propiedad ':key' para forzar al navegador a re-renderizar el video al cambiar, resolviendo problemas de carga de videos nuevos --}}
-                        <video :key="currentVideoKey" class="video-responsive" controls>
+                        <video class="video-responsive" controls>
                             <source src="{{ Storage::url($current->video_path) }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
                     @endif
 
-                    {{-- Título de la lección actual --}}
                     <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $current->name }}</h1>
-
-                    {{-- Descripción de la lección actual --}}
+                    
                     <div class="text-gray-600">
                         @if ($current->description)
                             <p>{{ $current->description }}</p>
@@ -31,17 +26,16 @@
                         @endif
                     </div>
 
-                    {{-- Botón de completar lección, alterna el estado completado --}}
                     <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
                         @if ($current->completed)
                             <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
                         @else
                             <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
                         @endif
+
                         <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
                     </div>
 
-                    {{-- Navegación entre lecciones anteriores y siguientes --}}
                     <div class="card mt-2">
                         <div class="card-body flex text-gray-500 font-bold">
                             @if ($previous)
@@ -53,7 +47,6 @@
                         </div>
                     </div>
 
-                    {{-- Sección de revisión del curso --}}
                     <div class="card mt-2">
                         @livewire('course-review', ['course' => $course])
                     </div>

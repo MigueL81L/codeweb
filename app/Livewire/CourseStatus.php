@@ -49,14 +49,18 @@ class CourseStatus extends Component
 
     public function changeLesson(Lesson $lesson)
     {
+        if (!$lesson) {
+            abort(404, "Lección no encontrada");
+        }
+    
         $this->current = $lesson;
         $this->index = $this->lfs->search(fn($l) => $l->id === $lesson->id);
     
         $this->updatePrevNext();
     
-        // Emitir evento correctamente
         $this->dispatchBrowserEvent('lesson-changed', ['id' => $lesson->id]);
     }
+    
     
 
     private function updatePrevNext()
