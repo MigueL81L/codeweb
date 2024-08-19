@@ -1,33 +1,32 @@
 {{-- resources/views/livewire/course-status.blade.php --}}
 <div>
     <div class="mt-8">
-        <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
-                
-                @if ($current)
-                    @if ($current->platform == 2)
+                @if ($this->current)
+                    
+                    @if ($this->current->platform == 2)
                         <div class="embed-responsive">
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
                         <video class="video-responsive" controls>
-                            <source src="{{ Storage::url($current->video_path) }}" type="{{ $currentMimeType }}">
+                            <source src="{{ Storage::url($this->current->video_path) }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
                     @endif
+                    <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
 
-                    <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $current->name }}</h1>
-                    
                     <div class="text-gray-600">
-                        @if ($current->description)
-                            <p>{{ $current->description }}</p>
+                        @if ($this->current->description)
+                            <p>{{ $this->current->description }}</p>
                         @else
                             <p class="italic">No existe descripción para esta lección</p>
                         @endif
                     </div>
 
                     <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
-                        @if ($current->completed)
+                        @if ($this->current->completed)
                             <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
                         @else
                             <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
@@ -38,11 +37,11 @@
 
                     <div class="card mt-2">
                         <div class="card-body flex text-gray-500 font-bold">
-                            @if ($previous)
-                                <a wire:click="changeLesson({{ $previous }})" class="cursor-pointer">Tema anterior</a>
+                            @if ($this->previous)
+                                <a wire:click="changeLesson({{$this->previous}})" class="cursor-pointer">Tema anterior</a>
                             @endif
-                            @if ($next)
-                                <a wire:click="changeLesson({{ $next }})" class="ml-auto cursor-pointer">Tema posterior</a>
+                            @if ($this->next)
+                                <a wire:click="changeLesson({{$this->next}})" class="ml-auto cursor-pointer">Tema posterior</a>
                             @endif
                         </div>
                     </div>
@@ -50,12 +49,12 @@
                     <div class="card mt-2">
                         @livewire('course-review', ['course' => $course])
                     </div>
+
                 @else
                     <p>No hay lección actual.</p>
                 @endif
             </div>
 
-            {{-- Barra lateral mostrando el progreso del curso y lista de lecciones --}}
             <div class="card col-span-1">
                 <div class="card-body">
                     <h1 class="text-2xl leading-8 text-center mb-4">{{ $course->title }}</h1>
@@ -69,8 +68,7 @@
                         </div>
                     </div>
 
-                    {{-- Sección que muestra el progreso en porcentaje realizado del curso --}}
-                    <p class="text-gray-600 text-sm mt-2">{{ $advance }}% completado</p>
+                    <p class="text-gray-600 text-sm mt-2">{{ $this->advance }}% completado</p>
 
                     <div class="relative pt-1">
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
