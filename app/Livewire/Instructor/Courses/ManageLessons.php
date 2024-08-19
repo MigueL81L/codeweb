@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Instructor\Courses;
 
-use App\Rules\UniqueLessonCourse;
+use App\Rules\UniqueLessonCourse;  
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Events\VideoUploaded; // Importa el evento

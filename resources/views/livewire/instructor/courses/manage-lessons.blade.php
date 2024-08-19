@@ -162,7 +162,7 @@
                     <div class="mt-2" x-show="platform == 2" x-cloak>
                         <x-label>Video Youtube</x-label>
                         <x-input wire:model="url" placeholder="Ingrese la URL de Youtube" class="w-full" />
-                        <x-input-error for="url" />
+                        <x-input-error for="url" />  
                     </div>
                 </div>
             </div>

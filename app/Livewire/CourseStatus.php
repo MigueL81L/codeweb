@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Support\Collection;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;  
 
 class CourseStatus extends Component  
 {
@@ -55,6 +55,9 @@ class CourseStatus extends Component
         });
 
         $this->updatePrevNext();
+
+        // Emitir un evento para notificar que la lección ha cambiado
+        $this->dispatchBrowserEvent('lesson-changed');
     }
 
     private function updatePrevNext()

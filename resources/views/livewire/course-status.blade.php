@@ -1,5 +1,15 @@
 {{-- resources/views/livewire/course-status.blade.php --}}
-<div>
+<div 
+    x-data
+    x-init="
+        window.addEventListener('lesson-changed', () => {
+            const videoElement = document.querySelector('video');
+            if(videoElement) {
+                videoElement.load(); // Recargar el video
+            }
+        });
+    "
+>
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
@@ -102,7 +112,7 @@
                                                 {{ $lesson->name }}
                                             </a>
                                         </li>
-                                    @endforeach  
+                                    @endforeach    
                                 </ul>
                             </li>
                         @endforeach
