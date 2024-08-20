@@ -5,9 +5,10 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Course;
 use App\Models\Lesson;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Collection;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;  
 
-class CourseStatus extends Component
+class CourseStatus extends Component  
 {
     use AuthorizesRequests;
 
@@ -48,7 +49,7 @@ class CourseStatus extends Component
 
     public function changeLesson($lessonId)
     {
-        $lesson = Lesson::findOrFail($lessonId);
+        $lesson = Lesson::findOrFail($lessonId); // Resolver el ID a un objeto Lesson
 
         $this->current = $lesson;
         $this->index = $this->lfs->search(function($l) use ($lesson) {
@@ -56,8 +57,6 @@ class CourseStatus extends Component
         });
 
         $this->updatePrevNext();
-
-        $this->emit('lessonChanged');
     }
 
     private function updatePrevNext()
@@ -77,6 +76,7 @@ class CourseStatus extends Component
     
         return $url;
     }
+    
 
     private function getMimeType($path)
     {
