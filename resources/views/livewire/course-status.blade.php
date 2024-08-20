@@ -1,4 +1,3 @@
-{{-- resources/views/livewire/course-status.blade.php --}}
 <div>
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
@@ -10,7 +9,7 @@
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
-                        <video class="video-responsive" controls wire:key="{{ $current->id }}">
+                        <video class="video-responsive" controls preload="metadata" wire:key="{{ $current->id }}">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
@@ -112,6 +111,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('lessonChanged', function () {
+            const video = document.querySelector('video');
+            const iframe = document.querySelector('iframe');
+            // Asegúrate que el video actual se ponga en pausa si está en reproducción
+            if (video) {
+                video.pause();
+                video.load(); // Forzar una recarga del video para el nuevo contenido
+            }
+            // Asegurate que el iframe recarga cambiando el atributo src
+            if (iframe) {
+                const src = iframe.src;
+                iframe.src = '';
+                iframe.src = src; 
+            }
+        });
+    });
+</script>
+
 
 
 
