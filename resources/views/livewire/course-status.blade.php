@@ -1,18 +1,16 @@
-<div x-data="{ iframeLoaded: @entangle('iframeLoaded') }"> <!-- Usamos x-data para manejar el estado -->
+{{-- resources/views/livewire/course-status.blade.php --}}
+<div>
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
                 @if ($this->current)
+                    
                     @if ($this->current->platform == 2)
                         <div class="embed-responsive">
-                            <iframe class="video-responsive" 
-                                    x-show="iframeLoaded" 
-                                    src="{{ $currentIframe }}" 
-                                    frameborder="0" 
-                                    allowfullscreen></iframe>
+                            <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
-                        <video class="video-responsive" controls preload="metadata" wire:key="{{ $current->id }}">
+                        <video class="video-responsive" controls wire:key="{{ $current->id }}">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
@@ -20,11 +18,20 @@
                     <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
 
                     <div class="text-gray-600">
-                        <p>{{ $this->current->description ?? 'No existe descripción para esta lección' }}</p>
+                        @if ($this->current->description)
+                            <p>{{ $this->current->description }}</p>
+                        @else
+                            <p class="italic">No existe descripción para esta lección</p>
+                        @endif
                     </div>
 
                     <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
-                        <i class="{{ $this->current->completed ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }} text-2xl {{ $this->current->completed ? 'text-blue-600' : 'text-gray-600' }}"></i>
+                        @if ($this->current->completed)
+                            <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
+                        @else
+                            <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
+                        @endif
+
                         <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
                     </div>
 
@@ -105,18 +112,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('livewire:load', function () {
-        Livewire.on('render', function () {
-            const iframe = document.querySelector('iframe');
-            iframe.onload = function() {
-                this.style.display = 'block'; // Mostrar el iframe una vez cargado
-                iframeLoaded = true; // Marca que el iframe ha sido cargado
-            }
-        });
-    });
-</script>
 
 
 
