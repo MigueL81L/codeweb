@@ -18,52 +18,29 @@ class CourseStatus extends Component
     public function mount(Course $course)
     {
         $this->course = $course;
+        $this->lfs = $course->sections->flatMap->lessons->sortBy('position');
         $this->index = 0;
-        $this->lfs = collect();
 
-        foreach ($course->sections->sortBy('position') as $section) {
-            foreach ($section->lessons as $lesson) {
-                $this->lfs->push($lesson);
-            }
-        }
+        $incompleteLessons = $this->lfs->filter(fn($lesson) => !$lesson->completed);
 
-        $incompleteLessons = $this->lfs->filter(function ($lesson) {
-            return !$lesson->completed;
-        });
+        $this->current = $incompleteLessons->isEmpty() ? $this->lfs->last() : $incompleteLessons->first();
 
-        if ($incompleteLessons->isEmpty()) {
-            $this->current = $this->lfs->last();
-        } else {
-            foreach ($this->lfs as $lesson) {
-                if (!$lesson->completed) {
-                    $this->current = $lesson;
-                    break;
-                }
-                $this->index++;
-            }
-        }
         $this->updatePrevNext();
         $this->authorize('enrolled', $course);
     }
 
     public function changeLesson($lessonId)
     {
-        $lesson = Lesson::findOrFail($lessonId);
-
-        $this->current = $lesson;
-        $this->index = $this->lfs->search(function($l) use ($lesson) {
-            return $l->id === $lesson->id;
-        });
+        $this->current = Lesson::findOrFail($lessonId);
+        $this->index = $this->lfs->search(fn($lesson) => $lesson->id === $this->current->id);
 
         $this->updatePrevNext();
-
-        $this->emit('lessonChanged');
     }
 
     private function updatePrevNext()
     {
         $this->previous = $this->index > 0 ? $this->lfs[$this->index - 1] : null;
-        $this->next = $this->index < $this->lfs->count() - 1 ? $this->lfs[$this->index + 1] : null;
+        $this->next = $this->index < ($this->lfs->count() - 1) ? $this->lfs[$this->index + 1] : null;
     }
 
     private function getYoutubeEmbedUrl($url)
@@ -75,11 +52,13 @@ class CourseStatus extends Component
             return "https://www.youtube.com/embed/" . $videoId;
         }
     
-        return $url;
+        return null; // devuelves null si no es un video de youtube
     }
 
     private function getMimeType($path)
     {
+        // Asumiendo que no hay problemas en determinar el tipo MIME
+        // Retorna un MIME especificado para cada tipo de extensión
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $mimeTypes = [
             'mp4' => 'video/mp4',
@@ -89,35 +68,7 @@ class CourseStatus extends Component
             'flv' => 'video/x-flv',
             '3gp' => 'video/3gpp',
         ];
-
         return $mimeTypes[$ext] ?? 'application/octet-stream';
-    }
-
-    public function completed()
-    {
-        if ($this->current->completed) {
-            $this->current->users()->detach(auth()->user()->id);
-        } else {
-            $this->current->users()->attach(auth()->user()->id);
-        }
-
-        $this->current = Lesson::find($this->current->id);  
-        $this->course = Course::find($this->course->id);
-    }
-
-    public function getAdvanceProperty()
-    {
-        $completedCount = $this->lfs->filter(function($lesson) {
-            return $lesson->completed;
-        })->count();
-    
-        $totalLessons = $this->lfs->count();
-    
-        if ($totalLessons > 0) {
-            return round(($completedCount / $totalLessons) * 100, 2); 
-        } else {
-            return 0; 
-        }
     }
 
     public function render()
@@ -125,12 +76,12 @@ class CourseStatus extends Component
         return view('livewire.course-status', [
             'course' => $this->course,
             'current' => $this->current,
-            'advance' => $this->advance, 
-            'currentIframe' => $this->current->platform == 2 ? $this->getYoutubeEmbedUrl($this->current->video_original_name) : null,
-            'currentMimeType' => $this->current->platform == 1 ? $this->getMimeType($this->current->video_path) : null,
+            'currentIframe' => $this->current && $this->current->platform == 2 ? $this->getYoutubeEmbedUrl($this->current->video_original_name) : null,
+            'currentMimeType' => $this->current && $this->current->platform == 1 ? $this->getMimeType($this->current->video_path) : null,
         ]);
     }
 }
+
 
 
 
