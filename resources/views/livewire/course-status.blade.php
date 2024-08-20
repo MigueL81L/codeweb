@@ -1,19 +1,22 @@
-<div x-data="{ isPlaying: false }">
+<div x-data="{ iframeLoaded: @entangle('iframeLoaded') }"> <!-- Usamos x-data para manejar el estado -->
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
                 @if ($this->current)
                     @if ($this->current->platform == 2)
                         <div class="embed-responsive">
-                            <iframe x-show="isPlaying" class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
+                            <iframe class="video-responsive" 
+                                    x-show="iframeLoaded" 
+                                    src="{{ $currentIframe }}" 
+                                    frameborder="0" 
+                                    allowfullscreen></iframe>
                         </div>
                     @else
-                        <video class="video-responsive" controls preload="metadata" wire:key="{{ $current->id }}" x-on:play="isPlaying = true" x-on:pause="isPlaying = false">
+                        <video class="video-responsive" controls preload="metadata" wire:key="{{ $current->id }}">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
                     @endif
-
                     <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
 
                     <div class="text-gray-600">
@@ -102,6 +105,19 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('render', function () {
+            const iframe = document.querySelector('iframe');
+            iframe.onload = function() {
+                this.style.display = 'block'; // Mostrar el iframe una vez cargado
+                iframeLoaded = true; // Marca que el iframe ha sido cargado
+            }
+        });
+    });
+</script>
+
 
 
 

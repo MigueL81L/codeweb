@@ -7,13 +7,14 @@ use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CourseStatus extends Component 
+class CourseStatus extends Component  
 {
     use AuthorizesRequests;
 
     public $course, $current;
     public $index, $previous, $next;
     public $lfs;
+    public $iframeLoaded = false; // Nueva propiedad para controlar la carga del iframe
 
     public function mount(Course $course)
     {
@@ -31,30 +32,18 @@ class CourseStatus extends Component
             return !$lesson->completed;
         });
 
-        if ($incompleteLessons->isEmpty()) {
-            $this->current = $this->lfs->last();
-        } else {
-            foreach ($this->lfs as $lesson) {
-                if (!$lesson->completed) {
-                    $this->current = $lesson;
-                    break;
-                }
-                $this->index++;
-            }
-        }
+        $this->current = $incompleteLessons->isEmpty() ? $this->lfs->last() : $incompleteLessons->first();
         $this->updatePrevNext();
         $this->authorize('enrolled', $course);
     }
 
     public function changeLesson($lessonId)
     {
-        $lesson = Lesson::findOrFail($lessonId);
-        $this->current = $lesson;
-        $this->index = $this->lfs->search(function($l) use ($lesson) {
-            return $l->id === $lesson->id;
-        });
+        $this->current = Lesson::findOrFail($lessonId);
+        $this->index = $this->lfs->search(fn($l) => $l->id === $this->current->id);
 
         $this->updatePrevNext();
+        $this->iframeLoaded = false; // Reinicia la propiedad al cambiar de lección
     }
 
     private function updatePrevNext()
@@ -67,7 +56,7 @@ class CourseStatus extends Component
     {
         preg_match('/(youtube\.com\/(watch\?v=|embed\/|v\/|.+\/)|youtu\.be\/)([\w-]{11})/', $url, $matches);
         $videoId = $matches[3] ?? null;
-
+    
         if ($videoId) {
             return "https://www.youtube.com/embed/" . $videoId;
         }
@@ -84,7 +73,7 @@ class CourseStatus extends Component
             'avi' => 'video/x-msvideo',
             'wmv' => 'video/x-ms-wmv',
             'flv' => 'video/x-flv',
-            '3gp' => 'video/3gpp',
+            '3gp' => 'video/3gpp'
         ];
 
         return $mimeTypes[$ext] ?? 'application/octet-stream';
@@ -104,10 +93,7 @@ class CourseStatus extends Component
 
     public function getAdvanceProperty()
     {
-        $completedCount = $this->lfs->filter(function($lesson) {
-            return $lesson->completed;
-        })->count();
-
+        $completedCount = $this->lfs->filter(fn($lesson) => $lesson->completed)->count();
         $totalLessons = $this->lfs->count();
 
         return $totalLessons > 0 ? round(($completedCount / $totalLessons) * 100, 2) : 0; 
@@ -121,9 +107,12 @@ class CourseStatus extends Component
             'advance' => $this->advance, 
             'currentIframe' => $this->current->platform == 2 ? $this->getYoutubeEmbedUrl($this->current->video_original_name) : null,
             'currentMimeType' => $this->current->platform == 1 ? $this->getMimeType($this->current->video_path) : null,
+            'iframeLoaded' => $this->iframeLoaded, // Pasar la propiedad al render
         ]);
     }
 }
+
+
 
 
 
