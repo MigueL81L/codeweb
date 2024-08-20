@@ -3,23 +3,34 @@
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
                 @if ($this->current)
+                    
                     @if ($this->current->platform == 2)
                         <div class="embed-responsive">
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
-                        <video class="video-responsive" controls wire:key="{{ $current->id }}" preload="metadata">
+                        <video class="video-responsive" controls preload="metadata" wire:key="{{ $current->id }}">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
                     @endif
                     <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
+
                     <div class="text-gray-600">
-                        <p>{{ $this->current->description ?? 'No existe descripción para esta lección' }}</p>
+                        @if ($this->current->description)
+                            <p>{{ $this->current->description }}</p>
+                        @else
+                            <p class="italic">No existe descripción para esta lección</p>
+                        @endif
                     </div>
 
                     <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
-                        <i class="{{ $this->current->completed ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }} text-2xl {{ $this->current->completed ? 'text-blue-600' : 'text-gray-600' }}"></i>
+                        @if ($this->current->completed)
+                            <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
+                        @else
+                            <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
+                        @endif
+
                         <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
                     </div>
 
@@ -37,6 +48,7 @@
                     <div class="card mt-2">
                         @livewire('course-review', ['course' => $course])
                     </div>
+
                 @else
                     <p>No hay lección actual.</p>
                 @endif
@@ -54,7 +66,9 @@
                             <a class="text-blue-500 text-sm" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
                         </div>
                     </div>
+
                     <p class="text-gray-600 text-sm mt-2">{{ $this->advance }}% completado</p>
+
                     <div class="relative pt-1">
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
                             <div style="width:{{ $this->advance }}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500"></div>
@@ -70,9 +84,17 @@
                                         <li class="flex">
                                             <div>
                                                 @if($lesson->completed)
-                                                    <span class="inline-block w-4 h-4 {{ $current && $current->id == $lesson->id ? 'border-4 border-yellow-500' : 'bg-yellow-300' }} rounded-full mr-2 mt-1"></span>
+                                                    @if ($current && $current->id == $lesson->id)
+                                                        <span class="inline-block w-4 h-4 border-4 border-yellow-500 rounded-full mr-2 mt-1"></span>
+                                                    @else
+                                                        <span class="inline-block w-4 h-4 bg-yellow-300 rounded-full mr-2 mt-1"></span>
+                                                    @endif
                                                 @else
-                                                    <span class="inline-block w-4 h-4 {{ $current && $current->id == $lesson->id ? 'border-4 border-gray-500' : 'bg-gray-300' }} rounded-full mr-2 mt-1"></span>
+                                                    @if ($current && $current->id == $lesson->id)
+                                                        <span class="inline-block w-4 h-4 border-4 border-gray-500 rounded-full mr-2 mt-1"></span>
+                                                    @else
+                                                        <span class="inline-block w-4 h-4 bg-gray-300 rounded-full mr-2 mt-1"></span>
+                                                    @endif
                                                 @endif
                                             </div>
                                             <a class="cursor-pointer" wire:click="changeLesson({{ $lesson->id }})">
@@ -89,6 +111,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('lessonChanged', function () {
+            const video = document.querySelector('video');
+            const iframe = document.querySelector('iframe');
+            // Asegúrate que el video actual se ponga en pausa si está en reproducción
+            if (video) {
+                video.pause();
+                video.load(); // Forzar una recarga del video para el nuevo contenido
+            }
+            // Asegurate que el iframe recarga cambiando el atributo src
+            if (iframe) {
+                const src = iframe.src;
+                iframe.src = '';
+                iframe.src = src; 
+            }
+        });
+    });
+</script>
+
 
 
 
