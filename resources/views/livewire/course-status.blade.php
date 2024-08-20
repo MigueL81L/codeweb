@@ -4,17 +4,13 @@
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
                 @if ($this->current)
+                    
                     @if ($this->current->platform == 2)
                         <div class="embed-responsive">
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
-                        <video 
-                            class="video-responsive" 
-                            controls 
-                            autoplay 
-                            id="lesson-video"
-                            wire:key="video-{{ $this->current->id }}">
+                        <video class="video-responsive" controls>
                             <source src="{{ Storage::url($this->current->video_path) }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
@@ -42,10 +38,10 @@
                     <div class="card mt-2">
                         <div class="card-body flex text-gray-500 font-bold">
                             @if ($this->previous)
-                                <a wire:click="changeLesson({{ $this->previous->id }})" class="cursor-pointer">Tema anterior</a>
+                                <a wire:click="changeLesson({{$this->previous}})" class="cursor-pointer">Tema anterior</a>
                             @endif
                             @if ($this->next)
-                                <a wire:click="changeLesson({{ $this->next->id }})" class="ml-auto cursor-pointer">Tema posterior</a>
+                                <a wire:click="changeLesson({{$this->next}})" class="ml-auto cursor-pointer">Tema posterior</a>
                             @endif
                         </div>
                     </div>
@@ -53,6 +49,7 @@
                     <div class="card mt-2">
                         @livewire('course-review', ['course' => $course])
                     </div>
+
                 @else
                     <p>No hay lección actual.</p>
                 @endif

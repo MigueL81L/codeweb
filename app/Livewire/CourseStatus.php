@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Course;
 use App\Models\Lesson;
+use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;  
 
 class CourseStatus extends Component  
@@ -53,7 +54,6 @@ class CourseStatus extends Component
             return $l->id === $lesson->id;
         });
 
-        $this->emit('lessonChanged');
         $this->updatePrevNext();
     }
 
@@ -61,6 +61,18 @@ class CourseStatus extends Component
     {
         $this->previous = $this->index > 0 ? $this->lfs[$this->index - 1] : null;
         $this->next = $this->index < $this->lfs->count() - 1 ? $this->lfs[$this->index + 1] : null;
+    }
+
+    private function getYoutubeEmbedUrl($url)
+    {
+        preg_match('/(youtube\.com\/(watch\?v=|embed\/|v\/|.+\/)|youtu\.be\/)([\w-]{11})/', $url, $matches);
+        $videoId = $matches[3] ?? null;
+
+        if ($videoId) {
+            return "https://www.youtube.com/embed/" . $videoId;
+        }
+
+        return $url;
     }
 
     private function getMimeType($path)
