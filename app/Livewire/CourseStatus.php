@@ -47,8 +47,10 @@ class CourseStatus extends Component
         $this->authorize('enrolled', $course);
     }
 
-    public function changeLesson(Lesson $lesson)
+    public function changeLesson($lessonId)
     {
+        $lesson = Lesson::findOrFail($lessonId); // Resolver el ID a un objeto Lesson
+
         $this->current = $lesson;
         $this->index = $this->lfs->search(function($l) use ($lesson) {
             return $l->id === $lesson->id;

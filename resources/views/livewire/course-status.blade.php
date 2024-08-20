@@ -10,8 +10,8 @@
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
-                        <video class="video-responsive" controls>
-                            <source src="{{ Storage::url($this->current->video_path) }}" type="{{ $currentMimeType }}">
+                        <video class="video-responsive" controls autoplay wire:key="{{ $current->id }}">
+                            <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
                     @endif
@@ -38,10 +38,10 @@
                     <div class="card mt-2">
                         <div class="card-body flex text-gray-500 font-bold">
                             @if ($this->previous)
-                                <a wire:click="changeLesson({{$this->previous}})" class="cursor-pointer">Tema anterior</a>
+                                <a wire:click="changeLesson({{$this->previous->id}})" class="cursor-pointer">Tema anterior</a>
                             @endif
                             @if ($this->next)
-                                <a wire:click="changeLesson({{$this->next}})" class="ml-auto cursor-pointer">Tema posterior</a>
+                                <a wire:click="changeLesson({{$this->next->id}})" class="ml-auto cursor-pointer">Tema posterior</a>
                             @endif
                         </div>
                     </div>
