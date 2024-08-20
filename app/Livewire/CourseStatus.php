@@ -69,10 +69,11 @@ class CourseStatus extends Component
     {
         preg_match('/(youtube\.com\/(watch\?v=|embed\/|v\/|.+\/)|youtu\.be\/)([\w-]{11})/', $url, $matches);
         $videoId = $matches[3] ?? null;
-
+    
         if ($videoId) {
-            return "https://www.youtube.com/embed/" . $videoId . "?autoplay=1";
+            return "https://www.youtube.com/embed/" . $videoId . "?autoplay=1&rel=0";
         }
+    
         return $url;
     }
 
