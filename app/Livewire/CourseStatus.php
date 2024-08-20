@@ -5,8 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Course;
 use App\Models\Lesson;
-use Illuminate\Support\Collection;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;  
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CourseStatus extends Component  
 {
@@ -15,6 +14,7 @@ class CourseStatus extends Component
     public $course, $current;
     public $index, $previous, $next;
     public $lfs;
+    public $cambiado = false; // Nueva propiedad para manejar el cambio
 
     public function mount(Course $course)
     {
@@ -57,6 +57,8 @@ class CourseStatus extends Component
         });
 
         $this->updatePrevNext();
+        
+        $this->cambiado = true; // Establecer la propiedad a true
     }
 
     private function updatePrevNext()
@@ -109,9 +111,9 @@ class CourseStatus extends Component
         $completedCount = $this->lfs->filter(function($lesson) {
             return $lesson->completed;
         })->count();
-    
+
         $totalLessons = $this->lfs->count();
-    
+
         if ($totalLessons > 0) {
             return round(($completedCount / $totalLessons) * 100, 2); 
         } else {
@@ -127,9 +129,11 @@ class CourseStatus extends Component
             'advance' => $this->advance, 
             'currentIframe' => $this->current->platform == 2 ? $this->getYoutubeEmbedUrl($this->current->video_original_name) : null,
             'currentMimeType' => $this->current->platform == 1 ? $this->getMimeType($this->current->video_path) : null,
+            'cambiado' => $this->cambiado, // Pasar la propiedad al render
         ]);
     }
 }
+
 
 
 

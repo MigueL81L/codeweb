@@ -1,5 +1,4 @@
- {{-- resources/views/livewire/course-status.blade.php --}}
- <div>
+<div>
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
@@ -10,7 +9,7 @@
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
-                        <video class="video-responsive" controls autoplay wire:key="{{ $current->id }}">
+                        <video class="video-responsive" controls preload="metadata" wire:key="{{ $current->id }}">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
@@ -111,7 +110,33 @@
             </div>
         </div>
     </div>
+    
+    <script>
+        document.addEventListener('livewire:load', function () {
+            Livewire.on('render', function () {
+                const video = document.querySelector('video');
+                const iframe = document.querySelector('iframe');
+
+                // Comprobamos la propiedad $cambiado
+                if ({{ $cambiado }}) {
+                    // Asegúrate que el video actual se ponga en pausa si está en reproducción
+                    if (video) {
+                        video.pause();
+                        video.load(); // Forzar una recarga del video para el nuevo contenido
+                    }
+                    
+                    // Asegúrate que el iframe recarga cambiando el atributo src
+                    if (iframe) {
+                        const src = iframe.src;
+                        iframe.src = ''; // Cambiar a un valor vacío primero
+                        iframe.src = src; // Volver a establecer la URL para recargar
+                    }
+                }
+            });
+        });
+    </script>
 </div>
+
 
 
 
