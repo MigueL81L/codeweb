@@ -7,7 +7,7 @@
                     
                     @if ($this->current->platform == 2)
                         <div class="embed-responsive">
-                            <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
+                            <iframe class="video-responsive" controls autoplay wire:key="{{ $current->id }}" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
                         <video class="video-responsive" controls autoplay wire:key="{{ $current->id }}">
