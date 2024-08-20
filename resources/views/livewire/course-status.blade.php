@@ -1,36 +1,27 @@
-<div>
+<div x-data="{ isPlaying: false }">
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
                 @if ($this->current)
-                    
                     @if ($this->current->platform == 2)
                         <div class="embed-responsive">
-                            <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
+                            <iframe x-show="isPlaying" class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     @else
-                        <video class="video-responsive" controls preload="metadata" wire:key="{{ $current->id }}">
+                        <video class="video-responsive" controls preload="metadata" wire:key="{{ $current->id }}" x-on:play="isPlaying = true" x-on:pause="isPlaying = false">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
                         </video>
                     @endif
+
                     <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
 
                     <div class="text-gray-600">
-                        @if ($this->current->description)
-                            <p>{{ $this->current->description }}</p>
-                        @else
-                            <p class="italic">No existe descripción para esta lección</p>
-                        @endif
+                        <p>{{ $this->current->description ?? 'No existe descripción para esta lección' }}</p>
                     </div>
 
                     <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
-                        @if ($this->current->completed)
-                            <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
-                        @else
-                            <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
-                        @endif
-
+                        <i class="{{ $this->current->completed ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }} text-2xl {{ $this->current->completed ? 'text-blue-600' : 'text-gray-600' }}"></i>
                         <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
                     </div>
 
@@ -110,32 +101,8 @@
             </div>
         </div>
     </div>
-    
-    <script>
-        document.addEventListener('livewire:load', function () {
-            Livewire.on('render', function () {
-                const video = document.querySelector('video');
-                const iframe = document.querySelector('iframe');
-
-                // Comprobamos la propiedad $cambiado
-                if ({{ $cambiado }}) {
-                    // Asegúrate que el video actual se ponga en pausa si está en reproducción
-                    if (video) {
-                        video.pause();
-                        video.load(); // Forzar una recarga del video para el nuevo contenido
-                    }
-                    
-                    // Asegúrate que el iframe recarga cambiando el atributo src
-                    if (iframe) {
-                        const src = iframe.src;
-                        iframe.src = ''; // Cambiar a un valor vacío primero
-                        iframe.src = src; // Volver a establecer la URL para recargar
-                    }
-                }
-            });
-        });
-    </script>
 </div>
+
 
 
 

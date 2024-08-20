@@ -7,14 +7,13 @@ use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class CourseStatus extends Component  
+class CourseStatus extends Component 
 {
     use AuthorizesRequests;
 
     public $course, $current;
     public $index, $previous, $next;
     public $lfs;
-    public $cambiado = false; // Nueva propiedad para manejar el cambio
 
     public function mount(Course $course)
     {
@@ -49,16 +48,13 @@ class CourseStatus extends Component
 
     public function changeLesson($lessonId)
     {
-        $lesson = Lesson::findOrFail($lessonId); // Resolver el ID a un objeto Lesson
-
+        $lesson = Lesson::findOrFail($lessonId);
         $this->current = $lesson;
         $this->index = $this->lfs->search(function($l) use ($lesson) {
             return $l->id === $lesson->id;
         });
 
         $this->updatePrevNext();
-        
-        $this->cambiado = true; // Establecer la propiedad a true
     }
 
     private function updatePrevNext()
@@ -76,7 +72,7 @@ class CourseStatus extends Component
             return "https://www.youtube.com/embed/" . $videoId;
         }
 
-        return $url;
+        return null;
     }
 
     private function getMimeType($path)
@@ -114,11 +110,7 @@ class CourseStatus extends Component
 
         $totalLessons = $this->lfs->count();
 
-        if ($totalLessons > 0) {
-            return round(($completedCount / $totalLessons) * 100, 2); 
-        } else {
-            return 0; 
-        }
+        return $totalLessons > 0 ? round(($completedCount / $totalLessons) * 100, 2) : 0; 
     }
 
     public function render()
@@ -129,10 +121,10 @@ class CourseStatus extends Component
             'advance' => $this->advance, 
             'currentIframe' => $this->current->platform == 2 ? $this->getYoutubeEmbedUrl($this->current->video_original_name) : null,
             'currentMimeType' => $this->current->platform == 1 ? $this->getMimeType($this->current->video_path) : null,
-            'cambiado' => $this->cambiado, // Pasar la propiedad al render
         ]);
     }
 }
+
 
 
 
