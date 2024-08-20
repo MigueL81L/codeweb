@@ -71,11 +71,12 @@ class CourseStatus extends Component
         $videoId = $matches[3] ?? null;
     
         if ($videoId) {
-            return "https://www.youtube.com/embed/" . $videoId . "?autoplay=1&rel=0";
+            return "https://www.youtube.com/embed/" . $videoId;
         }
     
         return $url;
     }
+    
 
     private function getMimeType($path)
     {
