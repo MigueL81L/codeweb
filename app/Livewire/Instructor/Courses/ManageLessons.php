@@ -17,17 +17,20 @@ class ManageLessons extends Component
     public $lessons;
     public $video;
     public $url;
+    public $document; // Agregar propiedad para el documento
+
     public $lessonCreate = [
         'open' => false,
         'name' => null,
         'platform' => 1, // 1 Significa video normal
         'video_original_name' => null,
+        'description' => null, // Propiedad para la descripción
+        'document' => null, // Propiedad para el documento
     ];
 
     public $lessonEdit = [
         'id' => null,
         'name' => null,
-
         'description'=>null,
     ];
 
@@ -48,14 +51,14 @@ class ManageLessons extends Component
         $rules = [
             'lessonCreate.name' => ['required', new UniqueLessonCourse($this->section->course_id)],
             'lessonCreate.platform' => 'required',
-        ];
+            'lessonCreate.description' => 'nullable|string', // Validar la descripción
 
-        if ($this->lessonCreate['platform'] == 1) {
-            // Añadir la restricción de tamaño en kilobytes (250 MB = 256,000 KB)
-            $rules['video'] = 'required|mimes:mp4,mov,avi,wmv,flv,3gp|max:256000';
-        } else {
-            $rules['url'] = ['required', 'regex:/^(?:https?:\/\/)?(?:www\.)?(youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=))([\w-]{10,12})/'];
-        }
+            // Validar video
+            'video' => $this->lessonCreate['platform'] == 1 ? 'required|mimes:mp4,mov,avi,wmv,flv,3gp|max:256000' : '',
+            
+            // Validar documento
+            'lessonCreate.document' => 'nullable|mimes:pdf|max:2048', // Asegúrate de que el PDF no exceda 2 MB
+        ];
 
         return $rules;
     }
@@ -65,6 +68,11 @@ class ManageLessons extends Component
         $this->validate();
 
         $this->lessonCreate['section_id'] = $this->section->id;
+
+        // Manejar la subida del documento
+        if ($this->lessonCreate['document']) {
+            $this->lessonCreate['document_path'] = $this->lessonCreate['document']->store('courses/documents');
+        }
 
         if ($this->lessonCreate['platform'] == 1) {
             $this->lessonCreate['video_original_name'] = $this->video->getClientOriginalName();
@@ -81,7 +89,7 @@ class ManageLessons extends Component
 
         VideoUploaded::dispatch($lesson);
 
-        $this->reset(['url', 'lessonCreate', 'video']);
+        $this->reset(['url', 'lessonCreate', 'video', 'document']); // Reinicia el formulario
         $this->getLessons();
         $this->dispatch('refreshOrderLessons');
     }
@@ -92,8 +100,7 @@ class ManageLessons extends Component
         $this->lessonEdit = [
             'id' => $lesson->id,
             'name' => $lesson->name,
-
-            'description'=>$lesson->description,
+            'description' => $lesson->description,
         ];
     }
 
@@ -118,7 +125,7 @@ class ManageLessons extends Component
     // Método para ordenar lecciones
     public function sortLessons($order)
     {
-         foreach ($order as $index => $lessonId) {
+        foreach ($order as $index => $lessonId) {
             Lesson::find($lessonId)->update(['position' => $index + 1]);
         }
 
@@ -130,31 +137,36 @@ class ManageLessons extends Component
     public function destroy($lessonId)
     {
         $lesson = Lesson::find($lessonId);
-    
+        
         // Verificar y eliminar el video asociado a la lección
         if ($lesson->video_path && Storage::exists($lesson->video_path)) {
             Storage::delete($lesson->video_path);
         }
-    
+
         // Verificar y eliminar la imagen de portada asociada a la lección (si aplica)
         if ($lesson->image_path && Storage::exists($lesson->image_path)) {
             Storage::delete($lesson->image_path);
         }
-    
+
+        // Verificar y eliminar el documento asociado a la lección (si aplica)
+        if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+            Storage::delete($lesson->document_path);
+        }
+
         // Eliminar la lección de la base de datos
         $lesson->delete();
-    
+
         // Actualizar la lista de lecciones
         $this->getLessons();
         $this->dispatch('refreshOrderLessons');
     }
-    
 
     public function render()
     {
-        return view('livewire.instructor.courses.manage-lessons');  
+        return view('livewire.instructor.courses.manage-lessons');   
     }
 }
+
 
 
 
