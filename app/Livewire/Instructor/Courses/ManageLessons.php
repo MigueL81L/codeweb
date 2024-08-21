@@ -5,7 +5,7 @@ namespace App\Livewire\Instructor\Courses;
 use App\Rules\UniqueLessonCourse;  
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Events\VideoUploaded;
+use App\Events\VideoUploaded; 
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Storage;
 
@@ -72,15 +72,14 @@ class ManageLessons extends Component
             $this->lessonCreate['video_original_name'] = $this->url;
         }
 
-        // Crear la lección
         $lesson = $this->section->lessons()->create($this->lessonCreate);
 
-        // Manejo de la subida del video
         if ($this->lessonCreate['platform'] == 1 && $this->video) {
             $lesson->video_path = $this->video->store('courses/lessons');
             $lesson->save();
         }
 
+        // Guardar el document_path en el modelo
         if (isset($this->lessonCreate['document_path'])) {
             $lesson->document_path = $this->lessonCreate['document_path'];
             $lesson->save();
@@ -108,10 +107,9 @@ class ManageLessons extends Component
         $this->validate([
             'lessonEdit.name' => ['required'],
             'lessonEdit.description' => ['nullable'],
-            'lessonEdit.document_path' => 'nullable|mimes:pdf|max:2048', // Validar nuevo documento si se cambia
+            'lessonEdit.document' => 'nullable|mimes:pdf|max:2048',
         ]);
 
-        // Actualizar la lección
         $lesson = Lesson::find($this->lessonEdit['id']);
 
         $lesson->update([
@@ -121,16 +119,13 @@ class ManageLessons extends Component
 
         // Manejo de la subida de un nuevo documento
         if ($this->lessonEdit['document']) {
-            // Eliminar el documento anterior si existe
             if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                 Storage::delete($lesson->document_path);
             }
-            // Guardar el nuevo documento y actualizar el model
             $lesson->document_path = $this->lessonEdit['document']->store('courses/documents');
             $lesson->save();
         }
 
-        // Reiniciar los datos de edición
         $this->reset('lessonEdit');
         $this->getLessons();
     }
@@ -148,17 +143,14 @@ class ManageLessons extends Component
     {
         $lesson = Lesson::find($lessonId);
 
-        // Verificar y eliminar el video asociado a la lección
         if ($lesson->video_path && Storage::exists($lesson->video_path)) {
             Storage::delete($lesson->video_path);
         }
 
-        // Verificar y eliminar el documento
         if ($lesson->document_path && Storage::exists($lesson->document_path)) {
             Storage::delete($lesson->document_path);
         }
 
-        // Eliminar la lección
         $lesson->delete();
         $this->getLessons();
         $this->dispatch('refreshOrderLessons');
@@ -169,6 +161,7 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');   
     }
 }
+
 
 
 

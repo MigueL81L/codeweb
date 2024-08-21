@@ -77,7 +77,7 @@
                             <div x-show="isOpen" x-cloak>
                                 <p class="text-sm">Descripción: {{$lesson->description ?? 'No existe descripción para esta lección'}}</p>
                                 @if($lesson->document_path)
-                                    <p class="text-sm">Documento: <a href="{{ Storage::url($lesson->document_path) }}" class="text-blue-600">Ver Documento</a></p>
+                                    <p class="text-sm">Documento: <a href="{{ Storage::url($lesson->document_path) }}" class="text-blue-600" target="_blank">{{ basename($lesson->document_path) }}</a></p>
                                 @else
                                     <p class="text-sm">No hay documento adjunto para esta lección.</p>
                                 @endif
@@ -141,6 +141,7 @@
         </form>
     </div>
 </div>
+
 
 
 
