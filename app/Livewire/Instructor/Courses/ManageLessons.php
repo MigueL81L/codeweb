@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 use App\Events\VideoUploaded;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class ManageLessons extends Component
 {
@@ -111,26 +112,28 @@ class ManageLessons extends Component
         $this->validate([
             'lessonEdit.name' => ['required'],
             'lessonEdit.description' => ['nullable'],
-            'lessonEdit.document' => 'nullable|mimes:pdf|max:2048',
+            'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',  // Asegúrate de que es un archivo
         ]);
-
+    
         $lesson = Lesson::find($this->lessonEdit['id']);
-
+    
         $lesson->update([
             'name' => $this->lessonEdit['name'],
             'description' => $this->lessonEdit['description'],
         ]);
-
-        // Manejo de la subida de un nuevo documento
-        if ($this->lessonEdit['document']) {
+    
+        // Verificando que `$this->lessonEdit['document']` sea una instancia de `UploadedFile`
+        $document = $this->lessonEdit['document'];
+        if ($document instanceof UploadedFile) {
             if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                 Storage::delete($lesson->document_path);
             }
-            $lesson->document_path = $this->lessonEdit['document']->store('courses/documents');
-            $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
+            
+            $lesson->document_path = $document->store('courses/documents');
+            $lesson->document_original_name = $document->getClientOriginalName();
             $lesson->save();
         }
-
+    
         $this->reset('lessonEdit');
         $this->getLessons();
     }
