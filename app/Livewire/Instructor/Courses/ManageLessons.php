@@ -132,7 +132,8 @@ class ManageLessons extends Component
                 'document_original_name' => $document->getClientOriginalName(),
             ]);
         }
-
+        
+        $this->deleteDocument();
         $this->reset('lessonEdit');
         $this->getLessons();
     }
