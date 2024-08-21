@@ -147,9 +147,12 @@ class ManageLessons extends Component
                 'document_original_name' => null,
             ]);
         }
-
+        
         $this->lessonEdit['document_path'] = null;
         $this->lessonEdit['document_original_name'] = null;
+
+        // Forzar actualización del registro en caso de fallo
+        $lesson->refresh();
     }
 
     public function sortLessons($order)
@@ -183,6 +186,7 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
 
 
 
