@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Instructor\Courses;  
+namespace App\Livewire\Instructor\Courses;
 
 use App\Rules\UniqueLessonCourse;  
 use Livewire\Component;
@@ -26,13 +26,15 @@ class ManageLessons extends Component
         'video_original_name' => null,
         'description' => null,
         'document' => null,
+        'document_original_name' => null, // Añadir aquí
     ];
 
     public $lessonEdit = [
         'id' => null,
         'name' => null,
         'description' => null,
-        'document_path' => null, // Agregar campo para documento
+        'document_path' => null,
+        'document_original_name' => null, // Añadir aquí también
     ];
 
     public $orderLessons;  
@@ -53,7 +55,7 @@ class ManageLessons extends Component
             'lessonCreate.document' => 'nullable|mimes:pdf|max:2048',
         ];
 
-        return $rules;
+        return $rules;  
     }
 
     public function store()
@@ -64,6 +66,7 @@ class ManageLessons extends Component
         // Manejo de la subida del documento
         if ($this->lessonCreate['document']) {
             $this->lessonCreate['document_path'] = $this->lessonCreate['document']->store('courses/documents');
+            $this->lessonCreate['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName(); // Guardar nombre original
         }
 
         if ($this->lessonCreate['platform'] == 1) {
@@ -82,6 +85,7 @@ class ManageLessons extends Component
         // Guardar el document_path en el modelo
         if (isset($this->lessonCreate['document_path'])) {
             $lesson->document_path = $this->lessonCreate['document_path'];
+            $lesson->document_original_name = $this->lessonCreate['document_original_name']; // Guardar el nombre original
             $lesson->save();
         }
 
@@ -98,7 +102,8 @@ class ManageLessons extends Component
             'id' => $lesson->id,
             'name' => $lesson->name,
             'description' => $lesson->description,
-            'document_path' => $lesson->document_path, // Cargar el document_path
+            'document_path' => $lesson->document_path,
+            'document_original_name' => $lesson->document_original_name, // Cargar el document_original_name
         ];
     }
 
@@ -123,6 +128,7 @@ class ManageLessons extends Component
                 Storage::delete($lesson->document_path);
             }
             $lesson->document_path = $this->lessonEdit['document']->store('courses/documents');
+            $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName(); // Guardar el nombre original
             $lesson->save();
         }
 
@@ -161,6 +167,7 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');   
     }
 }
+
 
 
 
