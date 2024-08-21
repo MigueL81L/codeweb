@@ -15,6 +15,22 @@
                     @this.call('destroy', lessonId);
                 }
             });
+        },
+        deleteDocument() {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡Esta acción eliminará el documento adjunto!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, ¡elimínalo!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    @this.call('deleteDocument');
+                }
+            });
         }
     }" class="mb-6" x-init="Sortable.create($refs.lessonList, {
         group: 'lessons',
@@ -42,6 +58,9 @@
                                 <div class="mt-2">
                                     <x-label>Documento Actual</x-label>
                                     <p>{{ $lessonEdit['document_original_name'] ?? 'No hay documento adjunto' }}</p>
+                                    @if ($lessonEdit['document_path'])
+                                        <x-button type="button" x-on:click="deleteDocument()">Eliminar Documento</x-button>
+                                    @endif
                                     <x-label>Reemplazar Documento (PDF)</x-label>
                                     <x-input type="file" wire:model="lessonEdit.document" accept=".pdf" class="w-full" />
                                     <x-input-error for="lessonEdit.document" />
@@ -148,6 +167,7 @@
         </form>
     </div>
 </div>
+
 
 
 
