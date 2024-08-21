@@ -4,7 +4,6 @@
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
             <div class="lg:col-span-2">
                 @if ($this->current)
-                    
                     @if ($this->current->platform == 2)
                         <div class="embed-responsive">
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
@@ -15,13 +14,25 @@
                             Your browser does not support the video tag.
                         </video>
                     @endif
-                    <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
 
-                    <div class="text-gray-600">
+                    <h1 class="text-3xl text-gray-600 font-bold mt-4">Nombre: {{ $this->current->name }}</h1>
+
+                    <div class="text-gray-600 mt-2">
+                        <h2 class="font-bold">Descripción:</h2>
                         @if ($this->current->description)
                             <p>{{ $this->current->description }}</p>
                         @else
                             <p class="italic">No existe descripción para esta lección</p>
+                        @endif
+                    </div>
+
+                    {{-- Nuevo apartado para mostrar el archivo adjunto --}}
+                    <div class="mt-4">
+                        @if ($this->current->document_path)
+                            <h2 class="font-bold">Archivo Adjunto:</h2>
+                            <a href="{{ Storage::url($this->current->document_path) }}" class="text-blue-500 hover:underline" target="_blank">Ver/Descargar Documento</a>
+                        @else
+                            <p class="italic">No hay archivos adjuntos para esta lección.</p>
                         @endif
                     </div>
 
@@ -112,6 +123,7 @@
         </div>
     </div>
 </div>
+
 
 
 
