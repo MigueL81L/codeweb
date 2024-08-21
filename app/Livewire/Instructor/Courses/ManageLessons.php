@@ -1,5 +1,3 @@
-<?php
-
 namespace App\Livewire\Instructor\Courses;
 
 use App\Rules\UniqueLessonCourse;
@@ -34,7 +32,7 @@ class ManageLessons extends Component
         'id' => null,
         'name' => null,
         'description' => null,
-        'document' => null,
+        'document' => null, // Asegura que esto esté presente
         'document_path' => null,
         'document_original_name' => null,
     ];
@@ -63,6 +61,7 @@ class ManageLessons extends Component
         $this->validate();
         $this->lessonCreate['section_id'] = $this->section->id;
 
+        // Manejo de la subida del documento
         if ($this->lessonCreate['document']) {
             $this->lessonCreate['document_path'] = $this->lessonCreate['document']->store('courses/documents');
             $this->lessonCreate['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
@@ -100,7 +99,7 @@ class ManageLessons extends Component
             'id' => $lesson->id,
             'name' => $lesson->name,
             'description' => $lesson->description,
-            'document' => null,
+            'document' => null, // Indica que estamos sólo editando, no cargando un nuevo archivo
             'document_path' => $lesson->document_path,
             'document_original_name' => $lesson->document_original_name,
         ];
@@ -111,50 +110,30 @@ class ManageLessons extends Component
         $this->validate([
             'lessonEdit.name' => ['required'],
             'lessonEdit.description' => ['nullable'],
-            'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
+            'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',  // Asegúrate de que es un archivo
         ]);
-
+    
         $lesson = Lesson::find($this->lessonEdit['id']);
-
+    
         $lesson->update([
             'name' => $this->lessonEdit['name'],
             'description' => $this->lessonEdit['description'],
         ]);
-
+    
+        // Verificando que `$this->lessonEdit['document']` sea una instancia de `UploadedFile`
         $document = $this->lessonEdit['document'];
         if ($document instanceof UploadedFile) {
             if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                 Storage::delete($lesson->document_path);
             }
-
-            $lesson->update([
-                'document_path' => $document->store('courses/documents'),
-                'document_original_name' => $document->getClientOriginalName(),
-            ]);
+            
+            $lesson->document_path = $document->store('courses/documents');
+            $lesson->document_original_name = $document->getClientOriginalName();
+            $lesson->save();
         }
-        
-        $this->deleteDocument();
+    
         $this->reset('lessonEdit');
         $this->getLessons();
-    }
-
-    public function deleteDocument()
-    {
-        $lesson = Lesson::find($this->lessonEdit['id']);
-        
-        if ($lesson->document_path && Storage::exists($lesson->document_path)) {
-            Storage::delete($lesson->document_path);
-            $lesson->update([
-                'document_path' => null,
-                'document_original_name' => null,
-            ]);
-        }
-        
-        $this->lessonEdit['document_path'] = null;
-        $this->lessonEdit['document_original_name'] = null;
-
-        // Asegúrate de actualizar la base de datos primero y luego el estado de Livewire
-        $this->getLessons(); // Refresca las lecciones para reflejar los cambios
     }
 
     public function sortLessons($order)
