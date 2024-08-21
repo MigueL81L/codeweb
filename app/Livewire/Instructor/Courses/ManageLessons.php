@@ -127,9 +127,10 @@ class ManageLessons extends Component
                 Storage::delete($lesson->document_path);
             }
 
-            $lesson->document_path = $document->store('courses/documents');
-            $lesson->document_original_name = $document->getClientOriginalName();
-            $lesson->save();
+            $lesson->update([
+                'document_path' => $document->store('courses/documents'),
+                'document_original_name' => $document->getClientOriginalName(),
+            ]);
         }
 
         $this->reset('lessonEdit');
@@ -151,8 +152,8 @@ class ManageLessons extends Component
         $this->lessonEdit['document_path'] = null;
         $this->lessonEdit['document_original_name'] = null;
 
-        // Forzar actualización del registro en caso de fallo
-        $lesson->refresh();
+        // Asegúrate de actualizar la base de datos primero y luego el estado de Livewire
+        $this->getLessons(); // Refresca las lecciones para reflejar los cambios
     }
 
     public function sortLessons($order)
@@ -186,6 +187,7 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
 
 
 
