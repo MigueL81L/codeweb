@@ -66,33 +66,42 @@ class ManageLessons extends Component
     public function store()
     {
         $this->validate();
-
+    
         $this->lessonCreate['section_id'] = $this->section->id;
-
+    
         // Manejar la subida del documento
         if ($this->lessonCreate['document']) {
             $this->lessonCreate['document_path'] = $this->lessonCreate['document']->store('courses/documents');
         }
-
+    
         if ($this->lessonCreate['platform'] == 1) {
             $this->lessonCreate['video_original_name'] = $this->video->getClientOriginalName();
         } else {
             $this->lessonCreate['video_original_name'] = $this->url;
         }
-
+    
+        // Crear la lección con los datos de lessonCreate, que ya incluye el document_path
         $lesson = $this->section->lessons()->create($this->lessonCreate);
-
+    
+        // Manejar la subida del video
         if ($this->lessonCreate['platform'] == 1 && $this->video) {
             $lesson->video_path = $this->video->store('courses/lessons');
             $lesson->save();
         }
-
+    
+        // También guardamos el document_path en el modelo ya creado
+        if ($this->lessonCreate['document']) {
+            $lesson->document_path = $this->lessonCreate['document_path']; // Asegúrate de que esto se registre
+            $lesson->save();
+        }
+    
         VideoUploaded::dispatch($lesson);
-
+    
         $this->reset(['url', 'lessonCreate', 'video', 'document']); // Reinicia el formulario
         $this->getLessons();
         $this->dispatch('refreshOrderLessons');
     }
+    
 
     public function edit($lessonId)
     {

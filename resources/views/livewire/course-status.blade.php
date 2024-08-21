@@ -15,7 +15,7 @@
                         </video>
                     @endif
 
-                    <h1 class="text-3xl text-gray-600 font-bold mt-4">Nombre: {{ $this->current->name }}</h1>
+                    <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
 
                     <div class="text-gray-600 mt-2">
                         <h2 class="font-bold">Descripción:</h2>
