@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Livewire\Instructor\Courses;
 
 use App\Rules\UniqueLessonCourse;
