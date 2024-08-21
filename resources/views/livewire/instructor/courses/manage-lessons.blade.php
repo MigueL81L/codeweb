@@ -40,7 +40,9 @@
                                     <x-textarea wire:model="lessonEdit.description" class="w-full" />
                                 </div>
                                 <div class="mt-2">
-                                    <x-label>Documento (PDF)</x-label>
+                                    <x-label>Documento Actual</x-label>
+                                    <p>{{ $lessonEdit['document_original_name'] ?? 'No hay documento adjunto' }}</p>
+                                    <x-label>Reemplazar Documento (PDF)</x-label>
                                     <x-input type="file" wire:model="lessonEdit.document" accept=".pdf" class="w-full" />
                                     <x-input-error for="lessonEdit.document" />
                                 </div>
@@ -80,7 +82,7 @@
                                     <p class="text-sm">
                                         Documento: 
                                         <a href="{{ Storage::url($lesson->document_path) }}" class="text-blue-600" target="_blank">
-                                            {{ $lesson->document_original_name }} <!-- Mostrar el nombre original del documento -->
+                                            {{ $lesson->document_original_name }}
                                         </a>
                                     </p>
                                 @else
@@ -146,6 +148,7 @@
         </form>
     </div>
 </div>
+
 
 
 

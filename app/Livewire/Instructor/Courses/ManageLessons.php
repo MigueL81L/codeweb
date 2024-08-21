@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Instructor\Courses;
 
-use App\Rules\UniqueLessonCourse;  
+use App\Rules\UniqueLessonCourse;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Events\VideoUploaded; 
+use App\Events\VideoUploaded;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,18 +26,19 @@ class ManageLessons extends Component
         'video_original_name' => null,
         'description' => null,
         'document' => null,
-        'document_original_name' => null, // Añadir aquí
+        'document_original_name' => null,
     ];
 
     public $lessonEdit = [
         'id' => null,
         'name' => null,
         'description' => null,
+        'document' => null, // Asegura que esto esté presente
         'document_path' => null,
-        'document_original_name' => null, // Añadir aquí también
+        'document_original_name' => null,
     ];
 
-    public $orderLessons;  
+    public $orderLessons;
 
     public function getLessons()
     {
@@ -48,14 +49,12 @@ class ManageLessons extends Component
 
     public function rules()
     {
-        $rules = [
+        return [
             'lessonCreate.name' => ['required', new UniqueLessonCourse($this->section->course_id)],
             'lessonCreate.platform' => 'required',
-            'lessonCreate.description' => 'nullable|string', 
+            'lessonCreate.description' => 'nullable|string',
             'lessonCreate.document' => 'nullable|mimes:pdf|max:2048',
         ];
-
-        return $rules;  
     }
 
     public function store()
@@ -66,7 +65,7 @@ class ManageLessons extends Component
         // Manejo de la subida del documento
         if ($this->lessonCreate['document']) {
             $this->lessonCreate['document_path'] = $this->lessonCreate['document']->store('courses/documents');
-            $this->lessonCreate['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName(); // Guardar nombre original
+            $this->lessonCreate['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
         }
 
         if ($this->lessonCreate['platform'] == 1) {
@@ -82,10 +81,9 @@ class ManageLessons extends Component
             $lesson->save();
         }
 
-        // Guardar el document_path en el modelo
         if (isset($this->lessonCreate['document_path'])) {
             $lesson->document_path = $this->lessonCreate['document_path'];
-            $lesson->document_original_name = $this->lessonCreate['document_original_name']; // Guardar el nombre original
+            $lesson->document_original_name = $this->lessonCreate['document_original_name'];
             $lesson->save();
         }
 
@@ -102,8 +100,9 @@ class ManageLessons extends Component
             'id' => $lesson->id,
             'name' => $lesson->name,
             'description' => $lesson->description,
+            'document' => null, // Indica que estamos sólo editando, no cargando un nuevo archivo
             'document_path' => $lesson->document_path,
-            'document_original_name' => $lesson->document_original_name, // Cargar el document_original_name
+            'document_original_name' => $lesson->document_original_name,
         ];
     }
 
@@ -128,7 +127,7 @@ class ManageLessons extends Component
                 Storage::delete($lesson->document_path);
             }
             $lesson->document_path = $this->lessonEdit['document']->store('courses/documents');
-            $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName(); // Guardar el nombre original
+            $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
             $lesson->save();
         }
 
@@ -164,9 +163,10 @@ class ManageLessons extends Component
 
     public function render()
     {
-        return view('livewire.instructor.courses.manage-lessons');   
+        return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
 
 
 
