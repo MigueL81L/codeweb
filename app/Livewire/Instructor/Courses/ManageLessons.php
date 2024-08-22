@@ -38,7 +38,7 @@ class ManageLessons extends Component
         'url' => null,
         'video_original_name' => null,
         'video_path' => null,
-        'platform' => null, // Añadir plataforma
+        'platform' => null,
     ];
 
     public $orderLessons;
@@ -101,8 +101,7 @@ class ManageLessons extends Component
             'document_original_name' => $lesson->document_original_name,
             'video_original_name' => $lesson->video_original_name,
             'video_path' => $lesson->video_path,
-            'platform' => $lesson->platform, // Asignar plataforma (1 o 2)
-            // Si la plataforma es YouTube, asignamos la URL
+            'platform' => $lesson->platform,
             'url' => $lesson->platform == 2 ? $lesson->video_path : null,
         ];
     }
@@ -150,7 +149,7 @@ class ManageLessons extends Component
                 'document_original_name' => $lesson->document_original_name,
                 'video_path' => $lesson->video_path,
                 'video_original_name' => $lesson->video_original_name,
-                'platform' => $this->lessonEdit['video'] ? 1 : ($this->lessonEdit['url'] ? 2 : $lesson->platform) // Mantener plataforma o cambiar
+                'platform' => $this->lessonEdit['video'] ? 1 : ($this->lessonEdit['url'] ? 2 : $lesson->platform)
             ]);
 
             $this->reset('lessonEdit');
