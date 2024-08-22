@@ -57,7 +57,7 @@
                                         <x-input-error for="lessonEdit.video" />
                                     </div>
                                     <div class="mt-2" x-show="lessonEdit.platform == 2">
-                                        <x-label>Nuevo Video YouTube</x-label>
+                                        <x-label>Nueva URL de Video YouTube</x-label>
                                         <x-input wire:model="lessonEdit.url" placeholder="Ingrese la nueva URL de YouTube" class="w-full" />
                                         <x-input-error for="lessonEdit.url" />
                                     </div>
@@ -66,7 +66,7 @@
                                     <x-danger-button wire:click="$set('lessonEdit.id', null)">
                                         Cancelar
                                     </x-danger-button>
-                                    <x-button>
+                                    <x-button class="ml-2">
                                         Actualizar
                                     </x-button>
                                 </div>
@@ -176,6 +176,7 @@
         </form>
     </div>
 </div>
+
 
 
 
