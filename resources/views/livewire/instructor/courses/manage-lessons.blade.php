@@ -28,7 +28,7 @@
         <ul class="space-y-4" x-ref="lessonList">
             @foreach ($lessons as $lesson)
                 <li wire:key="lesson-{{$lesson->id}}" data-id="{{$lesson->id}}">
-                    <div x-data="{ isOpen: false }" class="bg-white rounded-lg shadow-lg px-6 py-4 handle" style="cursor: move;">
+                    <div x-data="{ isOpen: false, platform: {{$lessonEdit['platform']}} }" class="bg-white rounded-lg shadow-lg px-6 py-4 handle" style="cursor: move;">
                         @if ($lessonEdit['id'] == $lesson->id)
                             <form wire:submit.prevent="update">
                                 <div class="flex items-center space-x-2">
@@ -47,7 +47,7 @@
                                     <x-input-error for="lessonEdit.document" />
                                 </div>
                                 <div class="mt-2">
-                                    <x-label class="mb-1">Plataformas</x-label>  
+                                    <x-label class="mb-1">Plataforma de Video Actual</x-label>
                                     <div class="md:flex md:items-center md:space-x-4 space-y-4 md:space-y-0">
                                         <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 1 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 1">
                                             <i class="fas fa-video text-2xl"></i>
@@ -55,29 +55,27 @@
                                         </button>
                                         <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 2 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 2">
                                             <i class="fab fa-youtube text-2xl"></i>
-                                            <span class="text-sm mt-2">Youtube</span>
+                                            <span class="text-sm mt-2">YouTube</span>
                                         </button>
                                     </div>
                                     <div class="mt-2" x-show="platform == 1" x-cloak>
                                         <x-label>Video</x-label>
-                                        <x-input type="file" wire:model="lessonEdit.video" accept="video/*" />
+                                        <x-input type="file" wire:model="lessonEdit.video" accept="video/*" class="w-full" />
                                         <x-input-error for="lessonEdit.video" />
                                     </div>
                                     <div class="mt-2" x-show="platform == 2" x-cloak>
                                         <x-label>Video YouTube</x-label>
                                         <x-input wire:model="lessonEdit.url" placeholder="Ingrese la URL de YouTube" class="w-full" />
-                                        <x-input-error for="lessonEdit.url" />
+                                        <x-input-error for="lessonEdit.url" />  
                                     </div>
                                 </div>
                                 <div class="flex justify-end mt-4">
-                                    <div class="space-x-2">
-                                        <x-danger-button wire:click="$set('lessonEdit.id', null)">
-                                            Cancelar
-                                        </x-danger-button>
-                                        <x-button>
-                                            Actualizar
-                                        </x-button>
-                                    </div>
+                                    <x-danger-button wire:click="$set('lessonEdit.id', null)">
+                                        Cancelar
+                                    </x-danger-button>
+                                    <x-button>
+                                        Actualizar
+                                    </x-button>
                                 </div>
                             </form>
                         @else
@@ -111,6 +109,20 @@
                                 @else
                                     <p class="text-sm">No hay documento adjunto para esta lección.</p>
                                 @endif
+                                <p class="text-sm">
+                                    Video: 
+                                    @if($lesson->platform == 1 && $lesson->video_path)
+                                        <a href="{{ Storage::url($lesson->video_path) }}" class="text-blue-600" target="_blank">
+                                            {{ $lesson->video_original_name }}
+                                        </a>
+                                    @elseif($lesson->platform == 2)
+                                        <a href="{{ $lesson->video_original_name }}" class="text-blue-600" target="_blank">
+                                            Ver en YouTube
+                                        </a>
+                                    @else
+                                        No hay video adjunto para esta lección.
+                                    @endif
+                                </p>
                             </div>
                         @endif
                     </div>
@@ -154,7 +166,7 @@
                     </div>
                     <div class="mt-2" x-show="platform == 1" x-cloak>
                         <x-label>Video</x-label>
-                        <x-input type="file" wire:model="video" accept="video/*" />
+                        <x-input type="file" wire:model="video" accept="video/*" class="w-full" />
                         <x-input-error for="video" />
                     </div>
                     <div class="mt-2" x-show="platform == 2" x-cloak>
@@ -171,6 +183,7 @@
         </form>
     </div>
 </div>
+
 
 
 
