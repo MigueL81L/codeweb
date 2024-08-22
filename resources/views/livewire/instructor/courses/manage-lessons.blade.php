@@ -51,17 +51,13 @@
                                     <div>
                                         <p><strong>{{ $lesson->platform == 1 ? 'Video Local' : 'YouTube' }}</strong>: {{ $lesson->video_original_name }}</p>
                                     </div>
-
-                                    <!-- Manejo para Video MP4 -->
-                                    <div x-show="lessonEdit.platform == 1">
+                                    <div class="mt-2" x-show="lessonEdit.platform == 1">
                                         <x-label>Nuevo Video (MP4)</x-label>
                                         <x-input type="file" wire:model="lessonEdit.video" accept="video/*" class="w-full" />
                                         <x-input-error for="lessonEdit.video" />
                                     </div>
-
-                                    <!-- Manejo para Video YouTube -->
-                                    <div x-show="lessonEdit.platform == 2">
-                                        <x-label>Nueva URL de Video YouTube</x-label>
+                                    <div class="mt-2" x-show="lessonEdit.platform == 2">
+                                        <x-label>Nuevo Video YouTube</x-label>
                                         <x-input wire:model="lessonEdit.url" placeholder="Ingrese la nueva URL de YouTube" class="w-full" />
                                         <x-input-error for="lessonEdit.url" />
                                     </div>
@@ -70,7 +66,7 @@
                                     <x-danger-button wire:click="$set('lessonEdit.id', null)">
                                         Cancelar
                                     </x-danger-button>
-                                    <x-button class="ml-2">
+                                    <x-button>
                                         Actualizar
                                     </x-button>
                                 </div>
