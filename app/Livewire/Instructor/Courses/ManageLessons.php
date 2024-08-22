@@ -32,7 +32,7 @@ class ManageLessons extends Component
         'id' => null,
         'name' => null,
         'description' => null,
-        'document' => null, // Para edición, aseguramos que no hay errores si está vacío
+        'document' => null,
         'document_path' => null,
         'document_original_name' => null,
         'platform' => 1,
@@ -117,14 +117,17 @@ class ManageLessons extends Component
     {
         $this->validate();
 
+        // Obtener lección actual desde la base de datos
         $lesson = Lesson::find($this->lessonEdit['id']);
 
+        // Actualizar información textual de la lección
         $lesson->update([
             'name' => $this->lessonEdit['name'],
             'description' => $this->lessonEdit['description'],
             'platform' => $this->lessonEdit['platform'],
         ]);
 
+        // Manejo de archivo de documento
         if ($this->lessonEdit['document'] instanceof UploadedFile) {
             $document = $this->lessonEdit['document'];
             if ($lesson->document_path && Storage::exists($lesson->document_path)) {
@@ -135,14 +138,16 @@ class ManageLessons extends Component
             $lesson->document_original_name = $document->getClientOriginalName();
         }
 
-        // Manejo del video
+        // Manejo de video
         if ($this->lessonEdit['platform'] == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
+            // Si cambiamos de YouTube a archivo local y hay un video_path, eliminarlo
             if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                 Storage::delete($lesson->video_path);
             }
             $lesson->video_path = $this->lessonEdit['video']->store('courses/lessons');
             $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
         } elseif ($this->lessonEdit['platform'] == 2 && $this->lessonEdit['url']) {
+            // Si cambiamos de archivo local a YouTube y hay un video_path, eliminarlo
             if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                 Storage::delete($lesson->video_path);
             }
@@ -187,6 +192,7 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
 
 
 
