@@ -25,10 +25,10 @@
            @this.call('sortLessons', order)
         }
     })">
-        <ul class="space-y-4" x-ref="lessonList">
+        <ul class="space-y-6" x-ref="lessonList">
             @foreach ($lessons as $lesson)
                 <li wire:key="lesson-{{$lesson->id}}" data-id="{{$lesson->id}}">
-                    <div x-data="{ isOpen: false, platform: {{$lessonEdit['platform']}} }" class="bg-white rounded-lg shadow-lg px-6 py-4 handle" style="cursor: move;">
+                    <div x-data="{ isOpen: false, platform: {{$lessonEdit['platform']}} }" class="bg-white rounded-lg shadow-lg px-6 py-4 handle mb-4" style="cursor: move;">
                         @if ($lessonEdit['id'] == $lesson->id)
                             <form wire:submit.prevent="update">
                                 <div class="flex items-center space-x-2">
@@ -47,7 +47,11 @@
                                     <x-input-error for="lessonEdit.document" />
                                 </div>
                                 <div class="mt-2">
-                                    <x-label class="mb-1">Plataforma de Video Actual</x-label>
+                                    <x-label>Video Actual</x-label>
+                                    <p>{{ $lesson->platform == 1 ? $lesson->video_original_name : ($lesson->platform == 2 ? 'YouTube URL: ' . $lesson->video_original_name : 'No hay video adjunto') }}</p>
+                                </div>
+                                <div class="mt-2">
+                                    <x-label class="mb-1">Plataforma de Video</x-label>
                                     <div class="md:flex md:items-center md:space-x-4 space-y-4 md:space-y-0">
                                         <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 1 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 1">
                                             <i class="fas fa-video text-2xl"></i>
@@ -73,9 +77,11 @@
                                     <x-danger-button wire:click="$set('lessonEdit.id', null)">
                                         Cancelar
                                     </x-danger-button>
-                                    <x-button>
-                                        Actualizar
-                                    </x-button>
+                                    <div class="ml-2">
+                                        <x-button>
+                                            Actualizar
+                                        </x-button>
+                                    </div>
                                 </div>
                             </form>
                         @else
@@ -178,11 +184,14 @@
             </div>
             <div class="flex justify-end px-6 py-4 bg-gray-100">
                 <x-danger-button x-on:click="open = false">Cancelar</x-danger-button>
-                <x-button class="ml-2">Guardar</x-button>
+                <div class="ml-2">
+                    <x-button class="ml-2">Guardar</x-button>
+                </div>
             </div>
         </form>
     </div>
 </div>
+
 
 
 
