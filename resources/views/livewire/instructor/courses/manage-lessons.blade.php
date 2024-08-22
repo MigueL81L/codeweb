@@ -46,6 +46,29 @@
                                     <x-input type="file" wire:model="lessonEdit.document" accept=".pdf" class="w-full" />
                                     <x-input-error for="lessonEdit.document" />
                                 </div>
+                                <div class="mt-2">
+                                    <x-label class="mb-1">Plataformas</x-label>  
+                                    <div class="md:flex md:items-center md:space-x-4 space-y-4 md:space-y-0">
+                                        <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 1 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 1">
+                                            <i class="fas fa-video text-2xl"></i>
+                                            <span class="text-sm mt-2">Video</span>
+                                        </button>
+                                        <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 2 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 2">
+                                            <i class="fab fa-youtube text-2xl"></i>
+                                            <span class="text-sm mt-2">Youtube</span>
+                                        </button>
+                                    </div>
+                                    <div class="mt-2" x-show="platform == 1" x-cloak>
+                                        <x-label>Video</x-label>
+                                        <x-input type="file" wire:model="lessonEdit.video" accept="video/*" />
+                                        <x-input-error for="lessonEdit.video" />
+                                    </div>
+                                    <div class="mt-2" x-show="platform == 2" x-cloak>
+                                        <x-label>Video YouTube</x-label>
+                                        <x-input wire:model="lessonEdit.url" placeholder="Ingrese la URL de YouTube" class="w-full" />
+                                        <x-input-error for="lessonEdit.url" />
+                                    </div>
+                                </div>
                                 <div class="flex justify-end mt-4">
                                     <div class="space-x-2">
                                         <x-danger-button wire:click="$set('lessonEdit.id', null)">
@@ -96,7 +119,7 @@
         </ul>
     </div>
 
-    {{-- Creación --}}
+    <!-- Componente para creación de nuevas lecciones -->
     <div x-data="{ open:@entangle('lessonCreate.open'), platform:@entangle('lessonCreate.platform') }">
         <div x-on:click="open = !open" class="h-6 w-12 -ml-4 bg-indigo-200 hover:bg-indigo-300 flex items-center justify-center cursor-pointer" style="clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 51%, 0% 0%);">
             <i class="-ml-2 text-sm fas fa-plus transition duration-300" :class="{ 'transform rotate-45': open, 'transform rotate-0': !open }"></i>
@@ -131,12 +154,12 @@
                     </div>
                     <div class="mt-2" x-show="platform == 1" x-cloak>
                         <x-label>Video</x-label>
-                        <x-progress-indicators wire:model="video" />
+                        <x-input type="file" wire:model="video" accept="video/*" />
                         <x-input-error for="video" />
                     </div>
                     <div class="mt-2" x-show="platform == 2" x-cloak>
-                        <x-label>Video Youtube</x-label>
-                        <x-input wire:model="url" placeholder="Ingrese la URL de Youtube" class="w-full" />
+                        <x-label>Video YouTube</x-label>
+                        <x-input wire:model="url" placeholder="Ingrese la URL de YouTube" class="w-full" />
                         <x-input-error for="url" />  
                     </div>
                 </div>
@@ -148,6 +171,7 @@
         </form>
     </div>
 </div>
+
 
 
 
