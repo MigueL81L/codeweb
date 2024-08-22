@@ -25,10 +25,10 @@
            @this.call('sortLessons', order)
         }
     })">
-        <ul class="space-y-6" x-ref="lessonList">
+        <ul class="space-y-4" x-ref="lessonList">
             @foreach ($lessons as $lesson)
                 <li wire:key="lesson-{{$lesson->id}}" data-id="{{$lesson->id}}">
-                    <div x-data="{ isOpen: false, platform: {{$lessonEdit['platform']}} }" class="bg-white rounded-lg shadow-lg px-6 py-4 handle mb-4" style="cursor: move;">
+                    <div x-data="{ isOpen: false }" class="bg-white rounded-lg shadow-lg px-6 py-4 handle" style="cursor: move;">
                         @if ($lessonEdit['id'] == $lesson->id)
                             <form wire:submit.prevent="update">
                                 <div class="flex items-center space-x-2">
@@ -47,41 +47,28 @@
                                     <x-input-error for="lessonEdit.document" />
                                 </div>
                                 <div class="mt-2">
-                                    <x-label>Video Actual</x-label>
-                                    <p>{{ $lesson->platform == 1 ? $lesson->video_original_name : ($lesson->platform == 2 ? 'YouTube URL: ' . $lesson->video_original_name : 'No hay video adjunto') }}</p>
-                                </div>
-                                <div class="mt-2">
-                                    <x-label class="mb-1">Plataforma de Video</x-label>
-                                    <div class="md:flex md:items-center md:space-x-4 space-y-4 md:space-y-0">
-                                        <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 1 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 1">
-                                            <i class="fas fa-video text-2xl"></i>
-                                            <span class="text-sm mt-2">Video</span>
-                                        </button>
-                                        <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 2 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 2">
-                                            <i class="fab fa-youtube text-2xl"></i>
-                                            <span class="text-sm mt-2">YouTube</span>
-                                        </button>
+                                    <x-label class="mb-1">Plataforma de Video Actual</x-label>
+                                    <div>
+                                        <p><strong>{{ $lesson->platform == 1 ? 'Video Local' : 'YouTube' }}</strong>: {{ $lesson->video_original_name }}</p>
                                     </div>
-                                    <div class="mt-2" x-show="platform == 1" x-cloak>
-                                        <x-label>Video</x-label>
+                                    <div class="mt-2" x-show="lessonEdit.platform == 1">
+                                        <x-label>Nuevo Video (MP4)</x-label>
                                         <x-input type="file" wire:model="lessonEdit.video" accept="video/*" class="w-full" />
                                         <x-input-error for="lessonEdit.video" />
                                     </div>
-                                    <div class="mt-2" x-show="platform == 2" x-cloak>
-                                        <x-label>Video YouTube</x-label>
-                                        <x-input wire:model="lessonEdit.url" placeholder="Ingrese la URL de YouTube" class="w-full" />
-                                        <x-input-error for="lessonEdit.url" />  
+                                    <div class="mt-2" x-show="lessonEdit.platform == 2">
+                                        <x-label>Nuevo Video YouTube</x-label>
+                                        <x-input wire:model="lessonEdit.url" placeholder="Ingrese la nueva URL de YouTube" class="w-full" />
+                                        <x-input-error for="lessonEdit.url" />
                                     </div>
                                 </div>
                                 <div class="flex justify-end mt-4">
                                     <x-danger-button wire:click="$set('lessonEdit.id', null)">
                                         Cancelar
                                     </x-danger-button>
-                                    <div class="ml-2">
-                                        <x-button>
-                                            Actualizar
-                                        </x-button>
-                                    </div>
+                                    <x-button>
+                                        Actualizar
+                                    </x-button>
                                 </div>
                             </form>
                         @else
@@ -184,13 +171,12 @@
             </div>
             <div class="flex justify-end px-6 py-4 bg-gray-100">
                 <x-danger-button x-on:click="open = false">Cancelar</x-danger-button>
-                <div class="ml-2">
-                    <x-button class="ml-2">Guardar</x-button>
-                </div>
+                <x-button class="ml-2">Guardar</x-button>
             </div>
         </form>
     </div>
 </div>
+
 
 
 
