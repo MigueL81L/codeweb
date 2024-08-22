@@ -8,6 +8,8 @@ use Livewire\WithFileUploads;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
+use Exception; // Importar Exception para manejar catch
 
 class ManageLessons extends Component
 {
@@ -119,46 +121,53 @@ class ManageLessons extends Component
             'lessonEdit.platform' => 'required|in:1,2',
         ]);
 
-        $lesson = Lesson::findOrFail($this->lessonEdit['id']);
+        try {
+            $lesson = Lesson::findOrFail($this->lessonEdit['id']);
 
-        // Manejo del documento
-        if ($this->lessonEdit['document'] instanceof UploadedFile) {
-            if ($lesson->document_path && Storage::exists($lesson->document_path)) {
-                Storage::delete($lesson->document_path);
+            // Manejo del documento
+            if ($this->lessonEdit['document'] instanceof UploadedFile) {
+                if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+                    Storage::delete($lesson->document_path);
+                }
+                $lesson->document_path = $this->lessonEdit['document']->store('courses/documents');
+                $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
             }
-            $lesson->document_path = $this->lessonEdit['document']->store('courses/documents');
-            $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
+
+            // Manejo del video
+            if ($this->lessonEdit['platform'] == 1) {
+                if ($this->lessonEdit['video'] instanceof UploadedFile) {
+                    if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                        Storage::delete($lesson->video_path);
+                    }
+                    $lesson->video_path = $this->lessonEdit['video']->store('courses/lessons');
+                    $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
+                }
+            } elseif ($this->lessonEdit['platform'] == 2) {
+                if (!empty($this->lessonEdit['url'])) {
+                    if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                        Storage::delete($lesson->video_path);
+                    }
+                    $lesson->video_path = null;
+                    $lesson->video_original_name = $this->lessonEdit['url'];
+                }
+            }
+
+            $lesson->update([
+                'name' => $this->lessonEdit['name'],
+                'description' => $this->lessonEdit['description'],
+                'platform' => $this->lessonEdit['platform'],
+                'video_path' => $lesson->video_path,
+                'video_original_name' => $lesson->video_original_name,
+                'document_path' => $lesson->document_path,
+                'document_original_name' => $lesson->document_original_name,
+            ]);
+
+            $this->reset('lessonEdit');
+            $this->getLessons();
+        } catch (Exception $e) {
+            Log::error("Error actualizando lección: " . $e->getMessage());
+            session()->flash('error', 'Ha ocurrido un problema al actualizar la lección.');
         }
-
-        // Manejo del video
-        if ($this->lessonEdit['platform'] == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
-            // Si es un nuevo video y es diferente del tipo anterior, eliminar el viejo
-            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-                Storage::delete($lesson->video_path);
-            }
-            $lesson->video_path = $this->lessonEdit['video']->store('courses/lessons');
-            $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
-        } elseif ($this->lessonEdit['platform'] == 2 && !empty($this->lessonEdit['url'])) {
-            // Si es un cambio a YouTube, eliminar el archivo si existe
-            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-                Storage::delete($lesson->video_path);
-            }
-            $lesson->video_path = null;
-            $lesson->video_original_name = $this->lessonEdit['url'];
-        }
-
-        $lesson->update([
-            'name' => $this->lessonEdit['name'],
-            'description' => $this->lessonEdit['description'],
-            'platform' => $this->lessonEdit['platform'],
-            'video_path' => $lesson->video_path,
-            'video_original_name' => $lesson->video_original_name,
-            'document_path' => $lesson->document_path,
-            'document_original_name' => $lesson->document_original_name,
-        ]);
-
-        $this->reset('lessonEdit');
-        $this->getLessons();
     }
 
     public function sortLessons($order)
@@ -172,19 +181,24 @@ class ManageLessons extends Component
 
     public function destroy($lessonId)
     {
-        $lesson = Lesson::find($lessonId);
+        try {
+            $lesson = Lesson::find($lessonId);
 
-        if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-            Storage::delete($lesson->video_path);
+            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                Storage::delete($lesson->video_path);
+            }
+
+            if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+                Storage::delete($lesson->document_path);
+            }
+
+            $lesson->delete();
+            $this->getLessons();
+            $this->emit('refreshOrderLessons');
+        } catch (Exception $e) {
+            Log::error("Error deleting lesson: " . $e->getMessage());
+            session()->flash('error', 'Ha ocurrido un problema al eliminar la lección.');
         }
-
-        if ($lesson->document_path && Storage::exists($lesson->document_path)) {
-            Storage::delete($lesson->document_path);
-        }
-
-        $lesson->delete();
-        $this->getLessons();
-        $this->emit('refreshOrderLessons');
     }
 
     public function render()
@@ -192,6 +206,9 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
+
+
 
 
 
