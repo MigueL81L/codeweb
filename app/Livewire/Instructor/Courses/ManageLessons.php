@@ -72,7 +72,7 @@ class ManageLessons extends Component
         $this->validate();
         $this->lessonCreate['section_id'] = $this->section->id;
 
-        if ($this->lessonCreate['document']) {
+        if ($this->lessonCreate['document'] instanceof UploadedFile) {
             $this->lessonCreate['document_path'] = $this->lessonCreate['document']->store('courses/documents');
             $this->lessonCreate['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
         }
@@ -94,7 +94,7 @@ class ManageLessons extends Component
 
     public function edit($lessonId)
     {
-        $lesson = Lesson::find($lessonId);
+        $lesson = Lesson::findOrFail($lessonId);
         $this->lessonEdit = [
             'id' => $lesson->id,
             'name' => $lesson->name,
@@ -116,7 +116,7 @@ class ManageLessons extends Component
             'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
         ]);
 
-        $lesson = Lesson::find($this->lessonEdit['id']);
+        $lesson = Lesson::findOrFail($this->lessonEdit['id']);
 
         $lesson->update([
             'name' => $this->lessonEdit['name'],
@@ -156,7 +156,7 @@ class ManageLessons extends Component
     public function sortLessons($order)
     {
         foreach ($order as $index => $lessonId) {
-            Lesson::find($lessonId)->update(['position' => $index + 1]);
+            Lesson::findOrFail($lessonId)->update(['position' => $index + 1]);
         }
         $this->getLessons();
         $this->emit('refreshOrderLessons');
@@ -164,7 +164,7 @@ class ManageLessons extends Component
 
     public function destroy($lessonId)
     {
-        $lesson = Lesson::find($lessonId);
+        $lesson = Lesson::findOrFail($lessonId);
 
         if ($lesson->video_path && Storage::exists($lesson->video_path)) {
             Storage::delete($lesson->video_path);
@@ -184,6 +184,7 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
 
 
 

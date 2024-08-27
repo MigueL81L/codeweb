@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <div x-show="isOpen" x-cloak>
+                            <div x-show="isOpen" x-transition x-cloak>
                                 <p class="text-sm">Descripción: {{$lesson->description ?? 'No existe descripción para esta lección'}}</p>
                                 @if($lesson->document_path)
                                     <p class="text-sm">
@@ -105,7 +105,7 @@
         <div x-on:click="open = !open" class="h-6 w-12 -ml-4 bg-indigo-200 hover:bg-indigo-300 flex items-center justify-center cursor-pointer" style="clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 51%, 0% 0%);">
             <i class="-ml-2 text-sm fas fa-plus transition duration-300" :class="{ 'transform rotate-45': open, 'transform rotate-0': !open }"></i>
         </div>
-        <form wire:submit.prevent="store" class="mt-4 bg-white rounded-lg shadow-lg" x-show="open" x-cloak>
+        <form wire:submit.prevent="store" class="mt-4 bg-white rounded-lg shadow-lg" x-show="open" x-transition x-cloak>
             <div class="p-6">
                 <div class="mb-2">
                     <x-input wire:model="lessonCreate.name" class="w-full" placeholder="Ingrese el nombre de la Lección" />
@@ -148,12 +148,13 @@
             <div class="flex justify-end px-6 py-4 bg-gray-100">
                 <x-danger-button x-on:click="open = false">Cancelar</x-danger-button>
                 <div class="ml-2">
-                    <x-button class="ml-2">Guardar</x-button>
+                    <x-button>Guardar</x-button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
 
 
 
