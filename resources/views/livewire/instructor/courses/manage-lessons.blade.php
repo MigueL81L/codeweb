@@ -153,7 +153,15 @@
             </div>
         </form>
     </div>
+
+    <!-- Notificaciones -->
+    <script>
+        window.addEventListener('notify', event => {
+            alert(event.detail.message);
+        });
+    </script>
 </div>
+
 
 
 

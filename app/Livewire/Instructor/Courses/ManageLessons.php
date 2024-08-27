@@ -70,6 +70,8 @@ class ManageLessons extends Component
     public function store()
     {
         $this->validate();
+
+        // Recopilar datos para la lección
         $lessonData = [
             'name' => $this->lessonCreate['name'],
             'description' => $this->lessonCreate['description'],
@@ -77,24 +79,34 @@ class ManageLessons extends Component
             'section_id' => $this->section->id,
         ];
 
-        if ($this->lessonCreate['document'] instanceof UploadedFile) {
-            $lessonData['document_path'] = $this->lessonCreate['document']->store('courses/documents', 'public');
-            $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
+        try {
+            // Manejo del upload del documento PDF
+            if ($this->lessonCreate['document'] instanceof UploadedFile) {
+                $lessonData['document_path'] = $this->lessonCreate['document']->store('courses/documents', 'public');
+                $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
+            }
+
+            // Manejo del upload del video
+            if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
+                $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
+                $lessonData['video_original_name'] = $this->video->getClientOriginalName();
+            } elseif ($lessonData['platform'] == 2) {
+                $lessonData['video_path'] = null;
+                $lessonData['video_original_name'] = $this->url;
+            }
+
+            // Crear la nueva lección en la base de datos
+            Lesson::create($lessonData);
+
+            // Reiniciar los valores para la creación de la lección
+            $this->reset(['url', 'lessonCreate', 'video', 'document']);
+            $this->getLessons();
+            $this->emit('refreshOrderLessons');
+
+        } catch (\Exception $e) {
+            // Manejo de errores, captura errores y muestra el mensaje
+            $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
-
-        if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
-            $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
-            $lessonData['video_original_name'] = $this->video->getClientOriginalName();
-        } elseif ($lessonData['platform'] == 2) {
-            $lessonData['video_path'] = null;
-            $lessonData['video_original_name'] = $this->url;
-        }
-
-        Lesson::create($lessonData);
-
-        $this->reset(['url', 'lessonCreate', 'video', 'document']);
-        $this->getLessons();
-        $this->emit('refreshOrderLessons');
     }
 
     public function edit($lessonId)
@@ -123,39 +135,51 @@ class ManageLessons extends Component
 
         $lesson = Lesson::findOrFail($this->lessonEdit['id']);
 
-        $lesson->update([
-            'name' => $this->lessonEdit['name'],
-            'description' => $this->lessonEdit['description'],
-        ]);
+        // Comienza la actualización de la lección
+        try {
+            $lesson->update([
+                'name' => $this->lessonEdit['name'],
+                'description' => $this->lessonEdit['description'],
+            ]);
 
-        if ($this->lessonEdit['document'] instanceof UploadedFile) {
-            if ($lesson->document_path && Storage::exists($lesson->document_path)) {
-                Storage::delete($lesson->document_path);
+            // Manejo del archivo del documento
+            if ($this->lessonEdit['document'] instanceof UploadedFile) {
+                // Eliminar el documento viejo
+                if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+                    Storage::delete($lesson->document_path);
+                }
+
+                // Guardar el nuevo documento
+                $lesson->document_path = $this->lessonEdit['document']->store('courses/documents', 'public');
+                $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
+                $lesson->save();
             }
 
-            $lesson->document_path = $this->lessonEdit['document']->store('courses/documents', 'public');
-            $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
-            $lesson->save();
+            // Manejo del video
+            if ($lesson->platform == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
+                if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                    Storage::delete($lesson->video_path);
+                }
+                $lesson->video_path = $this->lessonEdit['video']->store('courses/lessons', 'public');
+                $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
+                $lesson->save();
+            } elseif ($lesson->platform == 2) {
+                // No se guarda video si es YouTube
+                if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                    Storage::delete($lesson->video_path);
+                }
+                $lesson->video_path = null;
+                $lesson->video_original_name = $this->lessonEdit['url'];
+                $lesson->save();
+            }
+
+            $this->reset('lessonEdit');
+            $this->getLessons();
+
+        } catch (\Exception $e) {
+            // Manejo de errores
+            $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
-
-        if ($lesson->platform == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
-            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-                Storage::delete($lesson->video_path);
-            }
-            $lesson->video_path = $this->lessonEdit['video']->store('courses/lessons', 'public');
-            $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
-            $lesson->save();
-        } elseif ($lesson->platform == 2) {
-            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-                Storage::delete($lesson->video_path);
-            }
-            $lesson->video_path = null;
-            $lesson->video_original_name = $this->lessonEdit['url'];
-            $lesson->save();
-        }
-
-        $this->reset('lessonEdit');
-        $this->getLessons();
     }
 
     public function sortLessons($order)
@@ -189,6 +213,8 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
+
 
 
 
