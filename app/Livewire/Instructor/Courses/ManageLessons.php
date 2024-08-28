@@ -124,47 +124,53 @@ class ManageLessons extends Component
             'lessonEdit.description' => ['nullable'],
             'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
         ]);
-
+    
         $lesson = Lesson::findOrFail($this->lessonEdit['id']);
-
+    
         try {
+            // Update basic lesson information
             $lesson->update([
                 'name' => $this->lessonEdit['name'],
                 'description' => $this->lessonEdit['description'],
             ]);
-
-            if ($this->lessonEdit['document'] instanceof UploadedFile) {
+    
+            // Handle document uploading and updating
+            $uploadedDocument = $this->lessonEdit['document'];
+            if ($uploadedDocument && $uploadedDocument instanceof UploadedFile) {
                 if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                     Storage::delete($lesson->document_path);
                 }
-                $lesson->document_path = $this->lessonEdit['document']->store('courses/documents', 'public');
-                $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
-                $lesson->save();
+                $lesson->document_path = $uploadedDocument->store('courses/documents', 'public');
+                $lesson->document_original_name = $uploadedDocument->getClientOriginalName();
             }
-
-            if ($lesson->platform == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
+    
+            // Handle video upload and updating
+            $uploadedVideo = $this->lessonEdit['video'];
+            if ($lesson->platform == 1 && $uploadedVideo && $uploadedVideo instanceof UploadedFile) {
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
-                $lesson->video_path = $this->lessonEdit['video']->store('courses/lessons', 'public');
-                $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
-                $lesson->save();
+                $lesson->video_path = $uploadedVideo->store('courses/lessons', 'public');
+                $lesson->video_original_name = $uploadedVideo->getClientOriginalName();
             } elseif ($lesson->platform == 2) {
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
                 $lesson->video_path = null;
                 $lesson->video_original_name = $this->lessonEdit['url'];
-                $lesson->save();
             }
-
+    
+            $lesson->save();
+    
             $this->reset('lessonEdit');
             $this->getLessons();
-
+    
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
     }
+    
+    
 
     public function sortLessons($order)
     {
