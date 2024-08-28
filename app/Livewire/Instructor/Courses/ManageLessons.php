@@ -140,6 +140,7 @@ class ManageLessons extends Component
             $lesson->update([
                 'name' => $this->lessonEdit['name'],
                 'description' => $this->lessonEdit['description'],
+                'document'=>$this->lessonEdit['document']
             ]);
 
             // Manejo del archivo del documento
