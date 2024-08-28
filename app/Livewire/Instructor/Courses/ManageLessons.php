@@ -128,13 +128,12 @@ class ManageLessons extends Component
         $lesson = Lesson::findOrFail($this->lessonEdit['id']);
     
         try {
-            // Update basic lesson information
             $lesson->update([
                 'name' => $this->lessonEdit['name'],
                 'description' => $this->lessonEdit['description'],
             ]);
     
-            // Handle document uploading and updating
+            // Solo verificar y operar si se ha proporcionado un nuevo documento
             $uploadedDocument = $this->lessonEdit['document'];
             if ($uploadedDocument && $uploadedDocument instanceof UploadedFile) {
                 if ($lesson->document_path && Storage::exists($lesson->document_path)) {
@@ -144,23 +143,22 @@ class ManageLessons extends Component
                 $lesson->document_original_name = $uploadedDocument->getClientOriginalName();
             }
     
-            // Handle video upload and updating
-            $uploadedVideo = $this->lessonEdit['video'];
-            if ($lesson->platform == 1 && $uploadedVideo && $uploadedVideo instanceof UploadedFile) {
+            // Manejo del video
+            if ($lesson->platform == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
-                $lesson->video_path = $uploadedVideo->store('courses/lessons', 'public');
-                $lesson->video_original_name = $uploadedVideo->getClientOriginalName();
+                $lesson->video_path = $this->lessonEdit['video']->store('courses/lessons', 'public');
+                $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
+                $lesson->save();
             } elseif ($lesson->platform == 2) {
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
                 $lesson->video_path = null;
                 $lesson->video_original_name = $this->lessonEdit['url'];
+                $lesson->save();
             }
-    
-            $lesson->save();
     
             $this->reset('lessonEdit');
             $this->getLessons();
@@ -169,7 +167,6 @@ class ManageLessons extends Component
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
     }
-    
     
 
     public function sortLessons($order)
