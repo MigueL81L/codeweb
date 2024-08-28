@@ -70,7 +70,7 @@ class ManageLessons extends Component
     public function store()
     {
         $this->validate();
-
+    
         // Recopilar datos para la lección
         $lessonData = [
             'name' => $this->lessonCreate['name'],
@@ -78,14 +78,18 @@ class ManageLessons extends Component
             'platform' => $this->lessonCreate['platform'],
             'section_id' => $this->section->id,
         ];
-
+    
         try {
             // Manejo del upload del documento PDF
             if ($this->lessonCreate['document'] instanceof UploadedFile) {
                 $lessonData['document_path'] = $this->lessonCreate['document']->store('courses/documents', 'public');
                 $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
+            } else {
+                // Manera opcional de dejar null. Elimina estas líneas si se ha determinado que quieres que sean obligatorios
+                $lessonData['document_path'] = null;
+                $lessonData['document_original_name'] = null; 
             }
-
+    
             // Manejo del upload del video
             if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
                 $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
@@ -94,20 +98,21 @@ class ManageLessons extends Component
                 $lessonData['video_path'] = null;
                 $lessonData['video_original_name'] = $this->url;
             }
-
+    
             // Crear la nueva lección en la base de datos
             Lesson::create($lessonData);
-
+    
             // Reiniciar los valores para la creación de la lección
             $this->reset(['url', 'lessonCreate', 'video', 'document']);
             $this->getLessons();
             $this->emit('refreshOrderLessons');
-
+    
         } catch (\Exception $e) {
-            // Manejo de errores, captura errores y muestra el mensaje
+            // Manejo de errores
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
     }
+    
 
     public function edit($lessonId)
     {
