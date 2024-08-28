@@ -124,26 +124,24 @@ class ManageLessons extends Component
             'lessonEdit.description' => ['nullable'],
             'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
         ]);
-    
+
         $lesson = Lesson::findOrFail($this->lessonEdit['id']);
-    
+
         try {
             $lesson->update([
                 'name' => $this->lessonEdit['name'],
                 'description' => $this->lessonEdit['description'],
             ]);
-    
-            // Solo verificar y operar si se ha proporcionado un nuevo documento
-            $uploadedDocument = $this->lessonEdit['document'];
-            if ($uploadedDocument && $uploadedDocument instanceof UploadedFile) {
+
+            if ($this->lessonEdit['document'] instanceof UploadedFile) {
                 if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                     Storage::delete($lesson->document_path);
                 }
-                $lesson->document_path = $uploadedDocument->store('courses/documents', 'public');
-                $lesson->document_original_name = $uploadedDocument->getClientOriginalName();
+                $lesson->document_path = $this->lessonEdit['document']->store('courses/documents', 'public');
+                $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
+                $lesson->save();
             }
-    
-            // Manejo del video
+
             if ($lesson->platform == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
@@ -159,15 +157,14 @@ class ManageLessons extends Component
                 $lesson->video_original_name = $this->lessonEdit['url'];
                 $lesson->save();
             }
-    
+
             $this->reset('lessonEdit');
             $this->getLessons();
-    
+
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
     }
-    
 
     public function sortLessons($order)
     {
