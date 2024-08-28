@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Instructor\Courses;
 
+use App\Models\Lesson;
 use App\Rules\UniqueLessonCourse;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\Lesson;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 
@@ -16,14 +16,13 @@ class ManageLessons extends Component
     public $section;
     public $lessons;
     public $video;
-    public $url;
     public $document;
+    public $url;
 
     public $lessonCreate = [
         'open' => false,
         'name' => null,
         'platform' => 1,
-        'video_original_name' => null,
         'description' => null,
         'document' => null,
     ];
@@ -33,15 +32,13 @@ class ManageLessons extends Component
         'name' => null,
         'description' => null,
         'document' => null,
-        'document_path' => null,
         'document_original_name' => null,
+        'document_path' => null,
         'platform' => 1,
         'video' => null,
         'url' => null,
         'existing_video_path' => null,
     ];
-
-    public $orderLessons;
 
     protected $listeners = ['refreshOrderLessons' => 'getLessons'];
 
@@ -53,7 +50,7 @@ class ManageLessons extends Component
     public function getLessons()
     {
         $this->lessons = Lesson::where('section_id', $this->section->id)
-            ->orderBy('position', 'asc')
+            ->orderBy('position')
             ->get();
     }
 
@@ -63,7 +60,7 @@ class ManageLessons extends Component
             'lessonCreate.name' => ['required', new UniqueLessonCourse($this->section->course_id)],
             'lessonCreate.platform' => 'required|in:1,2',
             'lessonCreate.description' => 'nullable|string',
-            'lessonCreate.document' => 'nullable|mimes:pdf|max:2048',
+            'lessonCreate.document' => 'nullable|file|mimes:pdf|max:2048',
         ];
     }
 
@@ -71,7 +68,6 @@ class ManageLessons extends Component
     {
         $this->validate();
 
-        // Recopilar datos para la lección
         $lessonData = [
             'name' => $this->lessonCreate['name'],
             'description' => $this->lessonCreate['description'],
@@ -80,13 +76,12 @@ class ManageLessons extends Component
         ];
 
         try {
-            // Manejo del upload del documento PDF
             if ($this->lessonCreate['document'] instanceof UploadedFile) {
-                $lessonData['document_path'] = $this->lessonCreate['document']->store('courses/documents', 'public');
+                $path = $this->lessonCreate['document']->store('courses/documents', 'public');
+                $lessonData['document_path'] = $path;
                 $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
             }
 
-            // Manejo del upload del video
             if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
                 $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
                 $lessonData['video_original_name'] = $this->video->getClientOriginalName();
@@ -95,10 +90,8 @@ class ManageLessons extends Component
                 $lessonData['video_original_name'] = $this->url;
             }
 
-            // Crear la nueva lección en la base de datos
             Lesson::create($lessonData);
 
-            // Reiniciar los valores para la creación de la lección
             $this->reset(['url', 'lessonCreate', 'video', 'document']);
             $this->getLessons();
             $this->emit('refreshOrderLessons');
@@ -134,27 +127,21 @@ class ManageLessons extends Component
 
         $lesson = Lesson::findOrFail($this->lessonEdit['id']);
 
-        // Comienza la actualización de la lección
         try {
             $lesson->update([
                 'name' => $this->lessonEdit['name'],
                 'description' => $this->lessonEdit['description'],
             ]);
 
-            // Manejo del archivo del documento
             if ($this->lessonEdit['document'] instanceof UploadedFile) {
-                // Eliminar el documento viejo
                 if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                     Storage::delete($lesson->document_path);
                 }
-
-                // Guardar el nuevo documento
                 $lesson->document_path = $this->lessonEdit['document']->store('courses/documents', 'public');
                 $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
                 $lesson->save();
             }
 
-            // Manejo del video
             if ($lesson->platform == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
@@ -163,7 +150,6 @@ class ManageLessons extends Component
                 $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
                 $lesson->save();
             } elseif ($lesson->platform == 2) {
-                // No se guarda video si es YouTube
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
@@ -211,6 +197,9 @@ class ManageLessons extends Component
         return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
+
+
 
 
 

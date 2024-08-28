@@ -51,7 +51,7 @@
                             <div class="md:flex md:items-center mt-2">
                                 <h1 class="md:flex-1 truncate cursor-move">
                                     <i class="fas fa-play-circle text-blue-600"></i>
-                                    Lección {{$orderLessons->search($lesson->id) + 1}}: {{$lesson->name}}
+                                    Lección {{$loop->iteration}}: {{$lesson->name}}
                                 </h1>
                                 <div class="space-x-2 md:shrink-0 md:ml-4">
                                     <button wire:click="edit({{$lesson->id}})">
@@ -161,6 +161,7 @@
         });
     </script>
 </div>
+
 
 
 

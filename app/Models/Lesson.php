@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage; // Importa la clase Storage de Laravel
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use App\Observers\LessonObserver;
 
@@ -15,13 +15,15 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'slug',
         'platform',
         'video_path',
         'video_original_name',
         'image_path',
+        'document_original_name', // Agrega este campo
+        'document_path',          // Agrega este campo también
         'description',
         'duration',
         'position',
@@ -31,31 +33,18 @@ class Lesson extends Model
         'section_id',
     ];
 
-    // protected $guarded=['id'];
-
-    protected $casts=[
-        'is_published'=>'boolean',
-        'is_preview'=>'boolean',
-        'is_processed'=>'boolean',
+    protected $casts = [
+        'is_published' => 'boolean',
+        'is_preview' => 'boolean',
+        'is_processed' => 'boolean',
     ];
 
-    //Relación uno a muchos inversa
+    // Relaciones y otros métodos...
+
     public function section(){
         return $this->belongsTo(Section::class);
     }
 
-
-    // Relación uno a uno
-    // public function description(){
-    //     return $this->hasOne('App\Models\Description');
-    // }
-
-    
-    // public function platform(){
-    //     return $this->belonsTo('App\Models\Platform');
-    // }
-
-    // Relación muchos a muchos
     public function users()
     {
         return $this->belongsToMany(User::class);
@@ -65,7 +54,6 @@ class Lesson extends Model
         return $this->users->contains(auth()->user()->id);
     }
 
-    // Método para determinar el tipo MIME del video basado en su extensión
     private function getVideoType($filename)
     {
          $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -84,16 +72,15 @@ class Lesson extends Model
             case '3gp':
                 return 'video/3gpp';
             default:
-                return 'video/mp4'; // Valor predeterminado
+                return 'video/mp4';
         }
     }
 
-    // Accesor para generar el iframe de video
     protected function getIframeAttribute()
     {
-        if ($this->platform == 2) { // YouTube
+        if ($this->platform == 2) {
             return '<iframe width="560" height="315" src="https://www.youtube.com/embed/' . $this->video_path . '" frameborder="0" allowfullscreen></iframe>';
-        } elseif ($this->platform == 1) { // Normal Video
+        } elseif ($this->platform == 1) {
             $videoUrl = Storage::url($this->video_path);
             $videoType = $this->getVideoType($this->video_original_name);
 
@@ -105,9 +92,8 @@ class Lesson extends Model
 
         return '';
     }
-    
-
 }
+
 
 
 
