@@ -200,20 +200,34 @@ class ManageLessons extends Component
 
     public function destroy($lessonId)
     {
+        // Buscar lección por ID
         $lesson = Lesson::findOrFail($lessonId);
-
-        if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-            Storage::delete($lesson->video_path);
+    
+        try {
+            // Eliminar el video si existe primero para evitar problemas
+            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                Storage::delete($lesson->video_path);
+            }
+    
+            // Eliminar el documento si existe
+            if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+                Storage::delete($lesson->document_path);
+            }
+    
+            // Finalmente, eliminar la lección
+            $lesson->delete();
+    
+            // Actualizar las lecciones en la interfaz tras la eliminación
+            $this->getLessons();
+            $this->emit('refreshOrderLessons');
+    
+        } catch (\Exception $e) {
+            // Captura de excepciones para error 500
+            Log::error('Error al eliminar la lección: ' . $e->getMessage());
+            $this->dispatchBrowserEvent('notify', ['message' => 'Error al eliminar lección: ' . $e->getMessage()]);
         }
-
-        if ($lesson->document_path && Storage::exists($lesson->document_path)) {
-            Storage::delete($lesson->document_path);
-        }
-
-        $lesson->delete();
-        $this->getLessons();
-        $this->emit('refreshOrderLessons');
     }
+    
 
     public function render()
     {
