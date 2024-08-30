@@ -69,7 +69,10 @@ class ManageLessons extends Component
 
     public function store()
     {
-        $this->validate();
+        $this->validate([
+            'lessonCreate.name' => 'required',
+            'lessonCreate.platform' => 'required|in:1,2',
+        ]);
     
         $lessonData = [
             'name' => $this->lessonCreate['name'],
@@ -79,38 +82,33 @@ class ManageLessons extends Component
         ];
     
         try {
-            Log::info('Iniciando el proceso de creación de la lección', $lessonData);
-    
-            if ($this->lessonCreate['document'] instanceof UploadedFile) {
-                $path = $this->lessonCreate['document']->store('courses/documents', 'public');
-                $lessonData['document_path'] = $path;
+            // Solo manipula el documento si es una instancia de UploadedFile
+            if (isset($this->lessonCreate['document']) && $this->lessonCreate['document'] instanceof UploadedFile) {
+                $lessonData['document_path'] = $this->lessonCreate['document']->store('courses/documents', 'public');
                 $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
             }
     
-            if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
+            // Verifica si el video es una instancia de UploadedFile 
+            if ($this->lessonCreate['platform'] == 1 && isset($this->video) && $this->video instanceof UploadedFile) {
                 $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
                 $lessonData['video_original_name'] = $this->video->getClientOriginalName();
-            } elseif ($lessonData['platform'] == 2) {
+            } elseif ($this->lessonCreate['platform'] == 2) {
                 $lessonData['video_path'] = null;
                 $lessonData['video_original_name'] = $this->url;
             }
     
-            $lesson = Lesson::create($lessonData);
-            Log::info("Lección creada con éxito: ", ['lesson_id' => $lesson->id]);
+            Lesson::create($lessonData);
     
             $this->reset(['url', 'lessonCreate', 'video', 'document']);
             $this->getLessons();
             $this->emit('refreshOrderLessons');
     
         } catch (\Exception $e) {
-            Log::error('Error al crear la lección: ' . $e->getMessage(), [
-                'lessonData' => $lessonData,
-                'exception' => $e
-            ]);
+            Log::error('Error al crear la lección: ' . $e->getMessage());
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
-            return;
         }
     }
+    
     
 
     public function edit($lessonId)
@@ -135,48 +133,61 @@ class ManageLessons extends Component
             'lessonEdit.name' => ['required'],
             'lessonEdit.description' => ['nullable'],
             'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
+            'lessonEdit.video' => 'nullable|file|mimes:mp4|max:2048',
         ]);
-
+    
         $lesson = Lesson::findOrFail($this->lessonEdit['id']);
-
+    
         try {
             $lesson->update([
                 'name' => $this->lessonEdit['name'],
                 'description' => $this->lessonEdit['description'],
             ]);
-
-            if ($this->lessonEdit['document'] instanceof UploadedFile) {
+    
+            // Captura de los documentos y videos en variables internas
+            $uploadedDocument = $this->lessonEdit['document'] ?? null; // Usar null como valor por defecto
+            $uploadedVideo = $this->lessonEdit['video'] ?? null;
+    
+            // Verificación para eliminar y actualizar el documento
+            if ($uploadedDocument instanceof UploadedFile) {
+                // Eliminar el documento anterior si existe
                 if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                     Storage::delete($lesson->document_path);
                 }
-                $lesson->document_path = $this->lessonEdit['document']->store('courses/documents', 'public');
-                $lesson->document_original_name = $this->lessonEdit['document']->getClientOriginalName();
-                $lesson->save();
+                $lesson->document_path = $uploadedDocument->store('courses/documents', 'public');
+                $lesson->document_original_name = $uploadedDocument->getClientOriginalName();
             }
-
-            if ($lesson->platform == 1 && $this->lessonEdit['video'] instanceof UploadedFile) {
+    
+            // Verificación para eliminar y actualizar el video
+            if ($lesson->platform == 1 && $uploadedVideo instanceof UploadedFile) {
+                // Eliminar el video anterior si existe
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
-                $lesson->video_path = $this->lessonEdit['video']->store('courses/lessons', 'public');
-                $lesson->video_original_name = $this->lessonEdit['video']->getClientOriginalName();
-                $lesson->save();
+                $lesson->video_path = $uploadedVideo->store('courses/lessons', 'public');
+                $lesson->video_original_name = $uploadedVideo->getClientOriginalName();
             } elseif ($lesson->platform == 2) {
+                // Si se está usando YouTube
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
                 $lesson->video_path = null;
-                $lesson->video_original_name = $this->lessonEdit['url'];
-                $lesson->save();
+                $lesson->video_original_name = $this->lessonEdit['url'] ?? null; // Asegúrate de que este campo existe también
             }
-
+    
+            $lesson->save(); // Guardar los cambios después de manipular los archivos
+    
             $this->reset('lessonEdit');
             $this->getLessons();
-
+    
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
     }
+    
+    
+    
+    
 
     public function sortLessons($order)
     {
