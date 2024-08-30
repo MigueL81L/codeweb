@@ -20,23 +20,14 @@ class ManageLessons extends Component
     public $document;
     public $url;
 
-    // public $lessonCreate = [
-    //     'open' => false,
-    //     'name' => null,
-    //     'platform' => 1,
-    //     'description' => null,
-    //     'document' => null,
-    // ];
-
     public $lessonCreate = [
         'open' => false,
         'name' => null,
         'platform' => 1,
         'description' => null,
         'document' => null,
-        'video' => null, // Añadir el campo de video aquí
-        'url' => null,   // Añadir el campo de URL para videos de YouTube
     ];
+
     
 
     public $lessonEdit = [
@@ -80,51 +71,41 @@ class ManageLessons extends Component
 
     public function store()
     {
-        $this->validate([
-            'lessonCreate.name' => 'required',
-            'lessonCreate.platform' => 'required|in:1,2',
-            'lessonCreate.document' => 'nullable|file|mimes:pdf|max:2048', // Validación para documento
-            'lessonCreate.video' => 'nullable|file|mimes:mp4|max:256000', // Validación para video
-        ]);
-    
+        $this->validate();
+
         $lessonData = [
             'name' => $this->lessonCreate['name'],
             'description' => $this->lessonCreate['description'],
             'platform' => $this->lessonCreate['platform'],
             'section_id' => $this->section->id,
         ];
-    
+
         try {
-            // Comprobar el documento
-            $uploadedDocument = $this->lessonCreate['document'] ?? null; // Captura el documento
-            if ($uploadedDocument instanceof UploadedFile) {
-                $lessonData['document_path'] = $uploadedDocument->store('courses/documents', 'public');
-                $lessonData['document_original_name'] = $uploadedDocument->getClientOriginalName();
+            if ($this->lessonCreate['document'] instanceof UploadedFile) {
+                $path = $this->lessonCreate['document']->store('courses/documents', 'public');
+                $lessonData['document_path'] = $path;
+                $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
             }
-    
-            // Comprobar el video
-            if ($this->lessonCreate['platform'] == 1) {
-                $uploadedVideo = $this->lessonCreate['video'] ?? null; // Captura el video
-                if ($uploadedVideo instanceof UploadedFile) {
-                    $lessonData['video_path'] = $uploadedVideo->store('courses/lessons', 'public');
-                    $lessonData['video_original_name'] = $uploadedVideo->getClientOriginalName();
-                }
-            } elseif ($this->lessonCreate['platform'] == 2) {
-                $lessonData['video_path'] = null; // Sin video para esta plataforma
-                $lessonData['video_original_name'] = $this->lessonCreate['url'] ?? null; // URL de YouTube
+
+            if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
+                $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
+                $lessonData['video_original_name'] = $this->video->getClientOriginalName();
+            } elseif ($lessonData['platform'] == 2) {
+                $lessonData['video_path'] = null;
+                $lessonData['video_original_name'] = $this->url;
             }
-    
-            Lesson::create($lessonData); // Crear lección
-    
+
+            Lesson::create($lessonData);
+
             $this->reset(['url', 'lessonCreate', 'video', 'document']);
             $this->getLessons();
             $this->emit('refreshOrderLessons');
-    
+
         } catch (\Exception $e) {
-            Log::error('Error al crear la lección: ' . $e->getMessage());
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
     }
+    
     
     
     
