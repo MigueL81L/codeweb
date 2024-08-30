@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 
 class ManageLessons extends Component
 {
@@ -64,24 +65,28 @@ class ManageLessons extends Component
         ];
     }
 
+    
+
     public function store()
     {
         $this->validate();
-
+    
         $lessonData = [
             'name' => $this->lessonCreate['name'],
             'description' => $this->lessonCreate['description'],
             'platform' => $this->lessonCreate['platform'],
             'section_id' => $this->section->id,
         ];
-
+    
         try {
+            Log::info('Iniciando el proceso de creación de la lección', $lessonData);
+    
             if ($this->lessonCreate['document'] instanceof UploadedFile) {
                 $path = $this->lessonCreate['document']->store('courses/documents', 'public');
                 $lessonData['document_path'] = $path;
                 $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
             }
-
+    
             if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
                 $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
                 $lessonData['video_original_name'] = $this->video->getClientOriginalName();
@@ -89,17 +94,24 @@ class ManageLessons extends Component
                 $lessonData['video_path'] = null;
                 $lessonData['video_original_name'] = $this->url;
             }
-
-            Lesson::create($lessonData);
-
+    
+            $lesson = Lesson::create($lessonData);
+            Log::info("Lección creada con éxito: ", ['lesson_id' => $lesson->id]);
+    
             $this->reset(['url', 'lessonCreate', 'video', 'document']);
             $this->getLessons();
             $this->emit('refreshOrderLessons');
-
+    
         } catch (\Exception $e) {
+            Log::error('Error al crear la lección: ' . $e->getMessage(), [
+                'lessonData' => $lessonData,
+                'exception' => $e
+            ]);
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
+            return;
         }
     }
+    
 
     public function edit($lessonId)
     {
