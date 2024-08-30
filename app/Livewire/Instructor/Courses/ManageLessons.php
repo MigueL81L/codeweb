@@ -133,7 +133,7 @@ class ManageLessons extends Component
             'lessonEdit.name' => ['required'],
             'lessonEdit.description' => ['nullable'],
             'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
-            'lessonEdit.video' => 'nullable|file|mimes:mp4|max:2048',
+            'lessonEdit.video' => 'nullable|file|mimes:mp4|max:256000',
         ]);
     
         $lesson = Lesson::findOrFail($this->lessonEdit['id']);
