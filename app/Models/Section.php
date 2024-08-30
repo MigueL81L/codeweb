@@ -25,4 +25,17 @@ class Section extends Model
     public function lessons(){
         return $this->hasMany(Lesson::class)->orderBy('position');
     }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($section) {
+            // Deleting related lessons automatically triggers the deletion of associated files from Lesson's boot method
+            $section->lessons()->each(function ($lesson) {
+                $lesson->delete();
+            });
+        });
+    }
 }

@@ -84,14 +84,24 @@ class Course extends Model
     //Establecer estatus del curso por defecto en 3
     protected static function boot()
     {
-    parent::boot();
+        parent::boot();
 
-    static::creating(function ($model) {
-        // Establece el estado por defecto a 3 si no se ha proporcionado ningún valor
-        if (is_null($model->status)) {
-            $model->status = 3;
-        }
-    });
+        // Lógica existente que pudo haber en el método boot
+        static::creating(function ($model) {
+            // Lógica existente, como establecer valores predeterminados
+            if (is_null($model->status)) {
+                $model->status = 3;
+            }
+        });
+
+        // Añadiendo la lógica de eliminación
+        static::deleting(function ($course) {
+            // Eliminar las secciones asociadas, lo cual también eliminará lessons
+            // y disparará su respectivo evento `deleting` para manejar archivos
+            $course->sections()->each(function ($section) {
+                $section->delete(); // Esto eliminará automáticamente las lessons de la sección
+            });
+        });
     }
 
 
@@ -185,6 +195,7 @@ class Course extends Model
     {
         return $this->price ? $this->price->value : 0;
     }
+
 
 
 
