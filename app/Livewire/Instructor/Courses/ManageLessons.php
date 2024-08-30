@@ -72,42 +72,55 @@ class ManageLessons extends Component
         $this->validate([
             'lessonCreate.name' => 'required',
             'lessonCreate.platform' => 'required|in:1,2',
+            'lessonCreate.description' => 'nullable|string',
+            'lessonCreate.document' => 'nullable|file|mimes:pdf|max:2048', // Validación para documento
         ]);
     
-        $lessonData = [
-            'name' => $this->lessonCreate['name'],
-            'description' => $this->lessonCreate['description'],
-            'platform' => $this->lessonCreate['platform'],
-            'section_id' => $this->section->id,
-        ];
+        // Asignar datos desde lessonCreate a variables internas
+        $name = $this->lessonCreate['name'];
+        $description = $this->lessonCreate['description'];
+        $platform = $this->lessonCreate['platform'];
+        $sectionId = $this->section->id;
+        $uploadedDocument = $this->lessonCreate['document'] ?? null; // Usar null como valor por defecto
+        $uploadedVideo = $this->video ?? null;
     
         try {
-            // Solo manipula el documento si es una instancia de UploadedFile
-            if (isset($this->lessonCreate['document']) && $this->lessonCreate['document'] instanceof UploadedFile) {
-                $lessonData['document_path'] = $this->lessonCreate['document']->store('courses/documents', 'public');
-                $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
+            // Preparar los datos de lección
+            $lessonData = [
+                'name' => $name,
+                'description' => $description,
+                'platform' => $platform,
+                'section_id' => $sectionId,
+            ];
+    
+            // Verificar si se envía un documento
+            if ($uploadedDocument instanceof UploadedFile) {
+                $lessonData['document_path'] = $uploadedDocument->store('courses/documents', 'public');
+                $lessonData['document_original_name'] = $uploadedDocument->getClientOriginalName();
             }
     
-            // Verifica si el video es una instancia de UploadedFile 
-            if ($this->lessonCreate['platform'] == 1 && isset($this->video) && $this->video instanceof UploadedFile) {
-                $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
-                $lessonData['video_original_name'] = $this->video->getClientOriginalName();
-            } elseif ($this->lessonCreate['platform'] == 2) {
-                $lessonData['video_path'] = null;
-                $lessonData['video_original_name'] = $this->url;
+            // Verificar si se envía un video
+            if ($platform == 1 && $uploadedVideo instanceof UploadedFile) {
+                $lessonData['video_path'] = $uploadedVideo->store('courses/lessons', 'public');
+                $lessonData['video_original_name'] = $uploadedVideo->getClientOriginalName();
+            } elseif ($platform == 2) {
+                $lessonData['video_path'] = null; // No se espera un video
+                $lessonData['video_original_name'] = $this->lessonCreate['url'] ?? null; // Asignar por defecto la URL
             }
     
-            Lesson::create($lessonData);
+            Lesson::create($lessonData); // Crear la lección
     
-            $this->reset(['url', 'lessonCreate', 'video', 'document']);
-            $this->getLessons();
-            $this->emit('refreshOrderLessons');
+            // Resetear campos después de crear la lección
+            $this->reset(['lessonCreate', 'video', 'document']); 
+            $this->getLessons(); // Actualizar la lista de lecciones
+            $this->emit('refreshOrderLessons'); // Emitir evento para el frontend
     
         } catch (\Exception $e) {
             Log::error('Error al crear la lección: ' . $e->getMessage());
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
     }
+    
     
     
 
