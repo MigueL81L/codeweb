@@ -11,5 +11,5 @@ window.string_to_slug = function(str, querySelector){
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-');
    
-    document.querySelector(querySelector).value = str;
+    document.querySelector(querySelector).value = str; 
 }

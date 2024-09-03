@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+
 class ManageLessons extends Component
 {
     use WithFileUploads;
@@ -56,7 +56,6 @@ class ManageLessons extends Component
             ->get();
     }
 
-    //Modificado 03/09
     public function rules()
     {
         return [
@@ -64,64 +63,62 @@ class ManageLessons extends Component
             'lessonCreate.platform' => 'required|in:1,2',
             'lessonCreate.description' => 'nullable|string',
             'lessonCreate.document' => 'nullable|file|mimes:pdf|max:2048',
-            // Asegúrate de que el video es obligatorio si la plataforma es local (1)
             'video' => 'nullable|required_if:lessonCreate.platform,1|file|mimes:mp4|max:256000',
-            // Asegúrate de que el URL es obligatorio si la plataforma es YouTube (2)
             'url' => 'nullable|required_if:lessonCreate.platform,2|url'
         ];
     }
-    
 
-    //Modificado 03/09
     public function store()
     {
-        $this->validate(); // Usando las reglas del método rules()
-    
-        DB::beginTransaction();
-    
         try {
+            $this->validate();
+
+            DB::beginTransaction();
+
             $lessonData = [
                 'name' => $this->lessonCreate['name'],
                 'description' => $this->lessonCreate['description'],
                 'platform' => $this->lessonCreate['platform'],
                 'section_id' => $this->section->id,
             ];
-    
+
             // Manejo de documento
             if ($this->lessonCreate['document'] instanceof UploadedFile) {
                 $path = $this->lessonCreate['document']->store('courses/documents', 'public');
+                if (!$path) {
+                    throw new \Exception('Error al guardar el documento.');
+                }
                 $lessonData['document_path'] = $path;
                 $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
             }
-    
+
             // Manejo de video
             if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
                 $videoPath = $this->video->store('courses/lessons', 'public');
+                if (!$videoPath) {
+                    throw new \Exception('Error al guardar el video.');
+                }
                 $lessonData['video_path'] = $videoPath;
                 $lessonData['video_original_name'] = $this->video->getClientOriginalName();
             } elseif ($lessonData['platform'] == 2) {
                 $lessonData['video_path'] = null;
-                $lessonData['video_original_name'] = $this->url; // URL de YouTube
+                $lessonData['video_original_name'] = $this->url;
             }
-    
-            // Creación de la lección
+
             Lesson::create($lessonData);
-    
+
             DB::commit();
-    
+
             $this->reset(['url', 'lessonCreate', 'video', 'document']);
             $this->getLessons();
             $this->emit('refreshOrderLessons');
-    
+
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error al crear la lección: ' . $e->getMessage());
             $this->dispatchBrowserEvent('notify', ['message' => 'Error al crear la lección: ' . $e->getMessage()]);
         }
     }
-    
-    
-    
 
     public function edit($lessonId)
     {
@@ -141,67 +138,56 @@ class ManageLessons extends Component
 
     public function update()
     {
-        $this->validate([
-            'lessonEdit.name' => ['required'],
-            'lessonEdit.description' => ['nullable'],
-            'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
-            'lessonEdit.video' => 'nullable|file|mimes:mp4|max:256000',
-        ]);
-    
-        $lesson = Lesson::findOrFail($this->lessonEdit['id']);
-    
         try {
+            $this->validate([
+                'lessonEdit.name' => ['required'],
+                'lessonEdit.description' => ['nullable'],
+                'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
+                'lessonEdit.video' => 'nullable|file|mimes:mp4|max:256000',
+            ]);
+
+            $lesson = Lesson::findOrFail($this->lessonEdit['id']);
+
             $lesson->update([
                 'name' => $this->lessonEdit['name'],
                 'description' => $this->lessonEdit['description'],
             ]);
-    
-            // Captura de los documentos y videos en variables internas
-            $uploadedDocument = $this->lessonEdit['document'] ?? null; // Usar null como valor por defecto
+
+            $uploadedDocument = $this->lessonEdit['document'] ?? null;
             $uploadedVideo = $this->lessonEdit['video'] ?? null;
-    
-            // Verificación para eliminar y actualizar el documento
+
             if ($uploadedDocument instanceof UploadedFile) {
-                // Eliminar el documento anterior si existe
                 if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                     Storage::delete($lesson->document_path);
                 }
                 $lesson->document_path = $uploadedDocument->store('courses/documents', 'public');
                 $lesson->document_original_name = $uploadedDocument->getClientOriginalName();
             }
-    
-            // Verificación para eliminar y actualizar el video
+
             if ($lesson->platform == 1 && $uploadedVideo instanceof UploadedFile) {
-                // Eliminar el video anterior si existe
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
                 $lesson->video_path = $uploadedVideo->store('courses/lessons', 'public');
                 $lesson->video_original_name = $uploadedVideo->getClientOriginalName();
             } elseif ($lesson->platform == 2) {
-                // Si se está usando YouTube
                 if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                     Storage::delete($lesson->video_path);
                 }
                 $lesson->video_path = null;
-                $lesson->video_original_name = $this->lessonEdit['url'] ?? null; // Asegúrate de que este campo existe también
+                $lesson->video_original_name = $this->lessonEdit['url'] ?? null;
             }
-    
-            $lesson->save(); // Guardar los cambios después de manipular los archivos
-    
+
+            $lesson->save();
+
             $this->reset('lessonEdit');
             $this->getLessons();
-    
+
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
         }
     }
-    
-    
-    
-    
 
-    //Modificado 03/09
     public function sortLessons($order)
     {
         foreach ($order as $index => $lessonId) {
@@ -213,42 +199,40 @@ class ManageLessons extends Component
 
     public function destroy($lessonId)
     {
-        $lesson = Lesson::findOrFail($lessonId);
-    
         DB::beginTransaction();
-    
+
         try {
-            // Eliminar archivos asociados
+            $lesson = Lesson::findOrFail($lessonId);
+
             if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                 Storage::delete($lesson->video_path);
             }
-    
+
             if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                 Storage::delete($lesson->document_path);
             }
-    
-            // Eliminar la lección
+
             $lesson->delete();
-    
+
             DB::commit();
-    
-            // Actualizar las lecciones en la interfaz tras la eliminación
+
             $this->getLessons();
             $this->emit('refreshOrderLessons');
-    
+
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error al eliminar la lección: ' . $e->getMessage());
             $this->dispatchBrowserEvent('notify', ['message' => 'Error al eliminar la lección: ' . $e->getMessage()]);
         }
     }
-    
 
     public function render()
     {
         return view('livewire.instructor.courses.manage-lessons');
     }
 }
+
+
 
 
 

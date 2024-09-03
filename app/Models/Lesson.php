@@ -97,17 +97,19 @@ class Lesson extends Model
     {
         parent::boot();
 
-        static::deleting(function ($lesson) {
-            // Eliminar video si existe
-            if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-                Storage::delete($lesson->video_path);
-            }
+        //deleting() ya manejado en el LessonObserver.php 03/09
+        
+        // static::deleting(function ($lesson) {
+        //     // Eliminar video si existe
+        //     if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+        //         Storage::delete($lesson->video_path);
+        //     }
             
-            // Eliminar documento si existe
-            if ($lesson->document_path && Storage::exists($lesson->document_path)) {
-                Storage::delete($lesson->document_path);
-            }
-        });
+        //     // Eliminar documento si existe
+        //     if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+        //         Storage::delete($lesson->document_path);
+        //     }
+        // });
     }
 }
 
