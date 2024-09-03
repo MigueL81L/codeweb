@@ -109,7 +109,8 @@ class ManageLessons extends Component
 
         } catch (\Exception $e) {
             Log::error('Error al guardar la lección: ' . $e->getMessage());
-            $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
+            // $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
+            session()->flash('error', 'Error al guardar la lección: ' . $e->getMessage());
         }
     }
     
@@ -195,7 +196,8 @@ class ManageLessons extends Component
 
         } catch (\Exception $e) {
             Log::error('Error al actualizar la lección: ' . $e->getMessage());
-            $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
+            // $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
+            session()->flash('error', 'Error al actualizar la lección: ' . $e->getMessage());
         }
     }
 
@@ -240,7 +242,8 @@ class ManageLessons extends Component
         } catch (\Exception $e) {
             // Captura de excepciones para error 500
             Log::error('Error al eliminar la lección: ' . $e->getMessage());
-            $this->dispatchBrowserEvent('notify', ['message' => 'Error al eliminar lección: ' . $e->getMessage()]);
+            // $this->dispatchBrowserEvent('notify', ['message' => 'Error al eliminar lección: ' . $e->getMessage()]);
+            session()->flash('error', 'Error al eliminar la lección: ' . $e->getMessage());
         }
     }
     

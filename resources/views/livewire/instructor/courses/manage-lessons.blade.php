@@ -1,4 +1,12 @@
 <div>
+
+    <!-- Mensaje de error -->
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div x-data="{ destroyLesson(lessonId) { Swal.fire({ title: '¿Estás seguro?', text: '¡No podrás revertir esto!', icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Sí, ¡elimínalo!', cancelButtonText: 'Cancelar' }).then((result) => { if (result.isConfirmed) { @this.call('destroy', lessonId); } }); } }" class="mb-6" x-init="Sortable.create($refs.lessonList, { group: 'lessons', animation: 150, handle: '.handle', onEnd: function (evt) { let order = Array.from(evt.from.children).map(child => child.dataset.id) @this.call('sortLessons', order) } })">
         <ul class="space-y-6" x-ref="lessonList">
             @foreach ($lessons as $lesson)
