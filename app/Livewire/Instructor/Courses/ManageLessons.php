@@ -9,7 +9,8 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 class ManageLessons extends Component
 {
     use WithFileUploads;
@@ -55,6 +56,7 @@ class ManageLessons extends Component
             ->get();
     }
 
+    //Modificado 03/09
     public function rules()
     {
         return [
@@ -62,43 +64,59 @@ class ManageLessons extends Component
             'lessonCreate.platform' => 'required|in:1,2',
             'lessonCreate.description' => 'nullable|string',
             'lessonCreate.document' => 'nullable|file|mimes:pdf|max:2048',
+            // Asegúrate de que el video es obligatorio si la plataforma es local (1)
+            'video' => 'nullable|required_if:lessonCreate.platform,1|file|mimes:mp4|max:256000',
+            // Asegúrate de que el URL es obligatorio si la plataforma es YouTube (2)
+            'url' => 'nullable|required_if:lessonCreate.platform,2|url'
         ];
     }
+    
 
+    //Modificado 03/09
     public function store()
     {
-        $this->validate();
-
-        $lessonData = [
-            'name' => $this->lessonCreate['name'],
-            'description' => $this->lessonCreate['description'],
-            'platform' => $this->lessonCreate['platform'],
-            'section_id' => $this->section->id,
-        ];
-
+        $this->validate(); // Usando las reglas del método rules()
+    
+        DB::beginTransaction();
+    
         try {
+            $lessonData = [
+                'name' => $this->lessonCreate['name'],
+                'description' => $this->lessonCreate['description'],
+                'platform' => $this->lessonCreate['platform'],
+                'section_id' => $this->section->id,
+            ];
+    
+            // Manejo de documento
             if ($this->lessonCreate['document'] instanceof UploadedFile) {
                 $path = $this->lessonCreate['document']->store('courses/documents', 'public');
                 $lessonData['document_path'] = $path;
                 $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
             }
-
+    
+            // Manejo de video
             if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
-                $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
+                $videoPath = $this->video->store('courses/lessons', 'public');
+                $lessonData['video_path'] = $videoPath;
                 $lessonData['video_original_name'] = $this->video->getClientOriginalName();
             } elseif ($lessonData['platform'] == 2) {
                 $lessonData['video_path'] = null;
-                $lessonData['video_original_name'] = $this->url;
+                $lessonData['video_original_name'] = $this->url; // URL de YouTube
             }
-
+    
+            // Creación de la lección
             Lesson::create($lessonData);
-
+    
+            DB::commit();
+    
             $this->reset(['url', 'lessonCreate', 'video', 'document']);
             $this->getLessons();
             $this->emit('refreshOrderLessons');
-
+    
         } catch (\Exception $e) {
-            $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
+            DB::rollBack();
+            Log::error('Error al crear la lección: ' . $e->getMessage());
+            $this->dispatchBrowserEvent('notify', ['message' => 'Error al crear la lección: ' . $e->getMessage()]);
         }
     }
     
@@ -183,6 +201,7 @@ class ManageLessons extends Component
     
     
 
+    //Modificado 03/09
     public function sortLessons($order)
     {
         foreach ($order as $index => $lessonId) {
@@ -194,31 +213,33 @@ class ManageLessons extends Component
 
     public function destroy($lessonId)
     {
-        // Buscar lección por ID
         $lesson = Lesson::findOrFail($lessonId);
     
+        DB::beginTransaction();
+    
         try {
-            // Eliminar el video si existe primero para evitar problemas
+            // Eliminar archivos asociados
             if ($lesson->video_path && Storage::exists($lesson->video_path)) {
                 Storage::delete($lesson->video_path);
             }
     
-            // Eliminar el documento si existe
             if ($lesson->document_path && Storage::exists($lesson->document_path)) {
                 Storage::delete($lesson->document_path);
             }
     
-            // Finalmente, eliminar la lección
+            // Eliminar la lección
             $lesson->delete();
+    
+            DB::commit();
     
             // Actualizar las lecciones en la interfaz tras la eliminación
             $this->getLessons();
             $this->emit('refreshOrderLessons');
     
         } catch (\Exception $e) {
-            // Captura de excepciones para error 500
+            DB::rollBack();
             Log::error('Error al eliminar la lección: ' . $e->getMessage());
-            $this->dispatchBrowserEvent('notify', ['message' => 'Error al eliminar lección: ' . $e->getMessage()]);
+            $this->dispatchBrowserEvent('notify', ['message' => 'Error al eliminar la lección: ' . $e->getMessage()]);
         }
     }
     
