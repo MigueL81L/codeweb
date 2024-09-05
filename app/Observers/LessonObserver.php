@@ -23,16 +23,23 @@ class LessonObserver
         if ($lesson->isDirty('name')) {
             $lesson->slug = Str::slug($lesson->name);
         }
-
+    
         // Maneja la eliminación de archivos si se actualizan
-        if ($lesson->isDirty('video_path') && Storage::exists($lesson->getOriginal('video_path'))) {
-            Storage::delete($lesson->getOriginal('video_path'));
+        if ($lesson->isDirty('video_path')) {
+            $originalPath = $lesson->getOriginal('video_path');
+            if ($originalPath && Storage::exists($originalPath)) {
+                Storage::delete($originalPath);
+            }
         }
-
-        if ($lesson->isDirty('document_path') && Storage::exists($lesson->getOriginal('document_path'))) {
-            Storage::delete($lesson->getOriginal('document_path'));
+    
+        if ($lesson->isDirty('document_path')) {
+            $originalPath = $lesson->getOriginal('document_path');
+            if ($originalPath && Storage::exists($originalPath)) {
+                Storage::delete($originalPath);
+            }
         }
     }
+    
 
     public function deleting(Lesson $lesson)
     {
