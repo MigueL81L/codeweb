@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Livewire; 
+namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Support\Collection;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;  
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Log;  // Add log
 
-class CourseStatus extends Component  
+class CourseStatus extends Component
 {
     use AuthorizesRequests;
 
@@ -28,6 +29,8 @@ class CourseStatus extends Component
             }
         }
 
+        Log::info('Total lessons found: ' . $this->lfs->count());
+
         $incompleteLessons = $this->lfs->filter(function ($lesson) {
             return !$lesson->completed;
         });
@@ -43,13 +46,14 @@ class CourseStatus extends Component
                 $this->index++;
             }
         }
+
         $this->updatePrevNext();
         $this->authorize('enrolled', $course);
     }
 
     public function changeLesson($lessonId)
     {
-        $lesson = Lesson::findOrFail($lessonId); // Resolver el ID a un objeto Lesson
+        $lesson = Lesson::findOrFail($lessonId);
 
         $this->current = $lesson;
         $this->index = $this->lfs->search(function($l) use ($lesson) {
@@ -123,15 +127,18 @@ class CourseStatus extends Component
     {
         $currentMimeType = null;
         $currentIframe = null;
-    
+
         if ($this->current->platform == 1 && $this->current->video_path) {
             $currentMimeType = $this->getMimeType($this->current->video_path);
+            Log::info('MIME type for current lesson: ' . $currentMimeType);
         }
         
         if ($this->current->platform == 2) {
             $currentIframe = $this->getYoutubeEmbedUrl($this->current->video_original_name);
         }
-    
+
+        Log::info('Rendering view with: currentIframe=' . ($currentIframe ?? 'null') . ', currentMimeType=' . ($currentMimeType ?? 'null'));
+
         return view('livewire.course-status', [
             'course' => $this->course,
             'current' => $this->current,
@@ -140,8 +147,8 @@ class CourseStatus extends Component
             'currentMimeType' => $currentMimeType,
         ]);
     }
-    
 }
+
 
 
 
