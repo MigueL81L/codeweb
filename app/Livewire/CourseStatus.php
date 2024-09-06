@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Course;
 use App\Models\Lesson;
-use Illuminate\Support\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Log;
 
@@ -19,59 +18,67 @@ class CourseStatus extends Component
 
     public function mount(Course $course)
     {
-        dd('mount method called');
         Log::info('mount: Method called');
-        $this->course = $course;
-        $this->index = 0;
-        $this->lfs = collect();
-        Log::info('mount: Course set with ID: ' . $course->id);
+        
+        try {
+            $this->course = $course;
+            Log::info('mount: Course set with ID: ' . $course->id);
+            $this->index = 0;
+            $this->lfs = collect();
+            Log::info('mount: Initialized lesson collection');
 
-        foreach ($course->sections->sortBy('position') as $section) {
-            Log::info('mount: Processing section ID: ' . $section->id);
-            foreach ($section->lessons as $lesson) {
-                $this->lfs->push($lesson);
-                Log::info('mount: Added lesson ID: ' . $lesson->id);
-            }
-        }
-
-        Log::info('mount: Total lessons collected: ' . $this->lfs->count());
-
-        $incompleteLessons = $this->lfs->filter(function ($lesson) {
-            return !$lesson->completed;
-        });
-
-        if ($incompleteLessons->isEmpty()) {
-            Log::info('mount: All lessons are completed.');
-            $this->current = $this->lfs->last();
-        } else {
-            Log::info('mount: There are incomplete lessons.');
-            foreach ($this->lfs as $lesson) {
-                if (!$lesson->completed) {
-                    $this->current = $lesson;
-                    Log::info('mount: Setting current lesson ID: ' . $lesson->id);
-                    break;
+            foreach ($course->sections->sortBy('position') as $section) {
+                Log::info('mount: Processing section ID: ' . $section->id);
+                foreach ($section->lessons as $lesson) {
+                    $this->lfs->push($lesson);
+                    Log::info('mount: Added lesson ID: ' . $lesson->id);
                 }
-                $this->index++;
             }
-        }
 
-        $this->updatePrevNext();
-        $this->authorize('enrolled', $course);
-        Log::info('mount: Authorization checked');
+            Log::info('mount: Total lessons collected: ' . $this->lfs->count());
+
+            $incompleteLessons = $this->lfs->filter(function ($lesson) {
+                return !$lesson->completed;
+            });
+
+            if ($incompleteLessons->isEmpty()) {
+                Log::info('mount: All lessons are completed.');
+                $this->current = $this->lfs->last();
+            } else {
+                Log::info('mount: There are incomplete lessons.');
+                foreach ($this->lfs as $lesson) {
+                    if (!$lesson->completed) {
+                        $this->current = $lesson;
+                        Log::info('mount: Setting current lesson ID: ' . $lesson->id);
+                        break;
+                    }
+                    $this->index++;
+                }
+            }
+
+            $this->updatePrevNext();
+            $this->authorize('enrolled', $course);
+            Log::info('mount: Authorization checked');
+        } catch (\Exception $e) {
+            Log::error('mount: Error occurred - ' . $e->getMessage());
+        }
     }
 
     public function changeLesson($lessonId)
     {
         Log::info('changeLesson: Changing to lesson ID: ' . $lessonId);
-        $lesson = Lesson::findOrFail($lessonId);
+        try {
+            $lesson = Lesson::findOrFail($lessonId);
+            $this->current = $lesson;
+            $this->index = $this->lfs->search(function ($l) use ($lesson) {
+                return $l->id === $lesson->id;
+            });
 
-        $this->current = $lesson;
-        $this->index = $this->lfs->search(function($l) use ($lesson) {
-            return $l->id === $lesson->id;
-        });
-        Log::info('changeLesson: Current lesson set, index: ' . $this->index);
-
-        $this->updatePrevNext();
+            Log::info('changeLesson: Current lesson set, index: ' . $this->index);
+            $this->updatePrevNext();
+        } catch (\Exception $e) {
+            Log::error('changeLesson: Error occurred - ' . $e->getMessage());
+        }
     }
 
     private function updatePrevNext()
@@ -79,6 +86,7 @@ class CourseStatus extends Component
         Log::info('updatePrevNext: Updating previous and next lessons');
         $this->previous = $this->index > 0 ? $this->lfs[$this->index - 1] : null;
         $this->next = $this->index < $this->lfs->count() - 1 ? $this->lfs[$this->index + 1] : null;
+
         Log::info('updatePrevNext: Previous lesson set to: ' . ($this->previous->id ?? 'null'));
         Log::info('updatePrevNext: Next lesson set to: ' . ($this->next->id ?? 'null'));
     }
@@ -134,13 +142,13 @@ class CourseStatus extends Component
     public function getAdvanceProperty()
     {
         Log::info('getAdvanceProperty: Calculating advance');
-        $completedCount = $this->lfs->filter(function($lesson) {
+        $completedCount = $this->lfs->filter(function ($lesson) {
             return $lesson->completed;
         })->count();
 
         $totalLessons = $this->lfs->count();
         $advance = $totalLessons > 0 ? round(($completedCount / $totalLessons) * 100, 2) : 0;
-        
+
         Log::info('getAdvanceProperty: Advance calculated: ' . $advance . '%');
         return $advance;
     }
@@ -148,25 +156,24 @@ class CourseStatus extends Component
     public function render()
     {
         Log::info('CourseStatus render method started');
-        
-        $currentMimeType = 'video/mp4'; // Temporarily assign a static value for testing
+
+        $currentMimeType = 'video/mp4'; // Static assignment for debugging
         $currentIframe = null;
-    
+
         Log::info('Current lesson platform: ' . $this->current->platform);
-        
+
         if ($this->current->platform == 1 && !is_null($this->current->video_path)) {
-            // Original logic for MIME type
             $currentMimeType = $this->getMimeType($this->current->video_path);
             Log::info('MIME type for current lesson: ' . $currentMimeType);
         }
-    
+
         if ($this->current->platform == 2) {
             $currentIframe = $this->getYoutubeEmbedUrl($this->current->video_original_name);
             Log::info('YouTube embed URL: ' . $currentIframe);
         }
-    
+
         Log::info('Rendering view with currentMimeType=' . ($currentMimeType ?? 'null'));
-    
+
         return view('livewire.course-status', [
             'course' => $this->course,
             'current' => $this->current,
@@ -175,8 +182,8 @@ class CourseStatus extends Component
             'currentMimeType' => $currentMimeType,
         ]);
     }
-    
 }
+
 
 
 
