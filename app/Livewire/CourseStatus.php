@@ -19,6 +19,7 @@ class CourseStatus extends Component
 
     public function mount(Course $course)
     {
+        dd('mount method called');
         Log::info('mount: Method called');
         $this->course = $course;
         $this->index = 0;
