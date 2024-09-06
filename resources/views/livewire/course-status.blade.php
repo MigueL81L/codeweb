@@ -3,11 +3,11 @@
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
                 @if ($this->current)
-                    @if ($this->current->platform == 2) {{-- YouTube --}}
+                    @if ($this->current->platform == 2)
                         <div class="embed-responsive">
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
-                    @elseif ($this->current->platform == 1 && $this->current->video_path) {{-- Uploaded Videos --}}
+                    @elseif ($this->current->platform == 1 && $this->current->video_path)
                         <video class="video-responsive" controls wire:key="{{ $current->id }}">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
@@ -121,6 +121,7 @@
         </div>
     </div>
 </div>
+
 
 
 
