@@ -146,22 +146,26 @@ class CourseStatus extends Component
 
     public function render()
     {
-        Log::info('render: Rendering component');
+        Log::info('CourseStatus render method started');
         
-        $currentMimeType = null;
+        $currentMimeType = 'video/mp4'; // Temporarily assign a static value for testing
         $currentIframe = null;
-
-        if ($this->current->platform == 1 && $this->current->video_path) {
-            $currentMimeType = $this->getMimeType($this->current->video_path);
-            Log::info('render: MIME type for current lesson: ' . $currentMimeType);
-        }
+    
+        Log::info('Current lesson platform: ' . $this->current->platform);
         
+        if ($this->current->platform == 1 && !is_null($this->current->video_path)) {
+            // Original logic for MIME type
+            $currentMimeType = $this->getMimeType($this->current->video_path);
+            Log::info('MIME type for current lesson: ' . $currentMimeType);
+        }
+    
         if ($this->current->platform == 2) {
             $currentIframe = $this->getYoutubeEmbedUrl($this->current->video_original_name);
+            Log::info('YouTube embed URL: ' . $currentIframe);
         }
-
-        Log::info('render: Rendering view with: currentIframe=' . ($currentIframe ?? 'null') . ', currentMimeType=' . ($currentMimeType ?? 'null'));
-
+    
+        Log::info('Rendering view with currentMimeType=' . ($currentMimeType ?? 'null'));
+    
         return view('livewire.course-status', [
             'course' => $this->course,
             'current' => $this->current,
@@ -170,6 +174,7 @@ class CourseStatus extends Component
             'currentMimeType' => $currentMimeType,
         ]);
     }
+    
 }
 
 
