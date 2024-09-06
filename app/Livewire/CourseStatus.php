@@ -121,14 +121,26 @@ class CourseStatus extends Component
 
     public function render()
     {
+        $currentMimeType = null;
+        $currentIframe = null;
+    
+        if ($this->current->platform == 1 && $this->current->video_path) {
+            $currentMimeType = $this->getMimeType($this->current->video_path);
+        }
+        
+        if ($this->current->platform == 2) {
+            $currentIframe = $this->getYoutubeEmbedUrl($this->current->video_original_name);
+        }
+    
         return view('livewire.course-status', [
             'course' => $this->course,
             'current' => $this->current,
-            'advance' => $this->advance, 
-            'currentIframe' => $this->current->platform == 2 ? $this->getYoutubeEmbedUrl($this->current->video_original_name) : null,
-            'currentMimeType' => $this->current->platform == 1 ? $this->getMimeType($this->current->video_path) : null,
+            'advance' => $this->advance,
+            'currentIframe' => $currentIframe,
+            'currentMimeType' => $currentMimeType,
         ]);
     }
+    
 }
 
 
