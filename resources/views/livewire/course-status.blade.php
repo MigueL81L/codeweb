@@ -1,14 +1,13 @@
-{{-- resources/views/livewire/course-status.blade.php --}}
 <div>
     <div class="mt-8">
-        <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">  
+        <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
                 @if ($this->current)
-                    @if ($this->current->platform == 2)
+                    @if ($this->current->platform == 2) {{-- YouTube --}}
                         <div class="embed-responsive">
                             <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
                         </div>
-                    @else
+                    @elseif ($this->current->platform == 1 && $this->current->video_path) {{-- Uploaded Videos --}}
                         <video class="video-responsive" controls wire:key="{{ $current->id }}">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
                             Your browser does not support the video tag.
@@ -26,7 +25,6 @@
                         @endif
                     </div>
 
-                    {{-- Nuevo apartado para mostrar el archivo adjunto --}}
                     <div class="mt-4">
                         @if ($this->current->document_path)
                             <h2 class="font-bold">Archivo Adjunto:</h2>
@@ -49,10 +47,10 @@
                     <div class="card mt-2">
                         <div class="card-body flex text-gray-500 font-bold">
                             @if ($this->previous)
-                                <a wire:click="changeLesson({{$this->previous->id}})" class="cursor-pointer">Tema anterior</a>
+                                <a wire:click="changeLesson({{ $this->previous->id }})" class="cursor-pointer">Tema anterior</a>
                             @endif
                             @if ($this->next)
-                                <a wire:click="changeLesson({{$this->next->id}})" class="ml-auto cursor-pointer">Tema posterior</a>
+                                <a wire:click="changeLesson({{ $this->next->id }})" class="ml-auto cursor-pointer">Tema posterior</a>
                             @endif
                         </div>
                     </div>
@@ -123,6 +121,7 @@
         </div>
     </div>
 </div>
+
 
 
 
