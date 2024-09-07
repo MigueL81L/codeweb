@@ -1,5 +1,5 @@
 <div>
-    <div><h1>{{ $this->currentMimeType }}</h1></div> <!-- Para verificar su definición -->
+    {{-- <div><h1>{{ $this->currentMimeType }}</h1></div> <!-- Para verificar su definición --> --}}
 
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
