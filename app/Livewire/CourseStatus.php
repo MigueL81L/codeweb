@@ -15,6 +15,8 @@ class CourseStatus extends Component
     public $course, $current;
     public $index, $previous, $next;
     public $lfs;
+    public $currentMimeType; // Agrega esta propiedad
+
 
     public function mount(Course $course)
     {
@@ -157,7 +159,7 @@ class CourseStatus extends Component
     {
         Log::info('CourseStatus render method started');
     
-        $currentMimeType = null;  // Cambia de asignar a static a null
+        $this->currentMimeType = null;  // Cambia de asignar a static a null
         $currentIframe = null;
     
         Log::info('Current lesson platform: ' . $this->current->platform);
@@ -165,24 +167,25 @@ class CourseStatus extends Component
         // Mover la lógica de tipo de video aquí
         if ($this->current) {
             if ($this->current->platform == 1 && !is_null($this->current->video_path)) {
-                $currentMimeType = $this->current->getVideoType($this->current->video_original_name); // Aquí accedemos al método directamente.
-                Log::info('MIME type for current lesson: ' . $currentMimeType);
+                $this->currentMimeType = $this->current->getVideoType($this->current->video_original_name); // Aquí accedemos al método directamente.
+                Log::info('MIME type for current lesson: ' . $this->currentMimeType);
             } elseif ($this->current->platform == 2) {
                 $currentIframe = $this->getYoutubeEmbedUrl($this->current->video_original_name);
                 Log::info('YouTube embed URL: ' . $currentIframe);
             }
         }
     
-        Log::info('Rendering view with currentMimeType=' . ($currentMimeType ?? 'null'));
+        Log::info('Rendering view with currentMimeType=' . ($this->currentMimeType ?? 'null'));
     
         return view('livewire.course-status', [
             'course' => $this->course,
             'current' => $this->current,
             'advance' => $this->advance,
             'currentIframe' => $currentIframe,
-            'currentMimeType' => $currentMimeType, // Lo pasamos a la vista
+            // No pasa 'currentMimeType' porque es accesible directamente desde la clase
         ]);
     }
+    
     
 }
 

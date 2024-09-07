@@ -9,7 +9,8 @@
                         </div>
                     @elseif ($this->current->platform == 1 && $this->current->video_path)
                         <video class="video-responsive" controls wire:key="{{ $current->id }}">
-                            <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $currentMimeType }}">
+                            <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $this->currentMimeType }}">
+
                             Your browser does not support the video tag.
                         </video>
                     @endif
