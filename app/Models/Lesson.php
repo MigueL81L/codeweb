@@ -55,6 +55,7 @@ class Lesson extends Model
         return $this->users->contains(auth()->user()->id);
     }
 
+    //Método para determinar el tipo de video, en caso de que sea subido desde el ordenador
     public function getVideoType($filename)
     {
          $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -77,11 +78,24 @@ class Lesson extends Model
         }
     }
 
+    public function getYoutubeEmbedUrl($url)
+    {
+        preg_match('/(youtube\.com\/(watch\?v=|embed\/|v\/|.+\/)|youtu\.be\/)([\w-]{11})/', $url, $matches);
+        $videoId = $matches[3] ?? null;
+
+        if ($videoId) {
+            return "https://www.youtube.com/embed/" . $videoId;
+        }
+
+        return null;
+    }
+
     public function getIframeAttribute()
     {
-        if ($this->platform == 2) {
-            return '<iframe width="560" height="315" src="https://www.youtube.com/embed/' . $this->video_path . '" frameborder="0" allowfullscreen></iframe>';
-        } elseif ($this->platform == 1) {
+        if ($this->platform == 2 && $this->video_original_name) {
+            $embedUrl = $this->getYoutubeEmbedUrl($this->video_original_name);
+            return '<iframe width="560" height="315" src="' . $embedUrl . '" frameborder="0" allowfullscreen></iframe>';
+        } elseif ($this->platform == 1 && $this->video_path) {
             $videoUrl = Storage::url($this->video_path);
             $videoType = $this->getVideoType($this->video_original_name);
 
@@ -98,19 +112,6 @@ class Lesson extends Model
     {
         parent::boot();
 
-        //deleting() ya manejado en el LessonObserver.php 03/09
-        
-        // static::deleting(function ($lesson) {
-        //     // Eliminar video si existe
-        //     if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-        //         Storage::delete($lesson->video_path);
-        //     }
-            
-        //     // Eliminar documento si existe
-        //     if ($lesson->document_path && Storage::exists($lesson->document_path)) {
-        //         Storage::delete($lesson->document_path);
-        //     }
-        // });
     }
 }
 

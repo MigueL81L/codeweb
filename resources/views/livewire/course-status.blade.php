@@ -3,16 +3,8 @@
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
                 @if ($this->current)
-                    @if ($this->current->platform == 2)
-                        <div class="embed-responsive">
-                            <iframe class="video-responsive" src="{{ $currentIframe }}" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    @elseif ($this->current->platform == 1 && $this->current->video_path)
-                        <video class="video-responsive" controls wire:key="{{ $current->id }}">
-                            <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $this->current->getVideoType($this->current->video_original_name) }}">
-                            Your browser does not support the video tag.
-                        </video>
-                    @endif
+                    <!-- Mostrar el video/iframe de acuerdo con el método getIframeAttribute -->
+                    {!! $this->current->iframe !!}
 
                     <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
 
@@ -40,7 +32,6 @@
                         @else
                             <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
                         @endif
-
                         <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
                     </div>
 
@@ -84,9 +75,9 @@
                             <div style="width:{{ $this->advance }}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 transition-all duration-500"></div>
                         </div>
                     </div>
-                
+
                     <ul>
-                        @foreach ($course->sections->sortBy('position') as $section)
+                        @foreach ($course->sections as $section)
                             <li class="text-gray-600 mb-4">
                                 <a class="font-bold text-base inline-block mb-2">{{ $section->name }}</a>
                                 <ul>
@@ -94,13 +85,13 @@
                                         <li class="flex">
                                             <div>
                                                 @if($lesson->completed)
-                                                    @if ($current && $current->id == $lesson->id)
+                                                    @if ($this->current && $this->current->id == $lesson->id)
                                                         <span class="inline-block w-4 h-4 border-4 border-yellow-500 rounded-full mr-2 mt-1"></span>
                                                     @else
                                                         <span class="inline-block w-4 h-4 bg-yellow-300 rounded-full mr-2 mt-1"></span>
                                                     @endif
                                                 @else
-                                                    @if ($current && $current->id == $lesson->id)
+                                                    @if ($this->current && $this->current->id == $lesson->id)
                                                         <span class="inline-block w-4 h-4 border-4 border-gray-500 rounded-full mr-2 mt-1"></span>
                                                     @else
                                                         <span class="inline-block w-4 h-4 bg-gray-300 rounded-full mr-2 mt-1"></span>
@@ -121,6 +112,7 @@
         </div>
     </div>
 </div>
+
 
 
 
