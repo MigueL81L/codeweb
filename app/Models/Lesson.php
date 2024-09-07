@@ -50,6 +50,7 @@ class Lesson extends Model
         return $this->belongsToMany(User::class);
     }
 
+    //Atributo completed de la lesson
     public function getCompletedAttribute(){
         return $this->users->contains(auth()->user()->id);
     }

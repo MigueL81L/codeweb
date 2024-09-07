@@ -12,10 +12,11 @@ class CourseStatus extends Component
 {
     use AuthorizesRequests;
 
-    public $course, $current;
-    public $index, $previous, $next;
-    public $lfs;
-    public $currentMimeType; // Agrego esta propiedad
+    //Definidas en el método mount()
+    public $course, $current, $lfs, $index, $currentMimeType, $currentIframe;
+
+    public $previous, $next;
+
 
 
     public function mount(Course $course)
@@ -23,12 +24,18 @@ class CourseStatus extends Component
         Log::info('mount: Method called');
         
         try {
+            //Inicializo public $course
             $this->course = $course;
             Log::info('mount: Course set with ID: ' . $course->id);
+
+            //Inicializo public $index
             $this->index = 0;
+
+            //Inicializo public $lfs
             $this->lfs = collect();
             Log::info('mount: Initialized lesson collection');
 
+            //Relleno la colección lfs con las lessons del course
             foreach ($course->sections->sortBy('position') as $section) {
                 Log::info('mount: Processing section ID: ' . $section->id);
                 foreach ($section->lessons as $lesson) {
@@ -39,10 +46,12 @@ class CourseStatus extends Component
 
             Log::info('mount: Total lessons collected: ' . $this->lfs->count());
 
+            //Colección $incompleteLessons que agrupa las lessons que no han sido completadas
             $incompleteLessons = $this->lfs->filter(function ($lesson) {
                 return !$lesson->completed;
             });
 
+            //Definición de public $current, en función de la lista de lessons incompletas
             if ($incompleteLessons->isEmpty()) {
                 Log::info('mount: All lessons are completed.');
                 $this->current = $this->lfs->last();
@@ -58,13 +67,19 @@ class CourseStatus extends Component
                 }
             }
 
-            //Inicializo la variable $this->currentMimeType
+            //Inicializo la variable public currentMimeType y currentIframe
             if ($this->current) {
                 $this->setCurrentMimeType(); // Llama a esta función para inicializar el tipo MIME
             } else {
                 // Maneja la condición si no se carga correctamente
                 $this->currentMimeType = null; // Asigna un valor por defecto si no hay lección actual
+                $this->currentIframe=null;
             }
+
+            // Inicializo public $previous y $next
+            $this->previous = null; // Inicialización a null
+            $this->next = null; // Inicialización a null
+
 
             $this->updatePrevNext();
             $this->authorize('enrolled', $course);
@@ -79,6 +94,8 @@ class CourseStatus extends Component
         Log::info('changeLesson: Changing to lesson ID: ' . $lessonId);
         try {
             $lesson = Lesson::findOrFail($lessonId);
+
+            //Modificación de public $current y public $index
             $this->current = $lesson;
             $this->index = $this->lfs->search(function ($l) use ($lesson) {
                 return $l->id === $lesson->id;
@@ -94,6 +111,8 @@ class CourseStatus extends Component
     public function updatePrevNext()
     {
         Log::info('updatePrevNext: Updating previous and next lessons');
+
+        //Inicialización de public $previous y $next
         $this->previous = $this->index > 0 ? $this->lfs[$this->index - 1] : null;
         $this->next = $this->index < $this->lfs->count() - 1 ? $this->lfs[$this->index + 1] : null;
 
@@ -101,47 +120,43 @@ class CourseStatus extends Component
         Log::info('updatePrevNext: Next lesson set to: ' . ($this->next->id ?? 'null'));
     }
 
-    public function getYoutubeEmbedUrl($url)
-    {
-        Log::info('getYoutubeEmbedUrl: Resolving URL: ' . $url);
-        preg_match('/(youtube\.com\/(watch\?v=|embed\/|v\/|.+\/)|youtu\.be\/)([\w-]{11})/', $url, $matches);
-        $videoId = $matches[3] ?? null;
-
-        if ($videoId) {
-            Log::info('getYoutubeEmbedUrl: Video ID resolved: ' . $videoId);
-            return "https://www.youtube.com/embed/" . $videoId;
-        }
-
-        Log::info('getYoutubeEmbedUrl: No valid video ID found.');
-        return $url;
-    }
-
-    // private function getMimeType($path)
+    // public function getYoutubeEmbedUrl($url)
     // {
-    //     Log::info('getMimeType: Determining MIME type for path: ' . $path);
-    //     $ext = pathinfo($path, PATHINFO_EXTENSION);
-    //     $mimeTypes = [
-    //         'mp4' => 'video/mp4',
-    //         'mov' => 'video/quicktime',
-    //         'avi' => 'video/x-msvideo',
-    //         'wmv' => 'video/x-ms-wmv',
-    //         'flv' => 'video/x-flv',
-    //         '3gp' => 'video/3gpp',
-    //     ];
+    //     Log::info('getYoutubeEmbedUrl: Resolving URL: ' . $url);
+    //     preg_match('/(youtube\.com\/(watch\?v=|embed\/|v\/|.+\/)|youtu\.be\/)([\w-]{11})/', $url, $matches);
+    //     $videoId = $matches[3] ?? null;
 
-    //     $mimeType = $mimeTypes[$ext] ?? 'application/octet-stream';
-    //     Log::info('getMimeType: MIME type determined: ' . $mimeType);
-    //     return $mimeType;
+    //     if ($videoId) {
+    //         Log::info('getYoutubeEmbedUrl: Video ID resolved: ' . $videoId);
+    //         return "https://www.youtube.com/embed/" . $videoId;
+    //     }
+
+    //     Log::info('getYoutubeEmbedUrl: No valid video ID found.');
+    //     return $url;
     // }
+
 
     public function setCurrentMimeType() {
         // Asegúrate que current esté configurado
-        if ($this->current && $this->current->platform == 1 && !is_null($this->current->video_path)) {
-            $this->currentMimeType = $this->current->getVideoType($this->current->video_original_name);
+        if ($this->current) {
+            if ($this->current->platform == 1) {
+                // Para videos HTML5, se puede usar getVideoType(name)
+                $this->currentMimeType = $this->current->getVideoType($this->current->video_original_name);
+                $this->currentIframe = null; // No hay iframe para plataforma 1
+            } elseif ($this->current->platform == 2) {
+                // Para videos de YouTube, se puede usar el iframe directamente
+                $this->currentIframe = $this->current->getIframeAttribute(); // Asignamos el iframe de YouTube
+                $this->currentMimeType = null;
+            } else {
+                $this->currentMimeType = null; 
+                $this->currentIframe = null; // Asignamos un valor nulo si no hay lección actual
+            }
         } else {
-            $this->currentMimeType = null; // Asigna un valor por defecto
+            $this->currentMimeType = null; 
+            $this->currentIframe = null; 
         }
     }
+    
 
     public function completed()
     {
@@ -158,6 +173,7 @@ class CourseStatus extends Component
         $this->course = Course::find($this->course->id);
     }
 
+    //Méto para establecer la barra de progreso en el course
     public function getAdvanceProperty()
     {
         Log::info('getAdvanceProperty: Calculating advance');
@@ -182,7 +198,8 @@ class CourseStatus extends Component
             'course' => $this->course,
             'current' => $this->current,
             'advance' => $this->advance,
-            'currentIframe' => isset($currentIframe) ? $currentIframe : null,
+            'currentMimeType'=>$this->currentMimeType,
+            'currentIframe' => $this->currentIframe,
         ]);
     }
     
