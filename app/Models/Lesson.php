@@ -54,7 +54,7 @@ class Lesson extends Model
         return $this->users->contains(auth()->user()->id);
     }
 
-    private function getVideoType($filename)
+    protected function getVideoType($filename)
     {
          $extension = pathinfo($filename, PATHINFO_EXTENSION);
     
