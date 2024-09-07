@@ -156,32 +156,34 @@ class CourseStatus extends Component
     public function render()
     {
         Log::info('CourseStatus render method started');
-
-        $currentMimeType = 'video/mp4'; // Static assignment for debugging
+    
+        $currentMimeType = null;  // Cambia de asignar a static a null
         $currentIframe = null;
-
+    
         Log::info('Current lesson platform: ' . $this->current->platform);
-
-        if ($this->current->platform == 1 && !is_null($this->current->video_path)) {
-            $currentMimeType = $this->getMimeType($this->current->video_path);
-            Log::info('MIME type for current lesson: ' . $currentMimeType);
+    
+        // Mover la lógica de tipo de video aquí
+        if ($this->current) {
+            if ($this->current->platform == 1 && !is_null($this->current->video_path)) {
+                $currentMimeType = $this->current->getVideoType($this->current->video_original_name); // Aquí accedemos al método directamente.
+                Log::info('MIME type for current lesson: ' . $currentMimeType);
+            } elseif ($this->current->platform == 2) {
+                $currentIframe = $this->getYoutubeEmbedUrl($this->current->video_original_name);
+                Log::info('YouTube embed URL: ' . $currentIframe);
+            }
         }
-
-        if ($this->current->platform == 2) {
-            $currentIframe = $this->getYoutubeEmbedUrl($this->current->video_original_name);
-            Log::info('YouTube embed URL: ' . $currentIframe);
-        }
-
+    
         Log::info('Rendering view with currentMimeType=' . ($currentMimeType ?? 'null'));
-
+    
         return view('livewire.course-status', [
             'course' => $this->course,
             'current' => $this->current,
             'advance' => $this->advance,
             'currentIframe' => $currentIframe,
-            'currentMimeType' => $currentMimeType,
+            'currentMimeType' => $currentMimeType, // Lo pasamos a la vista
         ]);
     }
+    
 }
 
 
