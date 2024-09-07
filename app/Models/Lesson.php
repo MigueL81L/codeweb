@@ -54,7 +54,7 @@ class Lesson extends Model
         return $this->users->contains(auth()->user()->id);
     }
 
-    protected function getVideoType($filename)
+    public function getVideoType($filename)
     {
          $extension = pathinfo($filename, PATHINFO_EXTENSION);
     
@@ -76,7 +76,7 @@ class Lesson extends Model
         }
     }
 
-    protected function getIframeAttribute()
+    public function getIframeAttribute()
     {
         if ($this->platform == 2) {
             return '<iframe width="560" height="315" src="https://www.youtube.com/embed/' . $this->video_path . '" frameborder="0" allowfullscreen></iframe>';
@@ -93,7 +93,7 @@ class Lesson extends Model
         return '';
     }
 
-    protected static function boot()
+    public static function boot()
     {
         parent::boot();
 

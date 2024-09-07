@@ -91,7 +91,7 @@ class CourseStatus extends Component
         }
     }
 
-    private function updatePrevNext()
+    public function updatePrevNext()
     {
         Log::info('updatePrevNext: Updating previous and next lessons');
         $this->previous = $this->index > 0 ? $this->lfs[$this->index - 1] : null;
@@ -101,7 +101,7 @@ class CourseStatus extends Component
         Log::info('updatePrevNext: Next lesson set to: ' . ($this->next->id ?? 'null'));
     }
 
-    private function getYoutubeEmbedUrl($url)
+    public function getYoutubeEmbedUrl($url)
     {
         Log::info('getYoutubeEmbedUrl: Resolving URL: ' . $url);
         preg_match('/(youtube\.com\/(watch\?v=|embed\/|v\/|.+\/)|youtu\.be\/)([\w-]{11})/', $url, $matches);
@@ -134,7 +134,7 @@ class CourseStatus extends Component
     //     return $mimeType;
     // }
 
-    private function setCurrentMimeType() {
+    public function setCurrentMimeType() {
         // Asegúrate que current esté configurado
         if ($this->current && $this->current->platform == 1 && !is_null($this->current->video_path)) {
             $this->currentMimeType = $this->current->getVideoType($this->current->video_original_name);
