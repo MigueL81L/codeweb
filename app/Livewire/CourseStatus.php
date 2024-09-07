@@ -13,7 +13,7 @@ class CourseStatus extends Component
     use AuthorizesRequests;
 
     //Definidas en el método mount()
-    public $course, $current, $lfs, $index, $currentMimeType, $currentIframe;
+    public $course, $current, $lfs, $index, $currentIframe;
 
     public $previous, $next;
 
@@ -72,7 +72,7 @@ class CourseStatus extends Component
                 $this->setCurrentMimeType(); // Llama a esta función para inicializar el tipo MIME
             } else {
                 // Maneja la condición si no se carga correctamente
-                $this->currentMimeType = null; // Asigna un valor por defecto si no hay lección actual
+                // $this->currentMimeType = null; // Asigna un valor por defecto si no hay lección actual
                 $this->currentIframe=null;
             }
 
@@ -141,18 +141,18 @@ class CourseStatus extends Component
         if ($this->current) {
             if ($this->current->platform == 1) {
                 // Para videos HTML5, se puede usar getVideoType(name)
-                $this->currentMimeType = $this->current->getVideoType($this->current->video_original_name);
+                // $this->currentMimeType = $this->current->getVideoType($this->current->video_original_name);
                 $this->currentIframe = null; // No hay iframe para plataforma 1
             } elseif ($this->current->platform == 2) {
                 // Para videos de YouTube, se puede usar el iframe directamente
                 $this->currentIframe = $this->current->getIframeAttribute(); // Asignamos el iframe de YouTube
-                $this->currentMimeType = null;
+                // $this->currentMimeType = null;
             } else {
-                $this->currentMimeType = null; 
+                // $this->currentMimeType = null; 
                 $this->currentIframe = null; // Asignamos un valor nulo si no hay lección actual
             }
         } else {
-            $this->currentMimeType = null; 
+            // $this->currentMimeType = null; 
             $this->currentIframe = null; 
         }
     }
@@ -192,13 +192,13 @@ class CourseStatus extends Component
     {
         Log::info('CourseStatus render method started');
 
-        Log::info('Rendering view with currentMimeType=' . ($this->currentMimeType ?? 'null'));
+        // Log::info('Rendering view with currentMimeType=' . ($this->currentMimeType ?? 'null'));
 
         return view('livewire.course-status', [
             'course' => $this->course,
             'current' => $this->current,
             'advance' => $this->advance,
-            'currentMimeType'=>$this->currentMimeType,
+            // 'currentMimeType'=>$this->currentMimeType,
             'currentIframe' => $this->currentIframe,
         ]);
     }
