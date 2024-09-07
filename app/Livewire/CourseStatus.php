@@ -15,7 +15,7 @@ class CourseStatus extends Component
     public $course, $current;
     public $index, $previous, $next;
     public $lfs;
-    public $currentMimeType; // Agrega esta propiedad
+    public $currentMimeType; // Agrego esta propiedad
 
 
     public function mount(Course $course)
@@ -56,6 +56,14 @@ class CourseStatus extends Component
                     }
                     $this->index++;
                 }
+            }
+
+            //Inicializo la variable $this->currentMimeType
+            if ($this->current) {
+                $this->setCurrentMimeType(); // Llama a esta función para inicializar el tipo MIME
+            } else {
+                // Maneja la condición si no se carga correctamente
+                $this->currentMimeType = null; // Asigna un valor por defecto si no hay lección actual
             }
 
             $this->updatePrevNext();
@@ -127,13 +135,11 @@ class CourseStatus extends Component
     // }
 
     private function setCurrentMimeType() {
-        // Cuándo llamamos a setCurrentMimeType, nos aseguramos de que current esté disponible
-        if ($this->current) {
-            if ($this->current->platform == 1 && !is_null($this->current->video_path)) {
-                $this->currentMimeType = $this->current->getVideoType($this->current->video_original_name);
-            } else {
-                $this->currentMimeType = null; // O una asignación por defecto si no es un video de plataforma 1
-            }
+        // Asegúrate que current esté configurado
+        if ($this->current && $this->current->platform == 1 && !is_null($this->current->video_path)) {
+            $this->currentMimeType = $this->current->getVideoType($this->current->video_original_name);
+        } else {
+            $this->currentMimeType = null; // Asigna un valor por defecto
         }
     }
 

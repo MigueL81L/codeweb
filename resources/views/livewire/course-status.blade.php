@@ -1,4 +1,6 @@
 <div>
+    <div><h1>{{ $this->currentMimeType }}</h1></div> <!-- Para verificar su definición -->
+
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
@@ -10,6 +12,7 @@
                     @elseif ($this->current->platform == 1 && $this->current->video_path)
                         <video class="video-responsive" controls wire:key="{{ $current->id }}">
                             <source src="{{ Storage::url($current->video_path) }}?t={{ time() }}" type="{{ $this->currentMimeType }}">
+
                             Your browser does not support the video tag.
                         </video>
                     @endif
