@@ -93,20 +93,25 @@ class Lesson extends Model
     public function getIframeAttribute()
     {
         if ($this->platform == 2 && $this->video_original_name) {
+            // Obtener la URL del video de YouTube
             $embedUrl = $this->getYoutubeEmbedUrl($this->video_original_name);
-            return '<iframe width="560" height="315" src="' . $embedUrl . '" frameborder="0" allowfullscreen></iframe>';
+            if ($embedUrl) {
+                return '<iframe width="560" height="315" src="' . $embedUrl . '" frameborder="0" allowfullscreen></iframe>';
+            }
         } elseif ($this->platform == 1 && $this->video_path) {
             $videoUrl = Storage::url($this->video_path);
             $videoType = $this->getVideoType($this->video_original_name);
-
+            
             return '<video width="560" height="315" controls>
                         <source src="' . $videoUrl . '" type="' . $videoType . '">
                         Your browser does not support the video tag.
                     </video>';
         }
-
-        return '';
+    
+        // Retorna un mensaje o una imagen de marcador de posición si no hay video
+        return '<p>No hay video disponible para esta lección.</p>';
     }
+    
 
     public static function boot()
     {
