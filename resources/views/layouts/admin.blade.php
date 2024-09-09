@@ -31,7 +31,9 @@
       :class="{'overflow-hidden': open}">
 
     {{-- Para que las páginas de admin, home, ..etc, usen el mismo navigation-menu --}}
-    @livewire('navigation-menu') 
+    {{-- @livewire('navigation-menu')    --}}
+    @include('navigation-menu')
+
 
     @include('layouts.includes.admin.sidebar')
 
