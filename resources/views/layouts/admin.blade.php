@@ -17,6 +17,7 @@
     <script src="https://kit.fontawesome.com/9ff47718a2.js" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <link rel="stylesheet" href="{{ asset('build/assets/app-BtxJ_aVk.css') }}">
     <script src="{{ asset('build/assets/app-BDXrVzKj.js') }}" defer></script>
 
@@ -29,6 +30,7 @@
       class="sm:overflow-auto"
       :class="{'overflow-hidden': open}">
 
+    {{-- Para que las páginas de admin, home, ..etc, usen el mismo navigation-menu --}}
     @livewire('navigation-menu') 
 
     @include('layouts.includes.admin.sidebar')
@@ -37,12 +39,12 @@
         <i :class="open ? 'fas fa-times' : 'fas fa-bars'"></i>
     </button>
 
-    <div class="flex flex-col min-h-screen p-4 sm:ml-64"> <!-- Modificado para ocupar toda la pantalla -->
-        <!-- Aplicación de las migas de pan -->
-        <div class="mt-14 flex-grow">   <!-- Asegura que ocupa el espacio restante -->
+    <div class="p-4 sm:ml-64">
+        <!--Aplicación de las migas de pan-->
+        <div class="mt-14">
             @include('layouts.includes.admin.breadcrumb')
-            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 h-full">
-                {{$slot}} <!-- Aquí se inyecta el contenido -->
+            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+                {{$slot}}
             </div>
         </div>
     </div>
