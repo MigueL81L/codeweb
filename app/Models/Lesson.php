@@ -102,7 +102,8 @@ class Lesson extends Model
             $videoUrl = Storage::url($this->video_path);
             $videoType = $this->getVideoType($this->video_original_name);
             
-            return '<video width="560" height="315" controls>
+        // Asegurar un `key` único usando el ID de la lección
+            return '<video key="' . $this->id . '" width="560" height="315" controls>
                         <source src="' . $videoUrl . '" type="' . $videoType . '">
                         Your browser does not support the video tag.
                     </video>';
