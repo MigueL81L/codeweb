@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use Spatie\Permission\Models\Role; // Asegúrate de incluir esta línea
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -26,10 +27,20 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return User::create([
+        // Crear el nuevo usuario
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        // Asignar el rol de Estudiante por defecto
+        $role = Role::where('name', 'Estudiante')->first(); // Busca el rol 'Estudiante'
+        if ($role) {
+            $user->assignRole($role); // Asegúrate de que el usuario tenga el rol asignado
+        }
+
+        return $user; // Retorna el usuario creado
     }
 }
+
