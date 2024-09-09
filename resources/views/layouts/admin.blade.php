@@ -39,15 +39,16 @@
         <i :class="open ? 'fas fa-times' : 'fas fa-bars'"></i>
     </button>
 
-    <div class="p-4 sm:ml-64">
+    <div class="flex flex-col min-h-screen p-4 sm:ml-64">
         <!--Aplicación de las migas de pan-->
-        <div class="mt-14">
+        <div class="mt-14 flex-grow">   <!-- Agregar flex-grow para ocupar espacio -->
             @include('layouts.includes.admin.breadcrumb')
-            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 h-full">
                 {{$slot}}
             </div>
         </div>
     </div>
+    
 
     <div x-cloak x-show="open" x-on:click="open = false" class="bg-gray-900 bg-opacity-50 fixed inset-0 z-30 sm:hidden"></div>
 
