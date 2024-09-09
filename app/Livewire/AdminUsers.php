@@ -79,6 +79,8 @@ class AdminUsers extends Component
     // Método para filtrar usuarios por roles seleccionados
     public function filteredUsersByRolesProperty()
     {
+        logger('Roles seleccionados: ' . json_encode($this->selectedRoles));
+        
         $filteredUsers = User::query();
 
         // Verifica si se ha seleccionado un rol
