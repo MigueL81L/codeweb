@@ -3,8 +3,14 @@
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
                 @if ($this->current)
-                    <!-- Mostrar el video/iframe de acuerdo con el método getIframeAttribute -->
-                    {!! $this->current->iframe !!}
+                    <!-- Modificación: Usar Alpine.js para asegurarse de que el video se recargue adecuadamente -->
+                    <div x-data="{ videoUrl: '{{ $this->current->iframe }}', key: '{{ $this->current->id }}' }"
+                         x-init="$watch('key', value => { $refs.video.load(); })" 
+                         wire:key="lesson-video-{{ $this->current->id }}">
+                        <div x-html="videoUrl" x-ref="video">
+                            <!-- el contenido dinámico `iframe` o `video` se procesará aquí -->
+                        </div>
+                    </div>
 
                     <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
 
@@ -112,6 +118,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 
