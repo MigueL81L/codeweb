@@ -30,7 +30,8 @@
 
         <div class="min-h-screen bg-gray-100">
             {{-- @include('layouts.includes.instructor.navigation-menu') --}}
-            @livewire('navigation-menu')
+            {{-- @livewire('navigation-menu') --}}
+            @include('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
