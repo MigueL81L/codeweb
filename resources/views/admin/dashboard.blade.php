@@ -5,7 +5,7 @@
     ],
 ]">
 
-<div class="h-screen bg-gray-100 flex items-start p-4"> <!-- Ajustado para alinear al inicio -->
+<div class="h-screen flex items-start p-4"> <!-- Ajustado para alinear al inicio -->
     <p class="text-left text-2xl">Bienvenido al Panel de Administración de Codeweb!</p>
 </div>
 
