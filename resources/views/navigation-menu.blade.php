@@ -53,6 +53,11 @@
                     </a>
                 </div>
 
+                <!-- Application Name -->
+                <div class="flex items-center ms-3">
+                    <span class="text-xl font-semibold text-gray-800">CodeWeb</span>
+                </div>
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @foreach ($links as $item)
