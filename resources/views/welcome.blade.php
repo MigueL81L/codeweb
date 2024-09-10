@@ -1,8 +1,8 @@
 <x-app-layout>
     <!--El método asset hace referencia a mi carpeta public-->
     <!--Cabecera, Buscador-->
-    <section style="background-image: url({{ asset('img/home/pexelsHome.jpg') }})" class="bg-cover h-[80vh]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36 h-full flex items-center">
+    <section style="background-image: url({{ asset('img/home/pexelsHome.jpg') }})" class="bg-cover">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
             <div class="w-full md:w-3/4 lg:w-1/2">
                 <h1 class="text-white font-bold text-4xl">Domina la tecnología web con CodeWeb</h1>
                 <p class="text-white text-lg mt-2 mb-4">En CodeWeb encontrarás cursos, manuales y artículos que 
@@ -15,13 +15,13 @@
     </section>
 
     <!--Filtro-->
-    <section class="mt-0 bg-gray-700 py-12">
+    <section class="mt-0 bg-gray-700 py-14">
         <h1 class="text-center text-white text-3xl">¿No sabes que curso te puede interesar?</h1>
         <p class="text-center text-white">
             Dirígete al catálogo de cursos y filtralos por categoría o nivel
         </p>
         <div class="flex justify-center mt-4">
-            <a href="{{ route('courses.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('courses.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded">
                 Catálogo de Cursos
             </a>
         </div>
@@ -42,6 +42,7 @@
         </div>
     </section>
 </x-app-layout>
+
 
 
 
