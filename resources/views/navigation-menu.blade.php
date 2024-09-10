@@ -46,17 +46,14 @@
     <div class="container">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
+                <!-- Logo and Application name-->
                 <div class="shrink-0 flex items-center">  
-                    <a href="{{route('dashboard')}}">
+                    <a href="{{ route('home') }}" class="flex items-center space-x-2 hover:text-blue-600">
                         <x-application-mark class="block h-9 w-auto" />
+                        <span class="text-xl font-semibold text-gray-800 font-serif">CodeWeb</span>
                     </a>
                 </div>
-
-                <!-- Application Name -->
-                <div class="flex items-center ms-3">
-                    <span class="text-xl font-semibold text-gray-800">CodeWeb</span>
-                </div>
+                
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
