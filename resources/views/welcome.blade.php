@@ -16,8 +16,8 @@
 
     <!--Filtro-->
     <section class="mb-4 bg-gray-700 py-12">
-        <h1 class="text-center text-white text-3xl">¿No sabes que curso te puede interesar?</h1>
-        <p class="text-center text-white">
+        <h1 class="text-center text-white text-3xl mb-2">¿No sabes que curso te puede interesar?</h1>
+        <p class="text-center text-white text-2xl mb-2">
             Dirígete al catálogo de cursos y filtralos por categoría o nivel
         </p>
         <div class="flex justify-center mt-4">
