@@ -28,7 +28,7 @@
     </section>
 
     <!--Listado últimos cursos-->
-    <section class="my-0">
+    <section class="my-0 py-12">
         <h1 class="text-center text-3xl text-gray-600">Ultimos Cursos</h1>
         <p class="text-center text-gray-500 text-sm mb-6">Siempre estamos subiendo Cursos</p>
 
