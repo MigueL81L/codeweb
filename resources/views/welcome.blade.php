@@ -15,7 +15,7 @@
     </section>
 
     <!--Filtro-->
-    <section class="mt-0 bg-gray-700 py-16">
+    <section class="mb-2 bg-gray-700 py-12">
         <h1 class="text-center text-white text-3xl">¿No sabes que curso te puede interesar?</h1>
         <p class="text-center text-white">
             Dirígete al catálogo de cursos y filtralos por categoría o nivel
@@ -28,7 +28,7 @@
     </section>
 
     <!--Listado últimos cursos-->
-    <section class="my-0 py-12">
+    <section class="mt-2 py-12">
         <h1 class="text-center text-3xl text-gray-600">Ultimos Cursos</h1>
         <p class="text-center text-gray-500 text-sm mb-6">Siempre estamos subiendo Cursos</p>
 
