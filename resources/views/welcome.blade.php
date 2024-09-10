@@ -10,56 +10,7 @@
 
                 {{--Código buscador encapsulado en componente livewire--}}
                 @livewire('search')
-        </div>
-    </section>
-    <!--Contenido-->
-    <section class="mt-24">
-        <h1 class="text-gray-600 text-center text-3xl mb-6">Contenido</h1>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
-            <article>
-                <figure>
-                    <img class="rounded-xl w-full h-72 object-cover" src="{{ asset('img/home/turkey.jpg') }}" alt="">
-                </figure>
-                <header class="mt-2">
-                    <h1 class="text-center text-xl text-gray-700">Cursos y Proyectos</h1>
-                    <p class="text-sm text-gray-500">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam corporis, non, repudiandae cupiditate voluptate, 
-                    </p>
-                </header>
-            </article>
-            <article>
-                <figure>
-                    <img class="rounded-xl w-full h-72 object-cover" src="{{ asset('img/home/frogs.jpg') }}" alt="">
-                </figure>
-                <header class="mt-2">
-                    <h1 class="text-center text-xl text-gray-700">Manual de Laravel</h1>
-                    <p class="text-sm text-gray-500">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam corporis, non, repudiandae cupiditate voluptate, 
-                    </p>
-                </header>
-            </article>
-            <article>
-                <figure>
-                    <img class="rounded-xl w-full h-72 object-cover" src="{{ asset('img/home/gorilla.jpg') }}" alt="">
-                </figure>
-                <header class="mt-2">
-                    <h1 class="text-center text-xl text-gray-700">Blog</h1>
-                    <p class="text-sm text-gray-500">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam corporis, non, repudiandae cupiditate voluptate, 
-                    </p>
-                </header>
-            </article>
-            <article>
-                <figure>
-                    <img class="rounded-xl w-full h-72 object-cover" src="{{ asset('img/home/owl.jpg') }}" alt="">
-                </figure>
-                <header class="mt-2">
-                    <h1 class="text-center text-xl text-gray-700">Desarrollo Web</h1>
-                    <p class="text-sm text-gray-500">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam corporis, non, repudiandae cupiditate voluptate, 
-                    </p>
-                </header>
-            </article>
+            </div>
         </div>
     </section>
 
@@ -91,6 +42,7 @@
         </div>
     </section>
 </x-app-layout>
+
 
 
 
