@@ -12,7 +12,7 @@
         </div>
 
         <!-- Información de contacto -->
-        <div>
+        <div class="flex justify-items-center">
             <h1 class="text-3xl font-bold mb-4 text-center">Información de Contacto</h1>
             <p class="mt-2 text-gray-700 dark:text-gray-300">Puedes encontrarnos en:</p>
             <div class="mt-4">
