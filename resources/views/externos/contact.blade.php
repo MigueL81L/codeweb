@@ -13,18 +13,21 @@
 
                     <div>
                         <h1 class="text-3xl font-bold mb-4 text-center">Información de Contacto</h1>
-                        <p class="mt-2 text-gray-700 dark:text-gray-300 text-center">Puedes encontrarnos en:</p>
+                        <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">Puedes encontrarnos en:</p>
                         <div class="mt-4">
                             <div class="flex justify-start mb-2"> <!-- Primera fila: Dirección -->
-                                <span class="font-semibold w-32 text-right pr-4">Dirección:</span>
+                                <span class="font-semibold w-32 text-left pr-4">Dirección:</span>
+                                <br><br>
                                 <span class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</span>
                             </div>
                             <div class="flex justify-start mb-2"> <!-- Segunda fila: Teléfono -->
-                                <span class="font-semibold w-32 text-right pr-4">Teléfono:</span>
+                                <span class="font-semibold w-32 text-left pr-4">Teléfono:</span>
+                                <br><br>
                                 <span class="text-gray-700 dark:text-gray-300">612-345-678</span>
                             </div>
                             <div class="flex justify-start"> <!-- Tercera fila: Email -->
-                                <span class="font-semibold w-32 text-right pr-4">Email:</span>
+                                <span class="font-semibold w-32 text-left pr-4">Email:</span>
+                                <br><br>
                                 <span class="text-gray-700 dark:text-gray-300">
                                     <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
                                 </span>
@@ -33,9 +36,9 @@
                     </div>
 
                     <!-- Información sobre Donaciones -->
-                    <div class="text-center">
-                        <h2 class="text-2xl font-semibold">Contribuciones Voluntarias</h2>
-                        <p class="mt-2 text-gray-700 dark:text-gray-300">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-center">Contribuciones Voluntarias</h2>
+                        <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
                             Si deseas contribuir a nuestro proyecto, puedes hacer una donación voluntaria a través de Bizum. 
                             Para más detalles, visita nuestra 
                             <a href="{{ route('payment-address') }}" class="text-blue-600 hover:underline">Dirección de Pago</a>.
