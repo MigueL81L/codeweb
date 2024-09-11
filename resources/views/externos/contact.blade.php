@@ -1,32 +1,5 @@
 
-<!DOCTYPE html>
-<html lang="es">
-    <head>    <link href="/rappasoft/laravel-livewire-tables/core.min.css" rel="stylesheet" />     <link href="/rappasoft/laravel-livewire-tables/thirdparty.css" rel="stylesheet" />
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="oV2LsQdqfrZIrRBbUqeEWRQFxJddtD3rhhu88W2f">
-        <meta name="description" content="Domina la tecnología web con Codersfree" />
-        <meta name="robots" content="noindex" />
-
-        <title>Cursos en linea: Aprende programación a tu propio ritmo | Coders Free</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="canonical" href="https://codersfree.com/privacy-policy" />
-
-        <!-- Favicon -->
-        <link rel="icon" href="https://codersfree.com/logos/favicon.ico">
-
-        <!-- Scripts -->
-        <link rel="preload" as="style" href="https://codersfree.com/build/assets/app-DVVO27qK.css" /><link rel="modulepreload" href="https://codersfree.com/build/assets/app-CYOEM0E6.js" /><link rel="stylesheet" href="https://codersfree.com/build/assets/app-DVVO27qK.css" data-navigate-track="reload" /><script type="module" src="https://codersfree.com/build/assets/app-CYOEM0E6.js" data-navigate-track="reload"></script>
-        <!-- Styles -->
-        <!-- Livewire Styles --><style >[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak] {display: none !important;}</style>
-
-        <!-- Google Recaptcha -->
-        <script src="https://www.google.com/recaptcha/api.js?render=6LeZbNMgAAAAAKQv70T8JKxzdQhnchjfyojh7BuP"></script>
-    <script src="/rappasoft/laravel-livewire-tables/core.min.js"  ></script> <script src="/rappasoft/laravel-livewire-tables/thirdparty.min.js"  ></script></head>
-    <body>
+<x-guest-layout>
         <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
             <div class="pt-4 pb-12 bg-gray-100 dark:bg-gray-900">
         <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
@@ -113,9 +86,7 @@ Codersfree responde a cualquier duda que se tenga sobre la Política de Privacid
     </div>
         </div>
 
-        <script src="/livewire/livewire.min.js?id=239a5c52"   data-csrf="oV2LsQdqfrZIrRBbUqeEWRQFxJddtD3rhhu88W2f" data-update-uri="/livewire/update" data-navigate-once="true"></script>
-    </body>
-</html>
+</x-guest-layout>
 
 
 
