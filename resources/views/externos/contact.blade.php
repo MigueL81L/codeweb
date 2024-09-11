@@ -1,4 +1,4 @@
-<x-guest-layout>
+
     <div class="min-h-screen bg-gray-100 flex items-center justify-center"> <!-- Fondo gris en toda la pantalla -->
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full"> <!-- Contenedor blanco centrado -->
             <!-- Encabezado con el logo -->
@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-</x-guest-layout>
+
 
 
 
