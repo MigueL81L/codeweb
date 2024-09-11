@@ -15,7 +15,7 @@
         <div>
             <h1 class="text-3xl font-bold mb-4 text-center">Información de Contacto</h1>
             <p class="mt-2 text-gray-700 dark:text-gray-300 text-center">Puedes encontrarnos en:</p>
-            <div class="mt-4 mx-auto">
+            <div class="mt-4 ml-8 mx-auto">
                 <div class="flex">
                     <div class="w-1/3 text-right pr-4">
                         <span class="font-semibold">Dirección:</span>
