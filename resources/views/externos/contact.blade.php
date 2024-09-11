@@ -1,7 +1,37 @@
 <x-guest-layout>
-    <div class="container mx-auto py-4">
-        <h1 class="text-2xl font-bold">Contáctanos</h1>
-        <p>Información de contacto aquí...</p>
-        <!-- Aquí puedes agregar tu información de contacto o un formulario -->
+    <div class="container mx-auto py-6 px-4 lg:px-8">
+        <!-- Header con el logo y el nombre de la aplicación -->
+        <div class="flex items-center mb-8">
+            <x-application-mark class="h-10 mr-3" />
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">CodeWeb</h1>
+        </div>
+
+        <!-- Descripción de la Academia -->
+        <div class="mb-6">
+            <h2 class="text-2xl font-semibold">¿A qué nos dedicamos?</h2>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+                En CodeWeb ofrecemos cursos de programación gratuitos para ayudar a los estudiantes a iniciar su carrera en el mundo del desarrollo de software. Nuestros cursos están diseñados para ser accesibles, prácticos y orientados a proyectos, brindando a los estudiantes las habilidades necesarias para tener éxito.
+            </p>
+        </div>
+
+        <!-- Información de contacto -->
+        <div class="mb-6">
+            <h2 class="text-2xl font-semibold">Contáctanos</h2>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">Puedes encontrarnos en:</p>
+            <ul class="list-disc pl-5 mt-2 text-gray-700 dark:text-gray-300">
+                <li><strong>Dirección:</strong> Calle Ficticia 123, Pontevedra</li>
+                <li><strong>Teléfono:</strong> 123-456-789</li>
+                <li><strong>Email:</strong> <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a></li>
+            </ul>
+        </div>
+
+        <!-- Información sobre Donaciones -->
+        <div>
+            <h2 class="text-2xl font-semibold">Contribuciones Voluntarias</h2>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+                La academia es gratuita, pero si te sientes generoso y deseas contribuir, puedes hacer una donación voluntaria a través de Bizum a nuestro número: <strong>600-123-456</strong>.
+            </p>
+        </div>
     </div>
 </x-guest-layout>
+
