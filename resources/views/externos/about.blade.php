@@ -13,40 +13,19 @@
                         <img src="{{ asset('img/externos/equipo.jpg') }}" alt="Nuestro Equipo" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" />
                     </div>
 
-                    <p class="mt-2 text-gray-700 dark:text-gray-300 text-center">
-                        En **CodeWeb**, somos una academia virtual dedicada a ofrecer formación accesible en programación, bases de datos, y otras disciplinas de la informática. Nuestros cursos están diseñados para todos los niveles, desde principiantes hasta profesionales que buscan mejorar sus habilidades.
+                    <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
+                        En CodeWeb, somos una academia virtual dedicada a ofrecer formación accesible en programación, bases de datos, y otras disciplinas de la informática. Nuestros cursos están diseñados para todos los niveles, desde principiantes hasta profesionales que buscan mejorar sus habilidades.
                     </p>
 
-                    <p class="mt-2 text-gray-700 dark:text-gray-300 text-center">
+                    <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
                         Nuestros instructores son expertos en sus campos, y están comprometidos a brindarte una experiencia de aprendizaje enriquecedora, práctica y eficaz. Creemos en el poder de la educación online y en su capacidad para flexibilizar tu aprendizaje, adaptándose a tu ritmo y horario.
                     </p>
 
-                    <h2 class="text-2xl font-semibold mt-4 text-center">Información de Contacto</h2>
-                    <p class="mt-2 text-gray-700 dark:text-gray-300 text-center">Puedes encontrarnos en:</p>
-                    <div class="mt-4">
-                        <div class="flex justify-start mb-2">
-                            <span class="font-semibold w-32 text-right pr-4">Dirección:</span>
-                            <span class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</span>
-                        </div>
-                        <div class="flex justify-start mb-2">
-                            <span class="font-semibold w-32 text-right pr-4">Teléfono:</span>
-                            <span class="text-gray-700 dark:text-gray-300">612-345-678</span>
-                        </div>
-                        <div class="flex justify-start">
-                            <span class="font-semibold w-32 text-right pr-4">Email:</span>
-                            <span class="text-gray-700 dark:text-gray-300">
-                                <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Información sobre Donaciones -->
-                    <h2 class="text-2xl font-semibold mt-4 text-center">Contribuciones Voluntarias</h2>
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
-                        Si deseas contribuir a nuestro proyecto, puedes hacer una donación voluntaria a través de Bizum. 
-                        Para más detalles, visita nuestra 
-                        <a href="{{ route('payment-address') }}" class="text-blue-600 hover:underline">Dirección de Pago</a>.
+                        Te proponemos que entres y le eches un vistazo a la página, y a los cursos de los que dispondrás. Siempre estamos subiendo nuevos cursos. Puedes matricularte en tantos como quieras, y lo mejor de todo es que puedes hacerlo Gratis!. Eso si, si consideras que hacemos cursos de valor, agradeceríamos una donación, para ayudarnos a crecer, y atendera a la cada día mayor comunidad de estudiantes que tenemos.
                     </p>
+
+
                 </div>
             </div>
         </div>
