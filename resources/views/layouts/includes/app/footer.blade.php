@@ -1,6 +1,6 @@
 <footer class="bg-white dark:bg-gray-900 mt-16">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div class="md:flex md:justify-between items-center">  <!-- Añadido items-center para alinear verticalmente -->
+        <div class="md:flex md:justify-between items-start">  <!-- Cambiado a items-start para alinear arriba -->
             <div class="mb-6 md:mb-0 flex items-center">
                 <x-application-mark class="h-8 mr-3" />
                 <!-- Eliminamos el nombre duplicado de la aplicación -->
@@ -44,6 +44,7 @@
         </div>
     </div>
 </footer>
+
 
 
 
