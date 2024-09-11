@@ -5,7 +5,7 @@
                 <x-application-mark class="h-8 mr-3" />
                 <!-- Eliminado el nombre duplicado de la aplicación -->
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8 flex-grow"> <!-- Aumentado el espacio con gap-12 -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-16 sm:gap-12 flex-grow"> <!-- Aumentado el espacio entre bloques con gap-16 -->
                 <div>
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Nosotros</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
@@ -38,12 +38,13 @@
                 </div>
             </div>
         </div>
-        <hr class="my-6 border-gray-200 dark:border-gray-700 w-full" /> <!-- Asegurarse de que la línea horizontal abarque el ancho completo -->
+        <hr class="my-6 border-gray-200 dark:border-gray-700" style="width: 100%; margin-left: 0; margin-right: 0;" /> <!-- Asegurando que la línea horizontal llena el ancho de la ventana -->
         <div class="text-center">
             <span class="text-sm text-gray-500 dark:text-gray-400">© 2024 CodeWeb. Todos los derechos Reservados.</span>
         </div>
     </div>
 </footer>
+
 
 
 
