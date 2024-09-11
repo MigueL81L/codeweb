@@ -17,17 +17,17 @@
                         <div class="mt-4">
                             <div class="flex justify-start mb-2"> <!-- Primera fila: Dirección -->
                                 <span class="font-semibold w-32 text-right pr-4">Dirección:</span>
-                                <p class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</p>
+                                <span class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</span>
                             </div>
                             <div class="flex justify-start mb-2"> <!-- Segunda fila: Teléfono -->
                                 <span class="font-semibold w-32 text-right pr-4">Teléfono:</span>
-                                <p class="text-gray-700 dark:text-gray-300">612-345-678</p>
+                                <span class="text-gray-700 dark:text-gray-300">612-345-678</span>
                             </div>
                             <div class="flex justify-start"> <!-- Tercera fila: Email -->
                                 <span class="font-semibold w-32 text-right pr-4">Email:</span>
-                                <p class="text-gray-700 dark:text-gray-300">
+                                <span class="text-gray-700 dark:text-gray-300">
                                     <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
-                                </p>
+                                </span>
                             </div>
                         </div>
                     </div>
