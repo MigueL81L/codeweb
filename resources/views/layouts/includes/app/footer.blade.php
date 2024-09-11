@@ -1,9 +1,9 @@
 <footer class="bg-white dark:bg-gray-900 mt-16">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div class="md:flex md:justify-between items-start">  <!-- Cambiado a items-start para alinear arriba -->
-            <div class="mb-6 md:mb-0 flex items-center">
+        <div class="md:flex md:justify-between">  <!-- Mantén la alineación flex -->
+            <div class="mb-6 md:mb-0 flex items-start"> <!-- Cambiado a items-start para alinear en la parte superior -->
                 <x-application-mark class="h-8 mr-3" />
-                <!-- Eliminamos el nombre duplicado de la aplicación -->
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CodeWeb</span>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 flex-grow">
                 <div>
@@ -44,6 +44,7 @@
         </div>
     </div>
 </footer>
+
 
 
 
