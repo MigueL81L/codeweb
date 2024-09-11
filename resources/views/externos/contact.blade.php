@@ -8,12 +8,10 @@
             </div>
 
             <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg prose dark:prose-invert">
-                <h1>Política de privacidad</h1>
-<p>Codersfree pretende ofrecer la mejor experiencia de compra y estudio a cada uno de sus usuarios. Por ello nos esforzamos encarecidamente en proteger su privacidad presentando este documento donde detallamos nuestros procedimientos y políticas respecto a la información y datos personales. Datos que son recopilados a través del sitio web y/o plataformas virtuales de Codersfree.</p>
-<p>Los usuarios que acceden a nuestros servicios a través de la plataforma aceptan estar sujetos a las disposiciones de nuestra Política de Privacidad. Acepta que se recopile su información personal a través de nuestras encuestas, formularios electrónicos, entre otros, bien sea otorgados y/o requeridos de forma virtual por la plataforma.</p>
-<p>La empresa garantiza que la información personal brindada cuenta con la seguridad necesaria y no será entregada a terceros. Solo se requerirán o validarán datos en casos de incumplimiento de alguna orden judicial o requerimientos legales.</p>
-<p>La suscripción a boletines de correos electrónicos es voluntaria y se le dará la opción de seleccionarla al momento de crear su cuenta y en cualquier momento usted podrá darse de baja.</p>
-<p>Es necesario acotar que la presente política forma parte de nuestros Términos y Condiciones que podrán encontrar en Terminos y condiciones de uso. Asimismo, la empresa se reserva los derechos de modificar la Política de Privacidad sin previo aviso.</p>
+                <div class="flex justify-center mb-4">
+                    <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" />
+                </div>
+
 <h2>¿Qué información recopilamos?</h2>
 Codersfree recopila el siguiente tipo de información:
 <ol>
