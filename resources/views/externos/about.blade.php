@@ -6,9 +6,9 @@
             <!-- Eliminado el nombre duplicado de la aplicación -->
         </div>
 
-        <!-- Imagen ajustada a su tamaño original -->
+        <!-- Imagen ajustada a un tamaño razonable -->
         <div class="flex justify-center mb-8">
-            <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" /> <!-- Ajustada a tamaño original -->
+            <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 300px;" /> <!-- Ajustado a 300px de altura máxima -->
         </div>
 
         <!-- Información de contacto -->
@@ -33,6 +33,7 @@
         </div>
     </div>
 </x-guest-layout>
+
 
 
 
