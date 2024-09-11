@@ -7,6 +7,8 @@
                 </div>
 
                 <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg prose dark:prose-invert">
+                    <h1 class="text-center">Contacto</h1>
+                    
                     <div class="flex justify-center mb-4">
                         <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" />
                     </div>
