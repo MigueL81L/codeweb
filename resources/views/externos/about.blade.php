@@ -8,7 +8,7 @@
 
         <!-- Imagen ajustada a un tamaño razonable -->
         <div class="flex justify-center mb-8">
-            <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 300px;" /> <!-- Ajustado a 300px de altura máxima -->
+            <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" /> <!-- Ajustado a 300px de altura máxima -->
         </div>
 
         <!-- Información de contacto -->
