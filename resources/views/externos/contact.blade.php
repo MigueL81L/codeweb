@@ -16,15 +16,15 @@
                         <p class="mt-2 text-gray-700 dark:text-gray-300 text-center">Puedes encontrarnos en:</p>
                         <div class="mt-4">
                             <div class="flex justify-start mb-2"> <!-- Primera fila: Dirección -->
-                                <span class="font-semibold w-32 text-center pr-4">Dirección:</span>
+                                <span class="font-semibold w-32 text-center pr-4 ml-4">Dirección:</span>
                                 <span class="text-gray-700 dark:text-gray-300 ml-4">Calle Ficticia 123, Pontevedra</span>
                             </div>
                             <div class="flex justify-start mb-2"> <!-- Segunda fila: Teléfono -->
-                                <span class="font-semibold w-32 text-center pr-4">Teléfono:</span>
+                                <span class="font-semibold w-32 text-center pr-4 ml-4">Teléfono:</span>
                                 <span class="text-gray-700 dark:text-gray-300 ml-4">612-345-678</span>
                             </div>
                             <div class="flex justify-start"> <!-- Tercera fila: Email -->
-                                <span class="font-semibold w-32 text-center pr-4">Email:</span>
+                                <span class="font-semibold w-32 text-center pr-4 ml-4">Email:</span>
                                 <span class="text-gray-700 dark:text-gray-300 ml-4">
                                     <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
                                 </span>
