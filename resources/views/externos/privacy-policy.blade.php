@@ -13,7 +13,7 @@
                         En CodeWeb, valoramos y respetamos la privacidad de nuestros usuarios. Esta Política de Privacidad explica cómo recopilamos, utilizamos y compartimos la información personal de los usuarios que acceden a nuestra plataforma.
                     </p>
 
-                    <h2 class="text-2xl font-bold mt-4">Información que recopilamos</h2>
+                    <h2 class="text-2xl font-bold mt-4 text-center">Información que recopilamos</h2>
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
                         Recopilamos información personal cuando los usuarios se registran en nuestra plataforma, como:
                     </p>
@@ -26,7 +26,7 @@
                         También recopilamos información sobre el uso de la plataforma, incluyendo datos de navegación y preferencias de usuario.
                     </p>
 
-                    <h2 class="text-2xl font-bold mt-4">Uso de la información</h2>
+                    <h2 class="text-2xl font-bold mt-4 text-center">Uso de la información</h2>
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
                         Usamos la información recopilada para:
                     </p>
@@ -38,22 +38,22 @@
                         <li>Mejorar continuamente nuestros servicios y la experiencia del usuario.</li>
                     </ul>
 
-                    <h2 class="text-2xl font-bold mt-4">Divulgación de la información</h2>
+                    <h2 class="text-2xl font-bold mt-4 text-center">Divulgación de la información</h2>
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
                         No compartimos su información personal con terceros, salvo que sea necesario para cumplir con la ley, o si tenemos su consentimiento.
                     </p>
 
-                    <h2 class="text-2xl font-bold mt-4">Seguridad de la información</h2>
+                    <h2 class="text-2xl font-bold mt-4 text-center">Seguridad de la información</h2>
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
                         Implementamos medidas de seguridad adecuadas para proteger la información personal de nuestros usuarios. Sin embargo, ningún método de transmisión por internet o método de almacenamiento electrónico es 100% seguro.
                     </p>
 
-                    <h2 class="text-2xl font-bold mt-4">Cambios a esta política</h2>
+                    <h2 class="text-2xl font-bold mt-4 text-center">Cambios a esta política</h2>
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
                         Nos reservamos el derecho a modificar esta Política de Privacidad en cualquier momento. Cualquier cambio será publicado en esta página con una nueva fecha de vigencia.
                     </p>
 
-                    <h2 class="text-2xl font-bold mt-4">Contacto</h2>
+                    <h2 class="text-2xl font-bold mt-4 text-center">Contacto</h2>
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
                         Si tiene alguna pregunta sobre esta política, o si desea ejercer sus derechos de privacidad, contáctenos a través del correo electrónico proporcionado en nuestra plataforma.
                     </p>
