@@ -6,9 +6,9 @@
             <!-- Eliminado el nombre duplicado de la aplicación -->
         </div>
 
-        <!-- Imagen ajustada a la mitad de altura -->
+        <!-- Imagen ajustada a su tamaño original -->
         <div class="flex justify-center mb-8">
-            <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-32" /> <!-- Ahora la altura es la mitad -->
+            <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" /> <!-- Ajustada a tamaño original -->
         </div>
 
         <!-- Información de contacto -->
@@ -22,14 +22,17 @@
             </ul>
         </div>
 
-        <!-- Información sobre Donaciones si quieres agregarlo -->
+        <!-- Información sobre Donaciones -->
         <div class="mt-6">
             <h2 class="text-2xl font-semibold">Contribuciones Voluntarias</h2>
             <p class="mt-2 text-gray-700 dark:text-gray-300">
-                Si deseas contribuir a nuestro proyecto, puedes hacer una donación voluntaria a través de Bizum. ¡Tu apoyo es muy apreciado!
+                Si deseas contribuir a nuestro proyecto, puedes hacer una donación voluntaria a través de Bizum. 
+                Para más detalles, visita nuestra 
+                <a href="{{ route('payment-address') }}" class="text-blue-600 hover:underline">Dirección de Pago</a>.
             </p>
         </div>
     </div>
 </x-guest-layout>
+
 
 
