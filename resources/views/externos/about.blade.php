@@ -12,20 +12,20 @@
         </div>
 
         <!-- Información de contacto -->
-        <div class="text-center"> <!-- Se centra todo el texto aquí -->
+        <div class="text-center"> 
             <h1 class="text-3xl font-bold mb-4">Información de Contacto</h1>
             <p class="mt-2 text-gray-700 dark:text-gray-300">Puedes encontrarnos en:</p>
             <div class="mt-4">
-                <div class="flex justify-center mb-2"> <!-- Centrado horizontalmente -->
-                    <span class="font-semibold mr-2">Dirección:</span>
+                <div class="flex justify-center text-left mb-2"> <!-- Centramos las filas -->
+                    <span class="font-semibold w-32">Dirección:</span>
                     <p class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</p>
                 </div>
-                <div class="flex justify-center mb-2"> <!-- Centrado horizontalmente -->
-                    <span class="font-semibold mr-2">Teléfono:</span>
+                <div class="flex justify-center text-left mb-2"> <!-- Centramos las filas -->
+                    <span class="font-semibold w-32">Teléfono:</span>
                     <p class="text-gray-700 dark:text-gray-300">612-345-678</p>
                 </div>
-                <div class="flex justify-center"> <!-- Centrado horizontalmente -->
-                    <span class="font-semibold mr-2">Email:</span>
+                <div class="flex justify-center text-left"> <!-- Centramos las filas -->
+                    <span class="font-semibold w-32">Email:</span>
                     <p class="text-gray-700 dark:text-gray-300">
                         <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
                     </p>
@@ -44,6 +44,7 @@
         </div>
     </div>
 </x-guest-layout>
+
 
 
 
