@@ -12,31 +12,29 @@
         </div>
 
         <!-- Información de contacto -->
-        <div>
-            <h1 class="text-3xl font-bold mb-4 text-center">Información de Contacto</h1>
+        <div class="text-center"> <!-- Se centra todo el texto aquí -->
+            <h1 class="text-3xl font-bold mb-4">Información de Contacto</h1>
             <p class="mt-2 text-gray-700 dark:text-gray-300">Puedes encontrarnos en:</p>
             <div class="mt-4">
-                <div class="flex flex-col justify-items-center">
-                    <div class="flex">
-                        <span class="font-semibold w-32">Dirección:</span>
-                        <p class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</p>
-                    </div>
-                    <div class="flex mt-2">
-                        <span class="font-semibold w-32">Teléfono:</span>
-                        <p class="text-gray-700 dark:text-gray-300">612-345-678</p>
-                    </div>
-                    <div class="flex mt-2">
-                        <span class="font-semibold w-32">Email:</span>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
-                        </p>
-                    </div>
+                <div class="flex justify-center mb-2"> <!-- Centrado horizontalmente -->
+                    <span class="font-semibold mr-2">Dirección:</span>
+                    <p class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</p>
+                </div>
+                <div class="flex justify-center mb-2"> <!-- Centrado horizontalmente -->
+                    <span class="font-semibold mr-2">Teléfono:</span>
+                    <p class="text-gray-700 dark:text-gray-300">612-345-678</p>
+                </div>
+                <div class="flex justify-center"> <!-- Centrado horizontalmente -->
+                    <span class="font-semibold mr-2">Email:</span>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
+                    </p>
                 </div>
             </div>
         </div>
 
         <!-- Información sobre Donaciones -->
-        <div class="mt-6 text-left"> <!-- Se asegura que está alineado a la izquierda -->
+        <div class="mt-6 text-left">
             <h2 class="text-2xl font-semibold text-center">Contribuciones Voluntarias</h2>
             <p class="mt-2 text-gray-700 dark:text-gray-300">
                 Si deseas contribuir a nuestro proyecto, puedes hacer una donación voluntaria a través de Bizum. 
@@ -46,6 +44,7 @@
         </div>
     </div>
 </x-guest-layout>
+
 
 
 
