@@ -1,6 +1,6 @@
 
 @php
-    $links=[
+    $links=[ 
         [
             'name'=>'Home',
             'route'=>route('home'),
@@ -46,12 +46,9 @@
     <div class="container">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo and Application name-->
+                <!-- Logo and Application name -->
                 <div class="shrink-0 flex items-center">  
-                    <a href="{{ route('home') }}" class="flex items-center space-x-2 hover:text-blue-600">
-                        <x-application-mark class="block h-9 w-auto" />
-                        <span class="text-xl font-semibold text-gray-800 font-serif">CodeWeb</span>
-                    </a>
+                    <x-application-mark class="block h-9 w-auto" />
                 </div>
                 
 
