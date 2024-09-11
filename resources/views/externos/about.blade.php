@@ -13,7 +13,7 @@
 
         <!-- Información de contacto -->
         <div>
-            <h1 class="text-3xl font-bold mb-4">Información de Contacto</h1>
+            <h1 class="text-3xl font-bold mb-4 text-center">Información de Contacto</h1>
             <p class="mt-2 text-gray-700 dark:text-gray-300">Puedes encontrarnos en:</p>
             <div class="mt-4">
                 <div class="flex flex-col">
@@ -37,7 +37,7 @@
 
         <!-- Información sobre Donaciones -->
         <div class="mt-6 text-left"> <!-- Se asegura que está alineado a la izquierda -->
-            <h2 class="text-2xl font-semibold">Contribuciones Voluntarias</h2>
+            <h2 class="text-2xl font-semibold text-center">Contribuciones Voluntarias</h2>
             <p class="mt-2 text-gray-700 dark:text-gray-300">
                 Si deseas contribuir a nuestro proyecto, puedes hacer una donación voluntaria a través de Bizum. 
                 Para más detalles, visita nuestra 
