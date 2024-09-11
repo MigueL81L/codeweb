@@ -22,7 +22,10 @@
                     </p>
 
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
-                        Te proponemos que entres y le eches un vistazo a la página, y a los cursos de los que dispondrás. Siempre estamos subiendo nuevos cursos. Puedes matricularte en tantos como quieras, y lo mejor de todo es que puedes hacerlo Gratis!. Eso si, si consideras que hacemos cursos de valor, agradeceríamos una donación, para ayudarnos a crecer, y atendera a la cada día mayor comunidad de estudiantes que tenemos.
+                        Te proponemos que entres y le eches un vistazo a la página, y a los cursos de los que dispondrás. Siempre estamos subiendo nuevos cursos. Puedes matricularte en tantos como quieras, y lo mejor de todo es que puedes hacerlo Gratis!. 
+                    </p>
+                    <p class="mt-2 text-gray-700 dark:text-gray-300 text-left font-weight: 500">
+                        Eso si, si consideras que hacemos cursos de valor, agradeceríamos una donación, para ayudarnos a crecer, y atendera a la cada día mayor comunidad de estudiantes que tenemos.
                     </p>
 
 
