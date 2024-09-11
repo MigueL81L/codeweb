@@ -11,45 +11,33 @@
             <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" />
         </div>
 
-        <!-- Contenedor con tres columnas -->
+        <!-- Contenedor de tres columnas -->
         <div class="grid grid-cols-3 gap-6"> <!-- Usamos grid para tres columnas -->
             <div class="col-span-1"> <!-- Primer div vacío -->
-                <!-- Esta columna se deja vacía -->
+                <!-- Este div está vacío pero ocupa un tercio del espacio -->
             </div>
             <div class="col-span-1"> <!-- Segundo div con la información de contacto -->
                 <h1 class="text-3xl font-bold mb-4 text-center">Información de Contacto</h1>
                 <p class="mt-2 text-gray-700 dark:text-gray-300 text-center">Puedes encontrarnos en:</p>
                 <div class="mt-4">
                     <div class="flex">
-                        <div class="w-1/3 text-right pr-4">
-                            <span class="font-semibold">Dirección:</span>
-                        </div>
-                        <div class="w-2/3 text-left">
-                            <p class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</p>
-                        </div>
+                        <span class="font-semibold w-1/3 text-right pr-4">Dirección:</span>
+                        <p class="text-gray-700 dark:text-gray-300 w-2/3">Calle Ficticia 123, Pontevedra</p>
                     </div>
                     <div class="flex mt-2">
-                        <div class="w-1/3 text-right pr-4">
-                            <span class="font-semibold">Teléfono:</span>
-                        </div>
-                        <div class="w-2/3 text-left">
-                            <p class="text-gray-700 dark:text-gray-300">612-345-678</p>
-                        </div>
+                        <span class="font-semibold w-1/3 text-right pr-4">Teléfono:</span>
+                        <p class="text-gray-700 dark:text-gray-300 w-2/3">612-345-678</p>
                     </div>
                     <div class="flex mt-2">
-                        <div class="w-1/3 text-right pr-4">
-                            <span class="font-semibold">Email:</span>
-                        </div>
-                        <div class="w-2/3 text-left">
-                            <p class="text-gray-700 dark:text-gray-300">
-                                <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
-                            </p>
-                        </div>
+                        <span class="font-semibold w-1/3 text-right pr-4">Email:</span>
+                        <p class="text-gray-700 dark:text-gray-300 w-2/3">
+                            <a href="mailto:mNight@gmail.com" class="text-blue-600 hover:underline">mNight@gmail.com</a>
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="col-span-1"> <!-- Tercer div vacío -->
-                <!-- Esta columna se deja vacía -->
+                <!-- Este div está vacío pero ocupa un tercio del espacio -->
             </div>
         </div>
 
@@ -64,6 +52,7 @@
         </div>
     </div>
 </x-guest-layout>
+
 
 
 
