@@ -10,7 +10,7 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Nosotros</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline">Contáctanos</a>
+                            <a href="{{ route('contact') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Contáctanos</a>
                         </li>
                     </ul>
                 </div>
@@ -18,13 +18,13 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Compañía</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline">Política de Privacidad</a>
+                            <a href="{{ route('privacy-policy') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Política de Privacidad</a>
                         </li>
                         <li class="mb-4">
-                            <a href="#" class="hover:underline">Términos y Condiciones</a>
+                            <a href="{{ route('terms-and-conditions') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Términos y Condiciones</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline">Declaración de Accesibilidad</a>
+                            <a href="{{ route('accessibility-statement') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Declaración de Accesibilidad</a>
                         </li>
                     </ul>
                 </div>
@@ -32,18 +32,19 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Donaciones</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline">Dirección de Pago</a>
+                            <a href="{{ route('payment-address') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Dirección de Pago</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <hr class="my-6 border-gray-200 dark:border-gray-700" style="width: 100%; margin-left: 0; margin-right: 0;" /> <!-- Asegurando que la línea horizontal llena el ancho de la ventana -->
+        <hr class="my-6 border-gray-200 dark:border-gray-700" style="width: 100%; margin-left: 0; margin-right: 0;" />
         <div class="text-center">
             <span class="text-sm text-gray-500 dark:text-gray-400">© 2024 CodeWeb. Todos los derechos Reservados.</span>
         </div>
     </div>
 </footer>
+
 
 
 
