@@ -34,16 +34,6 @@
                         </div>
                     </div>
 
-                    <!-- Información sobre Donaciones -->
-                    <div>
-                        <h2 class="text-2xl font-semibold text-center">Contribuciones Voluntarias</h2>
-                        <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">
-                            Si deseas contribuir a nuestro proyecto, puedes hacer una donación voluntaria a través de Bizum. 
-                            Para más detalles, visita nuestra 
-                            <a href="{{ route('payment-address') }}" class="text-blue-600 hover:underline">Dirección de Pago</a>.
-                        </p>
-                    </div>
-
 
                 </div>
             </div>

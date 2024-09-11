@@ -31,14 +31,6 @@
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Donaciones</h2>
-                    <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                        <li class="mb-4">
-                            <a href="{{ route('payment-address') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Dirección de Pago</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
         <hr class="my-6 border-gray-200 dark:border-gray-700" style="width: 100%; margin-left: 0; margin-right: 0;" />

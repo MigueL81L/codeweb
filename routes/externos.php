@@ -11,5 +11,4 @@ Route::view('/contact', 'externos.contact')->name('contact'); // Corregido para 
 Route::view('/privacy-policy', 'externos.privacy-policy')->name('privacy-policy');
 Route::view('/terms-and-conditions', 'externos.terms-and-conditions')->name('terms-and-conditions');
 Route::view('/accessibility-statement', 'externos.accessibility-statement')->name('accessibility-statement');
-Route::view('/payment-address', 'externos.payment-address')->name('payment-address');
 });
