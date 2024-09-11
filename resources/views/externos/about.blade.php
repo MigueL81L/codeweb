@@ -17,11 +17,11 @@
             <p class="mt-2 text-gray-700 dark:text-gray-300">Puedes encontrarnos en:</p>
             <div class="mt-4">
                 <div class="flex justify-center">
-                    <div class="mr-6">
+                    <div class="mr-12">
                         <span class="font-semibold">Dirección:</span>
                         <p class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</p>
                     </div>
-                    <div class="mr-6">
+                    <div class="mr-12">
                         <span class="font-semibold">Teléfono:</span>
                         <p class="text-gray-700 dark:text-gray-300">612-345-678</p>
                     </div>
