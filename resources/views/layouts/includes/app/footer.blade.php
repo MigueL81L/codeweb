@@ -10,6 +10,9 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Nosotros</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
+                            <a href="{{ route('who-we-are') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Quienes Somos</a> <!-- Nuevo enlace a Quienes Somos -->
+                        </li>
+                        <li class="mb-4">
                             <a href="{{ route('contact') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Contáctanos</a>
                         </li>
                     </ul>
@@ -44,6 +47,7 @@
         </div>
     </div>
 </footer>
+
 
 
 

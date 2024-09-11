@@ -1,9 +1,9 @@
 <x-guest-layout>
     <div class="container mx-auto py-6 px-4 lg:px-8">
-        <!-- Header con el logo y el nombre de la aplicación -->
+        <!-- Header con el logo -->
         <div class="flex items-center mb-8">
             <x-application-mark class="h-10 mr-3" />
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">CodeWeb</h1>
+            <!-- Eliminado el nombre duplicado de la aplicación -->
         </div>
 
         <!-- Descripción de la Academia -->
@@ -29,9 +29,12 @@
         <div>
             <h2 class="text-2xl font-semibold">Contribuciones Voluntarias</h2>
             <p class="mt-2 text-gray-700 dark:text-gray-300">
-                La academia es gratuita, pero si te sientes generoso y deseas contribuir, puedes hacer una donación voluntaria a través de Bizum a nuestro número: <strong>600-123-456</strong>.
+                La academia es gratuita, pero si te sientes generoso y deseas contribuir, puedes hacer una donación voluntaria a través de Bizum. 
+                Para obtener más información sobre cómo hacer una donación, visita nuestra 
+                <a href="{{ route('payment-address') }}" class="text-blue-600 hover:underline">Dirección de Pago</a>.
             </p>
         </div>
     </div>
 </x-guest-layout>
+
 
