@@ -15,8 +15,8 @@
         <div>
             <h1 class="text-3xl font-bold mb-4 text-center">Información de Contacto</h1>
             <p class="mt-2 text-gray-700 dark:text-gray-300 text-center">Puedes encontrarnos en:</p>
-            <div class="mt-4 ml-8 mx-auto">
-                <div class="flex">
+            <div class="mt-4">
+                <div class="flex justify-center">
                     <div class="w-1/3 text-right pr-4">
                         <span class="font-semibold">Dirección:</span>
                     </div>
@@ -24,7 +24,7 @@
                         <p class="text-gray-700 dark:text-gray-300">Calle Ficticia 123, Pontevedra</p>
                     </div>
                 </div>
-                <div class="flex mt-2">
+                <div class="flex justify-center mt-2">
                     <div class="w-1/3 text-right pr-4">
                         <span class="font-semibold">Teléfono:</span>
                     </div>
@@ -32,7 +32,7 @@
                         <p class="text-gray-700 dark:text-gray-300">612-345-678</p>
                     </div>
                 </div>
-                <div class="flex mt-2">
+                <div class="flex justify-center mt-2">
                     <div class="w-1/3 text-right pr-4">
                         <span class="font-semibold">Email:</span>
                     </div>
