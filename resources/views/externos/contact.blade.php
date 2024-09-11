@@ -1,6 +1,6 @@
 <x-guest-layout>
-    <div class="min-h-screen bg-gray-100 flex items-center justify-center"> <!-- Fondo gris y centrado -->
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full"> <!-- Contenedor blanco -->
+    <div class="min-h-screen bg-gray-800 flex items-center justify-center"> <!-- Fondo gris y centrado -->
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full border-2"> <!-- Contenedor blanco -->
             <!-- Encabezado con el logo -->
             <div class="flex justify-center mb-8">
                 <x-application-mark class="h-10" />
