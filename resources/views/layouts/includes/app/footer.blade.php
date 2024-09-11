@@ -1,7 +1,7 @@
 <footer class="bg-white dark:bg-gray-900 mt-16">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">  <!-- Mantén la alineación flex -->
-            <div class="mb-6 md:mb-0 flex items-start"> <!-- Cambiado a items-start para alinear en la parte superior -->
+            <div class="mb-12 md:mb-0 flex items-start"> <!-- Cambiado a items-start para alinear en la parte superior -->
                 <x-application-mark class="h-8 mr-3" />
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 flex-grow">
