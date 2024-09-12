@@ -86,6 +86,7 @@ class AdminUsers extends Component
 
     public function updatedSearch()
     {
+        $this->resetPage();
         logger('Propiedad search actualizada: ' . $this->search);
     }
 
