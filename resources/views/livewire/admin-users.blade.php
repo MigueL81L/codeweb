@@ -1,9 +1,15 @@
 <div class="card">
-    <div class="card-body"> 
+    <div class="card-body">
 
         @if(session('info'))
             <div class="bg-blue-500 text-white px-4 py-2 w-full shadow-md mb-2">
                 <strong>Éxito! </strong>{{ session('info') }}
+            </div>
+        @endif
+
+        @if (session('warning'))
+            <div class="bg-yellow-500 text-white px-4 py-2 w-full shadow-md mb-2">
+                <strong>Advertencia! </strong>{{ session('warning') }}
             </div>
         @endif
 
@@ -25,97 +31,53 @@
                     </form>
                 </div>
 
-                @if (session('warning'))
-                    <div class="bg-yellow-500 text-white px-4 py-2 w-full shadow-md mb-2">
-                        <strong>Advertencia! </strong>{{ session('warning') }}
-                    </div>
-                @endif
-
                 <a href="{{ route('admin.users.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                     Crear Nuevo Usuario
                 </a>
             </div>
 
             <form class="pt-2 relative mx-auto text-gray-600" autocomplete="off">
-                <input wire:model.live="search" class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Escribe un nombre o un email....">
+                <input wire:model.debounce.300ms="search" class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Escribe un nombre o un email...">
 
-                @if ($search != "")
-                    <table class="w-full border-collapse">
-                        <thead>
-                            <tr>
-                                <th class="px-4 py-2">Nombre</th>
-                                <th class="px-4 py-2">Email</th>
-                                <th class="px-4 py-2 text-center">Acciones</th>
+                <table class="w-full border-collapse mt-4">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Nombre</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2 text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($paginatedUsers as $user)
+                            <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
+                                <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
+                                <td class="border px-4 py-2 text-center">{{ $user->email }}</td>
+                                <td class="border px-4 py-2 text-center">
+                                    <a class="btn btn-secondary inline-block" href="{{ route('admin.users.edit', $user) }}">Editar</a>
+
+                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline-block ml-2" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($filteredUsersBySearch as $user)
-                                <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
-                                    <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
-                                    <td class="border px-4 py-2 text-center">{{ $user->email }}</td>
-                                    <td class="border px-4 py-2 text-center">
-                                        <a class="btn btn-secondary inline-block" href="{{ route('admin.users.edit', $user) }}">Editar</a>
-
-                                        <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline-block ml-2" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="border px-4 py-2 text-center">No hay Usuario que coincida con su búsqueda</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-
-                    <div class="mt-4">
-                        {{ $filteredUsersBySearch->links() }}
-                    </div>
-                @else
-                    <!-- Filtrado por roles -->
-                    <table class="w-full border-collapse">
-                        <thead>
+                        @empty
                             <tr>
-                                <th class="px-4 py-2">Nombre</th>
-                                <th class="px-4 py-2">Email</th>
-                                <th class="px-4 py-2 text-center">Acciones</th>
+                                <td colspan="3" class="border px-4 py-2 text-center">No hay usuarios que coincidan con su búsqueda</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($filteredUsersByRoles as $user)
-                                <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
-                                    <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
-                                    <td class="border px-4 py-2 text-center">{{ $user->email }}</td>
-                                    <td class="border px-4 py-2 text-center">
-                                        <a class="btn btn-secondary inline-block" href="{{ route('admin.users.edit', $user) }}">Editar</a>
+                        @endforelse
+                    </tbody>
+                </table>
 
-                                        <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline-block ml-2" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="border px-4 py-2 text-center">No hay ningún rol registrado</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-
-                    <div class="mt-4">
-                        {{ $allUsers->links() }}
-                    </div>
-                @endif
-
+                <div class="mt-4">
+                    {{ $paginatedUsers->links() }}
+                </div>
             </form>
         </div>
     </div>
 </div>
+
 
 
 

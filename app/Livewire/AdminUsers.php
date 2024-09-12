@@ -23,14 +23,31 @@ class AdminUsers extends Component
         if (Gate::denies('Leer usuarios')) {
             abort(403, 'Unauthorized action.');
         }
-
+    
         $roles = Role::all();
-        $allUsers = User::paginate(10);
-        $filteredUsersBySearch = $this->filteredUsersBySearchProperty();
-        $filteredUsersByRoles = $this->filteredUsersByRolesProperty();
-
-        return view('livewire.admin-users', compact('allUsers', 'filteredUsersBySearch', 'filteredUsersByRoles', 'roles'));
+    
+        $usersQuery = User::query();
+        
+        // Aplicar filtro por búsqueda si existe
+        if (!empty($this->search)) {
+            $usersQuery = $usersQuery->where(function($query) {
+                $query->where('name', 'LIKE', '%' . $this->search . '%')
+                      ->orWhere('email', 'LIKE', '%' . $this->search . '%');
+            });
+        }
+    
+        // Aplicar filtro por roles si existe alguno seleccionado
+        if (!empty($this->selectedRoles)) {
+            $usersQuery->whereHas('roles', function ($query) {
+                $query->whereIn('id', $this->selectedRoles);
+            });
+        }
+    
+        $paginatedUsers = $usersQuery->paginate(10);
+    
+        return view('livewire.admin-users', compact('paginatedUsers', 'roles'));
     }
+    
 
     // Método para manejar el filtrado por roles
     public function filterUsers()

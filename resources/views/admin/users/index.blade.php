@@ -1,7 +1,7 @@
 <x-admin-layout :breadcrumb="[
     [
         'name' => 'Panel de Control',
-        'url' => route('admin.dashboard'),
+        'url' => route('admin.dashboard'), 
     ],
     [
         'name' => 'Lista de Usuarios',

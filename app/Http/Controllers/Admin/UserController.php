@@ -23,7 +23,7 @@ class UserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        return view('admin.users.index');
+        return view('admin.users.index'); 
     }
 
     /**
