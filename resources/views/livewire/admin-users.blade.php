@@ -37,7 +37,7 @@
             </div>
 
             <form class="pt-2 relative mx-auto text-gray-600" autocomplete="off">
-                <input wire:model.debounce.300ms="search" class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Escribe un nombre o un email...">
+                <input wire:model.live="search" class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="search" placeholder="Escribe un nombre o un email...">
 
                 <table class="w-full border-collapse mt-4">
                     <thead>
