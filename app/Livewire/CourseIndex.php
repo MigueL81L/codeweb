@@ -27,25 +27,25 @@ class CourseIndex extends Component
         $categories = Category::all();
         $levels = Level::all();
     
-        $usersQuery = User::query();
+        $coursesQuery = User::query();
     
         // Aplicar filtro por categorias si existe alguna seleccionado
         if (!empty($this->selectedCategories)) {
-            $usersQuery->whereHas('categories', function ($query) {
+            $coursesQuery->whereHas('categories', function ($query) {
                 $query->whereIn('id', $this->selectedCategories);
             });
         }
 
         // Aplicar filtro por niveles si existe alguno seleccionado
         if (!empty($this->selectedLevels)) {
-            $usersQuery->whereHas('levels', function ($query) {
+            $coursesQuery->whereHas('levels', function ($query) {
                 $query->whereIn('id', $this->selectedLevels);
             });
         }
     
-        $paginatedUsers = $usersQuery->paginate(8);
+        $paginatedCourses = $coursesQuery->paginate(8);
     
-        return view('livewire.course-index', compact('paginatedUsers', 'categories', 'levels'));
+        return view('livewire.course-index', compact('paginatedCourses', 'categories', 'levels'));
     }
     
 

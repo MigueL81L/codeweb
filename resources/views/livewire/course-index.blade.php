@@ -58,14 +58,14 @@
     </div>
 
     <!-- Mostrar Cursos Paginados -->
-    @if($courses->isNotEmpty())
+    @if($paginatedCourses->isNotEmpty())
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
-            @foreach ($courses as $course)
+            @foreach ($paginatedCourses as $course)
                 <x-instructor.course-card :course="$course" />
             @endforeach
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-8">
-            {{ $courses->links('pagination::tailwind') }}
+            {{ $paginatedCourses->links('pagination::tailwind') }}
         </div>
     @else
         <div class="bg-gray-100 rounded-lg p-4 text-center w-full">
