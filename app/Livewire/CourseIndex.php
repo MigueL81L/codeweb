@@ -73,33 +73,42 @@ class CourseIndex extends Component
     {
         $levels = Level::all();
         $categories = Category::all();
-
+        $mensaje = "";  // Inicializa la variable $mensaje aquí
+    
         $coursesQuery = Course::query()->where('status', 3);
-
+    
         if ($this->a) {
             $coursesQuery->whereHas('level', function ($query) {
                 $query->where('id', $this->a);
             });
-
+    
             if ($coursesQuery->count() === 0) {
-                $this->mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
+                $mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
             }
         }
-
+    
         if ($this->f) {
             $coursesQuery->whereHas('category', function ($query) {
                 $query->where('id', $this->f);
             });
-
+    
             if ($coursesQuery->count() === 0) {
-                $this->mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
+                $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
             }
         }
-
+    
         $courses = $coursesQuery->latest('id')->paginate(8);
-
+    
         return view('livewire.course-index', compact('levels', 'categories', 'courses', 'mensaje'));
     }
+
+
+
+
+
+
+    
+    
 }
 
 
