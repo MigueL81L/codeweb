@@ -45,7 +45,7 @@ class CourseIndex extends Component
     
         $paginatedUsers = $usersQuery->paginate(8);
     
-        return view('livewire.admin-users', compact('paginatedUsers', 'categories', 'levels'));
+        return view('livewire.course-index', compact('paginatedUsers', 'categories', 'levels'));
     }
     
 
