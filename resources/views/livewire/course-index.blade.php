@@ -4,7 +4,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex"> 
             <div class="grid grid-cols-5 gap-x-4">
                 
-                <!-- Botón para resetear los filtros --> 
+                {{-- <!-- Botón para resetear los filtros --> 
                 <div class="col-span-1">
                     <div class="flex items-center justify-start space-x-4">
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -13,7 +13,7 @@
                             Todos los Cursos
                         </button>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Filtro por Categoría -->
                 <div class="col-span-2">
