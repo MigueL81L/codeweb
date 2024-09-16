@@ -16,27 +16,42 @@
 
                 <!-- Filtro por Categoría -->
                 <div class="col-span-2">
-                    <div>
-                        <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 rounded-lg">
-                            <option class="py-2" value="">Seleccione una Categoría</option>
-                            @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <form class="flex items-center justify-end space-x-4">
+                        <div>
+                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 rounded-lg">
+                                <option class="py-2" value="">Seleccione una Categoría</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <button type="button" wire:click="updatedSelectedCategories()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <i class="fas fa-th-list text-xs mr-2"></i>  
+                            Filtrar por Categorías
+                        </button>
+                    </form>
                 </div>
 
                 <!-- Filtro por Nivel -->
                 <div class="col-span-2">
-                    <div>
-                        <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 rounded-lg">
-                            <option class="py-2" value="">Seleccione el Nivel</option>
-                            @foreach($levels as $level)
-                                <option value="{{$level->id}}">{{$level->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <form class="flex items-center justify-end space-x-4">
+                        <div>
+                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 rounded-lg">
+                                <option class="py-2" value="">Seleccione el Nivel</option>
+                                @foreach($levels as $level)
+                                    <option value="{{$level->id}}">{{$level->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <button type="button" wire:click="updatedSelectedLevels()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <i class="fas fa-filter text-xs mr-2"></i>  
+                            Filtrar por Niveles
+                        </button>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>
@@ -56,7 +71,10 @@
             <p class="text-gray-500 font-bold block">{{ $mensaje }}</p>
         </div>
     @endif
+    
 </div>
+
+
 
 
 
