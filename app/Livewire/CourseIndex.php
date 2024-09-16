@@ -27,7 +27,7 @@ class CourseIndex extends Component
         $categories = Category::all();
         $levels = Level::all();
     
-        $coursesQuery = User::query();
+        $coursesQuery = Course::query();
     
         // Aplicar filtro por categorias si existe alguna seleccionado
         if (!empty($this->selectedCategories)) {
