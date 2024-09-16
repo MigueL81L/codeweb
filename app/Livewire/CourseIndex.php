@@ -26,6 +26,7 @@ class CourseIndex extends Component
     {
         $categories = Category::all();
         $levels = Level::all();
+        $mensaje="mensaje por desarrollar";
     
         $coursesQuery = Course::query();
     
@@ -45,7 +46,7 @@ class CourseIndex extends Component
     
         $paginatedCourses = $coursesQuery->paginate(8);
     
-        return view('livewire.course-index', compact('paginatedCourses', 'categories', 'levels'));
+        return view('livewire.course-index', compact('paginatedCourses', 'categories', 'levels', 'mensaje'));
     }
     
 
