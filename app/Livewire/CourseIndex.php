@@ -61,56 +61,41 @@ class CourseIndex extends Component
     }
 
     public function render()
-    {
-        // Inicializar las variables 
-        $courses = collect(); 
-        $filtered = collect();
-        $levels = Level::all();
-        $categories = Category::all();
-        $mensaje="";
+{
+    $levels = Level::all();
+    $categories = Category::all();
+    $mensaje = "";
 
+    // Colección paginada única
+    $coursesQuery = Course::query()->where('status', 3);
 
-        //Condicionalidad del mensaje
-        if($this->a!=null){
-            $mensaje="Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
-        }elseif($this->f!=null){
-            $mensaje="Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
-        }else{
-            $mensaje="";
+    if (!is_null($this->a)) {
+        // Filtrar por nivel si está presente
+        $coursesQuery->whereHas('level', function ($query) {
+            $query->where('id', $this->a);
+        });
+        
+        if ($coursesQuery->count() === 0) {
+            $mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
         }
-
-        //Condicionalidad de la colección filtrada a mostrar
-        if($this->a!=null && !$this->f==null){
-            $filtered=$this->filterLevels();
-        }elseif($this->a==null && !$this->f!=null){
-            $filtered=$this->filterCategories();
-        }else{
-            $filtered=collect();
-        }
-
-        //Condicionalidad del reseteo
-        if($this->w==false){
-            $filtered=collect();
-            $this->a=null;
-            $this->f=null;
-            $courses = $this->getFilteredCourses();
-            //Reseteo para que los filtros funcionen nuevamente hasta que se pulse el botón nuevamente
-            $this->w=true;
-        }elseif($this->w==true && $this->a!=null){
-            $filtered = $this->filterLevels();
-            $mensaje="Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
-        }elseif($this->w==true && $this->f!=null){
-            $filtered= $this->filterCategories();
-            $mensaje="Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
-        }else{
-            $courses = $this->getFilteredCourses();
-        }
-
-        $this->c=$filtered->count();
-        $courses = $this->getFilteredCourses();
-
-        return view('livewire.course-index', compact('levels', 'categories', 'courses', 'mensaje', 'filtered'));
     }
+    
+    if (!is_null($this->f)) {
+        // Filtrar por categoría si está presente
+        $coursesQuery->whereHas('category', function ($query) {
+            $query->where('id', $this->f);
+        });
+        
+        if ($coursesQuery->count() === 0) {
+            $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
+        }
+    }
+
+    // Obtener cursos paginados
+    $courses = $coursesQuery->latest('id')->paginate(8);
+
+    return view('livewire.course-index', compact('levels', 'categories', 'courses', 'mensaje'));
+}
 
 
     //Método que recoge los datos que le envía la vista, y se asegura que sea un array
