@@ -30,18 +30,14 @@ class CourseIndex extends Component
     
         $coursesQuery = Course::query();
     
-        // Aplicar filtro por categorias si existe alguna seleccionado
+        // Aplicar filtro por categorías si existe alguna seleccionada
         if (!empty($this->selectedCategories)) {
-            $coursesQuery->whereHas('categories', function ($query) {
-                $query->whereIn('id', $this->selectedCategories);
-            });
+            $coursesQuery->whereIn('category_id', $this->selectedCategories);
         }
 
-        // Aplicar filtro por niveles si existe alguno seleccionado
+        // Puedes aplicar filtro adicional por niveles, si es necesario
         if (!empty($this->selectedLevels)) {
-            $coursesQuery->whereHas('levels', function ($query) {
-                $query->whereIn('id', $this->selectedLevels);
-            });
+            $coursesQuery->whereIn('level_id', $this->selectedLevels);
         }
     
         $paginatedCourses = $coursesQuery->paginate(8);
@@ -100,9 +96,7 @@ class CourseIndex extends Component
 
         // Verifica si se ha seleccionado una categoría
         if (!empty($this->selectedCategories)) {
-            $filteredCourses = $filteredCourses->whereHas('categories', function ($query) {
-                $query->whereIn('id', $this->selectedCategories);
-            });
+            $filteredCourses->whereIn('category_id', $this->selectedCategories);
         }
 
         return $filteredCourses->paginate(8);
@@ -118,9 +112,7 @@ class CourseIndex extends Component
 
         // Verifica si se ha seleccionado una categoría
         if (!empty($this->selectedLevels)) {
-            $filteredCourses = $filteredCourses->whereHas('levels', function ($query) {
-                $query->whereIn('id', $this->selectedLevels);
-            });
+            $filteredCourses->whereIn('level_id', $this->selectedLevels);
         }
 
         return $filteredCourses->paginate(8);
