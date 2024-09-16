@@ -17,7 +17,7 @@
                 <!-- Filtro por Categoría -->
                 <div class="col-span-2">
                     <div>
-                        <select wire:model="selectedCategories" wire:change="updatedSelectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 rounded-lg">
+                        <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 rounded-lg">
                             <option class="py-2" value="">Seleccione una Categoría</option>
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
@@ -29,7 +29,7 @@
                 <!-- Filtro por Nivel -->
                 <div class="col-span-2">
                     <div>
-                        <select wire:model="selectedLevels" wire:change="updatedSelectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 rounded-lg">
+                        <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 rounded-lg">
                             <option class="py-2" value="">Seleccione el Nivel</option>
                             @foreach($levels as $level)
                                 <option value="{{$level->id}}">{{$level->name}}</option>
@@ -57,6 +57,7 @@
         </div>
     @endif
 </div>
+
 
 
 
