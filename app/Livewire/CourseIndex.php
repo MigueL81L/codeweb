@@ -56,9 +56,13 @@ class CourseIndex extends Component
     }
     
     //Método para ir a la colección completa de courses, al pulsar el boton de reseteo
-    public function resetFilters(){
-        $this->w=false;
+    public function resetFilters()
+    {
+        $this->resetLevel();
+        $this->resetCategory();
+        $this->resetPage();  // Resetea a la primera página de la paginación.
     }
+    
 
     public function render()
 {
