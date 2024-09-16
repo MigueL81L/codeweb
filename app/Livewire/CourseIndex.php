@@ -70,7 +70,7 @@ class CourseIndex extends Component
     }
 
     // Método para manejar el filtrado por roles
-    public function filterCoursesLevels()
+    public function filterCoursesLevel()
     {
         // Convertir selectedRoles a array si no lo es
         if (!is_array($this->selectedLevels)) {

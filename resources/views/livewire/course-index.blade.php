@@ -17,7 +17,7 @@
 
                 <!-- Filtro por Categoría -->
                 <div class="col-span-2">
-                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-end space-x-4">
+                    <form wire:submit.prevent="filterCoursesCategory" class="flex items-center justify-end space-x-4">
                         <div>
                             <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
@@ -36,7 +36,7 @@
 
                 <!-- Filtro por Nivel -->
                 <div class="col-span-2">
-                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-end space-x-4">
+                    <form wire:submit.prevent="filterCoursesLevel" class="flex items-center justify-end space-x-4">
                         <div>
                             <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
