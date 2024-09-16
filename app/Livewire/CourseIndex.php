@@ -124,17 +124,17 @@ class CourseIndex extends Component
 
 
         
-    // Método para manejar actualización de roles seleccionados
-    public function updatedSelectedCategories()
-    {
-        $this->resetPage(); // Reinicia la paginación al actualizar roles seleccionados
-    }
+    // // Método para manejar actualización de roles seleccionados
+    // public function updatedSelectedCategories()
+    // {
+    //     $this->resetPage(); // Reinicia la paginación al actualizar roles seleccionados
+    // }
 
-    // Método para manejar actualización de roles seleccionados
-    public function updatedSelectedLevels()
-    {
-        $this->resetPage(); // Reinicia la paginación al actualizar roles seleccionados
-    }
+    // // Método para manejar actualización de roles seleccionados
+    // public function updatedSelectedLevels()
+    // {
+    //     $this->resetPage(); // Reinicia la paginación al actualizar roles seleccionados
+    // }
 }
 
 
