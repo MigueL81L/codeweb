@@ -10,4 +10,10 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable=['name'];
+
+    // Relación uno a muchos inversa: Una categoría puede tener muchos cursos
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }
