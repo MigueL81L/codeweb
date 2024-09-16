@@ -41,23 +41,23 @@ class CourseIndex extends Component
         $levels = Level::all();
         $categories = Category::all();
         $mensaje = "";
-
+    
         $coursesQuery = Course::query()->where('status', 3);
-
-        if (!empty($this->a)) {
-            $coursesQuery->where('level_id', $this->a);
+    
+        if (!empty($this->selectedLevel)) {
+            $coursesQuery->where('level_id', $this->selectedLevel);
         }
-
-        if (!empty($this->f)) {
-            $coursesQuery->where('category_id', $this->f);
+    
+        if (!empty($this->selectedCategory)) {
+            $coursesQuery->where('category_id', $this->selectedCategory);
         }
-
+    
         if ($coursesQuery->count() === 0) {
             $mensaje = "No hay cursos disponibles con los filtros actuales.";
         }
-
+    
         $courses = $coursesQuery->latest('id')->paginate(8);
-
+    
         return view('livewire.course-index', compact('levels', 'categories', 'courses', 'mensaje'));
     }
 
@@ -100,6 +100,14 @@ class CourseIndex extends Component
     {
         $this->resetPage();
     }
+
+    public function applyFilter()
+{
+    $this->resetPage();  // Reiniciar la paginación con cada nuevo filtro
+}
+
+
+
 }
 
 
