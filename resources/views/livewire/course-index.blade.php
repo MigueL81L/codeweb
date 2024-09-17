@@ -4,7 +4,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex"> 
             <div class="grid grid-cols-5 gap-x-4">
                 
-                {{-- <!-- Botón para resetear los filtros --> 
+                <!-- Botón para resetear los filtros --> 
                 <div class="col-span-1">
                     <div class="flex items-center justify-start space-x-4">
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -13,11 +13,11 @@
                             Todos los Cursos
                         </button>
                     </div>
-                </div> --}}
+                </div>
 
                 <!-- Filtro por Categoría -->
                 <div class="col-span-2">
-                    <form wire:submit.prevent="filterCoursesCategory" class="flex items-center justify-end space-x-4">
+                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-end space-x-4">
                         <div>
                             <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
@@ -36,7 +36,7 @@
 
                 <!-- Filtro por Nivel -->
                 <div class="col-span-2">
-                    <form wire:submit.prevent="filterCoursesLevel" class="flex items-center justify-end space-x-4">
+                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-end space-x-4">
                         <div>
                             <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
@@ -58,14 +58,14 @@
     </div>
 
     <!-- Mostrar Cursos Paginados -->
-    @if($paginatedCourses->isNotEmpty())
+    @if($courses->isNotEmpty())
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
-            @foreach ($paginatedCourses as $course)
+            @foreach ($courses as $course)
                 <x-instructor.course-card :course="$course" />
             @endforeach
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-8">
-            {{ $paginatedCourses->links('pagination::tailwind') }}
+            {{ $courses->links('pagination::tailwind') }}
         </div>
     @else
         <div class="bg-gray-100 rounded-lg p-4 text-center w-full">
