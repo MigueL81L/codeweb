@@ -65,41 +65,47 @@ class CourseIndex extends Component
     
 
     public function render()
-{
-    $levels = Level::all();
-    $categories = Category::all();
-    $mensaje = "";
-
-    // Colección paginada única
-    $coursesQuery = Course::query()->where('status', 3);
-
-    if (!is_null($this->a)) {
-        // Filtrar por nivel si está presente
-        $coursesQuery->whereHas('level', function ($query) {
-            $query->where('id', $this->a);
-        });
-        
-        if ($coursesQuery->count() === 0) {
-            $mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
+    {
+        $levels = Level::all();
+        $categories = Category::all();
+    
+        $mensaje = "";
+    
+        // Estado para rehidratar si filtrado.
+        $coursesQuery = Course::where('status', 3);
+    
+        if (!is_null($this->a)) {
+            $coursesQuery->whereHas('level', function ($query) {
+                $query->where('id', $this->a);
+            });
+    
+            if ($coursesQuery->count() === 0) {
+                $mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
+            }
         }
+        
+        if (!is_null($this->f)) {
+            $coursesQuery->whereHas('category', function ($query) {
+                $query->where('id', $this->f);
+            });
+    
+            if ($coursesQuery->count() === 0) {
+                $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
+            }
+        }
+    
+        // Obtener cursos paginados y asegurarse de mantener el páginador funcional
+        $courses = $coursesQuery->latest('id')->paginate(8)->withQueryString();
+
+    
+        return view('livewire.course-index', [
+            'levels' => $levels,
+            'categories' => $categories,
+            'courses' => $courses,
+            'mensaje' => $mensaje,
+        ]);
     }
     
-    if (!is_null($this->f)) {
-        // Filtrar por categoría si está presente
-        $coursesQuery->whereHas('category', function ($query) {
-            $query->where('id', $this->f);
-        });
-        
-        if ($coursesQuery->count() === 0) {
-            $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
-        }
-    }
-
-    // Obtener cursos paginados
-    $courses = $coursesQuery->latest('id')->paginate(8);
-
-    return view('livewire.course-index', compact('levels', 'categories', 'courses', 'mensaje'));
-}
 
 
     //Método que recoge los datos que le envía la vista, y se asegura que sea un array
