@@ -33,7 +33,6 @@ class CourseIndex extends Component
 
     public $w = true;
 
-    // Nueva propiedad para indicar si es una colección filtrada
     public $isFiltered = false;
 
     public function resetLevel()
@@ -50,15 +49,17 @@ class CourseIndex extends Component
         $this->f = null;
     }
     
+    // Elimina el método resetFilters ya que no se utilizará
+    /*
     public function resetFilters()
     {
         $this->resetLevel();
         $this->resetCategory();
-        $this->isFiltered = false; // Reset al reseteo de filtros
+        $this->isFiltered = false; 
         $this->page = 1;
-
         $this->resetPage();
     }
+    */
 
     public function render()
     {
@@ -74,7 +75,7 @@ class CourseIndex extends Component
             $coursesQuery->whereHas('level', function ($query) {
                 $query->where('id', $this->a);
             });
-            $this->isFiltered = true; // Se aplica un filtro de nivel
+            $this->isFiltered = true;
             if ($coursesQuery->count() === 0) {
                 $mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
             }
@@ -84,7 +85,7 @@ class CourseIndex extends Component
             $coursesQuery->whereHas('category', function ($query) {
                 $query->where('id', $this->f);
             });
-            $this->isFiltered = true; // Se aplica un filtro de categoría
+            $this->isFiltered = true;
             if ($coursesQuery->count() === 0) {
                 $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
             }
@@ -194,5 +195,6 @@ class CourseIndex extends Component
         $this->resetPage();
     }
 }
+
 
 
