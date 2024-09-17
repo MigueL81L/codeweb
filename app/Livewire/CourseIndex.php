@@ -46,6 +46,7 @@ class CourseIndex extends Component
         $this->selectedLevels = [];
         $this->selectedLevel = null;
         $this->a = null; 
+        
     }
     
     public function resetCategory()
@@ -60,6 +61,8 @@ class CourseIndex extends Component
     {
         $this->resetLevel();
         $this->resetCategory();
+        $this->page = 1;
+
         $this->resetPage();  // Resetea a la primera página de la paginación.
     }
     
@@ -113,6 +116,7 @@ class CourseIndex extends Component
 
         // Resetea filtro de categoría antes de aplicar filtro de nivel
         $this->resetCategory();
+        $this->page = 1;
 
         // Convertir a array si es una cadena
         if (!is_array($this->selectedLevels)) {
@@ -147,8 +151,8 @@ class CourseIndex extends Component
         $this->b=count($filteredCourses);
         
         // Resetear la página después de aplicar los filtros        
-        $this->resetPage(); 
-        return $filteredCourses;
+        $this->resetPage();
+        return $filteredCourses; 
     }
 
 
@@ -173,6 +177,7 @@ class CourseIndex extends Component
 
         // Resetea filtro de nivel antes de aplicar filtro de categoría
         $this->resetLevel();
+        $this->page = 1;
 
         // Convertir a array si es una cadena
         if (!is_array($this->selectedCategories)) {
