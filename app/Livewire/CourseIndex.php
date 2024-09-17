@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Course;
 use App\Models\Category;
 use App\Models\Level;
+use App\Models\Price; // Asegúrate de tener este modelo
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
@@ -25,6 +26,10 @@ class CourseIndex extends Component
     public $selectedCategories = [];
     public $selectedCategory = null;
     public $f = null;
+
+    public $selectedPrices = [];
+    public $selectedPrice = null;
+    public $p = null;
 
     public $b = null;
     public $c = null;
@@ -49,26 +54,21 @@ class CourseIndex extends Component
         $this->f = null;
     }
     
-    // Elimina el método resetFilters ya que no se utilizará
-    /*
-    public function resetFilters()
+    public function resetPrice()
     {
-        $this->resetLevel();
-        $this->resetCategory();
-        $this->isFiltered = false; 
-        $this->page = 1;
-        $this->resetPage();
+        $this->selectedPrices = [];
+        $this->selectedPrice = null;
+        $this->p = null;
     }
-    */
 
     public function render()
     {
         $levels = Level::all();
         $categories = Category::all();
-    
+        $prices = Price::all(); // Obtener precios
+
         $mensaje = "";
     
-        // Estado para rehidratar si filtrado.
         $coursesQuery = Course::where('status', 3);
     
         if (!is_null($this->a)) {
@@ -90,22 +90,32 @@ class CourseIndex extends Component
                 $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
             }
         }
+
+        if (!is_null($this->p)) {
+            $coursesQuery->whereHas('price', function ($query) {
+                $query->where('id', $this->p);
+            });
+            $this->isFiltered = true;
+            if ($coursesQuery->count() === 0) {
+                $mensaje = "Todavía no tenemos Cursos en ese Rango de Precios. En breve podrás disponer de los mejores!";
+            }
+        }
     
-        // Decidimos sobre paginar o no dependiendo si está filtrada
         $courses = $this->isFiltered ? $coursesQuery->latest('id')->get() : $coursesQuery->latest('id')->paginate(8)->withQueryString();
     
         return view('livewire.course-index', [
             'levels' => $levels,
             'categories' => $categories,
+            'prices' => $prices,
             'courses' => $courses,
             'mensaje' => $mensaje,
         ]);
     }
     
-
     public function filterLevels()
     {
         $this->resetCategory();
+        $this->resetPrice();
         $this->page = 1;
 
         if (!is_array($this->selectedLevels)) {
@@ -156,6 +166,7 @@ class CourseIndex extends Component
     public function filterCategories()
     {
         $this->resetLevel();
+        $this->resetPrice();
         $this->page = 1;
 
         if (!is_array($this->selectedCategories)) {
@@ -194,7 +205,50 @@ class CourseIndex extends Component
     {
         $this->resetPage();
     }
+    
+    public function filterPrices()
+    {
+        $this->resetLevel();
+        $this->resetCategory();
+        $this->page = 1;
+
+        if (!is_array($this->selectedPrices)) {
+            $this->selectedPrices = ($this->selectedPrices !== '') ? [$this->selectedPrices] : [];
+        }
+
+        foreach ($this->selectedPrices as $price) {
+            if ($price != null && $price != '') {
+                $z = Price::find($price); 
+                $this->selectedPrice = $z;
+                break;
+            }
+        }
+
+        if ($this->selectedPrice) {
+            $this->p = $this->selectedPrice->id;
+        } else {
+            $this->p = null;
+        }
+
+        $filteredCourses = collect();
+
+        if ($this->p != null) {
+            $filteredCourses = Course::whereHas('price', function ($query) {
+                $query->where('id', $this->p);
+            })->paginate(8);
+        }
+        
+        $this->resetPage();
+        
+        return $filteredCourses;
+    }
+
+    public function updatedSelectedPrices()
+    {
+        $this->resetPage();
+    }
 }
+
 
 
 
