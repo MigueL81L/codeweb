@@ -64,12 +64,16 @@
                 <x-instructor.course-card :course="$course" />
             @endforeach
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-8">
-            {{ $courses->links('pagination::tailwind') }}
-        </div>
+        
+        @if(!$filtrada)
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-8">
+                {{ $courses->links('pagination::tailwind') }}
+            </div>
+        @endif
+
     @else
         <div class="bg-gray-100 rounded-lg p-4 text-center w-full">
-            <p class="text-gray-500 font-bold block">{{ $mensaje }}</p>
+            <p class="text-gray-500 font-bold block">{{ $mensaje ?? '' }}</p>
         </div>
     @endif
 

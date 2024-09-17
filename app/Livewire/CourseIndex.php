@@ -20,7 +20,7 @@ class CourseIndex extends Component
     public $selectedCategory = null;
     public $f = null;
 
-    public $showPagination = true;
+    public $filtrada = false;
 
     public function resetLevel()
     {
@@ -40,40 +40,49 @@ class CourseIndex extends Component
     {
         $this->resetLevel();
         $this->resetCategory();
-        $this->gotoPage(1);
-        $this->showPagination = true;
+        $this->filtrada = false;  // Asegúrate de resetear la bandera de filtrado.
+        $this->resetPage();       // Resetear paginación.
+    }
+
+    public function filterLevels()
+    {
+        $this->resetCategory();
+        $this->filtrada = true;   // Cuando se aplica un filtro, marcamos como filtrada.
+        $this->a = $this->selectedLevel ? $this->selectedLevel->id : null;
+        $this->resetPage();       // Reiniciar paginación cuando se aplica filtro.
     }
 
     public function filterCategories()
     {
         $this->resetLevel();
+        $this->filtrada = true;   // Cuando se aplica un filtro, marcamos como filtrada.
         $this->f = $this->selectedCategory ? $this->selectedCategory->id : null;
-        $this->gotoPage(1);
+        $this->resetPage();       // Reiniciar paginación cuando se aplica filtro.
     }
 
     public function render()
     {
         $levels = Level::all();
         $categories = Category::all();
-    
+        
         $coursesQuery = Course::where('status', 3);
 
-        if ($this->a !== null) {
+        if (!is_null($this->a)) {
             $coursesQuery->where('level_id', $this->a);
-            $this->showPagination = false; // Desactiva paginación
         }
 
-        if ($this->f !== null) {
+        if (!is_null($this->f)) {
             $coursesQuery->where('category_id', $this->f);
-            $this->showPagination = false; // Desactiva paginación
         }
 
-        $courses = $this->showPagination ? $coursesQuery->latest('id')->paginate(8) : $coursesQuery->get();
+        // Aplicar paginación solo si no está filtrada
+        $courses = $this->filtrada ? $coursesQuery->latest('id')->get() : $coursesQuery->latest('id')->paginate(8);
 
         return view('livewire.course-index', [
             'levels' => $levels,
             'categories' => $categories,
             'courses' => $courses,
+            'mensaje' => $mensaje ?? '',
         ]);
     }
 }
