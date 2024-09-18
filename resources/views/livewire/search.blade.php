@@ -4,7 +4,7 @@
 
     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 
             rounded absolute right-0 top-0 mt-2">
-        Buscar
+        Reset
     </button>
 
     @if ($search != "")

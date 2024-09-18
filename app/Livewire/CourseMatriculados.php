@@ -50,51 +50,57 @@ class CourseMatriculados extends Component
     }
 
     public function render()
-    {
-        $levels = Level::all();
-        $categories = Category::all();
-        $prices = Price::all();
+{
+    $levels = Level::all();
+    $categories = Category::all();
+    $prices = Price::all();
 
-        $mensaje = "";
-    
-        $coursesQuery = Course::whereHas('students', function($query) {
-            $query->where('users.id', Auth::id());
-        });
-    
-        if (!is_null($this->a)) {
-            $coursesQuery->whereHas('level', function ($query) {
-                $query->where('id', $this->a);
-            });
-            $this->isFiltered = true;
-            if ($coursesQuery->count() === 0) {
-                $mensaje = "No te has matriculado en cursos de este nivel.";
-            }
-        }
-        
-        if (!is_null($this->f)) {
-            $coursesQuery->whereHas('category', function ($query) {
-                $query->where('id', $this->f);
-            });
-            $this->isFiltered = true;
-            if ($coursesQuery->count() === 0) {
-                $mensaje = "No te has matriculado en cursos de esta categoría.";
-            }
-        }
+    $mensaje = "";  // Mensaje inicial como cadena vacía.
 
-        if (!is_null($this->p)) {
-            $coursesQuery->whereHas('price', function ($query) {
-                $query->where('id', $this->p);
-            });
-            $this->isFiltered = true;
-            if ($coursesQuery->count() === 0) {
-                $mensaje = "No te has matriculado en cursos en este rango de precios.";
-            }
-        }
-    
-        $courses = $this->isFiltered ? $coursesQuery->latest('id')->get() : $coursesQuery->latest('id')->paginate(8)->withQueryString();
-    
-        return view('livewire.course-matriculados', compact('levels', 'categories', 'prices', 'courses', 'mensaje'));
+    $coursesQuery = Course::whereHas('students', function($query) {
+        $query->where('users.id', Auth::id());
+    });
+
+    // Verificar si la colección está vacía después de la consulta inicial.
+    if ($coursesQuery->count() === 0) {
+        $mensaje = "¡Aún no estás matriculado en ningún curso! ¡Explora nuestros cursos y matricúlate!";
     }
+
+    if (!is_null($this->a)) {
+        $coursesQuery->whereHas('level', function ($query) {
+            $query->where('id', $this->a);
+        });
+        $this->isFiltered = true;
+        if ($coursesQuery->count() === 0) {
+            $mensaje = "No te has matriculado en cursos de este nivel. ¡A que esperas, tenemos los mejores cursos! ¡Matriculate ya!";
+        }
+    }
+    
+    if (!is_null($this->f)) {
+        $coursesQuery->whereHas('category', function ($query) {
+            $query->where('id', $this->f);
+        });
+        $this->isFiltered = true;
+        if ($coursesQuery->count() === 0) {
+            $mensaje = "No te has matriculado en cursos de esta categoría. ¡A que esperas, tenemos los mejores cursos! ¡Matriculate ya!";
+        }
+    }
+
+    if (!is_null($this->p)) {
+        $coursesQuery->whereHas('price', function ($query) {
+            $query->where('id', $this->p);
+        });
+        $this->isFiltered = true;
+        if ($coursesQuery->count() === 0) {
+            $mensaje = "No te has matriculado en cursos en este rango de precios. ¡A que esperas, tenemos los mejores cursos! ¡Matriculate ya!";
+        }
+    }
+
+    $courses = $this->isFiltered ? $coursesQuery->latest('id')->get() : $coursesQuery->latest('id')->paginate(8)->withQueryString();
+
+    return view('livewire.course-matriculados', compact('levels', 'categories', 'prices', 'courses', 'mensaje'));
+}
+
     
     public function filterLevels()
     {
