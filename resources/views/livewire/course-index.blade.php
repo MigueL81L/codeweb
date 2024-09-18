@@ -3,9 +3,9 @@
     <div class="bg-gray-200 py-4 mb-16">  
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex"> 
 
-            <div class="grid grid-cols-6 gap-x-4">
+            <div class="grid grid-cols-3 gap-x-4">
                 <!-- Filtro por Precio -->
-                <div class="col-span-2">
+                <div class="col-span-1">
                     <form wire:submit.prevent="filterPrices" class="flex items-center justify-end space-x-4">
                         <div>
                             <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 border-gray-300 rounded-lg">
@@ -17,7 +17,7 @@
                         </div>
                         
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            <i class="fas fa-dollar-sign text-xs mr-2"></i>  
+                            <i class="fas fa-euro-sign text-xs mr-2"></i>  
                             Filtrar
                         </button>
                     </form>
@@ -25,7 +25,7 @@
 
 
                 <!-- Filtro por Categoría -->
-                <div class="col-span-2">
+                <div class="col-span-1">
                     <form wire:submit.prevent="filterCategories" class="flex items-center justify-end space-x-4">
                         <div>
                             <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 rounded-lg">
@@ -44,7 +44,7 @@
                 </div>
 
                 <!-- Filtro por Nivel -->
-                <div class="col-span-2">
+                <div class="col-span-1">
                     <form wire:submit.prevent="filterLevels" class="flex items-center justify-end space-x-4">
                         <div>
                             <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 rounded-lg">
