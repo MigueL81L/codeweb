@@ -18,7 +18,7 @@
                         
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             <i class="fas fa-dollar-sign text-xs mr-2"></i>  
-                            Filtrar por Precios
+                            Filtrar
                         </button>
                     </form>
                 </div>
@@ -38,7 +38,7 @@
                         
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             <i class="fas fa-th-list text-xs mr-2"></i>  
-                            Filtrar por Categorías
+                            Filtrar
                         </button>
                     </form>
                 </div>
@@ -57,13 +57,13 @@
                         
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             <i class="fas fa-filter text-xs mr-2"></i>  
-                            Filtrar por Niveles
+                            Filtrar
                         </button>
                     </form>
                 </div>
 
             </div>
-            
+
         </div>
     </div>
 
