@@ -69,51 +69,114 @@ class ManageLessons extends Component
         ];
     }
 
+    // public function store()
+    // {
+    //     Log::info('Método store iniciado');
+    //     $this->validate();
+
+    //     $lessonData = [
+    //         'name' => $this->lessonCreate['name'],
+    //         'description' => $this->lessonCreate['description'],
+    //         'platform' => $this->lessonCreate['platform'],
+    //         'section_id' => $this->section->id,
+    //     ];
+
+    //     try {
+    //         Log::info('Intentando guardar la lección con los datos: ' . json_encode($lessonData));
+    //         if ($this->lessonCreate['document'] instanceof UploadedFile) {
+    //             $path = $this->lessonCreate['document']->store('courses/documents', 'public');
+    //             $lessonData['document_path'] = $path;
+    //             $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
+    //             Log::info('Documento subido: ' . $path);
+    //         }
+
+    //         if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
+    //             $path = $this->video->store('courses/lessons', 'public');
+    //             $lessonData['video_path'] = $path;
+    //             $lessonData['video_original_name'] = $this->video->getClientOriginalName();
+    //             Log::info('Video subido: ' . $lessonData['video_path']);
+    //         } elseif ($lessonData['platform'] == 2) {
+    //             $lessonData['video_path'] = null;
+    //             $lessonData['video_original_name'] = $this->url;
+    //             Log::info('Se está utilizando URL de YouTube: ' . $this->url);
+    //         }
+
+    //         Lesson::create($lessonData);
+    //         Log::info('Lección creada correctamente.');
+
+    //         $this->reset(['url', 'lessonCreate', 'video', 'document']);
+    //         $this->getLessons();
+    //         // $this->emit('refreshOrderLessons');
+
+    //     } catch (\Exception $e) {
+    //         Log::error('Error al guardar la lección: ' . $e->getMessage());
+    //         // $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
+    //         session()->flash('error', 'Error al guardar la lección: ' . $e->getMessage());
+    //     }
+    // }
+
+
     public function store()
-    {
-        Log::info('Método store iniciado');
-        $this->validate();
+{
+    Log::info('Método store iniciado');
+    $this->validate();
 
-        $lessonData = [
-            'name' => $this->lessonCreate['name'],
-            'description' => $this->lessonCreate['description'],
-            'platform' => $this->lessonCreate['platform'],
-            'section_id' => $this->section->id,
-        ];
+    // Inicializar data de la lección
+    $lessonData = [
+        'name' => $this->lessonCreate['name'],
+        'description' => $this->lessonCreate['description'],
+        'platform' => $this->lessonCreate['platform'],
+        'section_id' => $this->section->id,
+        // Asegúrate de asignar valores por defecto para evitar NULL
+        'document_path' => null,
+        'video_path' => null,
+        'video_original_name' => null,
+    ];
 
-        try {
-            Log::info('Intentando guardar la lección con los datos: ' . json_encode($lessonData));
-            if ($this->lessonCreate['document'] instanceof UploadedFile) {
-                $path = $this->lessonCreate['document']->store('courses/documents', 'public');
-                $lessonData['document_path'] = $path;
-                $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
-                Log::info('Documento subido: ' . $path);
-            }
+    try {
+        Log::info('Intentando guardar la lección con los datos: ' . json_encode($lessonData));
+        
+        // Procesar el documento
+        if ($this->lessonCreate['document'] instanceof UploadedFile) {
+            $path = $this->lessonCreate['document']->store('courses/documents', 'public');
+            $lessonData['document_path'] = $path;
+            $lessonData['document_original_name'] = $this->lessonCreate['document']->getClientOriginalName();
+            Log::info('Documento subido: ' . $path);
+        }
 
-            if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
-                $path = $this->video->store('courses/lessons', 'public');
+        // Procesar el video
+        if ($this->lessonCreate['platform'] == 1 && $this->video instanceof UploadedFile) {
+            // Almacenar el video y verificar la asignación
+            $path = $this->video->store('courses/lessons', 'public');
+            if ($path) { // Verificar que se haya almacenado correctamente
                 $lessonData['video_path'] = $path;
                 $lessonData['video_original_name'] = $this->video->getClientOriginalName();
                 Log::info('Video subido: ' . $lessonData['video_path']);
-            } elseif ($lessonData['platform'] == 2) {
-                $lessonData['video_path'] = null;
-                $lessonData['video_original_name'] = $this->url;
-                Log::info('Se está utilizando URL de YouTube: ' . $this->url);
+            } else {
+                Log::warning('No se pudo guardar el video.');
             }
-
-            Lesson::create($lessonData);
-            Log::info('Lección creada correctamente.');
-
-            $this->reset(['url', 'lessonCreate', 'video', 'document']);
-            $this->getLessons();
-            // $this->emit('refreshOrderLessons');
-
-        } catch (\Exception $e) {
-            Log::error('Error al guardar la lección: ' . $e->getMessage());
-            // $this->dispatchBrowserEvent('notify', ['message' => 'Error: ' . $e->getMessage()]);
-            session()->flash('error', 'Error al guardar la lección: ' . $e->getMessage());
+        } elseif ($this->lessonCreate['platform'] == 2) {
+            $lessonData['video_path'] = null; // No hay video en el caso de YouTube
+            $lessonData['video_original_name'] = $this->url;
+            Log::info('Se está utilizando URL de YouTube: ' . $this->url);
         }
+
+        // Crear la lección en la base de datos
+        Lesson::create($lessonData);
+        Log::info('Lección creada correctamente.');
+
+        // Resetear los campos después de crear
+        $this->reset(['lessonCreate', 'video', 'document', 'url']);
+        
+        // Obtener las lecciones otra vez para asegurar que la vista esté actualizada
+        $this->getLessons();
+
+    } catch (\Exception $e) {
+        Log::error('Error al guardar la lección: ' . $e->getMessage());
+        session()->flash('error', 'Error al guardar la lección: ' . $e->getMessage());
     }
+}
+
     
     public function edit($lessonId)
     {
