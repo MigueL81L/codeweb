@@ -116,6 +116,22 @@
         <form wire:submit.prevent="store" class="mt-4 bg-white rounded-lg shadow-lg" x-show="open" x-transition x-cloak enctype="multipart/form-data">
             <div class="p-6">
 
+                <div class="mb-2">
+                    <x-label>Nombre</x-label>
+                    <x-input wire:model="lessonCreate.name" class="w-full" placeholder="Ingrese el nombre de la Lección" />
+                    <x-input-error for="lessonCreate.name" />
+                </div>
+                <div class="mt-2">
+                    <x-label>Descripción</x-label>
+                    <x-textarea wire:model="lessonCreate.description" class="w-full" placeholder="Ingrese la descripción de la lección" />
+                    <x-input-error for="lessonCreate.description" />  
+                </div>
+                <div class="mt-2">
+                    <x-label>Documento (PDF)</x-label>
+                    <x-input type="file" wire:model="lessonCreate.document" accept=".pdf" class="w-full" />
+                    <x-input-error for="lessonCreate.document" />
+                </div>
+
                 <div class="mt-2">
                     <x-label class="mb-1">Plataformas</x-label>  
                     <div class="md:flex md:items-center md:space-x-4 space-y-4 md:space-y-0">
@@ -140,30 +156,7 @@
                     </div>
                 </div>
 
-
-
-                <div class="mb-2">
-                    <x-label>Nombre</x-label>
-                    <x-input wire:model="lessonCreate.name" class="w-full" placeholder="Ingrese el nombre de la Lección" />
-                    <x-input-error for="lessonCreate.name" />
-                </div>
-                <div class="mt-2">
-                    <x-label>Descripción</x-label>
-                    <x-textarea wire:model="lessonCreate.description" class="w-full" placeholder="Ingrese la descripción de la lección" />
-                    <x-input-error for="lessonCreate.description" />  
-                </div>
-                <div class="mt-2">
-                    <x-label>Documento (PDF)</x-label>
-                    <x-input type="file" wire:model="lessonCreate.document" accept=".pdf" class="w-full" />
-                    <x-input-error for="lessonCreate.document" />
-                </div>
-
             </div>
-
-
-
-
-
 
             <div class="flex justify-end px-6 py-4 bg-gray-100">
                 <x-danger-button x-on:click="open = false">Cancelar</x-danger-button>
