@@ -143,13 +143,13 @@
                     </div>
                     <div class="mt-2" x-show="platform == 1" x-cloak>
                         <x-label>Video</x-label>
-                        <x-input type="file" wire:model="video" accept="video/*" class="w-full" />
-                        <x-input-error for="video" />
+                        <x-input type="file" wire:model="lessonCreate.video" accept="video/*" class="w-full" />
+                        <x-input-error for="lessonCreate.video" />
                     </div>
                     <div class="mt-2" x-show="platform == 2" x-cloak>
                         <x-label>Video YouTube</x-label>
-                        <x-input wire:model="url" placeholder="Ingrese la URL de YouTube" class="w-full" />
-                        <x-input-error for="url" />  
+                        <x-input wire:model="lessonCreate.url" placeholder="Ingrese la URL de YouTube" class="w-full" />
+                        <x-input-error for="lessonCreate.url" />  
                     </div>
                 </div>
             </div>

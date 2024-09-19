@@ -133,8 +133,11 @@ class ManageLessons extends Component
         'description' => $this->lessonCreate['description'],
         'platform' => $this->lessonCreate['platform'],
         'section_id' => $this->section->id,
+        
         // Asegúrate de asignar valores por defecto para evitar NULL
         'document_path' => null,
+        'document_original_name' => null,
+
         'video_path' => null,
         'video_original_name' => null,
     ];
