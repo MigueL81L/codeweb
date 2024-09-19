@@ -91,7 +91,8 @@ class ManageLessons extends Component
             }
 
             if ($lessonData['platform'] == 1 && $this->video instanceof UploadedFile) {
-                $lessonData['video_path'] = $this->video->store('courses/lessons', 'public');
+                $path = $this->video->store('courses/lessons', 'public');
+                $lessonData['video_path'] = $path;
                 $lessonData['video_original_name'] = $this->video->getClientOriginalName();
                 Log::info('Video subido: ' . $lessonData['video_path']);
             } elseif ($lessonData['platform'] == 2) {
