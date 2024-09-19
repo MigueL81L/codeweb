@@ -125,6 +125,13 @@ class ManageLessons extends Component
     public function store()
 {
     Log::info('Método store iniciado');
+
+    // Análisis de la finalización de carga del archivo de video
+    if ($this->lessonCreate['platform'] == 1 && empty($this->lessonCreate['video'])) {
+        session()->flash('upload_error', 'Por favor, adjunte el archivo de video antes de guardar.');
+        return;
+    }
+
     $this->validate();
 
     // Inicializar data de la lección
@@ -133,7 +140,7 @@ class ManageLessons extends Component
         'description' => $this->lessonCreate['description'],
         'platform' => $this->lessonCreate['platform'],
         'section_id' => $this->section->id,
-        
+
         // Asegúrate de asignar valores por defecto para evitar NULL
         'document_path' => null,
         'document_original_name' => null,

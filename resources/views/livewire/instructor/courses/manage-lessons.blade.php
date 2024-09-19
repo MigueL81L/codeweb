@@ -161,7 +161,9 @@
             <div class="flex justify-end px-6 py-4 bg-gray-100">
                 <x-danger-button x-on:click="open = false">Cancelar</x-danger-button>
                 <div class="ml-2">
-                    <x-button>Guardar</x-button>
+                    {{-- <x-button>Guardar</x-button> --}}
+                    <x-button wire:click="store" x-bind:disabled="(platform == 1 && !lessonCreate.video) || (platform == 2 && !lessonCreate.url)">Guardar</x-button>
+
                 </div>
             </div>
         </form>
