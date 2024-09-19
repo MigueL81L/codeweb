@@ -90,8 +90,7 @@
                                     Video: 
                                     @if($lesson->platform == 1 && $lesson->video_path)
                                         <a href="{{ Storage::url($lesson->video_path) }}" class="text-blue-600" target="_blank">
-                                            {{-- {{ $lesson->video_original_name }} --}}
-                                            Visionar video adjuntado
+                                            {{ $lesson->video_original_name }}
                                         </a>
                                     @elseif($lesson->platform == 2)
                                         <a href="{{ $lesson->video_original_name }}" class="text-blue-600" target="_blank">
