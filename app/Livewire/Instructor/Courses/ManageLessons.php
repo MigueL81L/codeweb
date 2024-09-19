@@ -64,6 +64,9 @@ class ManageLessons extends Component
 
     public function rules()
     {
+
+        Log::info('Validación iniciada');
+
         return [
             'lessonCreate.name' => ['required', new UniqueLessonCourse($this->section->course_id)],
             'lessonCreate.platform' => 'required|in:1,2',
@@ -73,6 +76,7 @@ class ManageLessons extends Component
 
             'lessonEdit.video' => 'nullable|file|mimes:mp4|max:256000',
         ];
+
     }
 
     // public function store()
@@ -126,12 +130,6 @@ class ManageLessons extends Component
 {
     Log::info('Método store iniciado');
 
-    // Análisis de la finalización de carga del archivo de video
-    if ($this->lessonCreate['platform'] == 1 && empty($this->lessonCreate['video'])) {
-        session()->flash('upload_error', 'Por favor, adjunte el archivo de video antes de guardar.');
-        return;
-    }
-
     $this->validate();
 
     // Inicializar data de la lección
@@ -174,7 +172,7 @@ class ManageLessons extends Component
         } elseif ($this->lessonCreate['platform'] == 2) {
             $lessonData['video_path'] = null; // No hay video en el caso de YouTube
             $lessonData['video_original_name'] = $this->lessonCreate['url'];
-            Log::info('Se está utilizando URL de YouTube: ' . $this->url);
+            Log::info('Se está utilizando URL de YouTube: ' . $this->lessonCreate['url']);
         }
 
         // Crear la lección en la base de datos
