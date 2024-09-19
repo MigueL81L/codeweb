@@ -105,7 +105,7 @@ class ManageLessons extends Component
 
             $this->reset(['url', 'lessonCreate', 'video', 'document']);
             $this->getLessons();
-            $this->emit('refreshOrderLessons');
+            // $this->emit('refreshOrderLessons');
 
         } catch (\Exception $e) {
             Log::error('Error al guardar la lección: ' . $e->getMessage());
@@ -209,7 +209,7 @@ class ManageLessons extends Component
         }
         Log::info('Lecciones ordenadas exitosamente.');
         $this->getLessons();
-        $this->emit('refreshOrderLessons');
+        // $this->emit('refreshOrderLessons');
     }
 
     public function destroy($lessonId)
@@ -237,7 +237,7 @@ class ManageLessons extends Component
 
             // Actualizar las lecciones en la interfaz tras la eliminación
             $this->getLessons();
-            $this->emit('refreshOrderLessons');
+            // $this->emit('refreshOrderLessons');
 
         } catch (\Exception $e) {
             // Captura de excepciones para error 500
