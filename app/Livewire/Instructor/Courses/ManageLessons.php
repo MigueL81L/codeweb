@@ -26,6 +26,9 @@ class ManageLessons extends Component
         'platform' => 1,
         'description' => null,
         'document' => null,
+
+        'video' => null,
+        'url' => null,
     ];
 
     public $lessonEdit = [
@@ -66,6 +69,9 @@ class ManageLessons extends Component
             'lessonCreate.platform' => 'required|in:1,2',
             'lessonCreate.description' => 'nullable|string',
             'lessonCreate.document' => 'nullable|file|mimes:pdf|max:2048',
+
+
+            'lessonEdit.video' => 'nullable|file|mimes:mp4|max:256000',
         ];
     }
 
@@ -145,19 +151,19 @@ class ManageLessons extends Component
         }
 
         // Procesar el video
-        if ($this->lessonCreate['platform'] == 1 && $this->video instanceof UploadedFile) {
+        if ($this->lessonCreate['platform'] == 1 && $this->lessonCreate['video'] instanceof UploadedFile) {
             // Almacenar el video y verificar la asignación
-            $path = $this->video->store('courses/lessons', 'public');
+            $path = $this->lessonCreate['video']->store('courses/lessons', 'public');
             if ($path) { // Verificar que se haya almacenado correctamente
                 $lessonData['video_path'] = $path;
-                $lessonData['video_original_name'] = $this->video->getClientOriginalName();
+                $lessonData['video_original_name'] = $this->lessonCreate['video']->getClientOriginalName();
                 Log::info('Video subido: ' . $lessonData['video_path']);
             } else {
                 Log::warning('No se pudo guardar el video.');
             }
         } elseif ($this->lessonCreate['platform'] == 2) {
             $lessonData['video_path'] = null; // No hay video en el caso de YouTube
-            $lessonData['video_original_name'] = $this->url;
+            $lessonData['video_original_name'] = $this->lessonCreate['url'];
             Log::info('Se está utilizando URL de YouTube: ' . $this->url);
         }
 
