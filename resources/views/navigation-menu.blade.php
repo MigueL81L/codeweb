@@ -90,7 +90,15 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
 
-                <!-- Settings Dropdown -->
+                <div>
+                    <a href="{{route('cart.index')}}">
+                        <i class="fa-solid fa-cart-shopping text-xl text-gray-600"></i>
+                    </a>
+                </div>
+
+
+
+                <!-- Settings Dropdown. Acordeón del perfil -->
                 <div class="ms-3 relative">
                     @auth
                             <x-dropdown align="right" width="48">
