@@ -52,6 +52,8 @@ class CourseEnrolled extends Component
 
         //El item nunca existió/ya no existe en el carrito, entonces lo agrega
         $this->addCart();
+
+        return redirect()->route('cart.index');
     }
 
 

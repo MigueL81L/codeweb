@@ -99,7 +99,7 @@
 
                         <span 
                             x-text="count"
-                            class="absolute -top-4 -right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-blue-100 bg-blue-500 rounded-full">
+                            class="absolute top-2 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-blue-100 bg-blue-500 rounded-full">
 
                         </span>
                     </a>
@@ -108,7 +108,7 @@
 
 
                 <!-- Settings Dropdown. Acordeón del perfil -->
-                <div class="ms-6 relative">
+                <div class="ms-5 relative">
                     @auth
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
