@@ -108,7 +108,7 @@
 
 
                 <!-- Settings Dropdown. Acordeón del perfil -->
-                <div class="ms-5 relative">
+                <div class="ms-8 relative">
                     @auth
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
