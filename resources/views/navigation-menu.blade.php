@@ -92,7 +92,8 @@
 
                 <div class="relative"
                 x-data="{
-                    { count: {{ \CodersFree\Shoppingcart\Facades\Cart::instance('shopping')->count() }} }
+                    {{-- { count: {{ \CodersFree\Shoppingcart\Facades\Cart::instance('shopping')->count() }} } --}}
+                    count: {{Cart::instance('shopping')->count() }} 
                 }"
                 x-on:cart-updated.window="count= $event.detail[0]">
                 <!--Escuchando en alpine un evento definido en livewire-->
