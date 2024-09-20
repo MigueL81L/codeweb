@@ -92,7 +92,7 @@
 
                 <div class="relative"
                 x-data="{
-                    count: 2
+                    count:{{Cart::instance('shopping')->count()}}
                 }">
                     <a href="{{route('cart.index')}}">
                         <i class="fa-solid fa-cart-shopping text-xl text-gray-600"></i>
