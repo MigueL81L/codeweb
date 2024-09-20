@@ -93,7 +93,11 @@
                 <div class="relative"
                 x-data="{
                     count:{{Cart::instance('shopping')->count()}}
-                }">
+                }"
+                x-on:cart-updated.window="count= $event.detail[0]">
+                <!--Escuchando en alpine un evento definido en livewire-->
+                <!--$event.detail[0] es el número de items contenidos en el carrito-->
+
                     <a href="{{route('cart.index')}}">
                         <i class="fa-solid fa-cart-shopping text-xl text-gray-600"></i>
 

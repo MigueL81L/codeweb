@@ -29,6 +29,9 @@ class CourseEnrolled extends Component
                 'teache'=>$this->course->teacher->name,
             ]
         ]);
+
+        //Añado evento que se disparará, y contará el item añadido al carrito
+        $this->dispatch('cart-updated', Cart::count());
     }
 
     //Método para eliminar un item del carrito
@@ -44,6 +47,9 @@ class CourseEnrolled extends Component
             Cart::remove($itemCart->rowId);
         }
         //Si no existe el item en el carrito, no hace nada
+
+        //Añado evento que se dispará y restará item del carrito
+        $this->dispatch('cart-updated', Cart::count());
     }
 
     public function buyNow(){
