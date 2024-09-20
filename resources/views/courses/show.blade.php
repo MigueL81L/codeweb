@@ -132,7 +132,7 @@
                     <!--LLamada al componenete carrito de la compra y sus botones-->
                     <!--Deberían sustituir al "LLevar este curso", deberían tener el precio encima-->
                             
-                    @livewire('course-enrolled', ['course' => $course])
+                    {{-- @livewire('course-enrolled', ['course' => $course]) --}}
 
 
                 </div>
