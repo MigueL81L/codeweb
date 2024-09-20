@@ -97,9 +97,11 @@
                     <a href="{{route('cart.index')}}">
                         <i class="fa-solid fa-cart-shopping text-xl text-gray-600"></i>
 
+                        <!--si count es =0, es como si fuera false-->
                         <span 
+                            x-show="count" 
                             x-text="count"
-                            class="absolute -top-8 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-blue-100 bg-blue-500 rounded-full">
+                            class="absolute -top-8 right-0 inline-flex items-center justify-center w-2 py-1 text-xs font-bold text-blue-100 bg-blue-500 rounded-full">
 
                         </span>
                     </a>
