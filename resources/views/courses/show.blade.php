@@ -118,6 +118,12 @@
                             <a class="btn btn-danger btn-block mt-4" href="{{route('courses.status', $course)}}">
                                 Continuar con el curso
                             </a>
+
+
+                            <!--LLamada al componenete carrito de la compra y sus botones-->
+                            <!--Deberían sustituir al "LLevar este curso", deberían tener el precio encima-->
+                            
+                            {{-- @livewire('course-enrolled', ['course' => $course]) --}}
                          
                     @else
                             {{--Le paso la ruta de matriculación, y el objeto curso a matricular--}}

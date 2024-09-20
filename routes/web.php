@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Instructor\CourseController;
 use App\Http\Controllers\Admin\UserController;
 use App\Models\Lesson;
@@ -35,14 +36,14 @@ Route::get('cursos', [CourseController::class, 'list'])->name('courses.index');
 
 Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
 
-
 //Ruta para mostrar al usuario, solo los cursos en los que está matriculado
 Route::get('courses', [CourseController::class, 'matriculados'])->name('courses.matriculados');
-
 
 });
 
 
+//Ruta del carrito de la compra. En que grupo de rutas va?
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
 
 //Rutas de matriculación de usuarios, método enrolled responsable matriculación
