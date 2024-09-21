@@ -35,7 +35,7 @@
 
     <!--Carrito + siguiente nivel -->
         <button 
-            wire:key="buyNow"
+            wire:key="enrolled"
             wire:click="buyNow"
             class="btn btn-red w-full uppercase">
                 Comprar ahora
