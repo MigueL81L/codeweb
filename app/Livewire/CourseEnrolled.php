@@ -62,6 +62,10 @@ class CourseEnrolled extends Component
         return redirect()->route('cart.index');
     }
 
+    public function enrolled(){
+        dd('enrolled');
+    }
+
 
     public function render()
     {
