@@ -30,11 +30,7 @@
                 Comprar ahora
         </button>
 
-
-
-
-
-        <div class="container mx-auto py-6">
+        {{-- <div class="container mx-auto py-6">
             <h1 class="text-2xl font-semibold mb-4">Contenido del Carrito de Prueba</h1>
         
             @if($cartContent->isEmpty())
@@ -69,7 +65,7 @@
                     @endforeach
                 </div>
             @endif
-        </div>
+        </div> --}}
         
 </div>
 

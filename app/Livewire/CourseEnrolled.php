@@ -26,7 +26,7 @@ class CourseEnrolled extends Component
             'options'=>[
                 'slug'=>$this->course->slug,
                 'image'=>$this->course->image,
-                'teache'=>$this->course->teacher->name,
+                'teacher'=>$this->course->teacher->name,
             ]
         ]);
 
@@ -65,8 +65,9 @@ class CourseEnrolled extends Component
 
     public function render()
     {
-        $cartContent = Cart::content(); // Obtener el contenido del carrito
+        // $cartContent = Cart::content(); // Obtener el contenido del carrito
+        // return view('livewire.course-enrolled', compact('cartContent'));
 
-        return view('livewire.course-enrolled', compact('cartContent'));
+        return view('livewire.course-enrolled');
     }
 }
