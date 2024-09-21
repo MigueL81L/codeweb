@@ -111,23 +111,21 @@
                         <div class="ml-4">
                             <h1 class="font-bold text-gray-500">Prof. {{$course->teacher->name}}</h1>
                             <a class="text-blue-400 text-sm font-bold" href="{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a>
-                        </div>
-                        <div>
-                            <h1 class="font-bold text-gray-500">{{$course->price->value}} €</h1>
+                            <h1 class="font-bold text-gray-500 text-2xl">{{$course->price->value}} €</h1>
                         </div>
                     </div>
-                    
+
                     <div>
                         @can('enrolled', $course)
 
-                            <a class="btn btn-danger btn-block mt-4" href="{{route('courses.status', $course)}}">
+                            <a class="btn btn-danger btn-block mt-4 mb-2" href="{{route('courses.status', $course)}}">
                                 Continuar con el curso
                             </a>
                         @else
                         {{--Le paso la ruta de matriculación, y el objeto curso a matricular--}}
                             <form action="{{route('course.enrolled', $course)}}" method="post">
                                 @csrf {{--token csrf necesario para enviar datos por formulario--}}
-                                <button class="btn btn-danger btn-block mt-4" type="submit">
+                                <button class="btn btn-danger btn-block mt-4 mb-2" type="submit">
                                     LLevar este Curso
                                 </button>
                             </form>
