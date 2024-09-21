@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 //Paquete carrito de compra traido de github
-use CodersFree\Shoppingcart\Facades\Cart; 
+use CodersFree\Shoppingcart\Facades\Cart;  
 use Livewire\Component;
 
 class CourseEnrolled extends Component
@@ -16,7 +16,7 @@ class CourseEnrolled extends Component
         Cart::instance('shopping');
         Cart::add([
             'id'=>$this->course->id,
-            'name'=>$this->course->name,
+            'name'=>$this->course->title,
 
             //Hay que ver este parámetro como se define
             'qty'=>1,
@@ -65,6 +65,8 @@ class CourseEnrolled extends Component
 
     public function render()
     {
-        return view('livewire.course-enrolled');
+        $cartContent = Cart::content(); // Obtener el contenido del carrito
+        return view('cart.test', compact('cartContent'));
+        // return view('livewire.course-enrolled');
     }
 }

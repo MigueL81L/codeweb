@@ -53,7 +53,7 @@ Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])
 
 //Ruta para el control de avance del curso
 Route::get('course-status/{course}', function (Course $course) {
-    return view('courses.status', ['course' => $course]);
+    return view('courses.status', ['course' => $course]); 
 })->name('courses.status')->middleware('auth');
 
 

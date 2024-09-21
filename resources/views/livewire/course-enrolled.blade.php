@@ -9,7 +9,7 @@
         <button 
             wire:key="removeCart"
             wire:click="removeCart"
-            class="btn btn-blue w-full uppercase mb-2">
+            class="btn btn-blue w-full uppercase mb-2"> 
                 Eliminar de la cesta
         </button>
     @else
