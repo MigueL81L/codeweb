@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Enums\CourseStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 
 class Course extends Model
@@ -120,10 +122,16 @@ class Course extends Model
         );
     }
 
+    //Método accesor para encontrar la fecha que el user compra el course
+    public function dateOfAcquisition()
+    {
+        $record = DB::table('course_user')
+            ->where('course_id', $this->id)
+            ->where('user_id', auth()->id())
+            ->first();
 
-
-
-
+        return $record ? Carbon::parse($record->created_at) : null;
+    }
 
     //Métodos para relacionar a nivel de modelo las tablas. En esta tabla 
     //son relaciones Uno a Muchos inversa
@@ -159,7 +167,8 @@ class Course extends Model
     //Relación Muchos a Muchos
     public function students()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'course_user', 'course_id', 'user_id')
+                ->withTimestamps();
     }
 
     // Método de relación polimórfica para las imágenes

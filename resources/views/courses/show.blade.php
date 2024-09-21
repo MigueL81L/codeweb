@@ -111,32 +111,41 @@
                         <div class="ml-4">
                             <h1 class="font-bold text-gray-500">Prof. {{$course->teacher->name}}</h1>
                             <a class="text-blue-400 text-sm font-bold" href="{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a>
-                            <h1 class="font-bold text-gray-500 text-2xl">{{$course->price->value}} €</h1>
                         </div>
                     </div>
 
-                    <div>
+                    <div> 
+                        <!--Policy CoursePolicy, método enrolled-->
                         @can('enrolled', $course)
-
-                            <a class="btn btn-danger btn-block mt-4 mb-2" href="{{route('courses.status', $course)}}">
-                                Continuar con el curso
-                            </a>
+                        <p class="flex items-center mb-1">
+                            <svg class="fill-current h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-6h2v6zm0-8h-2V7h2v4z"/>
+                            </svg>
+                            
+                            <span class="font-semibold">
+                                @if($date = $course->dateOfAcquisition())
+                                    Adquirido el {{ $date->format('d/m/Y') }}
+                                @else
+                                    Fecha de adquisición no disponible
+                                @endif
+                            </span>
+                        </p>
+                        <a class="btn btn-danger btn-block mt-4 mb-2" href="{{route('courses.status', $course)}}">
+                            Continuar con el curso
+                        </a>
                         @else
-                        {{--Le paso la ruta de matriculación, y el objeto curso a matricular--}}
-                            <form action="{{route('course.enrolled', $course)}}" method="post">
-                                @csrf {{--token csrf necesario para enviar datos por formulario--}}
+                            <!--LLamada al componenete carrito de la compra y sus botones-->
+                            <!--Deberían sustituir al "LLevar este curso", deberían tener el precio encima-->
+                            <h1 class="font-bold text-gray-500 text-2xl">{{$course->price->value}} €</h1>
+                            @livewire('course-enrolled', ['course' => $course])
+                            {{-- <form action="{{route('course.enrolled', $course)}}" method="post">
+                                @csrf 
                                 <button class="btn btn-danger btn-block mt-4 mb-2" type="submit">
-                                    LLevar este Curso
+                                    Inscribirse en este Curso
                                 </button>
-                            </form>
+                            </form> --}}
 
                         @endcan
-
-                        <!--LLamada al componenete carrito de la compra y sus botones-->
-                        <!--Deberían sustituir al "LLevar este curso", deberían tener el precio encima-->
-                            
-                        @livewire('course-enrolled', ['course' => $course])
-
                     </div>
                 </div>
             </section>

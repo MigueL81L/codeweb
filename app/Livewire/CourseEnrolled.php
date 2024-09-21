@@ -63,7 +63,11 @@ class CourseEnrolled extends Component
     }
 
     public function enrolled(){
-        dd('enrolled');
+        //Esta el usuario autenticado?
+        if(auth()->check()){
+            $this->course->students()->attach(auth()->user()->id);
+        }
+        return redirect()->route('courses.status', $this->course);
     }
 
 

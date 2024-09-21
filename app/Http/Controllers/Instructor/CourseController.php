@@ -226,7 +226,7 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         // Verifica si el usuario tiene permiso y es el creador del curso
-        if (Gate::denies('Eliminar cursos') || $course->user_id !== auth()->id()) {
+        if (Gate::denies('Eliminar cursos') || $course->user_id !== auth()->id()) { 
             abort(403, 'Unauthorized action.');
         }
         
@@ -287,12 +287,10 @@ class CourseController extends Controller
     
 
     //Método de matriculación
-    public function enrolled(Course $course){
-        //Para introducir un nuevo registro en la tabla course_user, uso el método attach
-        //Ingreso el user que está ahora mismo loggeado
-        $course->students()->attach(auth()->user()->id);
-        return redirect()->route('courses.status', $course);
-    }
+    // public function enrolled(Course $course){
+    //     $course->students()->attach(auth()->user()->id);
+    //     return redirect()->route('courses.status', $course);
+    // }
 
     //Método para llevar el curso
     public function status(Course $course){
