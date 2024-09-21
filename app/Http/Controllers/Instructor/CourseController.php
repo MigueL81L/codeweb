@@ -282,10 +282,6 @@ class CourseController extends Controller
         return redirect()->route('instructor.courses.index');
     }
     
-    
-    
-    
-
     //Método de matriculación
     // public function enrolled(Course $course){
     //     $course->students()->attach(auth()->user()->id);
