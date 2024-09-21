@@ -2,8 +2,8 @@
 <div>
     @if ($course->price->value==0)
         <button 
-            wire:key="enrolled"
-            wire:click="buyNow"
+            wire:key="free"
+            wire:click="enrolled"
             class="btn btn-red w-full uppercase">
                 Inscríbete ahora
         </button>      
