@@ -66,7 +66,7 @@ class CourseEnrolled extends Component
     public function render()
     {
         $cartContent = Cart::content(); // Obtener el contenido del carrito
-        return view('cart.test', compact('cartContent'));
-        // return view('livewire.course-enrolled');
+
+        return view('livewire.course-enrolled', compact('cartContent'));
     }
 }
