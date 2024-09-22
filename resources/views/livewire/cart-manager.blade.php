@@ -32,6 +32,14 @@
             </div>
         </div>
     @endif
+    
+    {{-- Mensaje de éxito tras compra si lo hay --}}
+    @if (session()->has('message'))
+        <div class="mt-4 bg-green-500 text-white p-4 rounded">
+            {{ session('message') }}
+        </div>
+    @endif
 </div>
+
 
 
