@@ -14,6 +14,9 @@ class CartManager extends Component
         // Elimina el curso del carrito usando su rowId
         Cart::instance('shopping')->remove($rowId);
         // No es necesario emitir un evento aquí porque el componente se re-renderiza automáticamente
+
+        //Añado evento que se disparará, y contará el item añadido al carrito
+        $this->dispatch('cart-updated', Cart::count());
     }
 
     public function checkout()
