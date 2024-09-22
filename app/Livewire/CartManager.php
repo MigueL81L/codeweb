@@ -13,9 +13,7 @@ class CartManager extends Component
     {
         // Elimina el curso del carrito usando su rowId
         Cart::instance('shopping')->remove($rowId);
-
-        // Refresca el componente
-        $this->emit('cart-updated', Cart::count());
+        // No es necesario emitir un evento aquí porque el componente se re-renderiza automáticamente
     }
 
     public function checkout()
@@ -23,7 +21,7 @@ class CartManager extends Component
         // Verifica si el usuario está autenticado
         if (auth()->check()) {
             $cartContent = Cart::instance('shopping')->content();
-            
+
             foreach ($cartContent as $item) {
                 $courseId = $item->id;
                 $course = Course::find($courseId); // Obtener el curso por ID
@@ -48,7 +46,6 @@ class CartManager extends Component
     public function render()
     {
         $cartContent = Cart::instance('shopping')->content();
-
         return view('livewire.cart-manager', compact('cartContent'));
     }
 }
