@@ -58,7 +58,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="flex flex-col items-center text-center sm:items-start sm:text-left">
+                <div class="flex flex-col sm:items-start sm:text-left md:items-center md:text-center">
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Compañía</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
