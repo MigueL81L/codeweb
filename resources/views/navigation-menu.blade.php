@@ -199,7 +199,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    {{-- <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @foreach ($links as $item)
 
@@ -231,10 +231,61 @@
                         @endif
 
                 @endforeach
+        </div> --}}
+
+        <!-- Responsive Navigation Menu -->
+        <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
+            <div class="flex justify-between items-center px-4 py-3 border-t border-gray-200">
+                <div class="flex space-x-4">
+                    <!-- Navigation Links -->
+                    @foreach ($links as $item)
+                        @php
+                        $canView = false; 
+
+                        if (Auth::check()) {
+                            switch ($item['name']) {
+                                case 'Panel de Control':
+                                    $canView = Auth::user()->hasPermissionTo('Ver dashboard');
+                                    break;
+                                case 'Creación de Cursos':
+                                    $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
+                                    break;
+                                case 'Tus Cursos':
+                                    $canView = true; // Asegúrate que para estudiantes esté siempre visible
+                                    break;
+                                default:
+                                    $canView = true;
+                                    break;
+                            }
+                        }
+                        @endphp
+
+                        @if ($canView)
+                            <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                                {{ $item['name'] }}
+                            </x-responsive-nav-link>
+                        @endif
+                    @endforeach
+                </div>
+
+                <!-- User Icon Placeholder -->
+                <div class="relative">
+                    <button class="inline-flex items-center justify-center p-2 rounded-full bg-gray-500 text-white focus:outline-none">
+                        <span class="text-xl font-medium leading-none">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dropdown for user actions like Profile & Logout (currently blank for conditional display) -->
+            <div :class="{ 'block': open, 'hidden': ! open }" class="hidden px-4 py-3">
+                <div class="border-t border-gray-200 my-2"></div>
+                <!-- Here you can later add dropdown interaction logic -->
+            </div>
         </div>
 
+
         <!-- Responsive Settings Options -->
-        @auth
+        {{-- @auth
             <div class="pt-4 pb-1 border-t border-gray-200">
                 
                     <div class="flex items-center px-4">
@@ -270,7 +321,8 @@
 
                     </div>
             </div>
-        @endauth
+        @endauth --}}
+
     </div>
 </nav>
 
