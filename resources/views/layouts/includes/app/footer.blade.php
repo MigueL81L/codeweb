@@ -44,7 +44,7 @@
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8"> 
         <div class="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-start md:justify-between">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-16 sm:gap-12 flex-grow w-full sm:w-auto">
-                <div class="sm:mb-0 md:mb-12 flex justify-center w-full sm:w-auto">
+                <div class="sm:mb-6 flex justify-center w-full sm:w-auto">
                     <x-application-mark class="h-8 mr-3" />
                 </div>
                 <div class="flex flex-col sm:items-start sm:text-left md:items-center md:text-center">
