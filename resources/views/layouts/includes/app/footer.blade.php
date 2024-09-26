@@ -7,10 +7,10 @@
                 <!-- Eliminado el nombre duplicado de la aplicación -->
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-16 sm:gap-12 flex-grow"> <!-- Aumentado el espacio entre bloques con gap-16 -->
-                <div class="sm:text-center">
+                <div>
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Nosotros</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                        <li class="mb-4">
+                        <li class="mb-4 sm:text-center">
                             <a href="{{ route('who-we-are') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Quienes Somos</a> <!-- Nuevo enlace a Quienes Somos -->
                         </li>
                         <li class="mb-4">
