@@ -46,7 +46,7 @@
             <div class="mb-6 sm:mb-0 flex justify-center w-full sm:w-auto">
                 <x-application-mark class="h-8 mr-3" />
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-16 sm:gap-12 flex-grow w-full sm:w-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 sm:gap-12 flex-grow w-full sm:w-auto">
                 <div class="flex flex-col items-center text-center sm:items-start sm:text-left">
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Nosotros</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
