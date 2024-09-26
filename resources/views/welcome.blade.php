@@ -15,15 +15,17 @@
     </section>
 
     <!--Filtro-->
-    <section class="mb-4 bg-gray-700 py-12">
-        <h1 class="text-center text-white text-3xl mb-2">¿No sabes que curso te puede interesar?</h1>
-        <p class="text-center text-white  mb-2">
-            Dirígete al catálogo de cursos y filtralos por categoría o nivel
-        </p>
-        <div class="flex justify-center mt-4">
-            <a href="{{ route('courses.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded text-2xl">
-                Catálogo de Cursos
-            </a>
+    <section class="mb-4 bg-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <h1 class="text-center text-white text-3xl mb-2">¿No sabes que curso te puede interesar?</h1>
+            <p class="text-center text-white  mb-2">
+                Dirígete al catálogo de cursos y filtralos por categoría o nivel
+            </p>
+            <div class="flex justify-center mt-4">
+                <a href="{{ route('courses.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 rounded text-2xl">
+                    Catálogo de Cursos
+                </a>
+            </div>
         </div>
     </section>
 
