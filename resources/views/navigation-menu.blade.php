@@ -233,55 +233,56 @@
                 @endforeach
         </div> --}}
 
-        <!-- Responsive Navigation Menu -->
-        <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
-            <div class="flex justify-between items-center px-4 py-3 border-t border-gray-200">
-                <div class="flex space-x-4">
-                    <!-- Navigation Links -->
-                    @foreach ($links as $item)
-                        @php
-                        $canView = false; 
+<!-- Responsive Navigation Menu -->
+<div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
+    <div class="flex justify-between items-center px-4 py-2 border-t border-gray-200">
+        <div class="flex items-center space-x-4">
+            <!-- Navigation Links -->
+            @foreach ($links as $item)
+                @php
+                $canView = false; 
 
-                        if (Auth::check()) {
-                            switch ($item['name']) {
-                                case 'Panel de Control':
-                                    $canView = Auth::user()->hasPermissionTo('Ver dashboard');
-                                    break;
-                                case 'Creación de Cursos':
-                                    $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
-                                    break;
-                                case 'Tus Cursos':
-                                    $canView = true; // Asegúrate que para estudiantes esté siempre visible
-                                    break;
-                                default:
-                                    $canView = true;
-                                    break;
-                            }
-                        }
-                        @endphp
+                if (Auth::check()) {
+                    switch ($item['name']) {
+                        case 'Panel de Control':
+                            $canView = Auth::user()->hasPermissionTo('Ver dashboard');
+                            break;
+                        case 'Creación de Cursos':
+                            $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
+                            break;
+                        case 'Tus Cursos':
+                            $canView = true; // Asegúrate que para estudiantes esté siempre visible
+                            break;
+                        default:
+                            $canView = true;
+                            break;
+                    }
+                }
+                @endphp
 
-                        @if ($canView)
-                            <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
-                                {{ $item['name'] }}
-                            </x-responsive-nav-link>
-                        @endif
-                    @endforeach
-                </div>
-
-                <!-- User Icon Placeholder -->
-                <div class="relative">
-                    <button class="inline-flex items-center justify-center p-2 rounded-full bg-gray-500 text-white focus:outline-none">
-                        <span class="text-xl font-medium leading-none">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Dropdown for user actions like Profile & Logout (currently blank for conditional display) -->
-            <div :class="{ 'block': open, 'hidden': ! open }" class="hidden px-4 py-3">
-                <div class="border-t border-gray-200 my-2"></div>
-                <!-- Here you can later add dropdown interaction logic -->
-            </div>
+                @if ($canView)
+                    <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                        {{ $item['name'] }}
+                    </x-responsive-nav-link>
+                @endif
+            @endforeach
         </div>
+
+        <!-- User Icon -->
+        <div class="flex items-center">
+            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos() && Auth::user()->profile_photo_url)
+                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+            @else
+                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
+                    <span class="text-sm font-medium leading-none text-white">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- Here you can add the dropdown logic (optional) -->
+</div>
+
 
 
         <!-- Responsive Settings Options -->
