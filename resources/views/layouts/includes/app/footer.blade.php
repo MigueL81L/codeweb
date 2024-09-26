@@ -1,8 +1,8 @@
 <footer class="bg-white dark:bg-gray-900 mt-16">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8"> 
         <div class="md:flex md:justify-between"> 
-            {{-- <div class="mb-6 md:mb-0 flex items-start"> --}}
-                <div class="w-full mb-6 sm:justify-center sm:items-center md:mb-0 flex items-start">
+            <div class="mb-6 md:mb-0 flex items-start">
+            {{-- <div class="w-full mb-6 sm:justify-center sm:items-center md:mb-0 flex items-start"> --}}
                 <x-application-mark class="h-8 mr-3" />
                 <!-- Eliminado el nombre duplicado de la aplicación -->
             </div>
