@@ -203,48 +203,48 @@
         <div class="pt-2 pb-3 space-y-1">
             @foreach ($links as $item)
 
-            @php
-            $canView = false; // Por defecto, no mostrar el enlace
+                @php
+                    $canView = false; // Por defecto, no mostrar el enlace
 
-            if (Auth::check()) {
-                switch ($item['name']) {
-                    case 'Panel de Control':
-                        $canView = Auth::user()->hasPermissionTo('Ver dashboard');
-                        break;
-                    case 'Creación de Cursos':
-                        $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
-                        break;
-                    case 'Tus Cursos':
-                    //Esta variable de session es true, cuando el user está
-                    //matriculado en al menos un course
-                        if(session('matriculado')){
-                            $canView = !$canView;
-                        }else{
-                            $canView = $canView;
+                    if (Auth::check()) {
+                        switch ($item['name']) {
+                            case 'Panel de Control':
+                                $canView = Auth::user()->hasPermissionTo('Ver dashboard');
+                                break;
+                            case 'Creación de Cursos':
+                                $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
+                                break;
+                            case 'Tus Cursos':
+                            //Esta variable de session es true, cuando el user está
+                            //matriculado en al menos un course
+                                if(session('matriculado')){
+                                    $canView = !$canView;
+                                }else{
+                                    $canView = $canView;
+                                }
+                                break;
+                            default:
+                                $canView = true; // Para otros enlaces, siempre mostrar
+                                break;
                         }
-                        break;
-                    default:
-                        $canView = true; // Para otros enlaces, siempre mostrar
-                        break;
-                }
-            }
-        @endphp
+                    }
+                @endphp
 
-                @if ($canView)
-                    <x-nav-link href="{{ $item['route'] }}" :active="$item['active']">
-                        {{ $item['name'] }}
-                    </x-nav-link>
-                @endif
+                    @if ($canView)
+                        <x-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                            {{ $item['name'] }}
+                        </x-nav-link>
+                    @endif
 
             @endforeach
 
 
-                <x-responsive-nav-link href="{{ route('login')}}">
+                {{-- <x-responsive-nav-link href="{{ route('login')}}">
                     Iniciar Sesión
                 </x-responsive-nav-link>
                 <x-responsive-nav-link href="{{ route('register') }}">
                     Registrarse
-                </x-responsive-nav-link>
+                </x-responsive-nav-link> --}}
         </div>
 
         <!-- Responsive Settings Options -->
