@@ -1,7 +1,7 @@
 <div>
     <div class="bg-gray-200 py-4 mb-16">  
         {{-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">  --}}
-            <div class="grid grid-cols-1 md:grid-cols-3 sm:gap-x-4 sm:py-4 sm:justify-between">
+            <div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-x-4 sm:py-4 justify-around">
                 <!-- Filtro por Precio -->
                 <div class="col-span-1">
                     <form wire:submit.prevent="filterPrices" class="flex items-center justify-between space-x-4">
