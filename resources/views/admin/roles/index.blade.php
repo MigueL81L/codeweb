@@ -99,7 +99,12 @@
                             <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
                             
                             <td class="border px-4 py-2 text-center">
-                                <a class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block" href="{{ route('admin.roles.edit', $role) }}">Editar</a> <!-- Ajusta la anchura -->
+                                <a href="{{ route('admin.roles.edit', $role) }}">
+                                    <button type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block">
+                                        Editar
+                                    </button>
+                                </a>
+                                
                                 <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="inline-block ml-2">
                                     @method('delete')
                                     @csrf
