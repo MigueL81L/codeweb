@@ -236,7 +236,7 @@
 <!-- Responsive Navigation Menu -->
 <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
     <div class="flex justify-between items-center px-4 py-2 border-t border-gray-200">
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center ">
             <!-- Navigation Links -->
             @foreach ($links as $item)
                 @php
