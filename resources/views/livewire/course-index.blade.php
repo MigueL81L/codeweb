@@ -68,21 +68,21 @@
     </div> --}}
 
     <div class="bg-gray-200 py-4 mb-16">  
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex"> 
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> 
             <div class="grid grid-cols-1 md:grid-cols-6 gap-y-4 md:gap-x-4">
                 <!-- Filtro por Precio -->
-                <div class="col-span-1 md:col-span-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
-                    <form wire:submit.prevent="filterPrices" class="flex w-full md:items-center md:justify-end space-x-2">
-                        <div class="flex-grow md:flex-grow-0">
-                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 border-gray-300 rounded-lg w-full md:w-auto">
+                <div class="md:col-span-2">
+                    <form wire:submit.prevent="filterPrices" class="flex items-center justify-between md:justify-end space-x-2">
+                        <label class="flex-1">
+                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 w-full md:w-auto border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione un Precio</option>
                                 @foreach($prices as $price)
                                     <option value="{{$price->id}}">{{$price->value}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </label>
                         
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full md:w-auto">
+                        <button type="submit" class="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             <i class="fas fa-euro-sign text-xs mr-2"></i>  
                             Filtrar
                         </button>
@@ -90,18 +90,18 @@
                 </div>
     
                 <!-- Filtro por Categoría -->
-                <div class="col-span-1 md:col-span-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
-                    <form wire:submit.prevent="filterCategories" class="flex w-full md:items-center md:justify-end space-x-2">
-                        <div class="flex-grow md:flex-grow-0">
-                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 rounded-lg w-full md:w-auto">
+                <div class="md:col-span-2">
+                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-between md:justify-end space-x-2">
+                        <label class="flex-1">
+                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 w-full md:w-auto border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </label>
                         
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full md:w-auto">
+                        <button type="submit" class="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             <i class="fas fa-th-list text-xs mr-2"></i>  
                             Filtrar
                         </button>
@@ -109,18 +109,18 @@
                 </div>
     
                 <!-- Filtro por Nivel -->
-                <div class="col-span-1 md:col-span-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
-                    <form wire:submit.prevent="filterLevels" class="flex w-full md:items-center md:justify-end space-x-2">
-                        <div class="flex-grow md:flex-grow-0">
-                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 rounded-lg w-full md:w-auto">
+                <div class="md:col-span-2">
+                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-between md:justify-end space-x-2">
+                        <label class="flex-1">
+                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 w-full md:w-auto border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
                                 @foreach($levels as $level)
                                     <option value="{{$level->id}}">{{$level->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </label>
                         
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full md:w-auto">
+                        <button type="submit" class="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             <i class="fas fa-filter text-xs mr-2"></i>  
                             Filtrar
                         </button>
@@ -129,6 +129,7 @@
             </div>
         </div>
     </div>
+    
     
     
 
