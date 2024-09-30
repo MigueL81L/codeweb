@@ -86,7 +86,7 @@
                 </a>
             </div>
 
-            <table class="w-full">
+            <table class="w-auto">
                 <thead>
                     <tr>
                         <th class="px-4 py-2 text-center">Nombre</th>
