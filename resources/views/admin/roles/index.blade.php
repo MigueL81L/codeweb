@@ -86,7 +86,7 @@
                 </a>
             </div>
 
-            <table class="w-full border-collapse">
+            <table class="w-full">
                 <thead>
                     <tr>
                         <th class="px-4 py-2 text-center">Nombre</th>
