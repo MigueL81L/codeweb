@@ -4,7 +4,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-x-4 sm:py-4">
                 <!-- Filtro por Precio -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterPrices" class="flex items-center justify-between sm:justify-center space-x-4">
+                    <form wire:submit.prevent="filterPrices" class="flex items-center justify-around sm:justify-center space-x-4">
                         <div>
                             <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 sm:mb-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione un Precio</option>
@@ -24,7 +24,7 @@
 
                 <!-- Filtro por Categoría -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-between sm:justify-center space-x-4">
+                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-around sm:justify-center space-x-4">
                         <div>
                             <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 sm:mb-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
@@ -43,7 +43,7 @@
 
                 <!-- Filtro por Nivel -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-between sm:justify-center space-x-4">
+                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-around sm:justify-center space-x-4">
                         <div>
                             <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 sm:mb-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
