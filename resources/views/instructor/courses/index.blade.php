@@ -1,14 +1,14 @@
 <x-instructor-layout>
     <!--Copiado de la vista dashboard.blade.php, lo utilizaré para la cabecera del listado de cursos-->
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center sm:text-start">
             Listado de Cursos
         </h2>
     </x-slot>
 
     <!--En la carpeta components defino un componente con clases de centrado, y lo aplico aqui-->
     <x-container class="mt-12 ">
-        <div class="md:flex md:justify-end mb-6">
+        <div class="flex justify-center md:justify-end mb-6">
             <!--En la carpeta css defino clases copiadas de tail wind component y las llamo aqui para el botón-->
             <a href="{{ route('instructor.courses.create') }}" class="btn btn-secondary w-full md:w-auto text-center">
                 Crear Nuevo Curso

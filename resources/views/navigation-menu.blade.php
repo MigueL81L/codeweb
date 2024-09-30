@@ -204,7 +204,7 @@
     <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
         <div class="flex flex-col items-center px-4 py-2 border-t border-gray-200">
             <div class="flex items-center w-full justify-between">
-                <div class="flex items-center text-center">
+                <div class="flex items-center">
                     <!-- Navigation Links -->
                     @foreach ($links as $item)
                         @php
