@@ -81,7 +81,7 @@
         <div class="table-responsive">
 
             <div class="flex items-center py-4">
-                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full text-left" href="{{ route('admin.roles.create') }}">
+                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded  text-center sm:text-left" href="{{ route('admin.roles.create') }}">
                     Crear Rol
                 </a>
             </div>
@@ -89,7 +89,7 @@
             <table class="w-full border-collapse">
                 <thead>
                     <tr>
-                        <th class="px-4 py-2">Nombre</th>
+                        <th class="px-4 py-2 text-center">Nombre</th>
                         <th class="px-4 py-2 text-center">Acciones</th> <!-- Centrar el texto de Acciones -->
                     </tr>
                 </thead>
@@ -99,12 +99,12 @@
                             <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
                             
                             <td class="border px-4 py-2 text-center">
-                                <a class="bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded inline-block w-58" href="{{ route('admin.roles.edit', $role) }}">Editar</a> <!-- Ajusta la anchura -->
+                                <a class="bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-8 rounded inline-block" href="{{ route('admin.roles.edit', $role) }}">Editar</a> <!-- Ajusta la anchura -->
                                 <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="inline-block ml-2">
                                     @method('delete')
                                     @csrf
                                     
-                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-block w-58" type="submit">Eliminar</button> <!-- Ajusta la anchura -->
+                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-8 rounded inline-block" type="submit">Eliminar</button> <!-- Ajusta la anchura -->
                                 </form>
                             </td>
                         </tr>
