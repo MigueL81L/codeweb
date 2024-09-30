@@ -20,7 +20,7 @@
     <div class="card-body">
         <div class="table-responsive">
 
-            <div class="flex items-center py-4">
+            <div class="flex items-center justify-center py-4">
                 <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" href="{{ route('admin.roles.create') }}">Crear Rol</a>
             </div>
 
@@ -37,12 +37,12 @@
                             <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
                             
                             <td class="border px-4 py-2 text-center">
-                                <a class="btn btn-secondary inline-block" href="{{ route('admin.roles.edit', $role) }}">Editar</a>
+                                <a class="btn btn-secondary inline-block py-4" href="{{ route('admin.roles.edit', $role) }}">Editar</a>
 
                                 <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="inline-block ml-2">
                                     @method('delete')
                                     @csrf
-                                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    <button class="btn btn-danger py-4 mt-2 sm:mt-0" type="submit">Eliminar</button>
                                 </form>
                             </td>
                         </tr>

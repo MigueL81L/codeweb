@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!--Coloco mi kit de fuentes de FontAwesome-->
-    <script src="https://kit.fontawesome.com/9ff47718a2.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/9ff47718a2.js" crossorigin="anonymous"></script> 
 
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
