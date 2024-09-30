@@ -81,7 +81,7 @@
         <div class="table-responsive">
 
             <div class="flex items-center justify-center sm:justify-start py-4">
-                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center" href="{{ route('admin.roles.create') }}">
+                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center sm:text-left" href="{{ route('admin.roles.create') }}">
                     Crear Rol
                 </a>
             </div>
@@ -99,7 +99,7 @@
                             <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
                             
                             <td class="border px-4 py-2 text-center">
-                                <a class="bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-8 rounded inline-block" href="{{ route('admin.roles.edit', $role) }}">Editar</a> <!-- Ajusta la anchura -->
+                                <a class="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-8 rounded inline-block" href="{{ route('admin.roles.edit', $role) }}">Editar</a> <!-- Ajusta la anchura -->
                                 <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="inline-block ml-2">
                                     @method('delete')
                                     @csrf
