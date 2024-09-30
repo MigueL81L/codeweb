@@ -89,7 +89,7 @@
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
-
+                <!-- Cart Icon -->
                 <div class="relative"
                     x-data="{
                         {{-- { count: {{ \CodersFree\Shoppingcart\Facades\Cart::instance('shopping')->count() }} } --}}
@@ -199,67 +199,6 @@
     </div>
 
 
-
-    <!-- Responsive Navigation Menu -->
-    {{-- <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
-        <div class="flex justify-between items-center px-4 py-2 border-t border-gray-200">
-            <div class="flex items-center ">
-                <!-- Navigation Links -->
-                @foreach ($links as $item)
-                    @php
-                        $canView = false; 
-
-                        if (Auth::check()) {
-                            switch ($item['name']) {
-                                case 'Panel de Control':
-                                    $canView = Auth::user()->hasPermissionTo('Ver dashboard');
-                                    break;
-                                case 'Creación de Cursos':
-                                    $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
-                                    break;
-                                case 'Tus Cursos':
-                                    $canView = true; // Asegúrate que para estudiantes esté siempre visible
-                                    break;
-                                default:
-                                    $canView = true;
-                                    break;
-                            }
-                        }
-                    @endphp
-
-                    @if ($canView)
-                        <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
-                            {{ $item['name'] }}
-                        </x-responsive-nav-link>
-                    @endif
-                @endforeach
-            </div>
-
-            <!-- User Icon Button -->
-            <div class="relative" x-data="{ dropdownOpen: false }">
-                <button @click="dropdownOpen = !dropdownOpen" class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-500 text-white focus:outline-none">
-                    <span class="text-sm font-medium leading-none">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
-                </button>
-
-                <!-- Dropdown Menu -->
-                <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20">
-                    <div class="px-4 py-2 text-xs text-gray-400">
-                        {{ __('Manage Account') }}
-                    </div>
-                    <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ __('Profile') }}</a>
-                    <div class="border-t border-gray-200"></div>
-                        <form method="POST" action="{{ route('logout') }}" x-data>
-                            @csrf
-                            <button @click.prevent="$root.submit();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                {{ __('Log Out') }}
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>    
-    </div> --}}
-
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
         <div class="flex flex-col items-center px-4 py-2 border-t border-gray-200">
@@ -320,7 +259,13 @@
                     </div>
 
                     <!-- Cart Icon -->
-                    <div class="relative mt-2"> <!-- espaciado adicional entre el ícono del usuario y el del carrito -->
+                    <div class="relative mt-2"
+                        x-data="{
+                            {{-- { count: {{ \CodersFree\Shoppingcart\Facades\Cart::instance('shopping')->count() }} } --}}
+                            count: {{Cart::instance('shopping')->count() }} 
+                        }"
+                        x-on:cart-updated.window="count= $event.detail[0]"> 
+
                         <a href="{{route('cart.index')}}">
                             <i class="fa-solid fa-cart-shopping text-xl text-gray-600"></i>
                             <span 
@@ -330,6 +275,7 @@
                             </span>
                         </a>
                     </div>
+
                 </div>
             </div>
         </div>    
