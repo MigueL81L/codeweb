@@ -80,8 +80,8 @@
         <div class="card-body">
             <div class="table-responsive">
 
-                <div class="flex items-center justify-center sm:justify-start py-4">
-                    <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center" href="{{ route('admin.roles.create') }}">
+                <div class="flex items-center sm:justify-start py-4 w-full sm:px-8">
+                    <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded text-center" href="{{ route('admin.roles.create') }}">
                         Crear Rol
                     </a>
                 </div>
