@@ -80,8 +80,8 @@
     <div class="card-body">
         <div class="table-responsive">
 
-            <div class="flex items-center py-4">
-                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded  text-center sm:text-left" href="{{ route('admin.roles.create') }}">
+            <div class="flex items-center justify-center sm:justify-start py-4">
+                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center" href="{{ route('admin.roles.create') }}">
                     Crear Rol
                 </a>
             </div>
@@ -104,7 +104,7 @@
                                     @method('delete')
                                     @csrf
                                     
-                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-8 rounded inline-block" type="submit">Eliminar</button> <!-- Ajusta la anchura -->
+                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-8 rounded inline-block mt-2 sm:mt-0" type="submit">Eliminar</button> <!-- Ajusta la anchura -->
                                 </form>
                             </td>
                         </tr>
