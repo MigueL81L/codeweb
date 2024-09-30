@@ -198,149 +198,70 @@
         </div>
     </div>
 
+
+
     <!-- Responsive Navigation Menu -->
-    {{-- <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            @foreach ($links as $item)
+    <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
+        <div class="flex justify-between items-center px-4 py-2 border-t border-gray-200">
+            <div class="flex items-center ">
+                <!-- Navigation Links -->
+                @foreach ($links as $item)
+                    @php
+                        $canView = false; 
 
-                @php
-                $canView = false; 
+                        if (Auth::check()) {
+                            switch ($item['name']) {
+                                case 'Panel de Control':
+                                    $canView = Auth::user()->hasPermissionTo('Ver dashboard');
+                                    break;
+                                case 'Creación de Cursos':
+                                    $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
+                                    break;
+                                case 'Tus Cursos':
+                                    $canView = true; // Asegúrate que para estudiantes esté siempre visible
+                                    break;
+                                default:
+                                    $canView = true;
+                                    break;
+                            }
+                        }
+                    @endphp
 
-                if (Auth::check()) {
-                    switch ($item['name']) {
-                        case 'Panel de Control':
-                            $canView = Auth::user()->hasPermissionTo('Ver dashboard');
-                            break;
-                        case 'Creación de Cursos':
-                            $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
-                            break;
-                        case 'Tus Cursos':
-                            $canView = true; // Asegúrate de permitir que los estudiantes vean este enlace
-                            break;
-                        default:
-                            $canView = true; 
-                            break;
-                    }
-                }
-                @endphp
-
-                        @if ($canView)
-                            <x-nav-link href="{{ $item['route'] }}" :active="$item['active']">
-                                {{ $item['name'] }}
-                            </x-nav-link>
-                        @endif
-
-                @endforeach
-        </div> --}}
-
-<!-- Responsive Navigation Menu -->
-<div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
-    <div class="flex justify-between items-center px-4 py-2 border-t border-gray-200">
-        <div class="flex items-center ">
-            <!-- Navigation Links -->
-            @foreach ($links as $item)
-                @php
-                $canView = false; 
-
-                if (Auth::check()) {
-                    switch ($item['name']) {
-                        case 'Panel de Control':
-                            $canView = Auth::user()->hasPermissionTo('Ver dashboard');
-                            break;
-                        case 'Creación de Cursos':
-                            $canView = Auth::user()->hasPermissionTo('Eliminar cursos');
-                            break;
-                        case 'Tus Cursos':
-                            $canView = true; // Asegúrate que para estudiantes esté siempre visible
-                            break;
-                        default:
-                            $canView = true;
-                            break;
-                    }
-                }
-                @endphp
-
-                @if ($canView)
-                    <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
-                        {{ $item['name'] }}
-                    </x-responsive-nav-link>
-                @endif
-            @endforeach
-        </div>
-
-        <!-- User Icon Button -->
-        <div class="relative" x-data="{ dropdownOpen: false }">
-            <button @click="dropdownOpen = !dropdownOpen" class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-500 text-white focus:outline-none">
-                <span class="text-sm font-medium leading-none">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
-            </button>
-
-            <!-- Dropdown Menu -->
-            <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20">
-                <div class="px-4 py-2 text-xs text-gray-400">
-                    {{ __('Manage Account') }}
-                </div>
-                <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ __('Profile') }}</a>
-                <div class="border-t border-gray-200"></div>
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                    @csrf
-                    <button @click.prevent="$root.submit();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        {{ __('Log Out') }}
-                    </button>
-                </form>
-            </div>
-        </div>
-
-
-
-
-
-    </div>
-
-    <!-- Here you can add the dropdown logic (optional) -->
-</div>
-
-
-
-        <!-- Responsive Settings Options -->
-        {{-- @auth
-            <div class="pt-4 pb-1 border-t border-gray-200">
-                
-                    <div class="flex items-center px-4">
-                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                            <div class="shrink-0 me-3">
-                                <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                            </div>
-                        @endif
-
-                        <div>
-                            <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                        </div>
-                    </div>
-                
-
-                    <div class="mt-3 space-y-1">
-                        <!-- Account Management -->
-                        <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                            Perfil
+                    @if ($canView)
+                        <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                            {{ $item['name'] }}
                         </x-responsive-nav-link>
+                    @endif
+                @endforeach
+            </div>
 
-                        <!-- Authentication -->
+            <!-- User Icon Button -->
+            <div class="relative" x-data="{ dropdownOpen: false }">
+                <button @click="dropdownOpen = !dropdownOpen" class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-500 text-white focus:outline-none">
+                    <span class="text-sm font-medium leading-none">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20">
+                    <div class="px-4 py-2 text-xs text-gray-400">
+                        {{ __('Manage Account') }}
+                    </div>
+                    <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ __('Profile') }}</a>
+                    <div class="border-t border-gray-200"></div>
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
-
-                            <x-responsive-nav-link href="{{ route('logout') }}"
-                                        @click.prevent="$root.submit();">
+                            <button @click.prevent="$root.submit();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                 {{ __('Log Out') }}
-                            </x-responsive-nav-link>
+                            </button>
                         </form>
-
-
                     </div>
+                </div>
             </div>
-        @endauth --}}
-
+        </div>    
     </div>
+
+
+    
 </nav>
 
 
