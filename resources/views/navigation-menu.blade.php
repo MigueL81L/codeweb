@@ -268,16 +268,32 @@
             @endforeach
         </div>
 
-        <!-- User Icon -->
-        <div class="flex items-center">
-            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos() && Auth::user()->profile_photo_url)
-                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-            @else
-                <div class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
-                    <span class="text-sm font-medium leading-none text-white">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+        <!-- User Icon Button -->
+        <div class="relative" x-data="{ dropdownOpen: false }">
+            <button @click="dropdownOpen = !dropdownOpen" class="flex items-center justify-center h-8 w-8 rounded-full bg-gray-500 text-white focus:outline-none">
+                <span class="text-sm font-medium leading-none">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20">
+                <div class="px-4 py-2 text-xs text-gray-400">
+                    {{ __('Manage Account') }}
                 </div>
-            @endif
+                <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ __('Profile') }}</a>
+                <div class="border-t border-gray-200"></div>
+                <form method="POST" action="{{ route('logout') }}" x-data>
+                    @csrf
+                    <button @click.prevent="$root.submit();" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        {{ __('Log Out') }}
+                    </button>
+                </form>
+            </div>
         </div>
+
+
+
+
+
     </div>
 
     <!-- Here you can add the dropdown logic (optional) -->
