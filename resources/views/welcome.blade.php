@@ -4,9 +4,9 @@
     <section style="background-image: url({{ asset('img/home/pexelsHome.jpg') }})" class="bg-cover">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
             <div class="w-full md:w-3/4 lg:w-1/2">
-                <h1 class="text-white font-bold text-4xl">Domina la tecnología web con CodeWeb</h1>
-                <p class="text-white text-lg mt-2 mb-4">En CodeWeb encontrarás cursos, manuales y artículos que 
-                    te ayudarán a convertirte en un profesional del desarrollo web</p>
+                <h1 class="text-white font-bold text-4xl">Domina la tecnología Web</h1>
+                <p class="text-white text-lg mt-2 mb-4">En CodeWeb encontrarás cursos que 
+                    te ayudarán a convertirte en un profesional del desarrollo Web</p>
 
                 {{--Código buscador encapsulado en componente livewire--}}
                 @livewire('search')
