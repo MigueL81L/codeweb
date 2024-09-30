@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 sm:space-x-4">
 
                 <!-- Cart Icon -->
                 <div class="relative"
@@ -115,7 +115,7 @@
 
 
                 <!-- Settings Dropdown. Acordeón del perfil -->
-                <div class="ms-16 relative">
+                <div class="ms-4 relative">
                     @auth
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
@@ -195,6 +195,7 @@
                     </svg>
                 </button>
             </div>
+
         </div>
     </div>
 
