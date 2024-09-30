@@ -100,7 +100,7 @@
                                 
                                 <td class="border px-4 py-2 text-center">
                                     <a href="{{ route('admin.roles.edit', $role) }}">
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block">
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-10 rounded inline-block">
                                             Editar
                                         </button>
                                     </a>
