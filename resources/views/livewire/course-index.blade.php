@@ -1,5 +1,5 @@
 <div>
-    {{-- <div class="bg-gray-200 py-4 mb-16">  
+    <div class="bg-gray-200 py-4 mb-16">  
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex"> 
 
             <div class="grid grid-cols-6 gap-x-4">
@@ -64,72 +64,8 @@
             </div>
 
         </div>
-    </div> --}}
-    
-    <div class="bg-gray-200 py-4 mb-16">  
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> 
-            <div class="sm:grid sm:grid-cols-1 md:grid-cols-6 sm:gap-y-4 md:gap-x-4">
-                <!-- Filtro por Precio -->
-                <div class="md:col-span-2 sm:flex sm:flex-col">
-                    <form wire:submit.prevent="filterPrices" class="sm:flex sm:items-center sm:justify-between md:justify-end sm:space-x-2">
-                        <div class="sm:flex-1">
-                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 sm:w-full md:w-auto border-gray-300 rounded-lg">
-                                <option class="py-2" value="">Seleccione un Precio</option>
-                                @foreach($prices as $price)
-                                    <option value="{{$price->id}}">{{$price->value}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            <i class="fas fa-euro-sign text-xs mr-2"></i>  
-                            Filtrar
-                        </button>
-                    </form>
-                </div>
-    
-                <!-- Filtro por Categoría -->
-                <div class="md:col-span-2 sm:flex sm:flex-col">
-                    <form wire:submit.prevent="filterCategories" class="sm:flex sm:items-center sm:justify-between md:justify-end sm:space-x-2">
-                        <div class="sm:flex-1">
-                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 sm:w-full md:w-auto border-gray-300 rounded-lg">
-                                <option class="py-2" value="">Seleccione una Categoría</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            <i class="fas fa-th-list text-xs mr-2"></i>  
-                            Filtrar
-                        </button>
-                    </form>
-                </div>
-    
-                <!-- Filtro por Nivel -->
-                <div class="md:col-span-2 sm:flex sm:flex-col">
-                    <form wire:submit.prevent="filterLevels" class="sm:flex sm:items-center sm:justify-between md:justify-end sm:space-x-2">
-                        <div class="sm:flex-1">
-                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 sm:w-full md:w-auto border-gray-300 rounded-lg">
-                                <option class="py-2" value="">Seleccione el Nivel</option>
-                                @foreach($levels as $level)
-                                    <option value="{{$level->id}}">{{$level->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="w-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            <i class="fas fa-filter text-xs mr-2"></i>  
-                            Filtrar
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
-    
-    
+
 
     <!-- Mostrar la colección total paginada, y las filtradas no paginadas -->
     @if($courses->isNotEmpty())
