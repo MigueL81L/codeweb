@@ -335,7 +335,7 @@
 
 
                     <!-- Cart Icon -->
-                    <div class="relative mt-2"
+                    <div class="ms-4 relative mt-2"
                         x-data="{
                             {{-- { count: {{ \CodersFree\Shoppingcart\Facades\Cart::instance('shopping')->count() }} } --}}
                             count: {{Cart::instance('shopping')->count() }} 
