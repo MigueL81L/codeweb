@@ -1,7 +1,7 @@
 <div>
     <div class="bg-gray-200 py-4 mb-16">  
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex"> 
-
+        {{-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">  --}}
+        <div>
             <div class="sm:grid sm:grid-cols-2 sm:gap-y-4 md:grid md:grid-cols-6 md:gap-x-4">
                 <!-- Filtro por Precio -->
                 <div class="col-span-2">
