@@ -98,7 +98,7 @@
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
                                 
-                                <td class="border px-4 py-2 text-center flex items-center justify-center">
+                                <td class="border px-4 py-2 text-center flex items-center">
                                     <a href="{{ route('admin.roles.edit', $role) }}">
                                         <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block">
                                             Editar
