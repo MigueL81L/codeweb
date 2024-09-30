@@ -81,7 +81,7 @@
         <div class="table-responsive">
 
             <div class="flex items-center py-4">
-                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full text-left" href="{{ route('admin.roles.create') }}"> <!-- Asegúrate de que el botón ocupe el ancho completo -->
+                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full text-left" href="{{ route('admin.roles.create') }}">
                     Crear Rol
                 </a>
             </div>
@@ -95,15 +95,16 @@
                 </thead>
                 <tbody>
                     @forelse ($roles as $role)
-                        <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}"> <!-- Alternar colores entre filas -->
+                        <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                             <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
                             
                             <td class="border px-4 py-2 text-center">
-                                <a class="bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded inline-block" href="{{ route('admin.roles.edit', $role) }}">Editar</a> <!-- Ajusta los botones a un tamaño consistente -->
+                                <a class="bg-gray-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded inline-block w-28" href="{{ route('admin.roles.edit', $role) }}">Editar</a> <!-- Ajusta la anchura -->
                                 <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="inline-block ml-2">
                                     @method('delete')
                                     @csrf
-                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-block mt-2 sm:mt-0" type="submit">Eliminar</button> <!-- Asegura el mismo tamaño -->
+                                    
+                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-block w-28" type="submit">Eliminar</button> <!-- Ajusta la anchura -->
                                 </form>
                             </td>
                         </tr>
@@ -118,20 +119,3 @@
     </div>
 </div>
 </x-admin-layout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
