@@ -109,7 +109,7 @@
                                         @method('delete')
                                         @csrf
                                         
-                                        <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-block mt-2 sm:mt-0" type="submit">Eliminar</button> <!-- Ajusta la anchura -->
+                                        <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded inline-block mt-2 sm:mt-0" type="submit">Eliminar</button> <!-- Ajusta la anchura -->
                                     </form>
                                 </td>
                             </tr>
