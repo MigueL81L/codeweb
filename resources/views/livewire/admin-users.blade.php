@@ -206,8 +206,8 @@
                     <thead>
                         <tr>
                             <th class="px-4 py-2">Nombre</th>
-                            <th class="px-4 py-2">Email / Acciones</th> <!-- Títulos unificados -->
-                            <th class="px-4 py-2 text-center hidden sm:table-cell">Acciones</th> <!-- Oculto en móviles, visible en pantallas más grandes -->
+                            <th class="px-4 py-2">Email</th> <!-- Cambiar título en la versión tablet/laptop -->
+                            <th class="hidden sm:table-cell px-4 py-2 text-center">Acciones</th> <!-- Visible sólo en pantallas más grandes -->
                         </tr>
                     </thead>
                     <tbody>
@@ -215,7 +215,7 @@
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                                 <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
                                 <td class="border px-4 py-2 text-center">
-                                    <div class="block sm:hidden"> <!-- Visible solo en móviles -->
+                                    <div class="block sm:hidden"> <!-- Celda combinada para móviles -->
                                         <div>{{ $user->email }}</div>
                                         <div class="flex justify-center space-x-2 mt-2">
                                             <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
@@ -226,10 +226,9 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="hidden sm:block">{{ $user->email }}</div> <!-- Oculto en móviles, visible en más grandes -->
+                                    <div class="hidden sm:block">{{ $user->email }}</div> <!-- Mostrar solo email en pantallas más grandes -->
                                 </td>
-                                <td class="border px-4 py-2 text-center hidden sm:table-cell">
-                                    <!-- Acciones visibles en pantallas mayores que móviles -->
+                                <td class="border px-4 py-2 text-center hidden sm:table-cell"> <!-- Celda de acciones oculta en móviles -->
                                     <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')" class="inline-block">
                                         @method('delete')
@@ -253,6 +252,7 @@
         </div>
     </div>
 </div>
+
 
 
 
