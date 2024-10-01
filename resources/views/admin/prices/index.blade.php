@@ -9,17 +9,17 @@
     </div>
 @endif
 
-<div class="card">
+<div>
     <div class="card-body">
         <div class="table-responsive">
-            <div class="flex items-center py-4">
-                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" href="{{ route('admin.prices.create') }}">Crear Precio</a>
+            <div class="flex items-center sm:justify-start py-4">
+                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center" href="{{ route('admin.prices.create') }}">Crear Precio</a>
             </div>
 
-            <table class="w-full border-collapse">
+            <table class=class="mx-auto sm:w-full">
                 <thead>
                     <tr>
-                        <th class="px-4 py-2">Precio, (€)</th>
+                        <th class="px-4 py-2 text-center">Precio, (€)</th>
                         <th class="px-4 py-2 text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -27,12 +27,18 @@
                     @forelse ($prices as $price)
                         <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                             <td class="border px-4 py-2 text-center">{{ $price->value }}</td>
+
                             <td class="border px-4 py-2 text-center">
-                                <a class="btn btn-secondary inline-block" href="{{ route('admin.prices.edit', $price) }}">Editar</a>
+                                <a href="{{ route('admin.prices.edit', $price) }}">
+                                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block">
+                                        Editar
+                                    </button>
+                                </a>
+
                                 <form action="{{ route('admin.prices.destroy', $price) }}" method="POST" class="inline-block ml-2">
                                     @method('delete')
                                     @csrf
-                                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded inline-block mt-2 mr-1 sm:mt-0 sm:mr-0" type="submit">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
