@@ -207,7 +207,7 @@
                         <tr>
                             <th class="px-4 py-2">Nombre</th>
                             <th class="px-4 py-2">Email</th>
-                            <th class="px-4 py-2 text-center hidden sm:table-cell">Acciones</th> <!-- Acciones visibles en tablets/laptops -->
+                            <th class="px-4 py-2 text-center hide-mobile">Acciones</th> <!-- Añadida clase personalizada -->
                         </tr>
                     </thead>
                     <tbody>
@@ -215,7 +215,7 @@
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                                 <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
                                 <td class="border px-4 py-2 text-center">
-                                    <div class="block sm:hidden"> <!-- Mostrar email y acciones solo en móviles -->
+                                    <div class="show-mobile"> <!-- Muestra en móviles -->
                                         <div>{{ $user->email }}</div>
                                         <div class="flex justify-center space-x-2 mt-2">
                                             <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
@@ -226,9 +226,9 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="hidden sm:block">{{ $user->email }}</div> <!-- Email solo en pantallas más grandes -->
+                                    <div class="hidden show-desktop">{{ $user->email }}</div> <!-- Muestra solo email en pantallas más grandes -->
                                 </td>
-                                <td class="border px-4 py-2 text-center d-none d-sm-table-cell"> <!-- Acciones visibles en tablets/laptops -->
+                                <td class="border px-4 py-2 text-center hide-mobile"> <!-- Acciones visibles en tablets/laptops -->
                                     <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')" class="inline-block">
                                         @method('delete')
@@ -252,3 +252,4 @@
         </div>
     </div>
 </div>
+

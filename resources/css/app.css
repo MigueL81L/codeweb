@@ -2,6 +2,7 @@
 @import 'ckeditor.css';
 @import 'commom.css';
 @import 'buttons.css';
+@import 'responsive.css';
 
 @tailwind base;
 @tailwind components;
