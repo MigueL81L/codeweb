@@ -12,17 +12,6 @@
     }
 }
 
-/* Mostrar solo en pantallas pequeñas (móviles) */
-.show-mobile {
-    display: block; /* o inline-flex o block, según lo necesites */
-}
-
-@media (min-width: 640px) {
-    .show-mobile {
-        display: none;
-    }
-}
-
 .rino{
     background-color: orange;
 }
