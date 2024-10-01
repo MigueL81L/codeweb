@@ -2,13 +2,13 @@
 
 /* Ocultar por defecto en pantallas pequeñas (móviles) */
 .hide-mobile {
-    display: none;
+    visibility: hidden;
 }
 
 /* Mostrar en pantallas medianas y grandes (tabletas y laptops) */
 @media (min-width: 640px) {
     .hide-mobile {
-        display: block; /* o inline-flex o block, según lo necesites */
+        visibility: visible; /* o inline-flex o block, según lo necesites */
     }
 }
 
