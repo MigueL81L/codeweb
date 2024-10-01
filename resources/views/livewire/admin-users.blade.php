@@ -215,8 +215,9 @@
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                                 <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
                                 <td class="border px-4 py-2 text-center">
-                                    <div class="show-mobile"> <!-- Muestra en móviles -->
-                                        <div>{{ $user->email }}</div>
+                                    <div>{{ $user->email }}</div> 
+
+                                    <div class="sm:hidden"> <!-- Muestra en móviles -->
                                         <div class="flex justify-center space-x-2 mt-2">
                                             <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                             <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
@@ -226,8 +227,8 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="hidden show-desktop">{{ $user->email }}</div> <!-- Muestra solo email en pantallas más grandes -->
                                 </td>
+                                
                                 <td class="border px-4 py-2 text-center hide-mobile"> <!-- Acciones visibles en tablets/laptops -->
                                     <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')" class="inline-block">

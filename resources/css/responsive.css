@@ -8,7 +8,7 @@
 /* Mostrar en pantallas medianas y grandes (tabletas y laptops) */
 @media (min-width: 640px) {
     .hide-mobile {
-        display: table-cell; /* o inline-flex o block, según lo necesites */
+        display: block; /* o inline-flex o block, según lo necesites */
     }
 }
 
