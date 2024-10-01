@@ -204,7 +204,7 @@
                 
                 <table class="w-full border-collapse mt-4">
                     <thead>
-                        <tr>
+                        <tr class="rino">
                             <th class="px-4 py-2">Nombre</th>
                             <th class="px-4 py-2">Email</th>
                             <th class="px-4 py-2 text-center hide-mobile">Acciones</th> <!-- Añadida clase personalizada -->
@@ -213,7 +213,7 @@
                     <tbody>
                         @forelse ($paginatedUsers as $user)
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
-                                <td class="border px-4 py-2 text-center rino">{{ $user->name }}</td>
+                                <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <div>{{ $user->email }}</div> 
 
