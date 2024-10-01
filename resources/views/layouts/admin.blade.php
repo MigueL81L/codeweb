@@ -61,7 +61,7 @@
 <script>
     function sidebarData() {
         return {
-            open: true,
+            open: false,
             toggleSidebar() {
                 this.open = !this.open;
             },
