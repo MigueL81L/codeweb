@@ -37,7 +37,7 @@
 
         @include('layouts.includes.admin.sidebar')
 
-        <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
+        <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white md:hidden">
             <i :class="open ? 'fas fa-times' : 'fas fa-bars'"></i>
         </button>
 
