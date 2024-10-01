@@ -36,7 +36,7 @@
                     <tbody>
                         @forelse ($roles as $role)
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
-                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
+                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
                                 <td class="border px-4 py-2 text-center">
                                     <a href="{{ route('admin.roles.edit', $role) }}">

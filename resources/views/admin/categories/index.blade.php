@@ -21,7 +21,7 @@
         <div class="table-responsive">
 
             <div class="flex items-center sm:justify-start py-4">
-                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded text-center" href="{{ route('admin.categories.create') }}">Crear Categoría</a>
+                <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center" href="{{ route('admin.categories.create') }}">Crear Categoría</a>
             </div>
 
             <table class="mx-auto sm:w-full">
