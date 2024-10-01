@@ -180,21 +180,22 @@
             
             <!-- Contenedor Flex para los botones y el menú desplegable -->
             <div class="flex flex-col sm:flex-row justify-between items-center mb-4 space-y-4 sm:space-y-0">
-                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-x-4">
+                <div class="flex items-center space-y-4 sm:space-x-4"> 
                     <form wire:submit.prevent="filterUsers" class="flex items-center relative text-gray-600 space-x-4">
                         <select wire:model="selectedRoles" class="h-10 border-gray-300 rounded-lg w-full sm:w-auto">
-                            <option value="">Seleccione un Rol</option>
+                            <option value="">Roles</option>
                             @foreach($roles as $role)
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full sm:w-auto">
-                            Filtrar Usuarios por Rol
+                            <i class="fas fa-user-cog"></i>
+                            Filtrar
                         </button>
                     </form>
                 </div>
 
-                <a href="{{ route('admin.users.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full sm:w-auto text-center">
+                <a href="{{ route('admin.users.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold h-10 py-2 px-4 rounded w-full sm:w-auto text-center">
                     Crear Nuevo Usuario
                 </a>
             </div>
