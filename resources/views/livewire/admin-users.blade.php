@@ -213,7 +213,7 @@
                     <tbody>
                         @forelse ($paginatedUsers as $user)
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
-                                <td class="border px-4 py-2 text-center">{{ $user->name }}</td>
+                                <td class="border px-4 py-2 text-center rino">{{ $user->name }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <div>{{ $user->email }}</div> 
 
@@ -228,7 +228,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="border px-4 py-2 text-center hide-mobile"> <!-- Acciones visibles en tablets/laptops -->
                                     <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')" class="inline-block">
