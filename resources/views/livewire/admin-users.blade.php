@@ -206,8 +206,9 @@
                     <thead>
                         <tr class="rino">
                             <th class="px-4 py-2">Nombre</th>
-                            <th class="px-4 py-2">Email</th>
-                            <th class="px-4 py-2 text-center hide-mobile">Acciones</th> <!-- Añadida clase personalizada -->
+                            <th class="px-4 py-2 hidden sm:block">Email</th>
+                            <th class="px-4 py-2 block sm:hidden">Email/Acciones</th>
+                            <th class="px-4 py-2 text-center hidden sm:block">Acciones</th> <!-- Añadida clase personalizada -->
                         </tr>
                     </thead>
                     <tbody>
