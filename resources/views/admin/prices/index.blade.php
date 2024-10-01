@@ -16,7 +16,7 @@
                 <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center" href="{{ route('admin.prices.create') }}">Crear Precio</a>
             </div>
 
-            <table class=class="mx-auto sm:w-full">
+            <table class="mx-auto sm:w-full">
                 <thead>
                     <tr>
                         <th class="px-4 py-2 text-center">Precio, (€)</th>
