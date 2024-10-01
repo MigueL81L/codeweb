@@ -37,7 +37,7 @@
 
         @include('layouts.includes.admin.sidebar')
 
-        <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white lg:hidden">
+        <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
             <i :class="open ? 'fas fa-times' : 'fas fa-bars'"></i>
         </button>
 
@@ -58,7 +58,7 @@
         @livewireScripts
 
     </body>
-    {{-- <script>
+    <script>
         function sidebarData() {
             return {
                 open: open,
@@ -69,22 +69,6 @@
                     this.open = window.innerWidth >= 768;
                 }
             }
-        }
-    </script> --}}
-
-
-    <script>
-        function sidebarData() {
-            return {
-                open: window.innerWidth >= 768, // Comienza abierto solo si es 768px o más
-                toggleSidebar() {
-                    this.open = !this.open; 
-                },
-                checkWidth() {
-                    // Solo lo abre si el ancho de la ventana es 768px o mayor
-                    this.open = window.innerWidth >= 768 && this.open;
-                }
-            };
         }
     </script>
     
