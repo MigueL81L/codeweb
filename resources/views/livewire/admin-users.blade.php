@@ -228,7 +228,7 @@
                                     </div>
                                     <div class="hidden sm:block">{{ $user->email }}</div> <!-- Email solo en pantallas más grandes -->
                                 </td>
-                                <td class="border px-4 py-2 text-center invisible sm:visible"> <!-- Acciones visibles en tablets/laptops -->
+                                <td class="border px-4 py-2 text-center hidden sm:visible"> <!-- Acciones visibles en tablets/laptops -->
                                     <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')" class="inline-block">
                                         @method('delete')
