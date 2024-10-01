@@ -1,4 +1,4 @@
-<div class="card">
+<div>
     <div class="card-body">
 
         @if(session('info'))
@@ -14,6 +14,7 @@
         @endif
 
         <div class="table-responsive">
+            
             <!-- Contenedor Flex para los botones y el menú desplegable -->
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center">
