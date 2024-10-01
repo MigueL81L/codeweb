@@ -241,16 +241,6 @@
                                     </form>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="2" class="border px-4 py-2 text-center block sm:hidden">
-                                    <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
-                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')" class="inline-block">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                                    </form>
-                                </td>
-                            </tr>
                         @empty
                             <tr>
                                 <td colspan="3" class="border px-4 py-2 text-center">No hay usuarios que coincidan con su búsqueda</td>
