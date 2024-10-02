@@ -37,8 +37,8 @@
 
         @include('layouts.includes.admin.sidebar')
 
-        <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden z-80">
-            <i :class="open ? 'fas fa-times' : 'fas fa-bars'"></i>
+        <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
+            <i :class="open ? 'fa-solid fa-gauge' : 'fas fa-bars'"></i>
             <span class="ml-2">Barra de Administración</span>
         </button>
 
