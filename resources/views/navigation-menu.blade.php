@@ -204,7 +204,7 @@
     <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
         <div class="flex flex-col items-center px-4 py-2 border-t border-gray-200">
             <div class="flex items-center w-full justify-between">
-                <div class="flex items-center justify-center w-full">
+                <div class="flex items-center">
                     <!-- Navigation Links -->
                     @foreach ($links as $item)
                         @php
@@ -229,8 +229,8 @@
                         @endphp
 
                         @if ($canView)
-                            <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']" class="text-center w-full flex justify-center">
-                                {{ $item['name'] }}
+                            <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                                {{$item['name'] }} 
                             </x-responsive-nav-link>
                         @endif
                     @endforeach
