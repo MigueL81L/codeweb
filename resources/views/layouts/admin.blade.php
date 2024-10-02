@@ -39,7 +39,7 @@
 
         <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
             <i :class="open ? 'fas fa-times' : 'fas fa-bars'"></i>
-            <span>Barra de Administración</span>
+            <span class="ml-2">Barra de Administración</span>
         </button>
 
         <div class="p-4 sm:ml-64">

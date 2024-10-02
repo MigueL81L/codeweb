@@ -41,7 +41,7 @@
 
 
 
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 z-20 fixed w-full top-0">
     <!-- Primary Navigation Menu, con clase definida en commom.css -->
     <div class="container">
         <div class="flex justify-between h-16">
