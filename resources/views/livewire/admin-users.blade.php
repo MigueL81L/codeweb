@@ -73,7 +73,7 @@
                                 <td class="border px-4 py-2 text-center hidden sm:block"> <!-- Acciones visibles en tablets/laptops -->
 
                                     <a href="{{ route('admin.users.edit', $user) }}">
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block mb-0 sm:mb-2">
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block">
                                             Editar
                                         </button>
                                     </a>
@@ -81,7 +81,7 @@
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')" class="inline-block">
                                         @method('delete')
                                         @csrf
-                                        <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded inline-block mt-2 mr-1 sm:mt-0 sm:mr-0"  type="submit">Eliminar</button>
+                                        <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded inline-block mt-2 mr-1"  type="submit">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>
