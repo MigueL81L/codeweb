@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                             <th class="px-4 py-2 text-center">Nombre</th>
-                            <th class="px-4 py-2 text-center">Acciones</th> <!-- Centrar el texto de Acciones -->
+                            <th class="px-4 py-2 text-center">Acciones</th> <!-- Centrar el texto de Acciones --> 
                         </tr>
                     </thead>
                     <tbody>
