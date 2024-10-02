@@ -25,7 +25,7 @@
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full sm:w-auto">
+                        <button type="submit" class="bg-gray-500 hover:bg-gray-600 text-white font-bold h-10 py-2 px-4 rounded w-full sm:w-auto">
                             <i class="fas fa-user-cog"></i>
                             Filtrar
                         </button>
@@ -60,7 +60,11 @@
 
                                     <div class="block sm:hidden"> <!-- Muestra en móviles -->
                                         <div class="flex justify-center space-x-2 mt-2">
-                                            <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
+                                            <a href="{{ route('admin.users.edit', $user) }}">
+                                                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block">
+                                                    Editar
+                                                </button>
+                                            </a>
                                             <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
                                                 @method('delete')
                                                 @csrf
