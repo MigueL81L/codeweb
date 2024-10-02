@@ -45,10 +45,10 @@
                         <tr class="rino">
                             <th class="px-4 py-2">Nombre</th>
                             <th class="px-4 py-2">
-                                <div class="hidden md:block">Email</div>
-                                <div class="block md:hidden">Email/Acciones</div>
+                                <div class="hidden sm:block">Email</div>
+                                <div class="block sm:hidden">Email/Acciones</div>
                             </th>
-                            <th class="px-4 py-2 text-center hidden md:block">Acciones</th> <!-- Añadida clase personalizada -->
+                            <th class="px-4 py-2 text-center hidden sm:block">Acciones</th> <!-- Añadida clase personalizada -->
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +58,7 @@
                                 <td class="border px-4 py-2 text-center">
                                     <div>{{ $user->email }}</div> 
 
-                                    <div class="block md:hidden"> <!-- Muestra en móviles -->
+                                    <div class="block sm:hidden"> <!-- Muestra en móviles -->
                                         <div class="flex justify-center space-x-2 mt-2">
                                             <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                             <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')">
@@ -70,7 +70,7 @@
                                     </div>
                                 </td>
 
-                                <td class="border px-4 py-2 text-center hidden md:block"> <!-- Acciones visibles en tablets/laptops -->
+                                <td class="border px-4 py-2 text-center hidden sm:block"> <!-- Acciones visibles en tablets/laptops -->
                                     <a class="btn btn-secondary" href="{{ route('admin.users.edit', $user) }}">Editar</a>
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?')" class="inline-block">
                                         @method('delete')
