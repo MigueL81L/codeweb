@@ -73,7 +73,7 @@
                                 <td class="border px-4 py-2 text-center hidden sm:block"> <!-- Acciones visibles en tablets/laptops -->
 
                                     <a href="{{ route('admin.users.edit', $user) }}">
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block">
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded inline-block mb-0 sm:mb-2">
                                             Editar
                                         </button>
                                     </a>
