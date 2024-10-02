@@ -229,7 +229,7 @@
                         @endphp
 
                         @if ($canView)
-                            <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                            <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']" class="text-center">
                                 {{ $item['name'] }}
                             </x-responsive-nav-link>
                         @endif
