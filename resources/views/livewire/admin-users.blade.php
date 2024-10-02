@@ -45,8 +45,8 @@
                         <tr class="rino">
                             <th class="px-4 py-2">Nombre</th>
                             <th class="px-4 py-2">
-                                <div class="hidden lg:block">Email</div>
-                                <div class="block lg:hidden">Email/Acciones</div>
+                                <div class="hidden md:block">Email</div>
+                                <div class="block md:hidden">Email/Acciones</div>
                             </th>
                             <th class="px-4 py-2 text-center hidden md:block">Acciones</th> <!-- Añadida clase personalizada -->
                         </tr>
