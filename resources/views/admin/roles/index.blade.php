@@ -45,7 +45,7 @@
                                         </button>
                                     </a>
                                     
-                                    <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="inline-block ml-2">
+                                    <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta Rol?')"  class="inline-block ml-2">
                                         @method('delete')
                                         @csrf
                                         
