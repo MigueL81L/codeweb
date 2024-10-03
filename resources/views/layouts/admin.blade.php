@@ -43,7 +43,7 @@
             <span class="ml-2">Barra de Administración</span>
         </button>
 
-        <div class="p-4 sm:ml-64 mt-20">
+        <div class="p-4 sm:ml-64 mt-14">
             <!--Aplicación de las migas de pan-->
             <div>
                 @include('layouts.includes.admin.breadcrumb')
