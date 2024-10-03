@@ -10,7 +10,7 @@
 ]">
 
 @if(session('info'))
-    <div class="bg-blue-500 text-white px-4 py-2 w-full shadow-md mb-2">
+    <div class="bg-blue-500 text-white px-4 py-2 w-full shadow-md mb-2"> 
         <strong>Éxito! </strong>{{ session('info') }}
     </div>
 @endif
@@ -46,7 +46,7 @@
                                 <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="inline-block ml-2">
                                     @method('delete')
                                     @csrf
-                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded inline-block mt-2 mr-1 sm:mt-0 sm:mr-0"  type="submit">Eliminar</button>
+                                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded inline-block mt-2 mr-1"  type="submit">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
