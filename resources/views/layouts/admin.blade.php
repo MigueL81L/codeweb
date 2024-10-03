@@ -45,7 +45,7 @@
 
         <div class="p-4 sm:ml-64">
             <!--Aplicación de las migas de pan-->
-            <div class="mt-7">
+            <div class="mt-14">
                 @include('layouts.includes.admin.breadcrumb')
                 <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
                     {{$slot}}
