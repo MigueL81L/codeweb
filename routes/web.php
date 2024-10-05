@@ -34,7 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function(){
 //En el ejemplo es 'index', no 'list'
 Route::get('cursos', [CourseController::class, 'list'])->name('courses.index');
 
-// Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
+Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
 
 //Ruta para mostrar al usuario, solo los cursos en los que está matriculado
 Route::get('courses', [CourseController::class, 'matriculados'])->name('courses.matriculados');
@@ -56,8 +56,8 @@ Route::get('course-status/{course}', function (Course $course) {
     return view('courses.status', ['course' => $course]); 
 })->name('courses.status')->middleware('auth');
 
-// Route::get('courses-status/{course}', [CourseController::class, 'status'])
-// ->name('courses.status');
+Route::get('courses-status/{course}', [CourseController::class, 'status'])
+->name('courses.status');
 
 
 
