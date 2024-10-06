@@ -10,7 +10,7 @@
                     <h1 class="text-3xl font-bold mb-4 text-center">¿Quiénes Somos?</h1> <!-- Título de sección -->
                     
                     <div class="flex justify-center mb-4">
-                        <img src="{{ asset('img/externos/equipo.jpg') }}" alt="Nuestro Equipo" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" />
+                        <img src="{{ asset('public/img/externos/equipo.jpg') }}" alt="Nuestro Equipo" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" />
                     </div>
 
                     <p class="mt-2 text-gray-700 dark:text-gray-300 text-left">

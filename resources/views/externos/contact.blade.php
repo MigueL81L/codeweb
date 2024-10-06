@@ -10,7 +10,7 @@
                     <h1 class="text-center">Contacto</h1>
                     
                     <div class="flex justify-center mb-4">
-                        <img src="{{ asset('img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" />
+                        <img src="{{ asset('public/img/externos/contacto.jpg') }}" alt="Contacto" class="rounded-lg shadow-lg max-w-full h-auto" style="max-height: 500px;" />
                     </div>
 
                     <div>
