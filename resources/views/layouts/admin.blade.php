@@ -56,9 +56,9 @@
             </div>
         </div> --}}
 
-        {{-- <div class="grid grid-cols-2 border-b border-gray-200">
+        <div class="grid grid-cols-2 border-b border-gray-200">
             <!-- Columna Izquierda - Sidebar -->
-            <div class="col-span-1">
+            <div class="col-span-1 w-auto">
                 @include('layouts.includes.admin.sidebar')
             </div>
         
@@ -78,32 +78,7 @@
                     {{$slot}}
                 </div>
             </div>
-        </div> --}}
-
-        <div class="grid grid-cols-[auto_1fr] border-b border-gray-200"> <!-- Ajusta a que la primera columna sea auto y la segunda columna ocupe el resto -->
-            <!-- Columna Izquierda - Sidebar -->
-            <div class="w-auto"> <!-- Esto hará que la columna del sidebar tome solo el espacio necesario -->
-                @include('layouts.includes.admin.sidebar')
-            </div>
-            
-            <!-- Columna Derecha - Contenido Principal -->
-            <div class="p-4 border-l border-gray-200"> <!-- Eliminar 'w-full' ya que queremos que llene el espacio automáticamente -->
-                <!-- Botón para mostrar/ocultar sidebar (visible solo en móvil) -->
-                <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
-                    <i :class="open ? 'fas fa-bars' : 'fa-solid fa-gauge'"></i>
-                    <span class="ml-2">Barra de Administración</span>
-                </button>
-        
-                <!-- Migas de pan -->
-                @include('layouts.includes.admin.breadcrumb')
-        
-                <!-- Contenido principal -->
-                <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mb-4">
-                    {{$slot}}
-                </div>
-            </div>
         </div>
-        
 
         @include('layouts.includes.app.footer')
 
