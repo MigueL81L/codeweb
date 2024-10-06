@@ -54,9 +54,9 @@
                     {{$slot}}
                 </div>
             </div>
-
-            @include('layouts.includes.app.footer')
         </div>
+
+        @include('layouts.includes.app.footer')
 
         <div x-cloak x-show="open" x-on:click="open = false" class="bg-gray-900 bg-opacity-50 fixed inset-0 z-30 sm:hidden"></div>
 
