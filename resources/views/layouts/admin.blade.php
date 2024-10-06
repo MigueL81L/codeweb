@@ -63,7 +63,7 @@
             </div>
         
             <!-- Columna Derecha - Contenido Principal -->
-            <div class="col-span-1 sm:col-span-2 p-4">
+            <div class="col-span-1 sm:col-span-2 p-4 border-l border-gray-200"> <!-- Asegúrate de agregar el borde -->
                 <!-- Botón para mostrar/ocultar sidebar (visible solo en móvil) -->
                 <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
                     <i :class="open ? 'fas fa-bars' : 'fa-solid fa-gauge'"></i>
@@ -74,8 +74,13 @@
                 @include('layouts.includes.admin.breadcrumb')
         
                 <!-- Contenido principal -->
-                <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+                <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mb-4">
                     {{$slot}}
+                </div>
+        
+                <!-- Borde inferior para marcar el fin del contenido -->
+                <div class="border-b border-gray-200 pb-2">
+                    <!-- Puedes dejar este espacio vacío o agregar contenido aquí si lo deseas -->
                 </div>
             </div>
         </div>
