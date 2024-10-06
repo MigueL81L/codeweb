@@ -32,7 +32,7 @@ $links = [
         'name' => 'Lista de Niveles',
         'icon' => 'fa-solid fa-signal',
         'route' => route('admin.levels.index'),
-        'active' => request()->routeIs('admin.levels.index') 
+        'active' => request()->routeIs('admin.levels.index')  
     ],
     [
         'name' => 'Lista de Precios',

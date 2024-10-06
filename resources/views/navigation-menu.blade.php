@@ -79,7 +79,7 @@
                         @endphp
 
                         @if ($canView)
-                            <x-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                            <x-nav-link href="{{ $item['route'] }}" :active="$item['active']"> 
                                 {{ $item['name'] }}
                             </x-nav-link>
                         @endif
