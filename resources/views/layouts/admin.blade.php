@@ -56,14 +56,14 @@
             </div>
         </div> --}}
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 border-b border-gray-200">
+        <div class="grid grid-cols-1 sm:grid-cols-2 border-b border-gray-200">
             <!-- Columna Izquierda - Sidebar -->
-            <div class="col-span-1 sm:col-span-1">
+            <div class="col-span-1">
                 @include('layouts.includes.admin.sidebar')
             </div>
         
             <!-- Columna Derecha - Contenido Principal -->
-            <div class="col-span-1 sm:col-span-2 p-4 border-l border-gray-200 w-full mt-8"> <!-- Asegúrate de agregar el borde -->
+            <div class="col-span-1 p-4 border-l border-gray-200 w-full mt-8"> <!-- Asegúrate de agregar el borde -->
                 <!-- Botón para mostrar/ocultar sidebar (visible solo en móvil) -->
                 <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
                     <i :class="open ? 'fas fa-bars' : 'fa-solid fa-gauge'"></i>
