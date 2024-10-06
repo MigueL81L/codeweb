@@ -39,7 +39,7 @@
         @include('navigation-menu')
 
 
-        @include('layouts.includes.admin.sidebar')
+        {{-- @include('layouts.includes.admin.sidebar')
 
         <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
             <i :class="open ? 'fas fa-bars' : 'fa-solid fa-gauge'"></i>
@@ -54,7 +54,32 @@
                     {{$slot}}
                 </div>
             </div>
+        </div> --}}
+
+        <div class="grid grid-cols-1 sm:grid-cols-3">
+            <!-- Columna Izquierda - Sidebar -->
+            <div class="col-span-1 sm:col-span-1">
+                @include('layouts.includes.admin.sidebar')
+            </div>
+        
+            <!-- Columna Derecha - Contenido Principal -->
+            <div class="col-span-1 sm:col-span-2 p-4">
+                <!-- Botón para mostrar/ocultar sidebar (visible solo en móvil) -->
+                <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
+                    <i :class="open ? 'fas fa-bars' : 'fa-solid fa-gauge'"></i>
+                    <span class="ml-2">Barra de Administración</span>
+                </button>
+        
+                <!-- Migas de pan -->
+                @include('layouts.includes.admin.breadcrumb')
+        
+                <!-- Contenido principal -->
+                <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+                    {{$slot}}
+                </div>
+            </div>
         </div>
+        
 
         @include('layouts.includes.app.footer')
 
