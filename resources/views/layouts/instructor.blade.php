@@ -7,6 +7,9 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset('public/Logo64.png') }}" type="image/png">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -46,7 +49,9 @@
             <main>
                 {{ $slot }}
             </main>
-            @include('layouts.includes.instructor.footer')
+
+            {{-- @include('layouts.includes.instructor.footer') --}}
+            @include('layouts.includes.app.footer')
         </div>
 
         @stack('modals')
