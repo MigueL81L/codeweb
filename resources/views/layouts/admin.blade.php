@@ -56,7 +56,7 @@
             </div>
         </div> --}}
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 border-b border-gray-200">
+        <div class="grid grid-cols-2 border-b border-gray-200">
             <!-- Columna Izquierda - Sidebar -->
             <div class="col-span-1">
                 @include('layouts.includes.admin.sidebar')
