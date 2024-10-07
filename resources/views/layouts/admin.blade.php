@@ -10,32 +10,6 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-
-        <style>
-            /* Asegúrate de que la aplicación ocupe toda la ventana */
-            body {
-              overflow: hidden; /* Oculta cualquier desbordamiento */
-            }
-            
-            #app {
-              width: 100vw;  /* Abarca todo el viewport */
-              height: 100vh; /* Mantiene la altura igual que el viewport */
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-            }
-          </style>
-
-
-
-
-
-
-
-
-
-
         <!-- Favicon -->
         <link rel="icon" href="{{ asset('public/Logo64.png') }}" type="image/png">
 
@@ -59,10 +33,6 @@
         @resize.window="checkWidth()"
         class="sm:overflow-auto"
         :class="{'overflow-hidden': open}">
-
-        <div id="app">
-                
-            
 
             {{-- Para que las páginas de admin, home, ..etc, usen el mismo navigation-menu --}}
             {{-- @livewire('navigation-menu')    --}}
@@ -99,28 +69,10 @@
 
             {{-- <div x-cloak x-show="open" x-on:click="toggleSidebar()" class="bg-gray-900 bg-opacity-50 fixed inset-0 z-30 sm:hidden pointer-events-auto"></div> --}}
 
-        </div>
 
             @stack('modals')
 
             @livewireScripts
-
-            <script>
-                // Función para verificar la orientación
-                function checkOrientation() {
-                  if (window.innerHeight < window.innerWidth) {
-                    // Si está en apaisado, prevenir ajustes del layout
-                    alert('Por favor, utiliza la pantalla en vertical para una mejor experiencia.'); // Esto es solo indicativo, lo puedes quitar.
-                    window.scrollTo(0, 0); // Asegúrate de que no se mueva la vista.
-                  }
-                }
-          
-                // Registrar el evento de cambio de orientación
-                window.addEventListener('resize', checkOrientation);
-                window.addEventListener('orientationchange', checkOrientation); // Ajusta los cambios de orientación
-                window.addEventListener('load', checkOrientation); // Verifica la orientación al cargar la página
-              </script>
-            
 
     </body>
     <script>
