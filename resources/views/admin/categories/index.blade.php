@@ -17,7 +17,7 @@
 
 <div>
 
-    <div class="card-body">
+    <div class="card-body h-screen">
         <div class="table-responsive">
 
             <div class="flex items-center sm:justify-start py-4">
