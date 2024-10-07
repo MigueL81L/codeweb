@@ -97,7 +97,7 @@ $links = [
                                     </ul>
                                 </div>
                             @else
-                                <a href="{{ $link['route'] }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{$link['active'] ? 'bg-gray-100' : ''}}">
+                                <a href="{{ $link['route'] }}"  @click="console.log('Navigating to:', '{{ $link['route'] }}')"  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{$link['active'] ? 'bg-gray-100' : ''}}">
                                     <span class="inline-flex w-6 h-6 justify-center items-center">
                                         <i class="{{ $link['icon'] }} text-gray-500"></i>
                                     </span>
