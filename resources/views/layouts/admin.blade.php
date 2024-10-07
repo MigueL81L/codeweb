@@ -68,7 +68,7 @@
 
         {{-- <div x-cloak x-show="open" x-on:click="open = false" class="bg-gray-900 bg-opacity-50 fixed inset-0 z-30 sm:hidden"></div> --}}
         {{-- <div x-cloak x-show="open" x-on:click="toggleSidebar()" class="bg-gray-900 bg-opacity-50 fixed inset-0 z-30 sm:hidden"></div> --}}
-        <div x-cloak x-show="open" x-on:click="toggleSidebar()" class="bg-gray-900 bg-opacity-50 fixed inset-0 z-30 sm:hidden pointer-events-auto"></div>
+        {{-- <div x-cloak x-show="open" x-on:click="toggleSidebar()" class="bg-gray-900 bg-opacity-50 fixed inset-0 z-30 sm:hidden pointer-events-auto"></div> --}}
 
 
 
