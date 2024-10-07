@@ -81,7 +81,7 @@ class AdminUsers extends Component
 
         return User::where('name', 'LIKE', '%' . $this->search . '%')
             ->orWhere('email', 'LIKE', '%' . $this->search . '%')
-            ->paginate(10);
+            ->paginate(6);
     }
 
     public function updatedSearch()
@@ -108,7 +108,7 @@ class AdminUsers extends Component
             });
         }
 
-        return $filteredUsers->paginate(10);
+        return $filteredUsers->paginate(6);
     }
 
 
