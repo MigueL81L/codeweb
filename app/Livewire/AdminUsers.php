@@ -43,7 +43,7 @@ class AdminUsers extends Component
             });
         }
     
-        $paginatedUsers = $usersQuery->paginate(6);
+        $paginatedUsers = $usersQuery->paginate(5);
     
         return view('livewire.admin-users', compact('paginatedUsers', 'roles'));
     }
@@ -81,7 +81,7 @@ class AdminUsers extends Component
 
         return User::where('name', 'LIKE', '%' . $this->search . '%')
             ->orWhere('email', 'LIKE', '%' . $this->search . '%')
-            ->paginate(6);
+            ->paginate(5);
     }
 
     public function updatedSearch()
@@ -108,7 +108,7 @@ class AdminUsers extends Component
             });
         }
 
-        return $filteredUsers->paginate(6);
+        return $filteredUsers->paginate(5);
     }
 
 
