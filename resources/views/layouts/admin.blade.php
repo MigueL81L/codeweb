@@ -80,14 +80,14 @@
             </div>
         </div> --}}
 
-        <div class="grid grid-cols-[auto_1fr] border-b border-gray-200">
+        <div class="flex border-b border-gray-200">
             <!-- Columna Izquierda - Sidebar -->
-            <div class="w-auto">
+            <div class="flex-none">
                 @include('layouts.includes.admin.sidebar')
             </div>
         
             <!-- Columna Derecha - Contenido Principal -->
-            <div class="p-4 border-l border-gray-200 w-full mt-8">
+            <div class="flex-grow p-4 border-l border-gray-200 w-full mt-8">
                 <!-- Botón para mostrar/ocultar sidebar (visible solo en móvil) -->
                 <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
                     <i :class="open ? 'fas fa-bars' : 'fa-solid fa-gauge'"></i>
@@ -103,6 +103,7 @@
                 </div>
             </div>
         </div>
+        
         
 
         @include('layouts.includes.app.footer')
