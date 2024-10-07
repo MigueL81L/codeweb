@@ -88,6 +88,7 @@
         
             <!-- Columna Derecha - Contenido Principal -->
             <div class="flex-grow p-4 border-l border-gray-200 w-full mt-8">
+
                 <!-- Botón para mostrar/ocultar sidebar (visible solo en móvil) -->
                 <button @click="toggleSidebar()" class="m-4 p-2 bg-gray-800 text-white sm:hidden">
                     <i :class="open ? 'fas fa-bars' : 'fa-solid fa-gauge'"></i>
@@ -118,7 +119,7 @@
     <script>
         function sidebarData() {
             return {
-                open: open,
+                open: false,
                 toggleSidebar() {
                     this.open = !this.open;
                 },
