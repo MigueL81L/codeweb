@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <div class="table-responsive overflow-x-auto h-screen">
+        <div class="table-responsive overflow-x-auto h-screen card">
             
             <!-- Contenedor Flex para los botones y el menú desplegable -->
             <div class="flex flex-col sm:flex-row justify-between items-center mb-4 space-y-4 sm:space-y-0">
