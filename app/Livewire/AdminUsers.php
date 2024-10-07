@@ -43,7 +43,7 @@ class AdminUsers extends Component
             });
         }
     
-        $paginatedUsers = $usersQuery->paginate(8);
+        $paginatedUsers = $usersQuery->paginate(6);
     
         return view('livewire.admin-users', compact('paginatedUsers', 'roles'));
     }
