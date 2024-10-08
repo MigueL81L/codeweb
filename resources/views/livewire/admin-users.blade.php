@@ -13,7 +13,7 @@
         @endif
 
     <div>
-        <div class="card-body">
+
 
             <div class="table-responsive overflow-x-auto">
                 
@@ -104,7 +104,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+
     </div>
 </div>
 
