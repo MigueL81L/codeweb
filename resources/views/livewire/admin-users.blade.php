@@ -12,7 +12,7 @@
             </div>
         @endif
 
-    <div>
+    <div class="h-screen">
 
 
             <div class="table-responsive overflow-x-auto">
