@@ -9,6 +9,7 @@ use App\Models\Lesson;
 use App\Models\Course;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 //Importo un componente livewire
 use App\Livewire\CourseStatus;
 use Livewire\Livewire;
@@ -25,7 +26,14 @@ Route::get('instructor/video/{id}', [\App\Http\Controllers\Instructor\VideoLesso
     ->name('instructor.video.show');
     
 
-Route::get('/', HomeController::class)->name('home');
+// Sección que redirige a /register si el usuario no está autenticado
+Route::get('/', function () {
+    if (!Auth::check()) {
+        return redirect()->route('register');
+    }
+    // Permitir el acceso si ya están autenticados de terminar en /home
+    return app()->make(HomeController::class)();  // O simplemente redirige a "dashboard"
+})->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function(){
     return view('dashboard');
