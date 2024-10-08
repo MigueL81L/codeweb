@@ -1,7 +1,9 @@
 <x-admin-layout :breadcrumb="[
     ['name' => 'Panel de Control', 'url' => route('admin.dashboard')],
     ['name' => 'Lista de Precios', 'url' => route('admin.prices.index')]
-]">
+]"
+class="h-screen"
+>
 
 @if(session('info'))
     <div class="bg-blue-500 text-white px-4 py-2 w-full shadow-md mb-2">
@@ -9,7 +11,7 @@
     </div>
 @endif
 
-<div class="h-screen">
+<div >
     <div class="card-body">
         <div class="table-responsive">
             <div class="flex items-center sm:justify-start py-4">
