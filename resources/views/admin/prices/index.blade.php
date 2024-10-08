@@ -2,7 +2,6 @@
     ['name' => 'Panel de Control', 'url' => route('admin.dashboard')],
     ['name' => 'Lista de Precios', 'url' => route('admin.prices.index')]
 ]"
-class="h-screen"
 >
 
 @if(session('info'))

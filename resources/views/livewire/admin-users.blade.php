@@ -1,5 +1,5 @@
 
-<div class="h-screen">
+<div>
         @if(session('info'))
             <div class="bg-blue-500 text-white px-4 py-2 w-full shadow-md mb-2">
                 <strong>Éxito! </strong>{{ session('info') }}

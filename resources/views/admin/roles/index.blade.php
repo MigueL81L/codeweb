@@ -8,7 +8,6 @@
         'url' => route('admin.roles.index'),
     ]
 ]"
-class="h-screen"
 >
 
     @if(session('info'))
