@@ -1,6 +1,6 @@
 
 
-<footer class="bg-white dark:bg-gray-900 mt-2">
+<footer class="bg-white dark:bg-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8"> 
         <div class="flex flex-col items-center text-center sm:flex-row sm:text-left sm:items-start md:justify-between"> 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-16 sm:gap-12 flex-grow w-full sm:w-auto">
