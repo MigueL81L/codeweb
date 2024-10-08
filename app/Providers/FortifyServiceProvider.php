@@ -2,17 +2,16 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\RateLimiter;
 use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
-use Illuminate\Cache\RateLimiting\Limit;
-
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -34,12 +33,6 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
-        // Configurar vistas personalizadas
-        Fortify::registerView(function () {
-            // Define la vista para el registro de usuarios
-            return view('auth.register');
-        });
-
         RateLimiter::for('register', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
@@ -47,7 +40,13 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         RateLimiter::for('two-factor', function (Request $request) {
-            return Limit::perMinute(5)->by($request->session()->get('login.id'));
+            return Limit::perMinute(5)->by($request->session()->get('register.id'));
         });
     }
 }
+
+
+
+
+
+
