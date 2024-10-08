@@ -5,7 +5,7 @@
     ],
     [
         'name' => 'Creación de Usuario',
-        'url' => route('admin.users.create'),
+        'url' => route('admin.users.create'), 
     ]
 ]">
 
@@ -43,7 +43,9 @@
                     <label for="role" class="block text-sm font-medium text-gray-700">Rol</label>
                     <select name="role" id="role" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         @foreach($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            <option value="{{ $role->id }}" {{ $role->name == "Estudiante" ? 'selected' : '' }}>
+                                {{ $role->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
