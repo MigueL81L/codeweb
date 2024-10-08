@@ -40,12 +40,7 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.register');
         });
 
-        Fortify::loginView(function () {
-            // Define la vista para el inicio de sesión de usuarios
-            return view('auth.login');
-        });
-
-        RateLimiter::for('login', function (Request $request) {
+        RateLimiter::for('register', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
             return Limit::perMinute(5)->by($throttleKey);
