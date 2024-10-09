@@ -6,8 +6,8 @@
                 <!-- Filtro por Precio -->
                 <div class="col-span-1">
                     <form wire:submit.prevent="filterPrices" class="flex items-center justify-between  lg:justify-center lg:space-x-4">
-                        <div class="flex-grow mr-2 justify-start lg:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
-                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 border-gray-300">
+                        <div class="flex-grow mr-2">
+                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 border-gray-300 justify-start lg:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione un Precio</option>
                                 @foreach($prices as $price)
                                     <option value="{{ $price->id }}">{{ $price->value }}</option>
