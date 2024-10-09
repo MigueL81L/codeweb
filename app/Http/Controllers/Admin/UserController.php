@@ -34,10 +34,10 @@ class UserController extends Controller
     public function create()
     {
 
-    // Verifica si el usuario autenticado tiene el permiso de 'Editar usuarios'
-    if (Gate::denies('Crear usuarios')) {
-        abort(403, 'Unauthorized action.');
-    }
+        // Verifica si el usuario autenticado tiene el permiso de 'Editar usuarios'
+        if (Gate::denies('Crear usuarios')) {
+            abort(403, 'Unauthorized action.');
+        }
 
         $roles = Role::all();
         return view('admin.users.create', compact('roles'));  
@@ -48,10 +48,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-    // Verifica si el usuario autenticado tiene el permiso de 'Editar usuarios'
-    if (Gate::denies('Crear usuarios')) {
-        abort(403, 'Unauthorized action.');
-    }
+        // Verifica si el usuario autenticado tiene el permiso de 'Editar usuarios'
+        if (Gate::denies('Crear usuarios')) {
+            abort(403, 'Unauthorized action.');
+        }
     
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -85,62 +85,62 @@ class UserController extends Controller
         return view('admin.users.show', compact('user'));
     }
 
-/**
- * Show the form for editing the specified resource.
- */
-public function edit(User $user)
-{
-    // Verifica si el usuario autenticado tiene el permiso de 'Editar usuarios'
-    if (Gate::denies('Editar usuarios')) {
-        abort(403, 'Unauthorized action.');
-    }
-
-    // Colección de todos los roles existentes
-    $roles = Role::all();
-
-    return view('admin.users.edit', compact('user', 'roles'));
-}
-
-
-/**
- * Update the specified resource in storage.
- */
-public function update(Request $request, User $user)
-{
-    // Verifica si el usuario autenticado tiene el permiso de 'Editar usuarios'
-    if (Gate::denies('Editar usuarios')) {
-        abort(403, 'Unauthorized action.');
-    }
-
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        'role' => 'required|exists:roles,id', // Cambiar 'roles' por 'role'
-        'password' => 'nullable|string|min:8',
-    ]);
-
-    // Actualiza los campos del usuario excepto la contraseña
-    $user->update([
-        'name' => $validatedData['name'],
-        'email' => $validatedData['email'],
-    ]);
-
-    $role = Role::findOrFail($request->role)->name; // Obtiene el nombre del rol seleccionado
-    $user->syncRoles([$role]); // Asigna el rol al usuario
-
-    // Si se proporciona una nueva contraseña, encriptarla y actualizarla
-    if ($request->filled('password')) {
-        $password = $request->input('password');
-        $user->update(['password' => bcrypt($password)]);
-        
-        // Envía correo electrónico al usuario si es necesario
-            Mail::send('emails.password_changed', ['user' => $user, 'password' => $password], function ($message) use ($user) {
-                $message->to($user->email);
-                $message->subject('Su contraseña ha sido cambiada');
-            });
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        // Verifica si el usuario autenticado tiene el permiso de 'Editar usuarios'
+        if (Gate::denies('Editar usuarios')) {
+            abort(403, 'Unauthorized action.');
         }
 
-        return redirect()->route('admin.users.index')->with('info', 'Usuario actualizado con éxito');
+        // Colección de todos los roles existentes
+        $roles = Role::all();
+
+        return view('admin.users.edit', compact('user', 'roles'));
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, User $user)
+    {
+        // Verifica si el usuario autenticado tiene el permiso de 'Editar usuarios'
+        if (Gate::denies('Editar usuarios')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'role' => 'required|exists:roles,id', // Cambiar 'roles' por 'role'
+            'password' => 'nullable|string|min:8',
+        ]);
+
+        // Actualiza los campos del usuario excepto la contraseña
+        $user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+        ]);
+
+        $role = Role::findOrFail($request->role)->name; // Obtiene el nombre del rol seleccionado
+        $user->syncRoles([$role]); // Asigna el rol al usuario
+
+        // Si se proporciona una nueva contraseña, encriptarla y actualizarla
+        if ($request->filled('password')) {
+            $password = $request->input('password');
+            $user->update(['password' => bcrypt($password)]);
+            
+            // Envía correo electrónico al usuario si es necesario
+                Mail::send('emails.password_changed', ['user' => $user, 'password' => $password], function ($message) use ($user) {
+                    $message->to($user->email);
+                    $message->subject('Su contraseña ha sido cambiada');
+                });
+            }
+
+            return redirect()->route('admin.users.index')->with('info', 'Usuario actualizado con éxito');
     }
 
     /**
@@ -177,11 +177,43 @@ public function update(Request $request, User $user)
             // coincide con el id user que pretendo eliminar, elimino dicho curso
             foreach ($courses as $course) {
                 if($course->teacher->id==$user->id){
+
+                    // Antes de eliminar un curso, eliminar todos los datos relacionados con él
+                    $course->reviews()->delete();
+                    $course->goals()->delete();
+                    $course->requirements()->delete();
+
+                    foreach ($course->lessons as $lesson) {
+                        if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                            Storage::delete($lesson->video_path);
+                        }
+                        if ($lesson->image_path && Storage::exists($lesson->image_path)) {
+                            Storage::delete($lesson->image_path);
+                        }
+                        $lesson->delete();
+                    }
+
+                    $course->sections()->delete();
+
+                    if ($course->courseImage) {
+                        if (Storage::exists($course->courseImage->path)) {
+                            Storage::delete($course->courseImage->path);
+                        }
+                        $course->courseImage->delete();
+                    }
+
+                    if ($course->video_path && Storage::exists($course->video_path)) {
+                        Storage::delete($course->video_path);
+                    }
+
                     $course->delete();
                 }
+
+
             }
+            
         }
-    
+
         // Finalmente, elimina el usuario
         $user->delete();
     
@@ -189,6 +221,6 @@ public function update(Request $request, User $user)
     }
     
 
-} 
+}
 
 
