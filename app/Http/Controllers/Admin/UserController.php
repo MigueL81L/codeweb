@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Course;
+use Illuminate\Support\Facades\Log;
+
 
 class UserController extends Controller
 {
@@ -169,6 +171,7 @@ class UserController extends Controller
     
         // Verifico que el usuario sea un Instructor, sino no habrá creado cursos
         if ($user->hasRole('Instructor')) {
+            Log::info("If instructor de id: {$user->id}");
 
             // Obtengo la lista completa de courses existentes
             $courses = Course::all();
@@ -177,6 +180,7 @@ class UserController extends Controller
             // coincide con el id user que pretendo eliminar, elimino dicho curso
             foreach ($courses as $course) {
                 if($course->teacher->id==$user->id){
+                    Log::info("If Curso con profesor: {$user->id}" . "y curso: " . "{$course->id}");
 
                     // Antes de eliminar un curso, eliminar todos los datos relacionados con él
                     $course->reviews()->delete();
@@ -206,6 +210,7 @@ class UserController extends Controller
                         Storage::delete($course->video_path);
                     }
 
+                    Log::info("Momento de liquidar el curso de id: {$course->id}");
                     $course->delete();
                 }
 
@@ -215,6 +220,7 @@ class UserController extends Controller
         }
 
         // Finalmente, elimina el usuario
+        Log::info("Momento de liquidar el usuario de id: {$user->id}");
         $user->delete();
     
         return redirect()->route('admin.users.index')->with('info', 'Usuario eliminado con éxito');
