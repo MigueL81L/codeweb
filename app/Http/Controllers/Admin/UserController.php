@@ -167,14 +167,18 @@ public function update(Request $request, User $user)
             abort(403, 'Unauthorized action.');
         }
     
-        // Eliminar cursos si el usuario es un instructor
+        // Verifico que el usuario sea un Instructor, sino no habrá creado cursos
         if ($user->hasRole('Instructor')) {
-            // Obtener todos los cursos creados por este instructor
-            $courses = Course::where('user_id', $user->id)->get();
+
+            // Obtengo la lista completa de courses existentes
+            $courses = Course::all();
     
-            // Eliminar cada curso
+            // Itero la lista de cursos, si el id del teacher de un determinado course, 
+            // coincide con el id user que pretendo eliminar, elimino dicho curso
             foreach ($courses as $course) {
-                $course->delete(); // Esto debería llamar el método destroy en el controlador CourseController
+                if($course->teacher->id==$user->id){
+                    $course->delete();
+                }
             }
         }
     
