@@ -1,32 +1,12 @@
 <div>
     <div class="bg-gray-200 py-4 mb-16">  
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">  
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-4 lg:py-4 lg:px-4"> 
-                <!-- Filtro por Precio -->
-                <div class="col-span-1">
-                    <form wire:submit.prevent="filterPrices" class="flex items-center justify-between  lg:justify-center lg:space-x-4">
-                        <div class="flex-grow mr-2">
-                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 border-gray-300 justify-start lg:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
-                                <option class="py-2" value="">Seleccione un Precio</option>
-                                @foreach($prices as $price)
-                                    <option value="{{ $price->id }}">{{ $price->value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-end lg:justify-center mb-2 lg:mb-0 mr-2 lg:mr-0">
-                            <i class="fas fa-euro-sign text-xs mr-2"></i>  
-                            Filtrar
-                        </button>
-                    </form>
-                </div>
-
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-4 lg:py-4">
                 <!-- Filtro por Categoría -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-between lg:justify-center lg:space-x-4">
+                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-center  lg:justify-between sm:space-x-4">
                         <div class="flex-grow mr-2">
-                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 justify-start lg:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
+                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -34,8 +14,27 @@
                             </select>
                         </div>
                         
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-end lg:justify-center mb-2 lg:mb-0 mr-2 lg:mr-0">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-end sm:justify-center mb-2 lg:mb-0 mr-2 lg:mr-0">
                             <i class="fas fa-th-list text-xs mr-2"></i>  
+                            Filtrar
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Filtro por Precio -->
+                <div class="col-span-1">
+                    <form wire:submit.prevent="filterPrices" class="flex items-center justify-center  lg:justify-between sm:space-x-4">
+                        <div class="flex-grow mr-2">
+                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
+                                <option class="py-2" value="">Seleccione un Precio</option>
+                                @foreach($prices as $price)
+                                    <option value="{{ $price->id }}">{{ $price->value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-end sm:justify-center mb-2 lg:mb-0 mr-2 lg:mr-0">
+                            <i class="fas fa-euro-sign text-xs mr-2"></i>  
                             Filtrar
                         </button>
                     </form>
@@ -43,9 +42,9 @@
 
                 <!-- Filtro por Nivel -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-between  lg:justify-center lg:space-x-4">
+                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-center  lg:justify-between sm:space-x-4">
                         <div class="flex-grow mr-2" >
-                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 justify-start lg:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
+                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
                                 @foreach($levels as $level)
                                     <option value="{{ $level->id }}">{{ $level->name }}</option>
@@ -53,7 +52,7 @@
                             </select>
                         </div>
                         
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-end lg:justify-center mb-2 lg:mb-0 mr-2 lg:mr-0">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-end sm:justify-center mb-2 lg:mb-0 mr-2 lg:mr-0">
                             <i class="fas fa-filter text-xs mr-2"></i>  
                             Filtrar
                         </button>
