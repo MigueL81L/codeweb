@@ -2,7 +2,7 @@
     <div class="bg-gray-200 py-4 mb-16">  
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">  
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-4 lg:py-4"> 
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-4 lg:py-4 lg:px-4"> 
                 <!-- Filtro por Precio -->
                 <div class="col-span-1">
                     <form wire:submit.prevent="filterPrices" class="flex items-center justify-around  ">
