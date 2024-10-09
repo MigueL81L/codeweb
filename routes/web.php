@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Instructor\CourseController;
@@ -23,6 +24,7 @@ require __DIR__.'/externos.php';
 Route::get('/', function () {
     return redirect()->route('register'); // Cambia 'register' si tu ruta para el registro tiene un nombre específico
 })->middleware('guest'); // Asegúrate de que solo los usuarios no autenticados vean esto.
+
 
 
 Route::middleware(['auth'])->group(function () {
