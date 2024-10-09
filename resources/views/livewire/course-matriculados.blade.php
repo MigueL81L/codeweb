@@ -5,7 +5,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-4 lg:py-4"> 
                 <!-- Filtro por Precio -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterPrices" class="flex items-center justify-between  lg:justify-center lg:space-x-2">
+                    <form wire:submit.prevent="filterPrices" class="flex items-center justify-between  ">
                         <div class="flex-grow mr-2">
                             <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 border-gray-300 justify-start lg:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione un Precio</option>
@@ -24,7 +24,7 @@
 
                 <!-- Filtro por Categoría -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-between  lg:justify-center lg:space-x-2">
+                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-between  ">
                         <div class="flex-grow mr-2">
                             <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 justify-start lg:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
@@ -43,7 +43,7 @@
 
                 <!-- Filtro por Nivel -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-between  lg:justify-center lg:space-x-2">
+                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-between  ">
                         <div class="flex-grow mr-2" >
                             <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 justify-start lg:justify-center mb-2 lg:mb-0 ml-2 lg:ml-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
