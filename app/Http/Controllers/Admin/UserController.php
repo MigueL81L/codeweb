@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Course;
 
 class UserController extends Controller
 {
@@ -160,47 +161,29 @@ public function update(Request $request, User $user)
 
 
     public function destroy(User $user)
-{
-    // Verifica si el usuario autenticado tiene el permiso de 'Eliminar usuarios'
-    if (Gate::denies('Eliminar usuarios')) {
-        abort(403, 'Unauthorized action.');
-    }
-
-    // Eliminar los cursos del usuario si es un instructor
-    if ($user->hasRole('Instructor')) { // Asegúrate de utilizar el nombre correcto del rol en tu proyecto
-        foreach ($user->courses as $course) {
-            // Antes de eliminar un curso, eliminar todos los datos relacionados con él
-            $course->reviews()->delete();
-            $course->goals()->delete();
-            $course->requirements()->delete();
-            foreach ($course->lessons as $lesson) {
-                if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-                    Storage::delete($lesson->video_path);
-                }
-                if ($lesson->image_path && Storage::exists($lesson->image_path)) {
-                    Storage::delete($lesson->image_path);
-                }
-                $lesson->delete();
-            }
-            $course->sections()->delete();
-            if ($course->courseImage) {
-                if (Storage::exists($course->courseImage->path)) {
-                    Storage::delete($course->courseImage->path);
-                }
-                $course->courseImage->delete();
-            }
-            if ($course->video_path && Storage::exists($course->video_path)) {
-                Storage::delete($course->video_path);
-            }
-            $course->delete();
+    {
+        // Verifica si el usuario autenticado tiene el permiso de 'Eliminar usuarios'
+        if (Gate::denies('Eliminar usuarios')) {
+            abort(403, 'Unauthorized action.');
         }
+    
+        // Eliminar cursos si el usuario es un instructor
+        if ($user->hasRole('Instructor')) {
+            // Obtener todos los cursos creados por este instructor
+            $courses = Course::where('user_id', $user->id)->get();
+    
+            // Eliminar cada curso
+            foreach ($courses as $course) {
+                $course->delete(); // Esto debería llamar el método destroy en el controlador CourseController
+            }
+        }
+    
+        // Finalmente, elimina el usuario
+        $user->delete();
+    
+        return redirect()->route('admin.users.index')->with('info', 'Usuario eliminado con éxito');
     }
-
-    // Elimina el usuario
-    $user->delete();
-
-    return redirect()->route('admin.users.index')->with('info', 'Usuario eliminado con éxito');
-}
+    
 
 } 
 
