@@ -146,9 +146,15 @@ class Course extends Model
 
     //Relación de cursos con usuarios, mediante la tabla course_user
     //Relación uno a muchos, inversa
-    public function teacher(){
+    // public function teacher(){
+    //     return $this->belongsTo(User::class, 'user_id');
+    // }
+    // En el modelo Course.php
+    public function teacher()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
+
     public function level(){
         return $this->belongsTo(Level::class);
     }
