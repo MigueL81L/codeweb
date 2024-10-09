@@ -2,6 +2,27 @@
     <div class="bg-gray-200 py-4 mb-16">  
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex sm:justify-center"> 
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-4 lg:py-4">
+
+                <!-- Filtro por Categoría -->
+                <div class="col-span-1">
+                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-center  lg:justify-between sm:space-x-4">
+                        <div class="flex-grow mr-2">
+                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 sm:mb-0 ml-2 sm:ml-0 rounded-lg">
+                                <option class="py-2" value="">Seleccione una Categoría</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-end sm:justify-center mb-2 sm:mb-0 mr-2 sm:mr-0">
+                            <i class="fas fa-th-list text-xs mr-2"></i>  
+                            Filtrar
+                        </button>
+                    </form>
+                </div>
+
+
                 <!-- Filtro por Precio -->
                 <div class="col-span-1">
                     <form wire:submit.prevent="filterPrices" class="flex items-center justify-center  lg:justify-between sm:space-x-4">
@@ -21,29 +42,9 @@
                     </form>
                 </div>
 
-
-                <!-- Filtro por Categoría -->
-                <div class="col-span-1">
-                    <form wire:submit.prevent="filterCategories" class="flex items-center justify-between  sm:justify-center sm:space-x-4">
-                        <div class="flex-grow mr-2">
-                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 sm:mb-0 ml-2 sm:ml-0 rounded-lg">
-                                <option class="py-2" value="">Seleccione una Categoría</option>
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded justify-end sm:justify-center mb-2 sm:mb-0 mr-2 sm:mr-0">
-                            <i class="fas fa-th-list text-xs mr-2"></i>  
-                            Filtrar
-                        </button>
-                    </form>
-                </div>
-
                 <!-- Filtro por Nivel -->
                 <div class="col-span-1">
-                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-between  sm:justify-center sm:space-x-4">
+                    <form wire:submit.prevent="filterLevels" class="flex items-center justify-center  lg:justify-between sm:space-x-4">
                         <div class="flex-grow mr-2">
                             <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 border-gray-300 justify-start sm:justify-center mb-2 sm:mb-0 ml-2 sm:ml-0 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
