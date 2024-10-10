@@ -20,8 +20,8 @@
 
         <!-- Scripts Importación de estilos, entre otros de tailwind-->
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-        <link rel="stylesheet" href="{{ asset('build/assets/app-BtxJ_aVk.css') }}">
-        <script src="{{ asset('build/assets/app-BDXrVzKj.js') }}" defer></script>
+        <link rel="stylesheet" href="{{ asset('build/assets/app-KEcVs8Hg.css') }}">
+        <script src="{{ asset('build/assets/app-49Ykkm2g.js') }}" defer></script>
 
         <!--Importo la librería del plugin fontawesome-free de adminlte para las estrillitas del rating-->
         <link rel="stylesheet" href="{{asset('./vendor/almasaeed2010/adminlte/plugins/fontawesome-free/css/all.min.css')}}">
