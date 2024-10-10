@@ -173,51 +173,53 @@ class UserController extends Controller
         if ($user->hasRole('Instructor')) {
             Log::info("Eliminando cursos del instructor de id: {$user->id}");
     
-            // Obtener los cursos que pertenecen a este instructor
-            $courses = Course::where('user_id', $user->id)->get();
+            // Obtener todos los courses de la bbdd
+            $courses = Course::all();
     
-            // Iterar sobre cada curso y eliminar todos los recursos relacionados
+            // Iterar sobre cada curso y en caso de que este user sea su profesor, eliminar todos los recursos relacionados
             foreach ($courses as $course) {
                 Log::info("Eliminando curso de id: {$course->id}");
-    
-                // Eliminar los datos relacionados con el curso
-                $course->reviews()->delete();
-                $course->goals()->delete();
-                $course->requirements()->delete();
-    
-                foreach ($course->lessons as $lesson) {
-                    if ($lesson->video_path && Storage::exists($lesson->video_path)) {
-                        Storage::delete($lesson->video_path);
+
+                if($course->teacher->id==$user->id){
+                    // Eliminar los datos relacionados con el curso
+                    $course->reviews()->delete();
+                    $course->goals()->delete();
+                    $course->requirements()->delete();
+        
+                    foreach ($course->lessons as $lesson) {
+                        if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                            Storage::delete($lesson->video_path);
+                        }
+                        if ($lesson->image_path && Storage::exists($lesson->image_path)) {
+                            Storage::delete($lesson->image_path);
+                        }
+                        $lesson->delete();
+                        Log::info("Eliminada lección de id: {$lesson->id}");
                     }
-                    if ($lesson->image_path && Storage::exists($lesson->image_path)) {
-                        Storage::delete($lesson->image_path);
+        
+                    $course->sections()->delete();
+                    Log::info("Secciones eliminadas para curso de id: {$course->id}");
+        
+                    if ($course->courseImage) {
+                        if (Storage::exists($course->courseImage->path)) {
+                            Storage::delete($course->courseImage->path);
+                        }
+                        $course->courseImage->delete();
+                        Log::info("Imagen del curso de id: {$course->id} eliminada.");
                     }
-                    $lesson->delete();
-                    Log::info("Eliminada lección de id: {$lesson->id}");
-                }
-    
-                $course->sections()->delete();
-                Log::info("Secciones eliminadas para curso de id: {$course->id}");
-    
-                if ($course->courseImage) {
-                    if (Storage::exists($course->courseImage->path)) {
-                        Storage::delete($course->courseImage->path);
+        
+                    if ($course->video_path && Storage::exists($course->video_path)) {
+                        Storage::delete($course->video_path);
+                        Log::info("Video del curso de id: {$course->id} eliminado.");
                     }
-                    $course->courseImage->delete();
-                    Log::info("Imagen del curso de id: {$course->id} eliminada.");
+        
+                    $course->delete();
+                    Log::info("Curso de id: {$course->id} eliminado.");
                 }
-    
-                if ($course->video_path && Storage::exists($course->video_path)) {
-                    Storage::delete($course->video_path);
-                    Log::info("Video del curso de id: {$course->id} eliminado.");
-                }
-    
-                $course->delete();
-                Log::info("Curso de id: {$course->id} eliminado.");
             }
         }
     
-        // Finalmente, elimina el usuario después de eliminar todos sus cursos
+        // Finalmente, elimina el usuario después de eliminar todos sus cursos. O lo elimina directamente si el user no es instructor, o lo es, sin courses creados
         Log::info("Eliminando usuario de id: {$user->id}");
         $user->delete();
     
