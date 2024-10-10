@@ -21,12 +21,6 @@ require __DIR__.'/admin.php';
 require __DIR__.'/externos.php';
 
 
-Route::get('/', function () {
-    return redirect()->route('register'); // Cambia 'register' si tu ruta para el registro tiene un nombre específico
-})->middleware('guest'); // Asegúrate de que solo los usuarios no autenticados vean esto.
-
-
-
 Route::middleware(['auth'])->group(function () {
 
 // Ruta para mostrar el video de una lección específica de un curso para el que el usuario está matriculado
