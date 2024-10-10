@@ -46,7 +46,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="mb-8">
                 {{ $slot }}
             </main>
 
