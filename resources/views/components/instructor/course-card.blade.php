@@ -6,7 +6,7 @@
 
 <article class="card">
     <!-- Usa el accesor `image` para la imagen del curso -->
-    <img src="{{ $course->image }}" alt="Imagen del Curso" class="w-full h-36 object-cover">
+    <img src="{{ $course->image }}" alt="Imagen del Curso" class="w-full h-36 object-cover"> 
 
     <div class="card-body">
         <!--Mediante el helper Str y el método limit, limito los títulos a como mucho 40

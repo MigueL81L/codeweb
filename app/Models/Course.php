@@ -116,7 +116,7 @@ class Course extends Model
             get:function($value)
             {
                 //Retorna la ruta de la imagen, si existe, sino retorna la ruta a una imagen de que falta imagen
-                return $this->image_path ? Storage::url($this->image_path) : 
+                return $this->image_path ? url('storage/app/public/' . $this->image_path): 
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0epPorxaqWUlE65AQYNJtbcfwWr2I71b7vOLtRi4PxeiysCeNtmxGvbc_tA&s';
             }
         );
