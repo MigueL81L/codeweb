@@ -16,11 +16,11 @@ class CategorySeeder extends Seeder
     {
         $categories=[
             'Desarrollo Web',
-            'Diseño Web',
             'Desarrollo Móvil',
-            'Diseño Móvil',
-            'Desarrollo de Videojuegos',
-            'Diseño de Videojuegos',
+            'Desarrollo Videojuegos',
+            'Bases de datos',
+            'Ofimática',
+            'Ciberseguridad',
         ];
 
         foreach ($categories as $category) {
