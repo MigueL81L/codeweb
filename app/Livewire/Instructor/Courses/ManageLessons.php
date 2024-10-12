@@ -114,7 +114,7 @@ class ManageLessons extends Component
         // Procesar el video
         if ($this->lessonCreate['platform'] == 1 && $this->lessonCreate['video'] instanceof UploadedFile) {
             // Almacenar el video y verificar la asignación
-            $path = $this->lessonCreate['video']->store('courses/lessons', 'public');
+            $path = $this->lessonCreate['video']->store('app/public/courses/lessons', 'public');
             if ($path) { // Verificar que se haya almacenado correctamente
                 $lessonData['video_path'] = $path;
                 $lessonData['video_original_name'] = $this->lessonCreate['video']->getClientOriginalName();
