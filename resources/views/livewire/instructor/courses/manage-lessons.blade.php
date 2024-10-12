@@ -89,7 +89,7 @@
                                 <p class="text-sm">
                                     Video: 
                                     @if($lesson->platform == 1 && $lesson->video_path)
-                                        <a href="{{ Storage::url('app/public' . $lesson->video_path) }}" class="text-blue-600" target="_blank">
+                                        <a href="{{ Storage::url('app/public/' . $lesson->video_path) }}" class="text-blue-600" target="_blank">
                                             {{ $lesson->video_original_name }}
                                         </a>
                                     @elseif($lesson->platform == 2)
