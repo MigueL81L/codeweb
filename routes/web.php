@@ -59,8 +59,8 @@ Route::get('course-status/{course}', function (Course $course) {
     return view('courses.status', ['course' => $course]); 
 })->name('courses.status')->middleware('auth');
 
-Route::get('courses-status/{course}', [CourseController::class, 'status'])
-->name('courses.status');
+// Route::get('courses-status/{course}', [CourseController::class, 'status'])
+// ->name('courses.status');
 
 
 
