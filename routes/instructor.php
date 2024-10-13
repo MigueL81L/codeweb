@@ -16,7 +16,16 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Las 7 rutas típicas del CRUD de courses
-    Route::resource('courses', CourseController::class);
+    // Route::resource('courses', CourseController::class);
+
+    // Rutas para el CRUD de cursos
+    Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('courses/create', [CourseController::class, 'create'])->name('courses.create');
+    Route::post('courses', [CourseController::class, 'store'])->name('courses.store');
+    // Route::get('courses/{course}', [CourseController::class, 'show'])->name('courses.show'); 
+    Route::get('courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+    Route::put('courses/{course}', [CourseController::class, 'update'])->name('courses.update');
+    Route::delete('courses/{course}', [CourseController::class, 'destroy'])->name('instructor.courses.destroy');
 
     // Ruta para subir un video a un curso
     Route::get('courses/{course}/video', [CourseController::class, 'video'])->name('courses.video');
@@ -30,15 +39,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Ruta para el curriculum de cada curso
     Route::get('courses/{course}/curriculum', [CourseController::class, 'curriculum'])->name('courses.curriculum');
-
-
-
-    
-
-    //Ruta para liquidar un course determinado
-    Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('instructor.courses.destroy');
-
-
 
     // Ruta para la pagina del instructor, que mostrará los courses de este
     // Route::get('/instructor-courses/{user}', [InstructorController::class, 'bring'])
