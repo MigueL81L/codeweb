@@ -184,7 +184,13 @@
         </div>
     @endif
 
-    <div x-data="{ progress: 0, uploading: false, platform: @entangle('lessonCreate.platform') }"
+    <div x-data="{ 
+            progress: 0, 
+            uploadingCreate: false, 
+            uploadingEdit: false, 
+            platformCreate: @entangle('lessonCreate.platform'), 
+            platformEdit: @entangle('lessonEdit.platform')
+        }"
          x-init="Sortable.create($refs.lessonList, { group: 'lessons', animation: 150, handle: '.handle', onEnd: function (evt) { let order = Array.from(evt.from.children).map(child => child.dataset.id); $wire.sortLessons(order); } })">
         
         <!-- Lista de lecciones -->
@@ -216,8 +222,18 @@
                                 <div class="mt-2">
                                     @if($lesson->platform == 1)
                                         <x-label>Video</x-label>
-                                        <x-input type="file" wire:model="lessonEdit.video" accept="video/*" class="w-full" />
+                                        <x-input type="file" wire:model="lessonEdit.video" accept="video/*" class="w-full" 
+                                                 @change="uploadingEdit = true"
+                                                 x-on:livewire-upload-start="uploadingEdit = true"
+                                                 x-on:livewire-upload-finish="uploadingEdit = false"
+                                                 x-on:livewire-upload-error="uploadingEdit = false"
+                                                 x-on:livewire-upload-progress="progress = $event.detail.progress"
+                                        />
                                         <x-input-error for="lessonEdit.video" />
+                                        <!-- Barra de Progreso -->
+                                        <div class="mt-2" x-show="uploadingEdit">
+                                            <progress max="100" x-bind:value="progress" class="w-full"></progress>
+                                        </div>
                                     @elseif($lesson->platform == 2)
                                         <x-label>Video YouTube</x-label>
                                         <x-input wire:model="lessonEdit.url" placeholder="Ingrese la URL de YouTube" class="w-full" />
@@ -229,7 +245,8 @@
                                         Cancelar
                                     </x-danger-button>
                                     <div class="ml-2">
-                                        <x-button>
+                                        <!-- Desactiva botón mientras se sube el archivo -->
+                                        <x-button x-bind:disabled="uploadingEdit">
                                             Actualizar
                                         </x-button>
                                     </div>
@@ -269,7 +286,7 @@
                                 <p class="text-sm">
                                     Video: 
                                     @if($lesson->platform == 1 && $lesson->video_path)
-                                        <a href="{{ Storage::url('app/public/' . $lesson->video_path) }}" class="text-blue-600" target="_blank">
+                                        <a href="{{ Storage::url($lesson->video_path) }}" class="text-blue-600" target="_blank">
                                             {{ $lesson->video_original_name }}
                                         </a>
                                     @elseif($lesson->platform == 2)
@@ -288,9 +305,9 @@
         </ul>
 
         <!-- Componente para creación de nuevas lecciones -->
-        <div x-data="{ open:@entangle('lessonCreate.open'), platform:@entangle('lessonCreate.platform') }">
+        <div x-data="{ open:@entangle('lessonCreate.open'), platformCreate:@entangle('lessonCreate.platform') }">
             <div x-on:click="open = !open" class="h-6 w-12 -ml-4 bg-indigo-200 hover:bg-indigo-300 flex items-center justify-center cursor-pointer" style="clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 51%, 0% 0%);">
-                <i class="-ml-2 text-sm fas fa-plus transition duration-300" :class="{ 'transform rotate-45': open, 'transform rotate-0': !open }"></i>
+                <i class="ml-1 text-sm fas fa-plus transition duration-300" :class="{ 'transform rotate-45': open, 'transform rotate-0': !open }"></i>
             </div>
             <form wire:submit.prevent="store" class="mt-4 bg-white rounded-lg shadow-lg" x-show="open" x-transition x-cloak enctype="multipart/form-data">
                 <div class="p-6">
@@ -314,31 +331,31 @@
                     <div class="mt-2">
                         <x-label class="mb-1">Plataformas</x-label>  
                         <div class="md:flex md:items-center md:space-x-4 space-y-4 md:space-y-0">
-                            <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 1 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 1">
+                            <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platformCreate == 1 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platformCreate = 1">
                                 <i class="fas fa-video text-2xl"></i>
                                 <span class="text-sm mt-2">Video</span>
                             </button>
-                            <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platform == 2 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platform = 2">
+                            <button type="button" class="inline-flex flex-col justify-center items-center w-full md:w-20 h-24 border rounded" :class="platformCreate == 2 ? 'border-indigo-500 text-indigo-500':'border-gray-300'" x-on:click="platformCreate = 2">
                                 <i class="fab fa-youtube text-2xl"></i>
                                 <span class="text-sm mt-2">Youtube</span>
                             </button>
                         </div>
-                        <div class="mt-2" x-show="platform == 1" x-cloak>
+                        <div class="mt-2" x-show="platformCreate == 1" x-cloak>
                             <x-label>Video</x-label>
                             <x-input type="file" wire:model="lessonCreate.video" accept="video/*" class="w-full" 
-                                     @click="uploading = true"
-                                     x-on:livewire-upload-start="uploading = true"
-                                     x-on:livewire-upload-finish="uploading = false"
-                                     x-on:livewire-upload-error="uploading = false"
+                                     @click="uploadingCreate = true"
+                                     x-on:livewire-upload-start="uploadingCreate = true"
+                                     x-on:livewire-upload-finish="uploadingCreate = false"
+                                     x-on:livewire-upload-error="uploadingCreate = false"
                                      x-on:livewire-upload-progress="progress = $event.detail.progress"
                             />
                             <x-input-error for="lessonCreate.video" />
                             <!-- Barra de Progreso -->
-                            <div class="mt-2" x-show="uploading">
+                            <div class="mt-2" x-show="uploadingCreate">
                                 <progress max="100" x-bind:value="progress" class="w-full"></progress>
                             </div>
                         </div>
-                        <div class="mt-2" x-show="platform == 2" x-cloak>
+                        <div class="mt-2" x-show="platformCreate == 2" x-cloak>
                             <x-label>Video YouTube</x-label>
                             <x-input wire:model="lessonCreate.url" placeholder="Ingrese la URL de YouTube" class="w-full" />
                             <x-input-error for="lessonCreate.url" />  
@@ -351,7 +368,7 @@
                     <x-danger-button x-on:click="open = false">Cancelar</x-danger-button>
                     <div class="ml-2">
                         <!-- Desactiva botón mientras se sube el archivo -->
-                        <x-button x-bind:disabled="uploading">
+                        <x-button x-bind:disabled="uploadingCreate">
                             Guardar
                         </x-button>
                     </div>
@@ -367,6 +384,7 @@
         });
     </script>
 </div>
+
 
 
 
