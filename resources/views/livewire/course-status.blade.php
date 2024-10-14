@@ -2,7 +2,7 @@
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
-                @if ($this->current)
+                @if ($this->current) 
                     <!-- Mostrar el video/iframe de acuerdo con el método getIframeAttribute -->
                     {!! $this->current->iframe !!}
 

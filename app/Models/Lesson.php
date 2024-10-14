@@ -84,7 +84,7 @@ class Lesson extends Model
         $videoId = $matches[3] ?? null;
 
         if ($videoId) {
-            return "https://www.youtube.com/embed/" . $videoId;
+            return "https://www.youtube.com/embed/" . $videoId; 
         }
 
         return null;
@@ -99,6 +99,7 @@ class Lesson extends Model
             }
         } elseif ($this->platform == 1 && $this->video_path) {
             $videoUrl = route('instructor.video.show', $this->id);
+            // $videoUrl = route('videos.show', $this->id);
             return '<iframe width="560" height="315" src="' . $videoUrl . '" frameborder="0" allowfullscreen></iframe>';
         }
     

@@ -11,6 +11,6 @@ class VideoLessonController extends Controller
     public function show($id)
     {
         $lesson = Lesson::findOrFail($id);
-        return view('videos.show', compact('lesson'));
+        return view('videos.show', compact('lesson')); 
     }
 }
