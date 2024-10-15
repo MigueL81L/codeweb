@@ -20,7 +20,7 @@
                     <div class="mt-4">
                         @if ($this->current->document_path)
                             <h2 class="font-bold">Archivo Adjunto:</h2>
-                            <a href="{{ Storage::url($this->current->document_path) }}" class="text-blue-500 hover:underline" target="_blank">Ver/Descargar Documento</a>
+                            <a href="{{ Storage::url('app/public/' . $this->current->document_path) }}" class="text-blue-500 hover:underline" target="_blank">Ver/Descargar Documento</a>
                         @else
                             <p class="italic">No hay archivos adjuntos para esta lección.</p>
                         @endif
