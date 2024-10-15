@@ -513,7 +513,7 @@ por sustitución de video, o por adición, si no existe,pero falla la eliminaci�
                                 @if($lesson->document_path)
                                     <p class="text-sm">
                                         Documento: 
-                                        <a href="{{ Storage::url($lesson->document_path) }}" class="text-blue-600" target="_blank">
+                                        <a href="{{ Storage::url('app/public/' . $lesson->document_path) }}" class="text-blue-600" target="_blank">
                                             {{ $lesson->document_original_name }}
                                         </a>
                                     </p>
