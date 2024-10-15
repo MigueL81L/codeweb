@@ -55,7 +55,7 @@ class Lesson extends Model
         return $this->users->contains(auth()->user()->id);
     }
 
-    //Método para determinar el tipo de video, en caso de que sea subido desde el ordenador
+    //Método para determinar el tipo de video, en caso de que sea subido desde el ordenador 
     public function getVideoType($filename)
     {
          $extension = pathinfo($filename, PATHINFO_EXTENSION);

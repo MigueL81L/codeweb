@@ -63,19 +63,36 @@ return [
     |
     */
 
+    // 'temporary_file_upload' => [
+    //     'disk' => null,        // Example: 'local', 's3'              | Default: 'default'
+    //     'rules' => ['required', 'file', 'max:256000'], // Cambiado de 12288 a 256000 para 250 MB 
+    //     'directory' => null,   // Example: 'tmp'                      | Default: 'livewire-tmp'
+    //     'middleware' => null,  // Example: 'throttle:5,1'             | Default: 'throttle:60,1'
+    //     'preview_mimes' => [   // Supported file types for temporary pre-signed file URLs...
+    //         'png', 'gif', 'bmp', 'svg', 'wav', 'mp4',
+    //         'mov', 'avi', 'wmv', 'mp3', 'm4a',
+    //         'jpg', 'jpeg', 'mpga', 'webp', 'wma',
+    //     ],
+    //     'max_upload_time' => 5, // Max duration (in minutes) before an upload is invalidated...
+    //     'cleanup' => true, // Should cleanup temporary uploads older than 24 hrs...
+    // ],
+
     'temporary_file_upload' => [
-        'disk' => null,        // Example: 'local', 's3'              | Default: 'default'
-        'rules' => ['required', 'file', 'max:256000'], // Cambiado de 12288 a 256000 para 250 MB
-        'directory' => null,   // Example: 'tmp'                      | Default: 'livewire-tmp'
-        'middleware' => null,  // Example: 'throttle:5,1'             | Default: 'throttle:60,1'
-        'preview_mimes' => [   // Supported file types for temporary pre-signed file URLs...
-            'png', 'gif', 'bmp', 'svg', 'wav', 'mp4',
-            'mov', 'avi', 'wmv', 'mp3', 'm4a',
-            'jpg', 'jpeg', 'mpga', 'webp', 'wma',
-        ],
-        'max_upload_time' => 5, // Max duration (in minutes) before an upload is invalidated...
-        'cleanup' => true, // Should cleanup temporary uploads older than 24 hrs...
+    'disk' => null,        // Example: 'local', 's3'              | Default: 'default'
+    'rules' => ['required', 'file', 'max:1331200'], // Cambiado a 1.3GB en KB
+    'directory' => null,   // Example: 'tmp'                      | Default: 'livewire-tmp'
+    'middleware' => null,  // Example: 'throttle:5,1'             | Default: 'throttle:60,1'
+    'preview_mimes' => [   // Supported file types for temporary pre-signed file URLs...
+        'png', 'gif', 'bmp', 'svg', 'wav', 'mp4',
+        'mov', 'avi', 'wmv', 'mp3', 'm4a',
+        'jpg', 'jpeg', 'mpga', 'webp', 'wma',
+        'flv', '3gp', // De getVideoType() en Lesson.php
+        'pdf', // Añadido PDF type
     ],
+    'max_upload_time' => 5, // Max duration (in minutes) before an upload is invalidated...
+    'cleanup' => true, // Should cleanup temporary uploads older than 24 hrs...
+],
+
 
     /*
     |---------------------------------------------------------------------------

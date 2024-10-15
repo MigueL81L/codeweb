@@ -64,20 +64,22 @@ class ManageLessons extends Component
 
     public function rules()
     {
-
         Log::info('Validación iniciada');
-
+    
         return [
             'lessonCreate.name' => ['required', new UniqueLessonCourse($this->section->course_id)],
             'lessonCreate.platform' => 'required|in:1,2',
             'lessonCreate.description' => 'nullable|string',
-            'lessonCreate.document' => 'nullable|file|mimes:pdf|max:2048',
-
-
-            'lessonEdit.video' => 'nullable|file|mimes:mp4|max:256000',
+    
+            // Debería elevar el tamaño máximo de los documents. Ahora 5 MB
+            'lessonCreate.document' => 'nullable|file|mimes:pdf|max:5120',
+            'lessonCreate.video' => 'nullable|file|mimes:mp4,avi,mov,wmv,flv,3gp|max:1331200', 
+    
+            'lessonEdit.video' => 'nullable|file|mimes:mp4,avi,mov,wmv,flv,3gp|max:1331200',
+            'lessonEdit.document' => 'nullable|file|mimes:pdf|max:5120',
         ];
-
     }
+    
 
     public function store()
 {
