@@ -136,12 +136,13 @@
                         @else
                             <!--LLamada al componenete carrito de la compra y sus botones-->
                             <!--Deberían sustituir al "LLevar este curso", deberían tener el precio encima-->
+                            
                             @if ($course->price->value==0)
-                                <h1 class="font-bold text-gray-500 text-2xl">Curso Gratuito</h1>
+                                <h1 class="font-bold text-gray-500 text-2xl mb-2">Curso Gratuito</h1>
                             @else
-                                <h1 class="font-bold text-gray-500 text-2xl">{{$course->price->value}} €</h1>
+                                <h1 class="font-bold text-gray-500 text-2xl mb-2">{{$course->price->value}} €</h1>
                             @endif
-                           
+
                             @livewire('course-enrolled', ['course' => $course])
                             {{-- <form action="{{route('course.enrolled', $course)}}" method="post">
                                 @csrf 
