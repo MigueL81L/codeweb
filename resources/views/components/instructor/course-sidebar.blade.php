@@ -47,11 +47,12 @@
                                 </a>
                             </li>        --}}
 
-                            <li class="{{$link['active'] ? 'lg:border-l-4 lg:border-indigo-400 border-t-4' : 'border-transparent'}} text-center lg:text-left lg:pl-3">
-                                <a href="{{$link['url']}}">
-                                    {{$link['name']}}
+                            <li class="{{ $link['active'] ? 'border-indigo-400' : 'border-transparent' }} lg:border-l-4 border-b-4 text-center lg:text-left lg:pl-3">
+                                <a href="{{ $link['url'] }}" class="block">
+                                    {{ $link['name'] }}
                                 </a>
-                            </li>                            
+                            </li>
+                                                     
                         @endforeach
                     </ul>
             </nav>
