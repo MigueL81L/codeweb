@@ -10,11 +10,11 @@
             'url'=>route('instructor.courses.edit', $course),
             'active'=>request()->routeIs('instructor.courses.edit')
         ],
-        [
-            'name'=>'Video Promocional',
-            'url'=>route('instructor.courses.video', $course),
-            'active'=>request()->routeIs('instructor.courses.video')
-        ],
+        // [
+        //     'name'=>'Video Promocional',
+        //     'url'=>route('instructor.courses.video', $course),
+        //     'active'=>request()->routeIs('instructor.courses.video')
+        // ],
         [
             'name'=>'Metas del Curso',
             'url'=>route('instructor.courses.goals', $course),
