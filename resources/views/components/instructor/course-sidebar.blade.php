@@ -1,5 +1,3 @@
-<!--Componente creado para reutilizar en varias vistas, entre ellas la vista edit.blade.php-->
-
 @props(['course'])
 
 @php
@@ -41,11 +39,11 @@
             <nav>
                     <ul class="space-y-2">
                         @foreach ($links as $link)
-                        <li class="{{$link['active'] ? 'border-indigo-400' : 'border-transparent'}} text-center lg:text-left border-b-2 pb-2">
-                            <a href="{{$link['url']}}">
-                            {{$link['name']}}
-                            </a>
-                        </li>                       
+                            <li class="{{$link['active'] ? 'border-indigo-400' : 'border-transparent'}} text-center lg:text-left border-l-4 pl-3">
+                                <a href="{{$link['url']}}">
+                                {{$link['name']}}
+                                </a>
+                            </li>       
                         @endforeach
                     </ul>
             </nav>
