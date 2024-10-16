@@ -52,7 +52,7 @@
                                     <p>{{ $lessonEdit['document_original_name'] ?? 'No hay documento adjunto' }}</p>
 
                                     <x-label class="mt-2">Reemplazar Documento (PDF)</x-label>
-                                    <x-input type="file" wire:model="lessonEdit.document" accept=".pdf"  />
+                                    <x-input type="file" wire:model="lessonEdit.document" accept=".pdf" class="w-full" />
                                     <x-input-error for="lessonEdit.document" />
                                 </div>
                                 <div class="mt-2">

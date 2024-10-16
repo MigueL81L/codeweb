@@ -1,12 +1,10 @@
 <x-instructor-layout>
     <!--Cabecera-->
-    <div class="text-center md:text-left">
         <x-slot name="header" >
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Editar Curso: {{ $course->title }}
             </h2>
         </x-slot>
-    </div>
 
     <!--Llamo al componente, le paso la información del curso, y coloco dentro algo, en este caso un formulario-->
     <!--El componente course-sidebar aplica código del componente x-container-->
