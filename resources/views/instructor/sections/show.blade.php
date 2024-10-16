@@ -1,11 +1,11 @@
 {{-- Esto va a situarse en views\livewire\instructor\courses\manage-sections.blade.php --}}
 
-<div class="md:flex md:items-center">
+<div class="flex items-center justify-between md:flex md:items-center">
     {{-- La clase handle viene del x-init, y es la que va permitir en exclusiva el 
     cambio de posición mediante arrastre de ratón --}}
     <h1 class="md:flex-1 truncate handle cursor-move">
         Sección {{$loop->iteration}}:
-        <br class="md:hidden">
+        {{-- <br class="md:hidden"> --}}
         <span class="font-semibold">{{$section->name}}</span>
     </h1>
 
