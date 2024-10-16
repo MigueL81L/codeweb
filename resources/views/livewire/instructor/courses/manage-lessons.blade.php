@@ -41,7 +41,7 @@
                             <form wire:submit.prevent="update">
                                 <div class="mt-2">
                                     <x-label>Nombre de la Lección {{$loop->iteration}}:</x-label>
-                                    <x-input wire:model="lessonEdit.name" class="flex-1" />
+                                    <x-input wire:model="lessonEdit.name" class="w-full" />
                                 </div>
                                 <div class="mt-2">
                                     <x-label>Descripción</x-label>
@@ -50,7 +50,8 @@
                                 <div class="mt-2">
                                     <x-label>Documento Actual</x-label>
                                     <p>{{ $lessonEdit['document_original_name'] ?? 'No hay documento adjunto' }}</p>
-                                    <x-label>Reemplazar Documento (PDF)</x-label>
+                                    
+                                    <x-label class="mt-2">Reemplazar Documento (PDF)</x-label>
                                     <x-input type="file" wire:model="lessonEdit.document" accept=".pdf" class="w-full" />
                                     <x-input-error for="lessonEdit.document" />
                                 </div>
