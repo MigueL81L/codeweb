@@ -39,8 +39,8 @@
                     <div x-data="{ isOpen: false }" class="bg-white rounded-lg shadow-lg px-6 py-4 handle mb-4" style="cursor: move;">
                         @if ($lessonEdit['id'] == $lesson->id)
                             <form wire:submit.prevent="update">
-                                <div class="flex items-center space-x-2">
-                                    <x-label>Lección {{$loop->iteration}}:</x-label>
+                                <div class="mt-2">
+                                    <x-label>Nombre de la Lección {{$loop->iteration}}:</x-label>
                                     <x-input wire:model="lessonEdit.name" class="flex-1" />
                                 </div>
                                 <div class="mt-2">
