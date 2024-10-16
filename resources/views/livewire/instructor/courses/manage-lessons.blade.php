@@ -50,7 +50,7 @@
                                 <div class="mt-2">
                                     <x-label>Documento Actual</x-label>
                                     <p>{{ $lessonEdit['document_original_name'] ?? 'No hay documento adjunto' }}</p>
-                                    
+
                                     <x-label class="mt-2">Reemplazar Documento (PDF)</x-label>
                                     <x-input type="file" wire:model="lessonEdit.document" accept=".pdf" class="w-full" />
                                     <x-input-error for="lessonEdit.document" />
@@ -113,18 +113,18 @@
                             </div>
                             <hr>
                             <div x-show="isOpen" x-transition x-cloak>
-                                <p class="text-sm">Descripción: {{$lesson->description ?? 'No existe descripción para esta lección'}}</p>
+                                <p class="text-sm mb-2 sm:mb-0">Descripción: {{$lesson->description ?? 'No existe descripción para esta lección'}}</p>
                                 @if($lesson->document_path)
-                                    <p class="text-sm">
+                                    <p class="text-sm mb-2 sm:mb-0">
                                         Documento: 
                                         <a href="{{ Storage::url('app/public/' . $lesson->document_path) }}" class="text-blue-600" target="_blank">
                                             {{ $lesson->document_original_name }}
                                         </a>
                                     </p>
                                 @else
-                                    <p class="text-sm">No hay documento adjunto para esta lección.</p>
+                                    <p class="text-sm mb-2 sm:mb-0">No hay documento adjunto para esta lección.</p>
                                 @endif
-                                <p class="text-sm">
+                                <p class="text-sm mb-2 sm:mb-0">
                                     Video: 
                                     @if($lesson->platform == 1 && $lesson->video_path)
                                         <a href="{{ Storage::url('app/public/' . $lesson->video_path) }}" class="text-blue-600" target="_blank">
