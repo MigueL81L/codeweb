@@ -41,11 +41,17 @@
             <nav>
                     <ul class="space-y-2">
                         @foreach ($links as $link)
-                            <li class="{{$link['active'] ? 'border-indigo-400' : 'border-transparent'}} text-center lg:text-left border-l-4 pl-3">
+                            {{-- <li class="{{$link['active'] ? 'border-indigo-400' : 'border-transparent'}} text-center lg:text-left border-l-4 pl-3">
                                 <a href="{{$link['url']}}">
                                 {{$link['name']}}
                                 </a>
-                            </li>       
+                            </li>        --}}
+
+                            <li class="{{$link['active'] ? 'lg:border-l-4 lg:border-indigo-400 border-t-4' : 'border-transparent'}} text-center lg:text-left lg:pl-3">
+                                <a href="{{$link['url']}}">
+                                    {{$link['name']}}
+                                </a>
+                            </li>                            
                         @endforeach
                     </ul>
             </nav>
