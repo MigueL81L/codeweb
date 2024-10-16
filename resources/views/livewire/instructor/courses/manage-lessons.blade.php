@@ -92,7 +92,7 @@
                                 </div>
                             </form>
                         @else
-                            <div class="md:flex md:items-center mt-2">
+                            <div class="flex items-center justify-between md:flex md:items-center mt-2"> 
                                 <h1 class="md:flex-1 truncate cursor-move">
                                     <i class="fas fa-play-circle text-blue-600"></i>
                                     Lección {{$lesson->name}}
