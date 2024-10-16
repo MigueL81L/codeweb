@@ -1,7 +1,7 @@
 <x-instructor-layout>
     <!--Cabecera-->
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center md:text-left">
+    <x-slot name="header" class="text-center md:text-left">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Editar Curso: {{ $course->title }}
         </h2>
     </x-slot>

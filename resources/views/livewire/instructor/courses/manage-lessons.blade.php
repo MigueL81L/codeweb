@@ -116,14 +116,12 @@
                                 <p class="text-sm mb-2 sm:mb-0">Descripción: {{$lesson->description ?? 'No existe descripción para esta lección'}}</p>
                                 @if($lesson->document_path)
                                     <p class="text-sm mb-2 sm:mb-0">
-                                        Documento: 
                                         <a href="{{ Storage::url('app/public/' . $lesson->document_path) }}" class="text-blue-600" target="_blank">
-                                            {{ $lesson->document_original_name }}
+                                            {{"Documento: " . $lesson->document_original_name }}
                                         </a>
                                     </p>
                                 @else
-                                    Documento:
-                                    <p class="text-sm mb-2 sm:mb-0">No hay documento adjunto para esta lección.</p>
+                                    <p class="text-sm mb-2 sm:mb-0">Documento: No hay documento adjunto para esta lección.</p>
                                 @endif
                                 <p class="text-sm mb-2 sm:mb-0">
                                     Video: 
