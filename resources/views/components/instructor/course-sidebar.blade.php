@@ -37,11 +37,11 @@
 
         <aside class="col-span-1">
 
-            <h1 class="font-bold text-xl mb-4 text-left">Edición del Curso</h1>
+            <h1 class="font-bold text-xl mb-4 text-center lg:text-left">Edición del Curso</h1>
             <nav>
                     <ul class="space-y-2">
                         @foreach ($links as $link)
-                            <li class="{{$link['active'] ? 'border-indigo-400' : 'border-transparent'}} text-left border-l-4 pl-3">
+                            <li class="{{$link['active'] ? 'border-indigo-400' : 'border-transparent'}} text-center lg:text-left border-l-4 pl-3">
                                 <a href="{{$link['url']}}">
                                 {{$link['name']}}
                                 </a>

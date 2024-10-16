@@ -89,7 +89,7 @@
                         <img id="imgPreview" src="{{ $course->image }}" alt="Imagen del Curso" class="w-full aspect-video object-cover object-center">
                     </figure>
                     <div>
-                        <p class="mt-8 mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. totam harum. Obcaecati.</p>
+                        <p class="mt-8 mb-4">Aqui podrás cambiar la foto del curso</p>
                         <label>
                             <span class="btn btn-blue flex justify-center md:hidden cursor-pointer">Seleccionar una imagen</span>
                             <input 
