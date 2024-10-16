@@ -114,7 +114,7 @@
                         </div>
                     </div>
 
-                    <div> 
+                    <div class="mt-2"> 
                         <!--Policy CoursePolicy, método enrolled-->
                         @can('enrolled', $course)
                             <p class="flex items-center mb-1">
