@@ -156,7 +156,7 @@
                 </div>
             </section>
 
-            <aside class="hidden lg:block lg:card lg:mb-4">
+            <aside class="hidden lg:card lg:mb-4">
                 <h1 class="font-bold text-3xl mb-4">Cursos Similares</h1>
                 @if ($similares->count()!=0)
                     @foreach ($similares as $similar)
