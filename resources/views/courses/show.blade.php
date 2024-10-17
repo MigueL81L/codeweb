@@ -177,7 +177,7 @@
                         </article>
                     @endforeach
                 @else
-                    <p class="text-gray-700 text-base">En este momento, no hay cursos similares a este</p>
+                    <p class="text-gray-700 text-base text-center mb-4">En este momento, no hay cursos similares a este</p>
                 @endif
             </aside>
         </div>

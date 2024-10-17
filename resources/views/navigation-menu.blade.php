@@ -326,7 +326,7 @@
                             <span 
                                 x-show="count" 
                                 x-text="count"
-                                class="absolute -top-8 right-0 inline-flex items-center justify-center w-2 py-1 text-xs font-bold text-blue-100 bg-blue-500 rounded-full">
+                                class="absolute -top-6 -left-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-blue-100 bg-blue-500 rounded-full">
                             </span>
                         </a>
                     </div>
