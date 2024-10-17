@@ -58,7 +58,7 @@
             </section>
 
             <section class="card mb-12">
-                <h1 class="font-bold text-3xl text-center sm:text-left">Requisitos</h1>
+                <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Requisitos</h1>
                 <ul class="list-disc list-inside">
                     @foreach ($course->requirements as $requirement)
                         <li class="text-gray-700 text-base">{{$requirement->name}}</li>
@@ -67,7 +67,7 @@
             </section>
 
             <section class="card mb-12">
-                <h1 class="font-bold text-3xl text-center sm:text-left">Descripción</h1> 
+                <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Descripción</h1> 
                 <div class="text-gray-700 text-base">
                     {{$course->description}}
 
@@ -78,11 +78,11 @@
             </section>
 
             <section class="card mb-12">
-                <h1 class="font-bold text-3xl mt-2 text-center sm:text-left">Reseñas</h1>
+                <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Reseñas</h1>
                 <p class="text-gray-700 text-base mb-2">Número de estudiantes matriculados: <strong>{{ $course->students_count }}</strong></p>
                 <p class="text-gray-700 text-base mb-2">Puntuación media: <strong>{{ $course->rating }}</strong></p>
             
-                <h2 class="font-bold text-2xl mt-4 mb-4 text-center sm:text-left">Últimas Reseñas</h2>
+                <h2 class="font-bold text-2xl mt-4 mb-2 text-center sm:text-left">Últimas Reseñas</h2>
                 <div class="flex space-x-4">
                     @foreach($recentReviews as $review)
                         <div class="bg-white p-4 rounded-lg shadow-md w-1/3">
