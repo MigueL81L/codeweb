@@ -101,13 +101,13 @@
                     <!--$event.detail[0] es el número de items contenidos en el carrito-->
 
                     <a href="{{route('cart.index')}}">
-                        <i class="fa-solid fa-cart-shopping text-xl text-gray-600"></i>
+                        <i class="fa-solid fa-cart-shopping text-2xl text-gray-600"></i>
 
                         <!--si count es =0, es como si fuera false-->
                         <span 
                             x-show="count" 
                             x-text="count"
-                            class="absolute -top-8 right-0 inline-flex items-center justify-center w-2 py-1 text-xs font-bold text-blue-100 bg-blue-500 rounded-full">
+                            class="absolute -top-7 right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold text-blue-100 bg-blue-500 rounded-full">
 
                         </span>
                     </a>
@@ -121,12 +121,12 @@
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
                                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                        <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                        <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition ml-2">
                                             <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                         </button>
                                     @else
                                         <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150 ml-2">
                                                 {{ Auth::user()->name }}
 
                                                 <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
