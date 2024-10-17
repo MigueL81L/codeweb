@@ -157,11 +157,11 @@
             </section>
 
             <aside class="hidden lg:block mb-4 bg-white shadow-lg rounded overflow-hidden">
-                <h1 class="font-bold text-3xl mb-4">Cursos Similares</h1>
+                <h1 class="font-bold text-3xl mb-4 text-center mt-2">Cursos Similares</h1>
                 @if ($similares->count()!=0)
                     @foreach ($similares as $similar)
                         <article class="flex mb-6">
-                            <img class="h-32 w-40 object-cover" src="{{$similar->image}}" alt="">
+                            <img class="h-32 w-40 object-cover ml-2" src="{{$similar->image}}" alt="">
 
                             <div class="ml-3">
                                 <h1><a class="font-bold text-gray-500 mb-3 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
