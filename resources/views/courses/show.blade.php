@@ -48,7 +48,7 @@
                         <div class="bg-white py-2 px-4" x-show="open">
                             <ul class="grid grid-cols-1 gap-2">
                                 @foreach ($section->lessons as $lesson)
-                                    <li class="text-gray-700 text-base text-center sm:text-left"><i class="fas fa-play-circle mr-2 text-gray-600"></i>{{$lesson->name}}</li>
+                                    <li class="text-gray-700 text-base"><i class="fas fa-play-circle mr-2 text-gray-600"></i>{{$lesson->name}}</li>
                                 @endforeach
                             </ul>
                         </div> 
@@ -61,7 +61,7 @@
                 <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Requisitos</h1>
                 <ul class="list-disc list-inside">
                     @foreach ($course->requirements as $requirement)
-                        <li class="text-gray-700 text-base text-center sm:text-left">{{$requirement->name}}</li>
+                        <li class="text-gray-700 text-base">{{$requirement->name}}</li>
                     @endforeach 
                 </ul>
             </section>
@@ -69,7 +69,7 @@
             <section class="card mb-12">
                 <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Descripción</h1> 
                 <div class="text-gray-700 text-base">
-                    <p class="text-center sm:text-left text-gray-700 text-base">{{$course->description}}</p>
+                    <p class="text-gray-700 text-base">{{$course->description}}</p>
                 
                     @if($course->description==null)
                     <p class="text-gray-700 text-base text-center sm:text-left">No hay descripción del course, todavía.</p>
@@ -79,8 +79,8 @@
 
             <section class="card mb-12">
                 <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Reseñas</h1>
-                <p class="text-gray-700 text-base mb-2 text-center sm:text-left">Número de estudiantes matriculados: <strong>{{ $course->students_count }}</strong></p>
-                <p class="text-gray-700 text-base mb-2 text-center sm:text-left">Puntuación media: <strong>{{ $course->rating }}</strong></p>
+                <p class="text-gray-700 text-base mb-2 ">Número de estudiantes matriculados: <strong>{{ $course->students_count }}</strong></p>
+                <p class="text-gray-700 text-base mb-2 ">Puntuación media: <strong>{{ $course->rating }}</strong></p>
             
                 <h2 class="font-bold text-2xl mt-4 mb-2 text-center sm:text-left">Últimas Reseñas</h2>
                 <div class="flex space-x-4">
@@ -161,7 +161,7 @@
                 @if ($similares->count()!=0)
                     @foreach ($similares as $similar)
                         <article class="flex mb-6">
-                            <img class="h-32 w-40 object-cover ml-2" src="{{$similar->image}}" alt="">
+                            <img class="h-32 w-40 object-cover ml-4" src="{{$similar->image}}" alt="">
 
                             <div class="ml-3">
                                 <h1><a class="font-bold text-gray-500 mb-3 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
