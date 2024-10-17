@@ -19,7 +19,7 @@
         <div class="order-2 lg:col-span-2 lg:order-1">
             <section class="card mb-12">
                 <div class="card-body">
-                    <h1 class="font-bold text-2xl mb-2">Lo que Aprenderás:</h1>
+                    <h1 class="font-bold text-2xl mb-2 text-center sm:text-left">Lo que Aprenderás:</h1>
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 ">
                         @foreach ($course->goals as $goal)
                             <li class="text-gray-700 text-base"><i class="fas fa-check text-gray-600 mr-2"></i>{{$goal->name}}</li>
@@ -30,7 +30,7 @@
 
             <!--Hay que crear las lessons y sections-->
             <section class="card mb-12">
-                <h1 class="font-bold text-3xl mb-2 ">Temario</h1>
+                <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Temario</h1>
 
                 @foreach ($course->sections as $section)
                     <article class="mb-4 shadow" 
@@ -58,7 +58,7 @@
             </section>
 
             <section class="card mb-12">
-                <h1 class="font-bold text-3xl">Requisitos</h1>
+                <h1 class="font-bold text-3xl text-center sm:text-left">Requisitos</h1>
                 <ul class="list-disc list-inside">
                     @foreach ($course->requirements as $requirement)
                         <li class="text-gray-700 text-base">{{$requirement->name}}</li>
@@ -67,22 +67,22 @@
             </section>
 
             <section class="card mb-12">
-                <h1 class="font-bold text-3xl">Descripción</h1> 
+                <h1 class="font-bold text-3xl text-center sm:text-left">Descripción</h1> 
                 <div class="text-gray-700 text-base">
                     {{$course->description}}
 
                     @if($course->description==null)
-                    <p class="text-gray-700 text-base mt-4">No hay descripción del course, todavía.</p>
+                    <p class="text-gray-700 text-base">No hay descripción del course, todavía.</p>
                 @endif
                 </div>
             </section>
 
             <section class="card mb-12">
-                <h1 class="font-bold text-3xl mb-4 mt-2">Reseñas</h1>
+                <h1 class="font-bold text-3xl mt-2 text-center sm:text-left">Reseñas</h1>
                 <p class="text-gray-700 text-base mb-2">Número de estudiantes matriculados: <strong>{{ $course->students_count }}</strong></p>
                 <p class="text-gray-700 text-base mb-2">Puntuación media: <strong>{{ $course->rating }}</strong></p>
             
-                <h2 class="font-bold text-2xl mt-4 mb-4">Últimas Reseñas</h2>
+                <h2 class="font-bold text-2xl mt-4 mb-4 text-center sm:text-left">Últimas Reseñas</h2>
                 <div class="flex space-x-4">
                     @foreach($recentReviews as $review)
                         <div class="bg-white p-4 rounded-lg shadow-md w-1/3">
@@ -95,7 +95,7 @@
                 </div>
 
                 @if($recentReviews->isEmpty())
-                    <p class="text-gray-700 text-base mt-4">No hay reseñas todavía.</p>
+                    <p class="text-gray-700 text-base">No hay reseñas todavía.</p>
                 @endif
             </section>
             
