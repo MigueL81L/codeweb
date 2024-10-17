@@ -239,7 +239,7 @@
 
                 <!-- User Icon Button and Cart Icon -->
 
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center mr-2 sm:mr-0">
 
                     <div class="ms-4 relative">
                         @auth
