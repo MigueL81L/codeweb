@@ -7,10 +7,10 @@
 
             <div class="text-white flex flex-col justify-center items-center">
                 <h1 class="text-4xl mb-3">{{$course->title}}</h1>
-                <p class="mb-2"><i class="fas fa-chart-line"></i>Nivel: {{$course->level->name}}</p>
-                <p class="mb-2"><i class=""></i>Categoría: {{$course->category->name}}</p>
-                <p class="mb-2"><i class="fas fa-users"></i>Matriculados: {{$course->students_count}}</p>
-                <p><i class="far fa-star"></i>Calificación: {{$course->rating}}</p>
+                <p class="mb-2"><i class="fas fa-chart-line mr-2"></i>Nivel: {{$course->level->name}}</p>
+                <p class="mb-2"><i class="fas fa-tags mr-2"></i>Categoría: {{$course->category->name}}</p>
+                <p class="mb-2"><i class="fas fa-users mr-2"></i>Matriculados: {{$course->students_count}}</p>
+                <p><i class="far fa-star mr-2"></i>Calificación: {{$course->rating}}</p>
             </div>
         </div>
     </section>
@@ -29,7 +29,7 @@
             </section>
 
             <!--Hay que crear las lessons y sections-->
-            <section>
+            <section class="card mb-12">
                 <h1 class="font-bold text-3xl mb-2 ">Temario</h1>
 
                 @foreach ($course->sections as $section)
@@ -57,7 +57,7 @@
                 @endforeach
             </section>
 
-            <section class="mt-12 mb-8">
+            <section class="card mb-12">
                 <h1 class="font-bold text-3xl">Requisitos</h1>
                 <ul class="list-disc list-inside">
                     @foreach ($course->requirements as $requirement)
@@ -66,7 +66,7 @@
                 </ul>
             </section>
 
-            <section class="mt-12 mb-8">
+            <section class="card mb-12">
                 <h1 class="font-bold text-3xl">Descripción</h1> 
                 <div class="text-gray-700 text-base">
                     {{$course->description}}
@@ -77,7 +77,7 @@
                 </div>
             </section>
 
-            <section class="mt-12 mb-8">
+            <section class="card mb-12">
                 <h1 class="font-bold text-3xl mb-4 mt-2">Reseñas</h1>
                 <p class="text-gray-700 text-base mb-2">Número de estudiantes matriculados: <strong>{{ $course->students_count }}</strong></p>
                 <p class="text-gray-700 text-base mb-2">Puntuación media: <strong>{{ $course->rating }}</strong></p>
