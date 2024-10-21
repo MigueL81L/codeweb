@@ -154,7 +154,7 @@
                         <p class="text-sm text-gray-500">Precio con IVA: {{ number_format($priceWithIva, 2) . ' €' }}</p>
                         
                         <div class="mt-4">
-                            {{-- Botón para eliminar el curso de la cesta --}}
+
                             <button wire:click="remove('{{ $item->rowId }}')" class="text-red-500 underline hover:text-red-700">
                                 Eliminar
                             </button>
@@ -168,12 +168,12 @@
                     @php
                         $totalWithIva = $cartContent->sum(fn($item) => $item->price * $item->qty * (1 + $iva));
                     @endphp
-                    {{-- Mostrar cantidad total y precio total con IVA --}}
+
                     <p class="text-lg font-semibold mr-4">
                         Total con IVA ({{ $cartContent->count() }} {{ Str::plural('Curso', $cartContent->count()) }}):
                         {{ number_format($totalWithIva, 2) }} €
                     </p>
-                    {{-- Botón para proceder con el pago y la matrícula --}}
+
                     <button wire:click="checkout" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                         Continuar con el pago
                     </button>
@@ -183,7 +183,7 @@
     @endif
     
 
-</div> --}}
+</div>  --}}
 
 
 
