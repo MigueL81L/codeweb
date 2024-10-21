@@ -83,9 +83,9 @@
                 <p class="text-gray-700 text-base mb-2 ">Puntuación media: <strong>{{ $course->rating }}</strong></p>
             
                 <h2 class="font-bold text-2xl mt-4 mb-2 text-center sm:text-left">Últimas Reseñas</h2>
-                <div class="flex space-x-4">
+                <div class="space-y-4">
                     @foreach($recentReviews as $review)
-                        <div class="bg-white p-4 rounded-lg shadow-md w-1/3">
+                        <div class="bg-white p-4 rounded-lg shadow-md w-full">
                             <p class="font-bold text-center sm:text-left">{{ $review->user->name }} </p>
                             <p><span class="text-sm text-gray-500 text-center sm:text-left">(Calificación: <strong>{{ $review->rating }}</strong>)</span></p>
                             <p class="text-gray-700 text-sm truncate text-center sm:text-left">{{ $review->comment }}</p>
