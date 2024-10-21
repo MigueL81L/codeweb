@@ -14,7 +14,7 @@
                         <p class="text-sm text-gray-500">Nombre: {{ $item->options['slug'] }}</p>
                         <p class="text-sm text-gray-500">Profesor: {{ $item->options['teacher'] }}</p>
                         <p class="text-sm text-gray-500">Categoría: {{ $item->options['category'] }}</p>
-                        <p class="text-sm text-gray-500">Precio: {{ $item->options['price'] }}</p>
+                        <p class="text-sm text-gray-500">Precio: {{ $item->options['price'] .  ' €' }}</p>
 
                         <div class="mt-4">
                             {{-- Botón para eliminar el curso de la cesta --}}
