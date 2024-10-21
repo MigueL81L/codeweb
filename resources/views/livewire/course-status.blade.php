@@ -6,7 +6,7 @@
                     <!-- Mostrar el video/iframe de acuerdo con el método getIframeAttribute. Model Lesson.php -->
                     <!-- Contenedor que usa embed-responsive --> 
                     <div class="embed-responsive w-full"> 
-                        {!! $this->current->iframe !!} <!-- El iframe ahora se adaptará mejor -->
+                        {!! $this->current->iframe !!} 
                     </div>
 
                     <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>  
