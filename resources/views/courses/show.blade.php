@@ -5,7 +5,7 @@
                 <img class="h-60 w-full object-cover" src="{{$course->image}}" alt="">
             </figure>
 
-            <div class="text-white flex flex-col justify-center ml-4 sm:ml-0 text-left sm:text center">
+            <div class="text-white flex flex-col justify-center items-center">
                 <h1 class="text-3xl mb-3">{{$course->title}}</h1>
                 <p class="mb-2"><i class="fas fa-chart-line mr-2"></i>Nivel: {{$course->level->name}}</p>
                 <p class="mb-2"><i class="fas fa-tags mr-2"></i>Categoría: {{$course->category->name}}</p>
