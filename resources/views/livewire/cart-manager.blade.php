@@ -11,9 +11,12 @@
                     
                     <div class="ml-4 flex-1">
                         <h2 class="text-lg font-bold">{{ $item->name }}</h2>
-                        <p class="text-sm text-gray-500">Nombre: {{ $item->name }}</p>
-                        <p class="text-sm text-gray-500">Profesor: {{ $item->options['teacher'] }}</p>
-                        <p class="text-sm text-gray-500">Precio: {{ $item->price .  ' €' }}</p>
+                        @php
+                            $iva = 0.10; // IVA del 10%
+                            $priceWithIva = $item->price * (1 + $iva);
+                        @endphp
+                    <p class="text-sm text-gray-500">Profesor: {{ $item->options['teacher'] ?? 'Desconocido' }}</p>
+                    <p class="text-sm text-gray-500">Precio con IVA: {{ number_format($priceWithIva, 2) . ' €' }}</p>
 
                         <div class="mt-4">
                             {{-- Botón para eliminar el curso de la cesta --}}
