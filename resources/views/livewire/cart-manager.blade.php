@@ -57,12 +57,14 @@
 
         <div class="w-full md:w-3/4 lg:w-1/2">
 
-            <h1 class="text-2xl font-semibold mb-4 text-center sm:text-start">Contenido de la Cesta</h1>
-
-            @if ($cartContent->isEmpty())   
+            @if ($cartContent->isEmpty())  
+                <h1 class="text-2xl font-semibold mb-4 text-center sm:text-start">Contenido de la Cesta</h1> 
                 <p class="text-center sm:text-start">No hay elementos en la Cesta.</p>
             @else
                 <div class="bg-white p-6 rounded-lg shadow-lg">
+
+                    <h1 class="text-2xl font-semibold mb-4 text-center sm:text-start">Contenido de la Cesta</h1>
+
                     @foreach($cartContent as $item)
                         <div class="flex items-start mb-6 pb-3 border-b border-gray-200">
                             <img src="{{ $item->options['image'] }}" alt="{{ $item->name }}" class="w-24 h-24 object-cover rounded">
