@@ -52,7 +52,7 @@
     @endif
 </div> --}}
 
-<div class="container mx-auto py-6 min-h-screen flex flex-col">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
     <h1 class="text-2xl font-semibold mb-4 text-center sm:text-start">Contenido de la Cesta</h1>
 
     @if ($cartContent->isEmpty())    <div class="flex-1 flex items-center justify-center">
@@ -110,6 +110,9 @@
         </div>
     @endif
 </div>
+
+
+
 
 
 
