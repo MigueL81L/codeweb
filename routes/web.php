@@ -24,8 +24,11 @@ require __DIR__.'/externos.php';
 Route::middleware(['auth'])->group(function () {
 
 // Ruta para mostrar el video de una lección específica de un curso para el que el usuario está matriculado
-Route::get('instructor/video/{id}', [\App\Http\Controllers\Instructor\VideoLessonController::class, 'show'])
-    ->name('instructor.video.show');
+// Route::get('instructor/video/{id}', [\App\Http\Controllers\Instructor\VideoLessonController::class, 'show'])
+//     ->name('instructor.video.show');
+
+Route::get('videos/{id}', [\App\Http\Controllers\Instructor\VideoLessonController::class, 'show'])
+    ->name('videos.show');
     
 
 Route::get('/', HomeController::class)->name('home');
