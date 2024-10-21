@@ -1,5 +1,5 @@
 <div class="container mx-auto py-6">
-    <h1 class="text-2xl font-semibold mb-4">Contenido de la Cesta</h1>
+    <h1 class="text-2xl font-semibold mb-4 text-center sm:text-start">Contenido de la Cesta</h1>
 
     @if ($cartContent->isEmpty())
         <p>No hay elementos en la Cesta.</p>
@@ -11,8 +11,10 @@
                     
                     <div class="ml-4 flex-1">
                         <h2 class="text-lg font-bold">{{ $item->name }}</h2>
-                        <p class="text-sm text-gray-500">Slug: {{ $item->options['slug'] }}</p>
+                        <p class="text-sm text-gray-500">Nombre: {{ $item->options['slug'] }}</p>
                         <p class="text-sm text-gray-500">Profesor: {{ $item->options['teacher'] }}</p>
+                        <p class="text-sm text-gray-500">Categoría: {{ $item->options['category'] }}</p>
+                        <p class="text-sm text-gray-500">Precio: {{ $item->options['price'] }}</p>
 
                         <div class="mt-4">
                             {{-- Botón para eliminar el curso de la cesta --}}
