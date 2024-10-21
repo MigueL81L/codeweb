@@ -70,7 +70,6 @@
                             $priceWithIva = $item->price * (1 + $iva);
                         @endphp
                         <p class="text-sm text-gray-500">Profesor: {{ $item->options['teacher'] ?? 'Desconocido' }}</p>
-                        <p class="text-sm text-gray-500">Precio sin IVA: {{ number_format($item->price, 2) . ' €' }}</p>
                         <p class="text-sm text-gray-500">Precio con IVA: {{ number_format($priceWithIva, 2) . ' €' }}</p>
                         
                         <div class="mt-4">
@@ -90,7 +89,7 @@
                     @endphp
                     {{-- Mostrar cantidad total y precio total con IVA --}}
                     <p class="text-lg font-semibold mr-4">
-                        Total ({{ $cartContent->count() }} {{ Str::plural('Curso', $cartContent->count()) }}):
+                        Total con IVA ({{ $cartContent->count() }} {{ Str::plural('Curso', $cartContent->count()) }}):
                         {{ number_format($totalWithIva, 2) }} €
                     </p>
                     {{-- Botón para proceder con el pago y la matrícula --}}
