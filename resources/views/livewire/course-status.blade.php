@@ -3,10 +3,10 @@
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
             <div class="lg:col-span-2">
                 @if ($this->current) 
-                    <!-- Mostrar el video/iframe de acuerdo con el método getIframeAttribute -->
-                    <div class="overflow-hidden">
-                        <div class="aspect-w-16 aspect-h-9"> <!-- Mantiene la relación de aspecto -->
-                            {!! $this->current->iframe !!} <!-- Tu video/iframe -->
+                    <!-- Mostrar el video/iframe de acuerdo con el método getIframeAttribute. Model Lesson.php -->
+                    <div class="overflow-hidden w-full"> <!-- Asegura el ancho completo -->
+                        <div class="relative pb-9/16"> <!-- Mantiene la relación de aspecto -->
+                            {!! $this->current->iframe !!}
                         </div>
                     </div>
 
