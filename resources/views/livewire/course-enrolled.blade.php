@@ -16,14 +16,14 @@
             <button 
                 wire:key="removeCart"
                 wire:click="removeCart"
-                class="btn btn-blue w-full uppercase mb-2"> 
+                class="btn btn-blue w-full uppercase mb-4"> 
                     Eliminar de la cesta
             </button>
             @else
                 <button 
                     wire:key="addCart"
                     wire:click="addCart"
-                    class="btn btn-blue w-full uppercase mb-2">
+                    class="btn btn-blue w-full uppercase mb-4">
                         Agregar a la cesta
                 </button>
             @endif
