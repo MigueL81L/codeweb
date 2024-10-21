@@ -6,7 +6,7 @@
             </figure>
 
             <div class="text-white flex flex-col justify-center items-center">
-                <h1 class="text-4xl mb-3">{{$course->title}}</h1>
+                <h1 class="text-3xl mb-3">{{$course->title}}</h1>
                 <p class="mb-2"><i class="fas fa-chart-line mr-2"></i>Nivel: {{$course->level->name}}</p>
                 <p class="mb-2"><i class="fas fa-tags mr-2"></i>Categoría: {{$course->category->name}}</p>
                 <p class="mb-2"><i class="fas fa-users mr-2"></i>Matriculados: {{$course->students_count}}</p>
@@ -88,7 +88,7 @@
                         <div class="bg-white p-4 rounded-lg shadow-md w-full">
                             <p class="font-bold text-center sm:text-left">{{ $review->user->name }} </p>
                             <p><span class="text-sm text-gray-500 text-center sm:text-left">(Calificación: <strong>{{ $review->rating }}</strong>)</span></p>
-                            <p class="text-gray-700 text-sm truncate text-center sm:text-left">{{ $review->comment }}</p>
+                            <p class="text-gray-700 text-sm truncate text-left">{{ $review->comment }}</p>
                             <button class="text-blue-500 text-xs text-center sm:text-left" onclick="this.previousElementSibling.classList.toggle('truncate'); this.classList.toggle('hidden')">Leer más</button>
                         </div>
                     @endforeach
