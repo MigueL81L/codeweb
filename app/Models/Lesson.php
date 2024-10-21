@@ -95,12 +95,12 @@ class Lesson extends Model
         if ($this->platform == 2 && $this->video_original_name) {
             $embedUrl = $this->getYoutubeEmbedUrl($this->video_original_name);
             if ($embedUrl) {
-                return '<iframe width="560" height="315" src="' . $embedUrl . '" frameborder="0" allowfullscreen></iframe>';
+                return '<iframe w-full h-auto src="' . $embedUrl . '" frameborder="0" allowfullscreen></iframe>';
             }
         } elseif ($this->platform == 1 && $this->video_path) {
             // $videoUrl = route('instructor.video.show', $this->id);
             $videoUrl = route('videos.show', $this->id);
-            return '<iframe width="560" height="315" src="' . $videoUrl . '" frameborder="0" allowfullscreen></iframe>';
+            return '<iframe w-full h-auto src="' . $videoUrl . '" frameborder="0" allowfullscreen></iframe>';
         }
     
         return '<p>No hay video disponible para esta lección.</p>';
