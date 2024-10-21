@@ -52,11 +52,13 @@
     @endif
 </div> --}}
 
-<div class="container mx-auto py-6">
+<div class="container mx-auto py-6 min-h-screen flex flex-col">
     <h1 class="text-2xl font-semibold mb-4 text-center sm:text-start">Contenido de la Cesta</h1>
 
-    @if ($cartContent->isEmpty())
-        <p>No hay elementos en la Cesta.</p>
+    @if ($cartContent->isEmpty())    <div class="flex-1 flex items-center justify-center">
+        <div class="flex-1 flex items-center justify-center">
+            <p class="text-center sm:text-start">No hay elementos en la Cesta.</p>
+        </div>
     @else
         <div class="bg-white p-6 rounded-lg shadow-lg">
             @foreach($cartContent as $item)
