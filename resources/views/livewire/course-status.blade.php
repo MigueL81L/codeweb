@@ -5,7 +5,7 @@
                 @if ($this->current) 
                     <!-- Mostrar el video/iframe de acuerdo con el método getIframeAttribute. Model Lesson.php -->
                     <!-- Contenedor que usa embed-responsive -->
-                    <div class="embed-responsive w-full"> <!-- Clase para mantener la relación de aspecto -->
+                    <div class="embed-responsive w-full relative"> <!-- Clase para mantener la relación de aspecto -->
                         {!! $this->current->iframe !!} <!-- El iframe ahora se adaptará mejor -->
                     </div>
 
