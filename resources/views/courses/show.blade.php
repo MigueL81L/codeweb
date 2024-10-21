@@ -16,7 +16,7 @@
     </section>
 
     <div class="container grid grid-cols-1 lg:grid-cols-3 gap-6"> 
-        <div class="order-2 col-span-1 lg:col-span-2 lg:order-1">
+        <div class="order-2 lg:col-span-2 lg:order-1">
             <section class="card mb-12">
                 <div class="card-body">
                     <h1 class="font-bold text-2xl mb-2 text-center sm:text-left">Lo que Aprenderás:</h1>
@@ -102,7 +102,7 @@
 
         </div>
 
-        <div class="order-1 lg:order-2 col-span-1 lg:col-span-2">
+        <div class="order-1 lg:order-2">
             <section class="card mb-4">
                 <div class="card-body">
 
