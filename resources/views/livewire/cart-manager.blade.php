@@ -52,7 +52,7 @@
     @endif
 </div> --}}
 
-<div style="background-image: url({{ asset('public/img/cursos/carrito.jfif') }})" class="bg-cover"> 
+<div style="background-image: url({{ asset('public/img/cursos/carrito.jpg') }})" class="bg-cover"> 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
 
         <div class="w-full md:w-3/4 lg:w-1/2">
