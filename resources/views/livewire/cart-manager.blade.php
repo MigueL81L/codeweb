@@ -55,10 +55,8 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36">
     <h1 class="text-2xl font-semibold mb-4 text-center sm:text-start">Contenido de la Cesta</h1>
 
-    @if ($cartContent->isEmpty())    <div class="flex-1 flex items-center justify-center">
-        <div class="flex-1 flex items-center justify-center">
+    @if ($cartContent->isEmpty())   
             <p class="text-center sm:text-start">No hay elementos en la Cesta.</p>
-        </div>
     @else
         <div class="bg-white p-6 rounded-lg shadow-lg">
             @foreach($cartContent as $item)
