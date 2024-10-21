@@ -22,10 +22,6 @@
     </style>
 </head>
     <body>
-            {{-- <video width="560" height="315" controls>
-                <source src="{{ Storage::url('app/public/' . $lesson->video_path) }}" type="{{ $lesson->getVideoType($lesson->video_original_name) }}">    
-                Your browser does not support the video tag.
-            </video> --}}
             <div class="embed-responsive w-full"> <!-- Asegura que ocupa todo el ancho -->
                 <video class="w-full h-auto" controls>
                     <source src="{{ Storage::url('app/public/' . $lesson->video_path) }}" type="{{ $lesson->getVideoType($lesson->video_original_name) }}">    
