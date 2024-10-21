@@ -58,8 +58,8 @@
         <div class="w-full md:w-3/4 lg:w-1/2">
 
             @if ($cartContent->isEmpty())  
-                <h1 class="text-2xl font-semibold mb-6 text-center sm:text-start">Contenido de la Cesta</h1> 
-                <p class="text-center sm:text-start">No hay elementos en la Cesta.</p>
+                <h1 class="text-2xl font-semibold mb-6 text-center sm:text-start text-white">Contenido de la Cesta</h1> 
+                <p class="text-center sm:text-start text-white">No hay elementos en la Cesta.</p>
             @else
                 <div class="bg-white p-6 rounded-lg shadow-lg">
 
