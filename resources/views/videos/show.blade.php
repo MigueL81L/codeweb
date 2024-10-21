@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>Video</title> 
-    <style>
-        /* Clase para mantener la relación de aspecto */
+    {{-- <style>
+        
         .embed-responsive {
             position: relative;
             overflow: hidden;
-            padding-top: 56.25%; /* Relación de aspecto 16:9 */
+            padding-top: 56.25%; 
         }
 
         .embed-responsive video,
@@ -19,7 +19,10 @@
             height: 100%;
             border: 0;
         }
-    </style>
+    </style> --}}
+
+    <link rel="stylesheet" href="{{ asset('build/assets/app-KEcVs8Hg.css') }}">
+    <script src="{{ asset('build/assets/app-49Ykkm2g.js') }}" defer></script>
 </head>
     <body>
             <div class="embed-responsive w-full"> <!-- Asegura que ocupa todo el ancho -->
