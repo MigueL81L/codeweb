@@ -11,10 +11,9 @@
                     
                     <div class="ml-4 flex-1">
                         <h2 class="text-lg font-bold">{{ $item->name }}</h2>
-                        <p class="text-sm text-gray-500">Nombre: {{ $item->options['title'] }}</p>
+                        <p class="text-sm text-gray-500">Nombre: {{ $item->name }}</p>
                         <p class="text-sm text-gray-500">Profesor: {{ $item->options['teacher'] }}</p>
-                        <p class="text-sm text-gray-500">Categoría: {{ $item->category->name}}</p>
-                        <p class="text-sm text-gray-500">Precio: {{ $item->price->name .  ' €' }}</p>
+                        <p class="text-sm text-gray-500">Precio: {{ $item->price .  ' €' }}</p>
 
                         <div class="mt-4">
                             {{-- Botón para eliminar el curso de la cesta --}}
