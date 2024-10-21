@@ -1,12 +1,12 @@
 <div>
     <div class="mt-8">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2">
+            <div class="lg:col-span-2 mb-0 sm:mb-8">
                 @if ($this->current) 
                     <!-- Mostrar el video/iframe de acuerdo con el método getIframeAttribute -->
                     {!! $this->current->iframe !!}
 
-                    <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>
+                    <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1> 
 
                     <div class="text-gray-600 mt-2">
                         <h2 class="font-bold">Descripción:</h2>
@@ -55,7 +55,7 @@
                 @endif
             </div>
 
-            <div class="card col-span-1">
+            <div class="card col-span-1 mb-8">
                 <div class="card-body">
                     <h1 class="text-2xl leading-8 text-center mb-4">{{ $course->title }}</h1>
                     <div class="flex items-center">
