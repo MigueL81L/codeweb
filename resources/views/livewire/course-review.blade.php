@@ -1,4 +1,4 @@
-<div class="card mt-2">
+<div class="mt-2">
     <div class="card-body">
         @if (session()->has('success'))
             <div class="bg-blue-500 text-white px-4 py-2 w-full shadow-md mb-2">

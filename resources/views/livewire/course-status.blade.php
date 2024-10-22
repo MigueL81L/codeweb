@@ -8,7 +8,8 @@
                     <div class="embed-responsive w-full"> 
                         {!! $this->current->iframe !!} 
                     </div>
-                    <div class="cart mt-2">
+                    <div class="card mt-2">
+                        <h2 class="font-bold">Lección:</h2></br>
                         <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>  
 
                         <div class="text-gray-600 mt-2">
