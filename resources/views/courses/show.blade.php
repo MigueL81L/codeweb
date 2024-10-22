@@ -9,7 +9,7 @@
                 <h1 class="text-3xl mb-3">{{$course->title}}</h1>
                 <p class="mb-2"><i class="fas fa-chart-line mr-2"></i>Nivel: {{$course->level->name}}</p>
                 <p class="mb-2"><i class="fas fa-tags mr-2"></i>Categoría: {{$course->category->name}}</p>
-                <p class="mb-2"><i class="fas fa-users mr-2"></i>Matriculados: {{$course->students_count}}</p>
+                <p class="mb-2"><i class="fas fa-users mr-2"></i>Matriculados: {{$course->students_count}}</p> 
                 <p><i class="far fa-star mr-2"></i>Calificación: {{$course->rating}}</p>
             </div>
         </div>
