@@ -9,10 +9,12 @@
                         {!! $this->current->iframe !!} 
                     </div>
                     <div class="card mt-2">
-                        <h2 class="font-bold">Lección:</h2>
-                        <h1 class="text-3xl text-gray-600 font-bold">{{ $this->current->name }}</h1>  
-
                         <div class="text-gray-600 mt-2">
+                            <h2 class="font-bold">Lección:</h2>
+                            <h1 class="text-3xl text-gray-600 font-bold">{{ $this->current->name }}</h1>  
+                        </div>
+
+                        <div class="text-gray-600 mt-4">
                             <h2 class="font-bold">Descripción:</h2>
                             @if ($this->current->description)
                                 <p>{{ $this->current->description }}</p>
@@ -21,7 +23,7 @@
                             @endif
                         </div>
 
-                        <div class="mt-4">
+                        <div class="text-gray-600 mt-4">
                             @if ($this->current->document_path)
                                 <h2 class="font-bold">Archivo Adjunto:</h2>
                                 <a href="{{ Storage::url('app/public/' . $this->current->document_path) }}" class="text-blue-500 hover:underline" target="_blank">Ver/Descargar Documento</a>
