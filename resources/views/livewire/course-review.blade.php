@@ -1,4 +1,4 @@
-{{-- <div class="card mt-2">
+<div class="card mt-2">
     <div class="card-body">
         @if (session()->has('success'))
             <div class="bg-blue-500 text-white px-4 py-2 w-full shadow-md mb-2">
@@ -55,68 +55,8 @@
             @endif
         @endif
     </div>
-</div> --}}
-<div class="card mt-2 bg-white shadow-lg rounded-md">
-    <div class="card-body p-6">
-        @if (session()->has('success'))
-            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4 rounded" role="alert">
-                <p class="font-bold">¡Éxito!</p>
-                <p>{{ session('success') }}</p>
-            </div>
-        @endif
-
-        @if ($showForm)
-            <h2 class="text-xl font-semibold text-gray-800 mb-4 text-center">{{ $isEditing ? 'Editar Reseña' : 'Crear Reseña' }}</h2>
-            <form wire:submit.prevent="{{ $isEditing ? 'update' : 'store' }}" class="space-y-4">
-                <!-- Comentario del Review -->
-                <div>
-                    <label for="comment" class="block text-sm font-medium text-gray-700">Comentario</label>
-                    <textarea name="comment" id="comment" placeholder="Escriba un comentario" class="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md" wire:model="comment"></textarea>
-                    @error('comment') <span class="text-red-600">{{ $message }}</span> @enderror
-                </div>
-
-                <!-- Calificación del Review -->
-                <div>
-                    <label for="rating" class="block text-sm font-medium text-gray-700">Calificación</label>
-                    <input type="number" name="rating" id="rating" placeholder="Calificación del 1 al 5" class="mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md" min="1" max="5" wire:model="rating">
-                    @error('rating') <span class="text-red-600">{{ $message }}</span> @enderror
-                </div>
-
-                <div class="flex justify-center space-x-2">
-                    <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded shadow">{{ $isEditing ? 'Actualizar Reseña' : 'Crear Reseña' }}</button>
-                    <button type="button" wire:click="cancel" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow">Cancelar</button>
-                </div>
-            </form>
-        @else
-            @if($reviewId)
-                <div class="bg-gray-100 p-4 rounded mb-4">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-2 text-center">Tu Reseña</h2>
-                    <div class="text-left">
-                        <div class="flex items-center mb-2">
-                            <h5 class="text-lg font-semibold text-gray-700 ml-2">Comentario:</h5>
-                            <p class="text-gray-600 ml-3">{{ $comment }}</p>
-                        </div>
-                        <div class="flex items-center mb-2">
-                            <h5 class="text-lg font-semibold text-gray-700 ml-2">Calificación:</h5>
-                            <p class="text-gray-600 ml-3">{{ $rating }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-center space-x-2">
-                    <button type="button" wire:click="edit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded shadow">Editar Reseña</button>
-                    <button type="button" wire:click="destroy" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow">Eliminar Reseña</button>
-                </div>
-            @else
-                <div class="text-left mb-4">
-                    <p class="bg-gray-100 text-gray-700 p-4 rounded">Todavía no has creado una reseña para este curso. ¡Queremos conocer tu experiencia!</p>
-                    <div class="flex justify-center mt-4">
-                        <button type="button" wire:click="create" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow">Crear Reseña</button>
-                    </div>
-                </div>
-            @endif
-        @endif
-    </div>
 </div>
+
 
 
 
