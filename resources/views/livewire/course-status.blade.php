@@ -8,44 +8,45 @@
                     <div class="embed-responsive w-full"> 
                         {!! $this->current->iframe !!} 
                     </div>
+                    <div class="cart mt-2">
+                        <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>  
 
-                    <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>  
-
-                    <div class="text-gray-600 mt-2">
-                        <h2 class="font-bold">Descripción:</h2>
-                        @if ($this->current->description)
-                            <p>{{ $this->current->description }}</p>
-                        @else
-                            <p class="italic">No existe descripción para esta lección</p>
-                        @endif
-                    </div>
-
-                    <div class="mt-4">
-                        @if ($this->current->document_path)
-                            <h2 class="font-bold">Archivo Adjunto:</h2>
-                            <a href="{{ Storage::url('app/public/' . $this->current->document_path) }}" class="text-blue-500 hover:underline" target="_blank">Ver/Descargar Documento</a>
-                        @else
-                            <p class="italic">No hay archivos adjuntos para esta lección.</p>
-                        @endif
-                    </div>
-
-                    <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
-                        @if ($this->current->completed)
-                            <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
-                        @else
-                            <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
-                        @endif
-                        <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
-                    </div>
-
-                    <div class="card mt-2">
-                        <div class="card-body flex text-gray-500 font-bold">
-                            @if ($this->previous)
-                                <a wire:click="changeLesson({{ $this->previous->id }})" class="cursor-pointer">Tema anterior</a>
+                        <div class="text-gray-600 mt-2">
+                            <h2 class="font-bold">Descripción:</h2>
+                            @if ($this->current->description)
+                                <p>{{ $this->current->description }}</p>
+                            @else
+                                <p class="italic">No existe descripción para esta lección</p>
                             @endif
-                            @if ($this->next)
-                                <a wire:click="changeLesson({{ $this->next->id }})" class="ml-auto cursor-pointer">Tema posterior</a>
+                        </div>
+
+                        <div class="mt-4">
+                            @if ($this->current->document_path)
+                                <h2 class="font-bold">Archivo Adjunto:</h2>
+                                <a href="{{ Storage::url('app/public/' . $this->current->document_path) }}" class="text-blue-500 hover:underline" target="_blank">Ver/Descargar Documento</a>
+                            @else
+                                <p class="italic">No hay archivos adjuntos para esta lección.</p>
                             @endif
+                        </div>
+
+                        <div class="flex items-center mt-4 cursor-pointer" wire:click="completed">
+                            @if ($this->current->completed)
+                                <i class="fas fa-toggle-on text-2xl text-blue-600"></i>
+                            @else
+                                <i class="fas fa-toggle-off text-2xl text-gray-600"></i>
+                            @endif
+                            <p class="text-sm ml-2">Marcar esta unidad como culminada</p>
+                        </div>
+
+                        <div class="mt-2">
+                            <div class="card-body flex text-gray-500 font-bold">
+                                @if ($this->previous)
+                                    <a wire:click="changeLesson({{ $this->previous->id }})" class="cursor-pointer">Tema anterior</a>
+                                @endif
+                                @if ($this->next)
+                                    <a wire:click="changeLesson({{ $this->next->id }})" class="ml-auto cursor-pointer">Tema posterior</a>
+                                @endif
+                            </div>
                         </div>
                     </div>
 
