@@ -51,24 +51,24 @@
                     </div>
                 </div> --}}
 
-                <div class="card mt-2">
+                <div class="mt-2">
                     <div class="text-gray-600 mt-2">
-                        <h2 class="font-bold text-gray-600">Tu Reseña</h2>
+                        <h2 class="font-bold text-gray-600 text-2xl text-center">Tu Reseña</h2>
                 
                         <div class="text-gray-600 mt-4">
-                            <h5 class="text-lg font-bold ml-2">Calificación:</h5>
-                            <p class="ml-5">{{ $rating }}</p>
+                            <h5 class="text-lg font-bold">Calificación:</h5>
+                            <p >{{ $rating }}</p>
                         </div>
                 
                         <div class="text-gray-600 mt-4">
-                            <h5 class="text-lg font-bold ml-2">Comentario:</h5>
-                            <p class="ml-5">{{ $comment }}</p>
+                            <h5 class="text-lg font-bold">Comentario:</h5>
+                            <p>{{ $comment }}</p>
                         </div>
                     </div>
                 
                     <div class="flex justify-center space-x-2 mt-4">
-                        <button type="button" wire:click="edit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded shadow">Editar Reseña</button>
-                        <button type="button" wire:click="destroy" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded shadow">Eliminar Reseña</button>
+                        <button type="button" wire:click="edit" class="btn btn-primary btn-blue:hover font-bold py-2 px-4 rounded mt-2">Editar Reseña</button>
+                        <button type="button" wire:click="destroy" class="btn btn-danger btn-danger:hover font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button>
                     </div>
                 </div>
                 
