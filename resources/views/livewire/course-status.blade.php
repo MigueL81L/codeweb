@@ -9,8 +9,8 @@
                         {!! $this->current->iframe !!} 
                     </div>
                     <div class="card mt-2">
-                        <h2 class="font-bold">Lección:</h2></br>
-                        <h1 class="text-3xl text-gray-600 font-bold mt-4">{{ $this->current->name }}</h1>  
+                        <h2 class="font-bold">Lección:</h2>
+                        <h1 class="text-3xl text-gray-600 font-bold">{{ $this->current->name }}</h1>  
 
                         <div class="text-gray-600 mt-2">
                             <h2 class="font-bold">Descripción:</h2>

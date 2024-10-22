@@ -30,22 +30,33 @@
             </form>
         @else
             @if($reviewId)
-                    <div class="bg-gray-100 rounded">
-                        <h2 class="text-lg font-medium text-gray-700 mb-4 text-center ">Tu Reseña</h2>
-                        <div class="text-left">
-                            <div class="flex items-center mb-4 ">
-                                <h5 class="text-lg font-medium text-gray-700 ml-2">Comentario:</h5>
-                                <p class="text-gray-600 ml-5">{{ $comment }}</p>
-                            </div>
-                            <div class="flex items-center mb-4 ">
-                                <h5 class="text-lg font-medium text-gray-700 ml-2">Calificación:</h5>
-                                <p class="text-gray-600 ml-5">{{ $rating }}</p>
-                            </div>
+                    <div class="text-gray-600 mt-2">
+                        <h2 class="font-bold">Tu Reseña</h2>
+
+                        <div class="w-full">
+                            <h5 class="text-lg font-medium text-gray-700 ml-2">Calificación:</h5>
+                            <p class="text-gray-600 ml-5">{{ $rating }}</p>
+                        </div>
+
+                        <div class="w-full">
+                            <h5 class="text-lg font-medium text-gray-700 ml-2">Comentario:</h5>
+                            <p class="text-gray-600 ml-5">{{ $comment }}</p>
                         </div>
                     </div>
+                    
                     <div class="flex justify-center space-x-2">
                         <button type="button" wire:click="edit" class="btn btn-secondary font-bold py-2 px-4 rounded mt-2">Editar Reseña</button>
                         <button type="button" wire:click="destroy" class="btn btn-danger font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button>
+                    </div>
+
+
+                    <div class="text-gray-600 mt-2">
+                        <h2 class="font-bold">Descripción:</h2>
+                        @if ($this->current->description)
+                            <p>{{ $this->current->description }}</p>
+                        @else
+                            <p class="italic">No existe descripción para esta lección</p>
+                        @endif
                     </div>
             @else
                 <div class="text-left">
