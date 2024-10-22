@@ -43,20 +43,10 @@
                             <p class="text-gray-600 ml-5">{{ $comment }}</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex justify-center space-x-2">
                         <button type="button" wire:click="edit" class="btn btn-secondary font-bold py-2 px-4 rounded mt-2">Editar Reseña</button>
                         <button type="button" wire:click="destroy" class="btn btn-danger font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button>
-                    </div>
-
-
-                    <div class="text-gray-600 mt-2">
-                        <h2 class="font-bold">Descripción:</h2>
-                        @if ($this->current->description)
-                            <p>{{ $this->current->description }}</p>
-                        @else
-                            <p class="italic">No existe descripción para esta lección</p>
-                        @endif
                     </div>
             @else
                 <div class="text-left">
