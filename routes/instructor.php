@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Rutas para el CRUD de cursos
     Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
-    Route::get('courses/create', [CourseController::class, 'create'])->name('courses.create');
+    Route::get('courses/create', [CourseController::class, 'create'])->name('courses.create'); 
     Route::post('courses', [CourseController::class, 'store'])->name('courses.store');
     // Route::get('courses/{course}', [CourseController::class, 'show'])->name('courses.show'); 
     Route::get('courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
