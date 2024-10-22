@@ -55,9 +55,9 @@
                     <div class="text-gray-600 mt-2">
                         <h2 class="font-bold text-gray-600 text-2xl text-center">Tu Reseña</h2>
 
-                        <div class="text-gray-600 mt-4">
+                        <div class="text-gray-600 mt-4 flex items-start">
                             <h5 class="text-lg font-bold mr-2">Calificación:</h5>
-                            <p >{{ $rating }}</p>
+                            <p class="mt-1">{{ $rating }}</p>
                         </div>
                 
                         <div class="text-gray-600 mt-4">
