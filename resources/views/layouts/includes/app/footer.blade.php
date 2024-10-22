@@ -13,7 +13,7 @@
                         <li class="mb-2">
                             <a href="{{ route('who-we-are') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Quienes Somos</a>
                         </li>
-                        <li class="mb-2">
+                        <li class="mb-0">
                             <a href="{{ route('contact') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Contáctanos</a>
                         </li>
                     </ul>
@@ -24,10 +24,10 @@
                         <li class="mb-2">
                             <a href="{{ route('privacy-policy') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Política de Privacidad</a>
                         </li>
-                        <li class="mb-4¡2">
+                        <li class="mb-2">
                             <a href="{{ route('terms-and-conditions') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Términos y Condiciones</a>
                         </li>
-                        <li>
+                        <li class="mb-0">
                             <a href="{{ route('accessibility-statement') }}" class="hover:cursor-pointer hover:text-blue-600 no-underline">Declaración de Accesibilidad</a>
                         </li>
                     </ul>
