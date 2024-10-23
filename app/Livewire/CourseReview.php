@@ -88,13 +88,18 @@ class CourseReview extends Component
 
     public function destroy()
     {
-        $review = Review::findOrFail($this->reviewId);
-        $review->delete();
-
-        $this->reset(['comment', 'rating', 'reviewId']);
-        session()->flash('success', 'La reseña se eliminó satisfactoriamente.');
-
-        $this->showForm = false;
+        // Asegúrate de que reviewId está disponible y es válido
+        if ($this->reviewId) {
+            $review = Review::findOrFail($this->reviewId);
+            $review->delete();
+    
+            $this->reset(['comment', 'rating', 'reviewId']);
+            session()->flash('success', 'La reseña se eliminó satisfactoriamente.');
+    
+            $this->showForm = false;
+        } else {
+            session()->flash('error', 'No se pudo encontrar la reseña para eliminar.');
+        }
     }
 
     public function cancel()

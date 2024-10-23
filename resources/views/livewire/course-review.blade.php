@@ -77,13 +77,13 @@
                 confirmButtonText: 'Sí, eliminarlo!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Emitir el evento para llamar al método Livewire
-                    Livewire.emit('deleteConfirmed');
+                    @this.call('destroy'); // Cambia de `Livewire.emit()` a `@this.call()`
                 }
             });
         });
     });
 </script>
+
 
 
 
