@@ -36,7 +36,7 @@ class LevelController extends Controller
         }
 
         $levels=Level::all();
-        return view('admin.levels.create', compact('levels'));
+        return view('admin.levels.create', compact('levels')); 
     }
 
     /**

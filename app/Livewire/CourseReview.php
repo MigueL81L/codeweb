@@ -16,6 +16,9 @@ class CourseReview extends Component
     public $isEditing = false;
     public $showForm = false;
 
+    //Para la confirmación de eliminación del SweetAlert
+    protected $listeners = ['deleteConfirmed' => 'destroy'];
+
     protected $rules = [
         'comment' => 'required|string|max:1000',
         'rating' => 'required|integer|min:1|max:5',

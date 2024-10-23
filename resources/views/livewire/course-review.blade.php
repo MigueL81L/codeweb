@@ -30,27 +30,6 @@
             </form>
         @else
             @if($reviewId)
-                {{-- <div>
-                    <div class="text-gray-600 mt-2">
-                        <h2 class="font-bold">Tu Reseña</h2>
-
-                        <div class="w-full">
-                            <h5 class="text-lg font-medium text-gray-700 ml-2">Calificación:</h5>
-                            <p class="text-gray-600 ml-5">{{ $rating }}</p>
-                        </div>
-
-                        <div class="w-full">
-                            <h5 class="text-lg font-medium text-gray-700 ml-2">Comentario:</h5>
-                            <p class="text-gray-600 ml-5">{{ $comment }}</p>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-center space-x-2">
-                        <button type="button" wire:click="edit" class="btn btn-secondary font-bold py-2 px-4 rounded mt-2">Editar Reseña</button>
-                        <button type="button" wire:click="destroy" class="btn btn-danger font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button>
-                    </div>
-                </div> --}}
-
                 <div class="mt-2">
                     <div class="text-gray-600 mt-2">
                         <h2 class="font-bold text-gray-600 text-2xl text-center">Tu Reseña</h2>
@@ -68,7 +47,9 @@
                 
                     <div class="flex justify-center space-x-2 mt-4">
                         <button type="button" wire:click="edit" class="btn btn-primary btn-blue:hover font-bold py-2 px-4 rounded mt-2">Editar Reseña</button>
-                        <button type="button" wire:click="destroy" class="btn btn-danger btn-danger:hover font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button>
+                        {{-- <button type="button" wire:click="destroy" class="btn btn-danger btn-danger:hover font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button> --}}
+                        <button type="button" id="delete-review" class="btn btn-danger font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button>
+
                     </div>
                 </div>
                 
@@ -81,6 +62,29 @@
         @endif
     </div>
 </div>
+
+{{--script de Sweetalert--}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('delete-review').addEventListener('click', function () {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminarlo!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Emitir el evento para llamar al método Livewire
+                    Livewire.emit('deleteConfirmed');
+                }
+            });
+        });
+    });
+</script>
+
 
 
 
