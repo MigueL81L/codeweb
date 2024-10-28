@@ -37,6 +37,10 @@ require __DIR__.'/externos.php';
 // })->name('courses.status')->middleware('auth');
 
 
+// Redirigir a la página de registro si el usuario no está autenticado
+Route::get('/', function () {
+    return Auth::check() ? redirect()->route('home') : redirect()->route('register');
+});
 
 
 // Redirigir a la página de registro si el usuario no está autenticado
@@ -50,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('videos.show');
     
     Route::get('cursos', [CourseController::class, 'list'])->name('courses.index');
-    
+
     Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
 
     //Ruta para mostrar al usuario, solo los cursos en los que está matriculado
