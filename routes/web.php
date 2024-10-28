@@ -40,13 +40,9 @@ require __DIR__.'/externos.php';
 
 
 // Redirigir a la página de registro si el usuario no está autenticado
-Route::get('/', function () {
-    return Auth::check() ? redirect()->route('home') : redirect()->route('register');
-});
-
 Route::middleware(['auth'])->group(function () {
 
-    // Define la ruta de home aquí para usuarios autenticados
+    // Ruta para la página home accesible por usuarios autenticados
     Route::get('/home', HomeController::class)->name('home');
     
     // Ruta para mostrar el video de una lección específica de un curso para el que el usuario está matriculado
@@ -54,18 +50,24 @@ Route::middleware(['auth'])->group(function () {
         ->name('videos.show');
     
     Route::get('cursos', [CourseController::class, 'list'])->name('courses.index');
+    
     Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
+
+    //Ruta para mostrar al usuario, solo los cursos en los que está matriculado
     Route::get('courses', [CourseController::class, 'matriculados'])->name('courses.matriculados');
+
+    // Ruta para inscripciones a los cursos
+    Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])->name('course.enrolled');
+
+    // Ruta para el control de avance del curso
+    Route::get('course-status/{course}', function (Course $course) {
+        return view('courses.status', ['course' => $course]); 
+    })->name('courses.status');
+
+    //Ruta del carrito de la compra. 
+    Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 });
 
-Route::get('cart', [CartController::class, 'index'])->name('cart.index');
-
-Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])
-    ->middleware('auth')->name('course.enrolled');
-
-Route::get('course-status/{course}', function (Course $course) {
-    return view('courses.status', ['course' => $course]); 
-})->name('courses.status')->middleware('auth');
 
 
 
