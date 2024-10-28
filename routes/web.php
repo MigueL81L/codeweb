@@ -45,6 +45,10 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
+    // Define la ruta de home aquí para usuarios autenticados
+    Route::get('/home', HomeController::class)->name('home');
+    
     // Ruta para mostrar el video de una lección específica de un curso para el que el usuario está matriculado
     Route::get('videos/{id}', [\App\Http\Controllers\Instructor\VideoLessonController::class, 'show'])
         ->name('videos.show');
