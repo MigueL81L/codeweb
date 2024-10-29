@@ -267,7 +267,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                                     </svg>
                                                 </button> --}}
-                                                <button class="flex items-center text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition ml-4">
+                                                <button class="flex items-center text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition ml-2">
                                                     <div class="h-8 w-8 bg-gray-200 rounded-full flex items-center justify-center">
                                                         <span class="font-semibold text-gray-600">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
                                                     </div>
