@@ -259,7 +259,7 @@ class ManageLessons extends Component
             }
 
             // Eliminar el documento si existe
-            if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+            if ($lesson->document_path && Storage::exists($lesson->document_path)) { 
                 Storage::delete($lesson->document_path);
                 Log::info('Documento eliminado: ' . $lesson->document_path);
             }

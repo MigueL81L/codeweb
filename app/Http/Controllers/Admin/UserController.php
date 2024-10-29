@@ -202,6 +202,10 @@ class UserController extends Controller
                         if ($lesson->image_path && Storage::exists($lesson->image_path)) {
                             Storage::delete($lesson->image_path);
                         }
+                        if ($lesson->document_path && Storage::exists($lesson->document_path)) { 
+                            Storage::delete($lesson->document_path);
+                            Log::info('Documento eliminado: ' . $lesson->document_path);
+                        }
                         $lesson->delete();
                         Log::info("Eliminada lección de id: {$lesson->id}");
                     }
