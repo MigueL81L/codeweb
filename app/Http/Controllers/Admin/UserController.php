@@ -168,6 +168,15 @@ class UserController extends Controller
         if (Gate::denies('Eliminar usuarios')) {
             abort(403, 'Unauthorized action.');
         }
+
+        // Verifica y elimina la foto de perfil del usuario si existe
+        if ($user->profile_photo_path && Storage::exists($user->profile_photo_path)) {
+            Storage::delete($user->profile_photo_path);
+            Log::info("Foto de perfil del usuario de id: {$user->id} eliminada.");
+        }
+
+        // Borra el valor de profile_photo_path de la base de datos
+        $user->update(['profile_photo_path' => null]);
     
         // Verifico que el usuario sea un Instructor
         if ($user->hasRole('Instructor')) {
