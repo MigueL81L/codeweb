@@ -31,11 +31,12 @@
                 <div class="mt-2" x-show="! photoPreview">
                     {{-- <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover"> --}}
                     @if (Auth::user()->profile_photo_path)
-                    <img src="{{ asset('storage/app/public/' . Auth::user()->profile_photo_path) }}" alt="{{ Auth::user()->name }}" class="rounded-full h-20 w-20 object-cover">
-                @else
-                    <div class="h-20 w-20 bg-gray-200 rounded-full flex items-center justify-center">
-                        <span class="font-semibold text-gray-600">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
-                    </div>
+                        <img src="{{ asset('storage/app/public/' . Auth::user()->profile_photo_path) }}" alt="{{ Auth::user()->name }}" class="rounded-full h-20 w-20 object-cover">
+                    @else
+                        <div class="h-20 w-20 bg-gray-200 rounded-full flex items-center justify-center">
+                            <span class="font-semibold text-gray-600">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- New Profile Photo Preview -->
