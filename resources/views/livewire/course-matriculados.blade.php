@@ -92,7 +92,7 @@
                             <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 w-full border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione un Precio</option>
                                 @foreach($prices as $price)
-                                    <option value="{{ $price.id }}">{{ $price.value }}</option>
+                                    <option value="{{ $price->id }}">{{ $price->value }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -110,7 +110,7 @@
                             <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 w-full border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
                                 @foreach($levels as $level)
-                                    <option value="{{ $level.id }}">{{ $level.name }}</option>
+                                    <option value="{{ $level->id }}">{{ $level->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -124,6 +124,7 @@
             </div>
         </div>
     </div>
+    
     
 
     <!-- Mostrar la colección total paginada, y las filtradas no paginadas -->
