@@ -238,16 +238,18 @@
                         @endphp
 
                         @if ($canView)
-                            {{-- <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
-                                {{$item['name'] }} 
-                            </x-responsive-nav-link> --}}
                             @php
-                                $isStudent = auth()->user()->hasRole('estudiante'); // Verifica si el usuario tiene el rol de estudiante
+                                // Verificamos si el usuario autenticado tiene el rol de estudiante
+                                $isStudent = auth()->user()->hasRole('estudiante');
+                                // También podemos verificar qué roles tiene el usuario y loggearlos
+                                $userRoles = auth()->user()->roles; // Obtiene los roles del usuario
+                                Log::info('Mensaje: ', ['user' => auth()->user()]);
                             @endphp
+
                             @if ($isStudent)
                                 <x-responsive-nav-link-estudiante href="{{ $item['route'] }}" :active="$item['active']">
                                     {{ $item['name'] }} 
-                                </x-responsive-nav-link-estudian>
+                                </x-responsive-nav-link-estudiante>
                             @else
                                 <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
                                     {{ $item['name'] }} 
