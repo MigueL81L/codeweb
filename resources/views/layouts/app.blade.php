@@ -61,5 +61,31 @@
         @stack('modals')
 
         @livewireScripts
+
+        <!--Script de ajuste de texto en caja de selección para las pantallas móviles-->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Función para ajustar el texto de los selects
+                function adjustSelectText() {
+                    const width = window.innerWidth;
+        
+                    // Cambiar solo para tamaños de pantalla pequeños
+                    if (width < 640) {
+                        document.getElementById('selectedCategories').options[0].text = "Categor.";
+                        document.getElementById('selectedPrices').options[0].text = "Precio";
+                        document.getElementById('selectedLevels').options[0].text = "Nivel";
+                    } else {
+                        document.getElementById('selectedCategories').options[0].text = "Seleccione una Categoría";
+                        document.getElementById('selectedPrices').options[0].text = "Seleccione un Precio";
+                        document.getElementById('selectedLevels').options[0].text = "Seleccione el Nivel";
+                    }
+                }
+        
+                // Ejecutar la función al cargar la página y al cambiar el tamaño de la ventana
+                adjustSelectText();
+                window.addEventListener('resize', adjustSelectText);
+            });
+        </script>
+        
     </body>
 </html>

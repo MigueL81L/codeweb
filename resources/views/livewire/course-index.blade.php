@@ -66,14 +66,14 @@
         </div>
     </div> --}}
     <div class="bg-gray-200 py-4 mb-16">
-        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-            <div class="flex flex-col lg:flex-row justify-between lg:py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between lg:py-4">
     
                 <!-- Filtro por Categoría -->
-                <div class="flex flex-col items-center w-full lg:w-1/3 px-2">
+                <div class="flex flex-col items-center w-1/3 px-2">
                     <form wire:submit.prevent="filterCategories" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
-                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 w-full border-gray-300 rounded-lg text-sm sm:text-base px-2 sm:px-4">
+                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 w-full border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -88,10 +88,10 @@
                 </div>
     
                 <!-- Filtro por Precio -->
-                <div class="flex flex-col items-center w-full lg:w-1/3 px-2">
+                <div class="flex flex-col items-center w-1/3 px-2">
                     <form wire:submit.prevent="filterPrices" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
-                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 w-full border-gray-300 rounded-lg text-sm sm:text-base px-2 sm:px-4">
+                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 w-full border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione un Precio</option>
                                 @foreach($prices as $price)
                                     <option value="{{$price->id}}">{{$price->value}}</option>
@@ -106,10 +106,10 @@
                 </div>
     
                 <!-- Filtro por Nivel -->
-                <div class="flex flex-col items-center w-full lg:w-1/3 px-2">
+                <div class="flex flex-col items-center w-1/3 px-2">
                     <form wire:submit.prevent="filterLevels" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
-                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 w-full border-gray-300 rounded-lg text-sm sm:text-base px-2 sm:px-4">
+                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 w-full border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
                                 @foreach($levels as $level)
                                     <option value="{{$level->id}}">{{$level->name}}</option>
@@ -126,10 +126,6 @@
             </div>
         </div>
     </div>
-    
-    
-    
-
 
     <!-- Mostrar la colección total paginada, y las filtradas no paginadas -->
     @if($courses->isNotEmpty())
