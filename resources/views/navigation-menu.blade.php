@@ -241,16 +241,26 @@
                             @php
                                 // Verificamos si el usuario autenticado tiene el rol de estudiante
                                 $isStudent = auth()->user()->hasRole('estudiante');
+                                Log::info('Is this user a student? ' . ($isStudent ? 'Yes' : 'No')); // Para ver el resultado en log
+
                                 // También podemos verificar qué roles tiene el usuario y loggearlos
                                 $userRoles = auth()->user()->roles; // Obtiene los roles del usuario
                                 Log::info('Mensaje: ', ['user' => auth()->user()]);
                             @endphp
 
                             @if ($isStudent)
+                                @php
+                                    Log::info('Entro en la parte de responsive-nav-link-estudiante'); 
+                                @endphp
+
+                                
                                 <x-responsive-nav-link-estudiante href="{{ $item['route'] }}" :active="$item['active']">
                                     {{ $item['name'] }} 
                                 </x-responsive-nav-link-estudiante>
                             @else
+                                @php
+                                Log::info('Entro en la parte de responsive-nav-link'); 
+                                @endphp
                                 <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
                                     {{ $item['name'] }} 
                                 </x-responsive-nav-link>
