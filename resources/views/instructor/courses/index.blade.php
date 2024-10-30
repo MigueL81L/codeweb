@@ -32,7 +32,7 @@
                             <div class="py-4 px-8">
                                 <div class="grid md:grid-cols-12"> 
 
-                                    <div class="md:col-span-6 lg:col-span-3 text-center">
+                                    <div class="md:col-span-3 text-center">
                                         <p class="mt-1 text-sm">Curso</p>
                                         <p class="text-sm font-bold mt-2">{{ $course->title }}</p> 
                                     </div>
@@ -85,7 +85,7 @@
                                     </div>
 
                                     <!-- Botones de acción -->
-                                    <div class="md:col-span-6 lg:col-span-3 flex items-center justify-center sm:justify-end space-x-4 mt-4 md:mt-0">
+                                    <div class="md:col-span-3  flex items-center justify-center sm:justify-end space-x-4 mt-4 md:mt-0">
                                         <a href="{{ route('instructor.courses.edit', $course) }}" class="btn btn-blue">
                                             Editar
                                         </a>
