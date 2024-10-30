@@ -238,9 +238,20 @@
                         @endphp
 
                         @if ($canView)
-                            <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                            {{-- <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
                                 {{$item['name'] }} 
-                            </x-responsive-nav-link>
+                            </x-responsive-nav-link> --}}
+                                @if (auth()->user()->hasRole('estudiante')) <!-- Verifica si el usuario tiene el rol de estudiante -->
+                                    <x-responsive-nav-link2 href="{{ $item['route'] }}" :active="$item['active']">
+                                        {{ $item['name'] }} 
+                                    </x-responsive-nav-link2>
+                                @else
+                                    <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
+                                        {{ $item['name'] }} 
+                                    </x-responsive-nav-link>
+                                @endif
+                        @endif
+
                         @endif
                     @endforeach
                 </div>
