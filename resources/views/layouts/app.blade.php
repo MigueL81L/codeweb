@@ -62,7 +62,8 @@
 
         @livewireScripts
 
-        <!--Script de ajuste de texto en caja de selección para las pantallas móviles-->
+        <!--Script de ajuste de texto en caja de selección de los filtros, para la lista de courses, y courses matriculados,  para las pantallas móviles-->
+        <!--Texto más pequeño que coja en las pantallas móviles-->
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Función para ajustar el texto de los selects
