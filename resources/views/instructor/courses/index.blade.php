@@ -44,12 +44,12 @@
                                         <p class="text-sm font-bold mt-2">{{ ($course->students_count * $course->price_value) . ' €' }}</p>
                                     </div>
 
-                                    <div class="hidden md:block md:col-span-3 lg:col-span-2 text-center">
+                                    <div class="hidden md:block md:col-span-2 lg:col-span-2 text-center">
                                         <p class="text-sm mt-1">Estudiantes matriculados</p>
                                         <p class="text-sm font-bold mt-2">{{$course->students_count}}</p>
                                     </div>
 
-                                    <div class="hidden md:block md:col-span-3 lg:col-span-2">
+                                    <div class="hidden md:block md:col-span-4 lg:col-span-2">
                                         <div class="flex justify-center">
                                             
                                             @if($course->rating !=0)
@@ -72,7 +72,7 @@
                                                             <i class="fas fa-star text-{{$course->rating ==5 ? 'yellow':'gray'}}-400"></i>
                                                         </li>
                                                     </ul>
-                                                    <p class="mt-1 font-bold">{{$course->rating}}</p>
+                                                    <p class="mt-1 font-bold text-center">{{$course->rating}}</p>
                                                 </div>
                                             @else
                                                 <ul>
