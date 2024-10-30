@@ -130,8 +130,8 @@
                     <div class="flex items-center"> 
                         {{-- <img class="h-12 w-12 object-cover rounded-full shadow-lg" src="{{$course->teacher->profile_photo_url}}" alt="{{$course->teacher->name}}"> --}}
 
-                        @if ($course->teacher->profile_photo_url)
-                            <img src="{{ asset('storage/' . $course->teacher->profile_photo_url) }}" alt="{{$course->teacher->name}}" class="rounded-full h-20 w-20 object-cover shadow-lg">
+                        @if ($course->teacher->profile_photo_path)
+                            <img src="{{ asset('storage/app/public/' . $course->teacher->profile_photo_path) }}" alt="{{$course->teacher->name}}" class="rounded-full h-20 w-20 object-cover shadow-lg">
                         @else
                             <div class="h-20 w-20 bg-gray-200 rounded-full flex items-center justify-center">
                                 <span class="font-semibold text-gray-600">{{ strtoupper(substr($course->teacher->name, 0, 1)) }}</span>
