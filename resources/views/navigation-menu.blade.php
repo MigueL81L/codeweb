@@ -43,6 +43,7 @@
 
 {{-- <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 fixed top-0 w-full z-50"> --}}
     <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+
     <!-- Primary Navigation Menu, con clase definida en commom.css -->
     <div class="container">
         <div class="flex justify-between h-16">
@@ -210,7 +211,7 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': ! open }" class="hidden sm:hidden">
-        <div class="flex flex-col items-center px-4 py-2 border-t border-gray-200">
+        <div class="flex flex-col items-center py-2 border-t border-gray-200">
             <div class="flex items-center w-full justify-between">
                 <div class="flex items-center">
                     <!-- Navigation Links -->
