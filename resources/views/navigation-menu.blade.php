@@ -240,7 +240,7 @@
                         @if ($canView)
                             @php
                                 // Verificamos si el usuario autenticado tiene el rol de estudiante
-                                $isStudent = auth()->user()->hasRole('estudiante');
+                                $isStudent = auth()->user()->hasRole('Estudiante');
                                 Log::info('Is this user a student? ' . ($isStudent ? 'Yes' : 'No')); // Para ver el resultado en log
 
                                 // También podemos verificar qué roles tiene el usuario y loggearlos
