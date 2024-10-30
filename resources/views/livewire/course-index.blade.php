@@ -66,12 +66,12 @@
         </div>
     </div> --}}
     <div class="bg-gray-200 py-4 mb-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex sm:justify-center">
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-4 lg:py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between lg:py-4">
     
                 <!-- Filtro por Categoría -->
-                <div class="col-span-1 flex flex-col items-center">
-                    <form wire:submit.prevent="filterCategories" class="flex flex-col items-center space-y-2 lg:space-x-4 lg:space-y-0 lg:justify-center">
+                <div class="flex flex-col items-center w-1/3 px-2">
+                    <form wire:submit.prevent="filterCategories" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
                             <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 w-full border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
@@ -80,7 +80,6 @@
                                 @endforeach
                             </select>
                         </div>
-    
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                             <i class="fas fa-th-list text-xs mr-2"></i>
                             Filtrar
@@ -89,8 +88,8 @@
                 </div>
     
                 <!-- Filtro por Precio -->
-                <div class="col-span-1 flex flex-col items-center">
-                    <form wire:submit.prevent="filterPrices" class="flex flex-col items-center space-y-2 lg:space-x-4 lg:space-y-0 lg:justify-center">
+                <div class="flex flex-col items-center w-1/3 px-2">
+                    <form wire:submit.prevent="filterPrices" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
                             <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 w-full border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione un Precio</option>
@@ -99,7 +98,6 @@
                                 @endforeach
                             </select>
                         </div>
-    
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                             <i class="fas fa-euro-sign text-xs mr-2"></i>
                             Filtrar
@@ -108,8 +106,8 @@
                 </div>
     
                 <!-- Filtro por Nivel -->
-                <div class="col-span-1 flex flex-col items-center">
-                    <form wire:submit.prevent="filterLevels" class="flex flex-col items-center space-y-2 lg:space-x-4 lg:space-y-0 lg:justify-center">
+                <div class="flex flex-col items-center w-1/3 px-2">
+                    <form wire:submit.prevent="filterLevels" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
                             <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 w-full border-gray-300 rounded-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
@@ -118,7 +116,6 @@
                                 @endforeach
                             </select>
                         </div>
-    
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
                             <i class="fas fa-filter text-xs mr-2"></i>
                             Filtrar
@@ -129,6 +126,7 @@
             </div>
         </div>
     </div>
+    
     
 
 
