@@ -31,33 +31,13 @@
                         <div class="flex-1">
                             <div class="py-4 px-8">
                                 <div class="grid md:grid-cols-12"> 
-                                    <div class="md:col-span-3 text-center">
-                                        <p class="mt-1 text-sm">Curso</p>
-                                        <p class="text-sm font-bold mt-2">{{ $course->title }}</p>
 
-                                        <!--Se definió en un enum correspondencia entre números y nombres-->
-                                        <!--Copio el código de los badges de tail wind-->
-                                        {{-- @switch($course->status->name)
-                                            @case('BORRADOR')
-                                                <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
-                                                    {{ $course->status->name }}
-                                                </span>
-                                                @break
-                                            @case('PENDIENTE')
-                                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
-                                                    {{ $course->status->name }}
-                                                </span>
-                                                @break
-                                            @case('PUBLICADO')
-                                                <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                                                    {{ $course->status->name }}
-                                                </span>
-                                                @break
-                                            @default
-                                        @endswitch --}}
-                                        
+                                    <div class="md:col-span-6 lg:col-span-3 text-center">
+                                        <p class="mt-1 text-sm">Curso</p>
+                                        <p class="text-sm font-bold mt-2">{{ $course->title }}</p> 
                                     </div>
 
+                                    <!--Desaparecen en menos que lg-->
                                     <div class="hidden lg:block col-span-2 text-center">
                                         <p class="mt-1 text-sm">Ganado en total</p>
                                         <p class="text-sm font-bold mt-2">{{ ($course->students_count * $course->price_value) . ' €' }}</p>
@@ -72,14 +52,6 @@
                                         <div class="flex justify-end">
                                             
                                             @if($course->rating !=0)
-                                                {{-- <ul class="text-xs space-x-1 flex items-center">
-                                                        <i class="fa-solid fa-star text-yellow-400"></i>
-                                                        <i class="fa-solid fa-star text-yellow-400"></i>
-                                                        <i class="fa-solid fa-star text-yellow-400"></i>
-                                                        <i class="fa-solid fa-star text-yellow-400"></i>
-                                                        <i class="fa-solid fa-star text-yellow-400"></i>
-                                                </ul> --}}
-                                                <!--Estrellitas del rating, cada li, será una estrellita-->
                                                 <div>
                                                     <p class="text-sm text-center mt-1 mb-2">Rating</p>
                                                     <ul class="flex text-sm">
@@ -113,7 +85,7 @@
                                     </div>
 
                                     <!-- Botones de acción -->
-                                    <div class="md:col-span-3 flex items-center justify-center sm:justify-end space-x-4 mt-4 md:mt-0">
+                                    <div class="md:col-span-6 lg:col-span-3 flex items-center justify-center sm:justify-end space-x-4 mt-4 md:mt-0">
                                         <a href="{{ route('instructor.courses.edit', $course) }}" class="btn btn-blue">
                                             Editar
                                         </a>
