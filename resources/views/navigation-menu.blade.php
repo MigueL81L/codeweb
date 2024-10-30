@@ -251,8 +251,6 @@
                                     </x-responsive-nav-link>
                                 @endif
                         @endif
-
-                        @endif
                     @endforeach
                 </div>
 
