@@ -58,17 +58,17 @@
                                         
                                     </div>
 
-                                    <div class="hidden md:block col-span-2 text-center">
+                                    <div class="hidden lg:block col-span-2 text-center">
                                         <p class="mt-1 text-sm">Ganado en total</p>
                                         <p class="text-sm font-bold mt-2">{{ ($course->students_count * $course->price_value) . ' €' }}</p>
                                     </div>
 
-                                    <div class="hidden md:block col-span-2 text-center">
+                                    <div class="hidden lg:block col-span-2 text-center">
                                         <p class="text-sm mt-1">Estudiantes matriculados</p>
                                         <p class="text-sm font-bold mt-2">{{$course->students_count}}</p>
                                     </div>
 
-                                    <div class="hidden md:block col-span-2">
+                                    <div class="hidden lg:block col-span-2">
                                         <div class="flex justify-end">
                                             
                                             @if($course->rating !=0)
@@ -113,7 +113,7 @@
                                     </div>
 
                                     <!-- Botones de acción -->
-                                    <div class="md:col-span-3 flex items-center justify-end space-x-4 mt-4 md:mt-0">
+                                    <div class="md:col-span-3 flex items-center justify-center lg:justify-end space-x-4 mt-4 md:mt-0">
                                         <a href="{{ route('instructor.courses.edit', $course) }}" class="btn btn-blue">
                                             Editar
                                         </a>
