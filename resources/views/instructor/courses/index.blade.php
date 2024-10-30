@@ -50,7 +50,7 @@
                                     </div>
 
                                     <div class="hidden md:block md:col-span-3 lg:col-span-2">
-                                        <div class="flex justify-center">
+                                        <div class="flex md:justify-start lg:justify-center">
                                             
                                             @if($course->rating !=0)
                                                 <div>
