@@ -101,7 +101,17 @@
             <section class="card mb-12">
                 <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Reseñas</h1>
                 <p class="text-gray-700 text-base mb-2 ">Número de estudiantes matriculados: <strong>{{ $course->students_count }}</strong></p>
-                <p class="text-gray-700 text-base mb-2 ">Puntuación media: <strong>{{ $course->rating }}</strong></p>
+                {{-- <p class="text-gray-700 text-base mb-2 ">Puntuación media: <strong>{{ $course->rating }}</strong></p> --}}
+                <p class="text-gray-700 text-base mb-2 ">
+                    Puntuación media: 
+                    <strong>
+                        @if ($course->reviews_count > 0)
+                            {{ $course->rating }}
+                        @else
+                            N/A
+                        @endif
+                    </strong>
+                </p>
             
                 <h2 class="font-bold text-2xl mt-4 mb-2 text-center sm:text-left">Últimas Reseñas</h2>
                 <div class="space-y-4">

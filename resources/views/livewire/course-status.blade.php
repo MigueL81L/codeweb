@@ -79,7 +79,7 @@
                         <div>
                             <p class="ml-2">{{ $course->teacher->name }}</p>
                             {{-- <a class="text-blue-500 text-sm ml-2" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a> --}}
-                            <a class="text-blue-400 text-sm font-bold" href="mailto:{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a>
+                            <a class="text-blue-400 text-sm font-bold ml-2" href="mailto:{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a>
                         </div>
                     </div>
 
