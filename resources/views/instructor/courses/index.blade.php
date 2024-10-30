@@ -30,6 +30,7 @@
                     
                         <div class="flex-1">
                             <div class="py-4 px-8">
+
                                 <div class="grid md:grid-cols-12"> 
 
                                     <div class="md:col-span-3 text-center">
@@ -43,12 +44,12 @@
                                         <p class="text-sm font-bold mt-2">{{ ($course->students_count * $course->price_value) . ' €' }}</p>
                                     </div>
 
-                                    <div class="hidden lg:block col-span-2 text-center">
+                                    <div class="hidden md:block md:col-span-3 lg:col-span-2 text-center">
                                         <p class="text-sm mt-1">Estudiantes matriculados</p>
                                         <p class="text-sm font-bold mt-2">{{$course->students_count}}</p>
                                     </div>
 
-                                    <div class="hidden lg:block col-span-2">
+                                    <div class="hidden md:block md:col-span-3 lg:col-span-2">
                                         <div class="flex justify-end">
                                             
                                             @if($course->rating !=0)
