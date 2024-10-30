@@ -146,7 +146,8 @@
 
                         <div class="ml-4">
                             <h1 class="font-bold text-gray-500">Prof. {{$course->teacher->name}}</h1>
-                            <a class="text-blue-400 text-sm font-bold" href="{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a>
+                            {{-- <a class="text-blue-400 text-sm font-bold" href="{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a> --}}
+                            <a class="text-blue-400 text-sm font-bold" href="mailto:{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a>
                         </div>
                     </div>
 
