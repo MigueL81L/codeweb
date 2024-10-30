@@ -77,7 +77,7 @@
 
     @else
         <div class="bg-gray-100 rounded-lg p-4 text-center w-full">
-            <p class="text-gray-500 font-bold block">{{ $mensaje }}</p>
+            <p class="text-gray-500 font-bold block text-xl">{{ $mensaje }}</p>
         </div>
     @endif
 
