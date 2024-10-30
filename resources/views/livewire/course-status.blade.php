@@ -67,7 +67,14 @@
                     <h1 class="text-2xl leading-8 text-center mb-4">{{ $course->title }}</h1>
                     <div class="flex items-center">
                         <figure>
-                            <img class="w-12 h-12 object-cover rounded-full mr-4" src="{{ $course->teacher->profile_photo_url }}" alt="">
+                            {{-- <img class="w-12 h-12 object-cover rounded-full mr-4" src="{{ $course->teacher->profile_photo_url }}" alt=""> --}}
+                            @if ($course->teacher->profile_photo_path)
+                                <img src="{{ asset('storage/app/public/' . $course->teacher->profile_photo_path) }}" alt="{{ $course->teacher->name}}" class="rounded-full h-20 w-20 object-cover">
+                            @else
+                                <div class="h-20 w-20 bg-gray-200 rounded-full flex items-center justify-center">
+                                    <span class="font-semibold text-gray-600">{{ strtoupper(substr($course->teacher->name, 0, 1)) }}</span>
+                                </div>
+                            @endif
                         </figure>
                         <div>
                             <p>{{ $course->teacher->name }}</p>
