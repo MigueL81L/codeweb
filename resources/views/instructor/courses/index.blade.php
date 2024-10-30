@@ -19,7 +19,7 @@
         <ul>
             @forelse ($courses as $course)
                 <li class="bg-white rounded-lg shadow-lg overflow-hidden mb-4">
-                    {{-- <div class="md:flex">
+                    <div class="md:flex">
                         <!--No reducirá el tamaño de la imagen-->
                         <figure class="flex-shrink-0">
                             <!--Imagen cuadrada no deformable y centrada -->
@@ -98,74 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
-                    <div class="md:flex">
-                        <figure class="flex-shrink-0">
-                            <img src="{{ $course->image }}" 
-                                alt="" 
-                                class="w-full aspect-video md:w-36 md:aspect-square object-cover object-center" />
-                        </figure>
-                    
-                        <div class="flex-1">
-                            <div class="py-4 px-8">
-                                <div class="flex flex-wrap md:grid md:grid-cols-12"> 
-                    
-                                    <div class="md:col-span-3 text-center flex-grow">
-                                        <p class="mt-1 text-sm">Curso</p>
-                                        <p class="text-sm font-bold mt-2">{{ $course->title }}</p> 
-                                    </div>
-                    
-                                    <!-- Botones para pantallas pequeñas también -->
-                                    <div class="md:col-span-3 flex items-center justify-center sm:justify-end space-x-4 mt-4 md:mt-0 flex-grow md:flex-auto">
-                                        <a href="{{ route('instructor.courses.edit', $course) }}" class="btn btn-blue">
-                                            Editar
-                                        </a>
-                                        <form action="{{ route('instructor.courses.destroy', $course) }}" method="POST" onsubmit="return confirm('¿Estás seguro de querer eliminar este curso?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                    </div>
-                    
-                                    <div class="flex-grow lg:hidden col-span-2 text-center order-4 md:order-3">
-                                        <p class="text-sm mt-1">Estudiantes matriculados: {{$course->students_count}}</p>
-                                    </div>
-                    
-                                    <div class="hidden lg:block col-span-2 text-center order-3 md:order-4">
-                                        <p class="text-sm mt-1">Ganado en total</p>
-                                        <p class="text-sm font-bold mt-2">{{ ($course->students_count * $course->price_value) . ' €' }}</p>
-                                    </div>
-                    
-                                    <div class="hidden lg:block col-span-2 text-center order-2">
-                                        <div class="flex justify-end">
-                                            @if($course->rating != 0)
-                                                <div>
-                                                    <p class="text-sm text-center mt-1 mb-2">Rating</p>
-                                                    <ul class="flex text-sm">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            <li class="mr-1">
-                                                                <i class="fas fa-star text-{{$course->rating >= $i ? 'yellow':'gray'}}-400"></i>
-                                                            </li>
-                                                        @endfor
-                                                        <p class="ml-3 font-bold">{{$course->rating}}</p>
-                                                    </ul>
-                                                </div>
-                                            @else
-                                                <ul>
-                                                    <p class="text-sm mt-1 text-center">Rating</p>
-                                                    <li class="text-sm font-bold mt-2 text-center">
-                                                        <p>Sin reseñas</p>
-                                                    </li>
-                                                </ul>
-                                            @endif
-                                        </div>
-                                    </div>
-                    
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    
                 </li>
             @empty 
                 <li class="bg-white rounded-lg shadow-lg p-6">
