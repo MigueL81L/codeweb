@@ -241,13 +241,13 @@
                             {{-- <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
                                 {{$item['name'] }} 
                             </x-responsive-nav-link> --}}
-                                @php
+                            @php
                                 $isStudent = auth()->user()->hasRole('estudiante'); // Verifica si el usuario tiene el rol de estudiante
-                                @endphp
+                            @endphp
                             @if ($isStudent)
-                                <x-responsive-nav-link2 href="{{ $item['route'] }}" :active="$item['active']">
+                                <x-responsive-nav-link-estudiante href="{{ $item['route'] }}" :active="$item['active']">
                                     {{ $item['name'] }} 
-                                </x-responsive-nav-link2>
+                                </x-responsive-nav-link-estudian>
                             @else
                                 <x-responsive-nav-link href="{{ $item['route'] }}" :active="$item['active']">
                                     {{ $item['name'] }} 
