@@ -77,8 +77,8 @@
                             @endif
                         </figure>
                         <div>
-                            <p>{{ $course->teacher->name }}</p>
-                            <a class="text-blue-500 text-sm" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
+                            <p class="ml-2">{{ $course->teacher->name }}</p>
+                            <a class="text-blue-500 text-sm ml-2" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a>
                         </div>
                     </div>
 
