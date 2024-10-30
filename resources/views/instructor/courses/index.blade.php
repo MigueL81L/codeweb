@@ -50,7 +50,7 @@
                                     </div>
 
                                     <div class="hidden md:block md:col-span-3 lg:col-span-2">
-                                        <div class="flex justify-end">
+                                        <div class="flex justify-center">
                                             
                                             @if($course->rating !=0)
                                                 <div>
@@ -71,8 +71,8 @@
                                                         <li class="mr-1">
                                                             <i class="fas fa-star text-{{$course->rating ==5 ? 'yellow':'gray'}}-400"></i>
                                                         </li>
-                                                        <p class="ml-3 font-bold">{{$course->rating}}</p>
                                                     </ul>
+                                                    <p class="mt-1 font-bold">{{$course->rating}}</p>
                                                 </div>
                                             @else
                                                 <ul>
