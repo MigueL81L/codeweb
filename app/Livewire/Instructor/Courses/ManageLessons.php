@@ -171,8 +171,8 @@ class ManageLessons extends Component
         $this->validate([
             'lessonEdit.name' => ['required'],
             'lessonEdit.description' => ['nullable'],
-            'lessonEdit.document' => 'nullable|file|mimes:pdf|max:2048',
-            'lessonEdit.video' => 'nullable|file|mimes:mp4|max:256000',
+            'lessonEdit.document' => 'nullable|file|mimes:pdf|max:5120',
+            'lessonEdit.video' => 'nullable|file|mimes:mp4,avi,mov,wmv,flv,3gp|max:1331200',
         ]);
         
         Log::info('Validación completada para la actualización.');
