@@ -207,7 +207,7 @@
                                             <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
                                         </div>
                                     @endif
-                                    <p class="text-gray-700 text-sm ml-2">"Prof. " . {{$similar->teacher->name}}</p>
+                                    <p class="text-gray-700 text-sm ml-2">Prof. {{$similar->teacher->name}}</p>
                                 </div>
 
                                     @if ($similar->reviews_count > 0)
