@@ -196,7 +196,7 @@
                             <img class="h-32 w-40 object-cover ml-4" src="{{$similar->image}}" alt="">
 
                             <div class="ml-3">
-                                <h1><a class="font-bold text-gray-500 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
+                                <h1>Curso: <a class="font-bold text-blue-400 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
                                 
 
                                 <div class="flex items-center mb-2 mt-2">
@@ -207,7 +207,7 @@
                                             <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
                                         </div>
                                     @endif
-                                    <p class="text-gray-700 text-sm ml-2">{{$similar->teacher->name}}</p>
+                                    <p class="text-gray-700 text-sm ml-2">"Prof. " . {{$similar->teacher->name}}</p>
                                 </div>
 
                                     @if ($similar->reviews_count > 0)
