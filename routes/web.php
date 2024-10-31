@@ -15,27 +15,6 @@ require __DIR__.'/admin.php';
 require __DIR__.'/externos.php';
 
 
-// Route::middleware(['auth'])->group(function () {
-
-// Route::get('videos/{id}', [\App\Http\Controllers\Instructor\VideoLessonController::class, 'show'])
-//     ->name('videos.show');
-    
-
-// Route::get('/', HomeController::class)->name('home');
-// Route::get('cursos', [CourseController::class, 'list'])->name('courses.index');
-// Route::get('cursos/{course}', [CourseController::class, 'show'])->name('courses.show');
-// Route::get('courses', [CourseController::class, 'matriculados'])->name('courses.matriculados');
-
-// });
-
-
-// Route::get('cart', [CartController::class, 'index'])->name('cart.index');
-// Route::post('courses/{course}/enrolled', [CourseController::class, 'enrolled'])
-// ->middleware('auth')->name('course.enrolled');
-// Route::get('course-status/{course}', function (Course $course) {
-//     return view('courses.status', ['course' => $course]); 
-// })->name('courses.status')->middleware('auth');
-
 
 // Redirigir a la página de registro si el usuario no está autenticado
 Route::get('/', function () {

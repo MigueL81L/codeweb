@@ -67,7 +67,6 @@
                     <h1 class="text-2xl leading-8 text-center mb-4">{{ $course->title }}</h1>
                     <div class="flex items-center">
                         <figure>
-                            {{-- <img class="w-12 h-12 object-cover rounded-full mr-4" src="{{ $course->teacher->profile_photo_url }}" alt=""> --}}
                             @if ($course->teacher->profile_photo_path)
                                 <img src="{{ asset('storage/app/public/' . $course->teacher->profile_photo_path) }}" alt="{{ $course->teacher->name}}" class="rounded-full h-20 w-20 object-cover">
                             @else
@@ -78,7 +77,6 @@
                         </figure>
                         <div>
                             <p class="ml-2">{{ $course->teacher->name }}</p>
-                            {{-- <a class="text-blue-500 text-sm ml-2" href="">{{ '@' . Str::slug($course->teacher->name, '') }}</a> --}}
                             <a class="text-blue-400 text-sm font-bold ml-2" href="mailto:{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a>
                         </div>
                     </div>

@@ -15,9 +15,6 @@ Route::middleware(['auth'])->group(function () {
     Route::redirect('/', '/instructor/courses')->name('instructor');
 
 
-    // Las 7 rutas típicas del CRUD de courses
-    // Route::resource('courses', CourseController::class);
-
     // Rutas para el CRUD de cursos
     Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
     Route::get('courses/create', [CourseController::class, 'create'])->name('courses.create'); 
@@ -40,10 +37,6 @@ Route::middleware(['auth'])->group(function () {
     // Ruta para el curriculum de cada curso
     Route::get('courses/{course}/curriculum', [CourseController::class, 'curriculum'])->name('courses.curriculum');
 
-    // Ruta para la pagina del instructor, que mostrará los courses de este
-    // Route::get('/instructor-courses/{user}', [InstructorController::class, 'bring'])
-    //             ->middleware('can:Leer cursos')
-    //             ->name('instructor.instructor-courses');
 
 });
 

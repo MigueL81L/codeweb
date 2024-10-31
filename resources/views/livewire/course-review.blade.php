@@ -47,7 +47,6 @@
                 
                     <div class="flex justify-center space-x-2 mt-4">
                         <button type="button" wire:click="edit" class="btn btn-primary btn-blue:hover font-bold py-2 px-4 rounded mt-2">Editar Reseña</button>
-                        {{-- <button type="button" wire:click="destroy" class="btn btn-danger btn-danger:hover font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button> --}}
                         <button type="button" id="delete-review" class="btn btn-danger font-bold py-2 px-4 rounded mt-2">Eliminar Reseña</button>
 
                     </div>
@@ -77,7 +76,7 @@
                 confirmButtonText: 'Sí, eliminarlo!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    @this.call('destroy'); // Cambia de `Livewire.emit()` a `@this.call()`
+                    @this.call('destroy'); 
                 }
             });
         });

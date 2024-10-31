@@ -10,7 +10,6 @@
     <x-slot name="form">
         <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-        {{-- @if (Laravel\Jetstream\Jetstream::managesProfilePhotos() && Auth::user()->profile_photo_path) --}}
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
                 <input type="file" id="photo" class="hidden"
@@ -29,7 +28,6 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    {{-- <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover"> --}}
                     @if (Auth::user()->profile_photo_path)
                         <img src="{{ asset('storage/app/public/' . Auth::user()->profile_photo_path) }}" alt="{{ Auth::user()->name }}" class="rounded-full h-20 w-20 object-cover">
                     @else
