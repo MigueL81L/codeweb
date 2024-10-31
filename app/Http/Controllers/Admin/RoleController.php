@@ -93,12 +93,6 @@ class RoleController extends Controller
 
         $permissions = Permission::all();
     
-        // Compartir $role solo con la vista breadcrumb.blade.php
-        // View::composer('layouts.admin', function ($view) use ($role) {
-        //     $view->with('breadcrumbRole', $role);
-        // });
-    
-
         // Obtener los permisos asignados a este rol
         $selectedPermissions = $role->permissions->pluck('id')->toArray();
     

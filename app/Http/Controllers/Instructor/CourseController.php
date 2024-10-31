@@ -281,23 +281,12 @@ class CourseController extends Controller
     
         return redirect()->route('instructor.courses.index');
     }
-    
-    //Método de matriculación
-    // public function enrolled(Course $course){
-    //     $course->students()->attach(auth()->user()->id);
-    //     return redirect()->route('courses.status', $course);
-    // }
+
 
     //Método para llevar el curso
     public function status(Course $course){
         return view('courses.status', compact('course'));
     }
-
-    //Probando
-        
-    // public function instructor(){
-    //     return view('courses.instructor');
-    // }
     
 
     //Método para subir un video a un curso

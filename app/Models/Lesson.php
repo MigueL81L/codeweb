@@ -98,7 +98,6 @@ class Lesson extends Model
                 return '<iframe w-full h-auto src="' . $embedUrl . '" frameborder="0" allowfullscreen></iframe>';
             }
         } elseif ($this->platform == 1 && $this->video_path) {
-            // $videoUrl = route('instructor.video.show', $this->id);
             $videoUrl = route('videos.show', $this->id);
             return '<iframe w-full h-auto src="' . $videoUrl . '" frameborder="0" allowfullscreen></iframe>';
         }

@@ -27,18 +27,6 @@
                 </div>
 
                 <!-- Roles del Usuario -->
-                {{-- <div class="mb-4">
-                    <label for="roles" class="block text-sm font-medium text-gray-700">Roles</label>
-                    @foreach($roles as $role)
-                        <div class="mt-2">
-                            <label class="inline-flex items-center">
-                                <input type="checkbox" name="roles[]" value="{{ $role->id }}" class="form-checkbox h-5 w-5 text-blue-600">
-                                <span class="ml-2 text-gray-700">{{ $role->name }}</span>
-                            </label>
-                        </div>
-                    @endforeach
-                </div> --}}
-                <!-- Roles del Usuario -->
                 <div class="mb-4">
                     <label for="role" class="block text-sm font-medium text-gray-700">Rol</label>
                     <select name="role" id="role" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">

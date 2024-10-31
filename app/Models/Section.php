@@ -32,7 +32,7 @@ class Section extends Model
         parent::boot();
 
         static::deleting(function ($section) {
-            // Deleting related lessons automatically triggers the deletion of associated files from Lesson's boot method
+
             $section->lessons()->each(function ($lesson) {
                 $lesson->delete();
             });

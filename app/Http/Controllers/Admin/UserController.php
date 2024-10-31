@@ -145,23 +145,6 @@ class UserController extends Controller
             return redirect()->route('admin.users.index')->with('info', 'Usuario actualizado con éxito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(User $user)
-    // {
-    //     // Verifica si el usuario autenticado tiene el permiso de 'Eliminar usuarios'
-    //     if (Gate::denies('Eliminar usuarios')) {
-    //         abort(403, 'Unauthorized action.');
-    //     }
-
-    //     // Elimina el usuario
-    //     $user->delete();
-
-    //     return redirect()->route('admin.users.index')->with('info', 'Usuario eliminado con éxito');
-    // }
-
-
     public function destroy(User $user)
     {
         // Verifica si el usuario autenticado tiene el permiso de 'Eliminar usuarios'

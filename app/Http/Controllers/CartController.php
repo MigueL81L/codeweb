@@ -9,7 +9,7 @@ use CodersFree\Shoppingcart\Facades\Cart;
 class CartController extends Controller
 {
     public function index(){
-        // return view('cart.index');
+
                 // Obtén el contenido del carrito
                 $cartContent = Cart::instance('shopping')->content();
 

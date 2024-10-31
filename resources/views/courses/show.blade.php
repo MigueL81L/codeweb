@@ -5,14 +5,6 @@
                 <img class="h-60 w-full object-cover" src="{{$course->image}}" alt="">
             </figure>
 
-            {{-- <div class="text-white flex flex-col items-center">
-                <h1 class="text-3xl mb-3">{{$course->title}}</h1>
-                <p class="mb-2"><i class="fas fa-chart-line mr-2"></i>Nivel: {{$course->level->name}}</p>
-                <p class="mb-2"><i class="fas fa-tags mr-2"></i>Categoría: {{$course->category->name}}</p>
-                <p class="mb-2"><i class="fas fa-users mr-2"></i>Matriculados: {{$course->students_count}}</p> 
-                <p><i class="far fa-star mr-2"></i>Calificación: {{$course->rating}}</p>
-            </div> --}}
-
             <div class="text-white flex flex-col items-center mx-auto">
                 <h1 class="text-3xl mb-3">{{$course->title}}</h1>
                 <div class="flex items-center mb-2">
@@ -101,7 +93,6 @@
             <section class="card mb-12">
                 <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">Reseñas</h1>
                 <p class="text-gray-700 text-base mb-2 ">Número de estudiantes matriculados: <strong>{{ $course->students_count }}</strong></p>
-                {{-- <p class="text-gray-700 text-base mb-2 ">Puntuación media: <strong>{{ $course->rating }}</strong></p> --}}
                 <p class="text-gray-700 text-base mb-2 ">
                     Puntuación media: 
                     <strong>
@@ -138,7 +129,6 @@
                 <div class="card-body">
 
                     <div class="flex items-center"> 
-                        {{-- <img class="h-12 w-12 object-cover rounded-full shadow-lg" src="{{$course->teacher->profile_photo_url}}" alt="{{$course->teacher->name}}"> --}}
 
                         @if ($course->teacher->profile_photo_path)
                             <img src="{{ asset('storage/app/public/' . $course->teacher->profile_photo_path) }}" alt="{{$course->teacher->name}}" class="rounded-full h-20 w-20 object-cover shadow-lg">
@@ -156,7 +146,6 @@
 
                         <div class="ml-4">
                             <h1 class="font-bold text-gray-500">Prof. {{$course->teacher->name}}</h1>
-                            {{-- <a class="text-blue-400 text-sm font-bold" href="{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a> --}}
                             <a class="text-blue-400 text-sm font-bold" href="mailto:{{$course->teacher->email}}">{{'@'. Str::slug($course->teacher->name, '')}}</a>
                         </div>
                     </div>
@@ -191,12 +180,6 @@
                             @endif
 
                             @livewire('course-enrolled', ['course' => $course])
-                            {{-- <form action="{{route('course.enrolled', $course)}}" method="post">
-                                @csrf 
-                                <button class="btn btn-danger btn-block mt-4 mb-2" type="submit">
-                                    Inscribirse en este Curso
-                                </button>
-                            </form> --}}
 
                         @endcan
                     </div>
