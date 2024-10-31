@@ -189,10 +189,10 @@
                             <img class="h-32 w-40 object-cover ml-4" src="{{$similar->image}}" alt="">
 
                             <div class="ml-3">
-                                <h1><a class="font-bold text-gray-500 mb-3 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
+                                <h1><a class="font-bold text-gray-500 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
                                 
 
-                                <div class="flex items-center mb-2">
+                                <div class="flex items-center mb-2 mt-2">
                                     @if ($similar->teacher->profile_photo_path)
                                         <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{$similar->teacher->name}}" class="rounded-full h-20 w-20 object-cover shadow-lg">
                                     @else
@@ -203,7 +203,12 @@
                                     <p class="text-gray-700 text-sm ml-2">{{$similar->teacher->name}}</p>
                                 </div>
 
-                                <p class="text-sm"><i class="fas fa-star mr-2 text-yellow-400">{{" " . $similar->rating}}</i></p>
+                                    @if ($course->reviews_count > 0)
+                                        <p class="text-sm"><i class="fas fa-star mr-2 text-yellow-400">{{" " . $similar->rating}}</i></p>
+                                    @else
+                                        <p class="text-gray-500 text-sm mr-1">Sin reseñas</p>
+                                    @endif
+                                
                             </div>
                         </article>
                     @endforeach
