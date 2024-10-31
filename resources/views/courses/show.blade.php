@@ -85,7 +85,7 @@
                     <p class="text-gray-700 text-base">{{$course->description}}</p>
                 
                     @if($course->description==null)
-                    <p class="text-gray-700 text-base text-center sm:text-left">No hay descripción del course, todavía.</p>
+                    <p class="text-gray-700 text-base text-center sm:text-left">No hay descripción del curso, todavía.</p>
                     @endif
                 </div>
             </section>
@@ -137,11 +137,6 @@
                                 <span class="font-semibold text-gray-600">{{ strtoupper(substr($course->teacher->name, 0, 1)) }}</span>
                             </div>
                         @endif
-
-
-
-
-
 
 
                         <div class="ml-4">
@@ -198,7 +193,13 @@
                                 
 
                                 <div class="flex items-center mb-2">
-                                    <img class="h-8 w-8 object-cover rounded-full shadow-lg" src="{{$similar->teacher->profile_photo_url}}" alt="">
+                                    @if ($similar->teacher->profile_photo_path)
+                                        <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{$similar->teacher->name}}" class="rounded-full h-20 w-20 object-cover shadow-lg">
+                                    @else
+                                        <div class="h-20 w-20 bg-gray-200 rounded-full flex items-center justify-center">
+                                            <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
+                                        </div>
+                                    @endif
                                     <p class="text-gray-700 text-sm ml-2">{{$similar->teacher->name}}</p>
                                 </div>
 
