@@ -21,7 +21,14 @@
                 </div>
                 <div class="flex items-center">
                     <i class="far fa-star mr-2"></i>
-                    <p>Calificación: {{$course->rating}}</p>
+                    <p>
+                        Calificación:
+                        @if ($course->reviews_count > 0)
+                            {{ $course->rating }}
+                        @else
+                            N/A
+                        @endif
+                    </p>
                 </div>
             </div>
             
