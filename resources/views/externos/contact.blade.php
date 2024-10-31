@@ -23,8 +23,11 @@
                             </div>
                             <div class="flex justify-start mb-2"> <!-- Segunda fila: Teléfono -->
                                 <span class="font-semibold w-32 text-center pr-4 ml-4">Teléfono:</span>
-                                <span class="text-gray-700 dark:text-gray-300 ml-4">612-345-678</span>
+                                <span class="text-gray-700 dark:text-gray-300 ml-4">
+                                    <a href="tel:612345678" class="text-blue-600 hover:underline">612-345-678</a>
+                                </span>
                             </div>
+                            
                             <div class="flex justify-start"> <!-- Tercera fila: Email -->
                                 <span class="font-semibold w-32 text-center pr-4 ml-4">Email:</span>
                                 <span class="text-gray-700 dark:text-gray-300 ml-4">
