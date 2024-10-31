@@ -7,7 +7,7 @@
         'name' => 'Crear Nueva Categoría',
         'url' => '#',
     ]
-]">
+    ]">
 
     <div class="card">
         <div class="card-body">

@@ -10,30 +10,30 @@ use App\Http\Controllers\Admin\PriceController;
 Route::middleware(['auth'])->group(function () { 
 
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-})->middleware('can:Ver dashboard')->name('dashboard');
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->middleware('can:Ver dashboard')->name('dashboard');
 
-//Rutas para el crud de roles, las 7 rutas típicas
-Route::resource('roles', RoleController::class)->names('admin.roles');
+    //Rutas para el crud de roles, las 7 rutas típicas
+    Route::resource('roles', RoleController::class)->names('admin.roles');
 
-//Rutas para el crud de users, las 7 rutas típicas
-Route::resource('users', UserController::class)->names('admin.users');  
+    //Rutas para el crud de users, las 7 rutas típicas
+    Route::resource('users', UserController::class)->names('admin.users');  
 
-// Ruta específica para eliminar usuarios
-Route::delete('users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+    // Ruta específica para eliminar usuarios
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
-//Ruta específica para la creación de un nuevo user
-Route::get('users/create', [UserController::class, 'create'])->name('admin.users.create');
+    //Ruta específica para la creación de un nuevo user
+    Route::get('users/create', [UserController::class, 'create'])->name('admin.users.create');
 
-//Ruta para la administración de las categorías
-Route::resource('categories', CategoryController::class)->names('admin.categories');
+    //Ruta para la administración de las categorías
+    Route::resource('categories', CategoryController::class)->names('admin.categories');
 
-//Ruta para la administración de las Niveles de dificultad del curso
-Route::resource('levels', LevelController::class)->names('admin.levels');
+    //Ruta para la administración de las Niveles de dificultad del curso
+    Route::resource('levels', LevelController::class)->names('admin.levels');
 
-// Rutas para el crud de prices, las 7 rutas típicas
-Route::resource('prices', PriceController::class)->names('admin.prices');
+    // Rutas para el crud de prices, las 7 rutas típicas
+    Route::resource('prices', PriceController::class)->names('admin.prices');
 
 });
 

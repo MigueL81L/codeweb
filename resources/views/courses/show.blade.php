@@ -47,13 +47,13 @@
 
                 @foreach ($course->sections as $section)
                     <article class="mb-4 shadow" 
-                    {{--loop->first es un modo de preguntar si el bucle está en la primera iteration--}}
-                    @if($loop->first)
-                    {{--La primera sección estará abierta, el resto cerradas hasta que el usuario las clicke--}}
-                        x-data="{open:true}"
-                    @else
+                        {{--loop->first es un modo de preguntar si el bucle está en la primera iteration--}}
+                        @if($loop->first)
+                        {{--La primera sección estará abierta, el resto cerradas hasta que el usuario las clicke--}}
+                            x-data="{open:true}"
+                        @else
                         x-data="{open:false}"
-                    @endif>
+                        @endif>
                         <header class="border border-gray-200 px-4 py-2 cursor-pointer bg-200"
                         x-on:click="open=!open">
                             <h1 class="font-bold text-lg text-gray-600 text-center sm:text-left">{{$section->name}}</h1>
@@ -86,7 +86,7 @@
                 
                     @if($course->description==null)
                     <p class="text-gray-700 text-base text-center sm:text-left">No hay descripción del course, todavía.</p>
-                @endif
+                    @endif
                 </div>
             </section>
 

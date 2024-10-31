@@ -7,12 +7,12 @@
         </x-slot>
 
         <!--Llamo al componente course-sidebar, que tiene dentro el componente x-container-->
-            <x-instructor.course-sidebar :course="$course">
+        <x-instructor.course-sidebar :course="$course">
 
-                <!--Llamo al componente livewire previamente creado y editado-->
-                @livewire('instructor.courses.requirements', ['course' => $course])
+            <!--Llamo al componente livewire previamente creado y editado-->
+            @livewire('instructor.courses.requirements', ['course' => $course])
 
-            </x-instructor.course-sidebar>
+        </x-instructor.course-sidebar>
 
 
     

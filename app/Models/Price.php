@@ -14,6 +14,6 @@ class Price extends Model
     // Relación uno a muchos inversa: Un price puede ser tenido por muchos cursos
     public function courses()
     {
-            return $this->hasMany(Course::class);
+        return $this->hasMany(Course::class);
     }
 }

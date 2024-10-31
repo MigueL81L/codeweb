@@ -2,7 +2,7 @@
 
 <div x-data="{
     open:false
-}">
+    }">
     <div x-on:click="open = !open"
     class="h-6 w-12 -ml-4 bg-indigo-50 hover:bg-indigo-200 flex items-center justify-center cursor-pointer"
     style="clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0 51%, 0% 0%);">

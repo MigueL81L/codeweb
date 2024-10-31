@@ -7,13 +7,13 @@
         </x-slot>
 
         <!--Llamo al componente course-sidebar, que tiene dentro el componente x-container-->
-            <x-instructor.course-sidebar :course="$course">
+        <x-instructor.course-sidebar :course="$course">
 
-                <!--Incluyo componenete livewire previamente creado en la terminal, para que la carga del vídeo 
-                    se haga en segundo plano, y no paralice la vista-->
-                    @livewire('instructor.courses.promotional-video', ['course'=>$course])
+            <!--Incluyo componenete livewire previamente creado en la terminal, para que la carga del vídeo 
+            se haga en segundo plano, y no paralice la vista-->
+            @livewire('instructor.courses.promotional-video', ['course'=>$course])
 
-            </x-instructor.course-sidebar>
+        </x-instructor.course-sidebar>
 
 
     

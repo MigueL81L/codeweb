@@ -183,13 +183,8 @@ class Course extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    // public function audiences(){
-    //     return $this->hasMany('App\Models\Audience');
-    // }
-
     //Relación uno a muchos
     public function requirements(){
-        // return $this->hasMany(Requirement::class);
         return $this->hasMany(Requirement::class)->orderBy('position');
     }
     
@@ -210,10 +205,6 @@ class Course extends Model
     {
         return $this->price ? $this->price->value : 0;
     }
-
-
-
-
 
 
 }

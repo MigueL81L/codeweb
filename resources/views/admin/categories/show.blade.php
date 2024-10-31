@@ -7,7 +7,7 @@
         'name' => 'Editar una Categoría',
         'url'=>'#'
     ]
-]">
+    ]">
 
 
 </x-admin-layout>

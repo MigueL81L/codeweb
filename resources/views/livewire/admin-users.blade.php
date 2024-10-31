@@ -12,10 +12,8 @@
             </div>
         @endif
 
-    <div >
-
-
-            <div class="table-responsive overflow-x-auto">
+    <div>
+        <div class="table-responsive overflow-x-auto">
                 
                 <!-- Contenedor Flex para los botones y el menú desplegable -->
                 <div class="flex flex-col sm:flex-row justify-between items-center mb-4 space-y-4 sm:space-y-0">
@@ -103,8 +101,7 @@
                         {{ $paginatedUsers->links() }}
                     </div>
                 </form>
-            </div>
-
+        </div>
     </div>
 </div>
 

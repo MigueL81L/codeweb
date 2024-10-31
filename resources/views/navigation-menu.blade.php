@@ -41,7 +41,7 @@
 
 
 
-    <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
 
     <!-- Primary Navigation Menu, con clase definida en commom.css -->
     <div class="container">
@@ -159,7 +159,7 @@
                                 </x-slot>
                             </x-dropdown>
 
-                        @else
+                    @else
 
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
@@ -293,7 +293,7 @@
                                     </x-slot>
                                 </x-dropdown>
     
-                            @else
+                        @else
     
                                 <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
@@ -341,9 +341,6 @@
         </div>    
     </div>
 
-
-
-    
 </nav>
 
 

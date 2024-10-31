@@ -16,6 +16,6 @@ class Level extends Model
     // Relación uno a muchos inversa: Un nivel puede tener muchos cursos
     public function courses()
     {
-            return $this->hasMany(Course::class);
+        return $this->hasMany(Course::class);
     }
 }
