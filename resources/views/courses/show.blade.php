@@ -196,7 +196,7 @@
                             <img class="h-32 w-40 object-cover ml-4" src="{{$similar->image}}" alt="">
 
                             <div class="ml-3">
-                                <h1><a class="font-bold text-gray-500 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
+                                <h1><a class="font-bold text-black-500 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
                                 
 
                                 <div class="flex items-center mb-2 mt-2">
