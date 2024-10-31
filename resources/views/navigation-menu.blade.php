@@ -247,9 +247,9 @@
 
                 <!-- User Icon Button and Cart Icon -->
 
-                <div class="flex flex-col items-center mr-4 sm:mr-0">
+                <div class="flex flex-col items-center mr-4">
 
-                    <div class="ms-4 relative">
+                    <div class="ms-4 relative me-2">
                         @auth
                                 <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
@@ -320,7 +320,7 @@
 
 
                     <!-- Cart Icon -->
-                    <div class="ms-4 relative mt-2"
+                    <div class="ms-4 relative mt-2 me-2"
                         x-data="{
                             count: {{Cart::instance('shopping')->count() }} 
                         }"
