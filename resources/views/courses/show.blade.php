@@ -203,7 +203,7 @@
                                     <p class="text-gray-700 text-sm ml-2">{{$similar->teacher->name}}</p>
                                 </div>
 
-                                    @if ($course->reviews_count > 0)
+                                    @if ($similar->reviews_count > 0)
                                         <p class="text-sm"><i class="fas fa-star mr-2 text-yellow-400">{{" " . $similar->rating}}</i></p>
                                     @else
                                         <p class="text-gray-500 text-sm mr-1">Sin reseñas</p>
