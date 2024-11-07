@@ -130,32 +130,16 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'role' => 'required|exists:roles,id', // Cambiar 'roles' por 'role'
-            'password' => 'nullable|string|min:8',
+            'role' => 'required|exists:roles,id', 
         ]);
 
         // Actualiza los campos del usuario excepto la contraseña
-        $user->update([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-        ]);
+        $user->update($validatedData);
 
         $role = Role::findOrFail($request->role)->name; // Obtiene el nombre del rol seleccionado
         $user->syncRoles([$role]); // Asigna el rol al usuario
 
-        // Si se proporciona una nueva contraseña, encriptarla y actualizarla
-        if ($request->filled('password')) {
-            $password = $request->input('password');
-            $user->update(['password' => bcrypt($password)]);
-            
-            // Envía correo electrónico al usuario si es necesario
-                Mail::send('emails.password_changed', ['user' => $user, 'password' => $password], function ($message) use ($user) {
-                    $message->to($user->email);
-                    $message->subject('Su contraseña ha sido cambiada');
-                });
-            }
-
-            return redirect()->route('admin.users.index')->with('info', 'Usuario actualizado con éxito');
+        return redirect()->route('admin.users.index')->with('info', 'Usuario actualizado con éxito');
     }
 
     public function destroy(User $user)
