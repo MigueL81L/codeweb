@@ -1,3 +1,5 @@
+
+{{--Esto va a situarse en views\livewire\instructor\courses\manage-sections.blade.php--}}
 <div x-data="{
     open: false
     }" 

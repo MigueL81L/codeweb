@@ -152,6 +152,19 @@ class UserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        // Obtener el usuario autenticado
+        $authUser = auth()->user();
+
+        // Comprobar si el usuario que se pretende eliminar es un administrador
+        if ($user->hasRole('Administrador')) {
+        return redirect()->route('admin.users.index')->with('warning', 'No puedes eliminar a otro administrador.');
+        }
+
+        // Comprobar si el usuario que se intenta eliminar es el mismo que está autenticado
+        if ($user->id === $authUser->id) {
+        return redirect()->route('admin.users.index')->with('warning', 'No puedes eliminar tu propia cuenta. Por favor, utiliza el menú de tu perfil para darte de baja.');
+        }
+
         // Verifica y elimina la foto de perfil del usuario si existe
         if ($user->profile_photo_path && Storage::exists($user->profile_photo_path)) {
             Storage::delete($user->profile_photo_path);
