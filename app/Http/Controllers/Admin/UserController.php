@@ -114,6 +114,19 @@ class UserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        // Obtener el usuario autenticado
+        $authUser = auth()->user();
+
+        // Comprobar si el usuario que se intenta editar es el mismo que está autenticado
+        if ($user->id === $authUser->id) {
+        return redirect()->route('admin.users.index')->with('warning', 'No puedes editar tu propia cuenta. Por favor, utiliza el menú de tu perfil para realizar cambios.');
+        }
+
+        // Comprobar si el usuario que se pretende editar es un administrador
+        if ($user->hasRole('Administrador')) {
+        return redirect()->route('admin.users.index')->with('warning', 'No puedes editar a otro administrador. Este debe gestionar su cuenta desde su propio perfil.');
+        }
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
