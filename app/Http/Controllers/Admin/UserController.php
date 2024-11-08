@@ -129,9 +129,9 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('warning', 'No puedes editar a otro administrador. Este debe gestionar su cuenta desde su propio perfil.');
         }
 
+        //No debo permitir que un adeministrador pueda modificar la password o el email de un usuario, puesto que si pudiera, podría hacerse con la cuenta del usuario
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'role' => 'required|exists:roles,id', 
         ]);
 
