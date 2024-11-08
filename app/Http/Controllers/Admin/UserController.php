@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Course;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
@@ -115,7 +116,8 @@ class UserController extends Controller
         }
 
         // Obtener el usuario autenticado
-        $authUser = auth()->user();
+        // $authUser = auth()->user();
+        $authUser = Auth::user();
 
         // Comprobar si el usuario que se intenta editar es el mismo que está autenticado
         if ($user->id === $authUser->id) {
@@ -150,7 +152,8 @@ class UserController extends Controller
         }
 
         // Obtener el usuario autenticado
-        $authUser = auth()->user();
+        // $authUser = auth()->user();
+        $authUser = Auth::user();
 
         // Comprobar si el usuario que se intenta eliminar es el mismo que está autenticado
         if ($user->id === $authUser->id) {

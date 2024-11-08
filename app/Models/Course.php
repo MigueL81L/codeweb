@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 
 class Course extends Model
@@ -123,15 +124,26 @@ class Course extends Model
     }
 
     //Método accesor para encontrar la fecha que el user compra el course
+    // public function dateOfAcquisition()
+    // {
+    //     $record = DB::table('course_user')
+    //         ->where('course_id', $this->id)
+    //         ->where('user_id', auth()->id())
+    //         ->first();
+
+    //     return $record ? Carbon::parse($record->created_at) : null;
+    // }
+
     public function dateOfAcquisition()
     {
         $record = DB::table('course_user')
             ->where('course_id', $this->id)
-            ->where('user_id', auth()->id())
+            ->where('user_id', Auth::id()) // Cambiado de auth()->id() a Auth::id()
             ->first();
-
+    
         return $record ? Carbon::parse($record->created_at) : null;
     }
+
 
     //Métodos para relacionar a nivel de modelo las tablas. En esta tabla 
     //son relaciones Uno a Muchos inversa

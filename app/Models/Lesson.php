@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use App\Observers\LessonObserver;
+use Illuminate\Support\Facades\Auth;
 
 //Le indico al modelo Lesson que use el observer previamente predefinido, para que anote la posición
 #[ObservedBy([LessonObserver::class])]
@@ -52,7 +53,8 @@ class Lesson extends Model
 
     //Atributo completed de la lesson
     public function getCompletedAttribute(){
-        return $this->users->contains(auth()->user()->id);
+        // return $this->users->contains(auth()->user()->id);
+        return $this->users->contains(Auth::id());
     }
 
     //Método para determinar el tipo de video, en caso de que sea subido desde el ordenador 

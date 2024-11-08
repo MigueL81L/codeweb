@@ -5,6 +5,7 @@ namespace App\Livewire;
 //Paquete carrito de compra traido de github
 use CodersFree\Shoppingcart\Facades\Cart;  
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth; 
 
 class CourseEnrolled extends Component
 {
@@ -64,9 +65,12 @@ class CourseEnrolled extends Component
 
     public function enrolled(){
         //Esta el usuario autenticado?
-        if(auth()->check()){
+        // if(auth()->check()){
+        if (Auth::check()) {
             //Compra el curso y matricúlate
-            $this->course->students()->attach(auth()->user()->id);
+            // $this->course->students()->attach(auth()->user()->id);
+            $this->course->students()->attach(Auth::id()); 
+
             //El curso ya está comprado, por tanto eliminalo del carrito
             $this->removeCart();
         }

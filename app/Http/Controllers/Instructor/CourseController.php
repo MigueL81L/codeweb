@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Policies\CoursePolicy;
 use Illuminate\Support\Facades\Gate;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 
 class CourseController extends Controller
@@ -42,7 +43,8 @@ class CourseController extends Controller
         }
 
          // Recojo la colección de cursos del usuario autenticado 
-         $courses = Course::where('user_id', auth()->id())->get();
+        //  $courses = Course::where('user_id', auth()->id())->get();
+        $courses = Course::where('user_id', Auth::id())->get();
 
          // Le paso a la vista la colección de cursos
          return view('instructor.courses.index', compact('courses'));
@@ -102,7 +104,8 @@ class CourseController extends Controller
                  // Agrega validación para la imagen opcionalmente
         ]);
             //A la variable con los datos del formulario, le paso el id, del usuario ahora mismo autentificado
-            $data['user_id']=auth()->id();
+            // $data['user_id']=auth()->id();
+            $data['user_id'] = Auth::id();
 
             //Creo un curso, y lo almaceno en una variable
             $course=Course::create($data);
@@ -154,7 +157,10 @@ class CourseController extends Controller
 
         // Verifica si el usuario autenticado tiene el permiso de 'Actualizar cursos'
         // y si es el creador del curso (usuario autenticado debe ser el mismo que el creador del curso)
-        if (Gate::denies('Actualizar cursos') || $course->user_id !== auth()->id()) {
+        // if (Gate::denies('Actualizar cursos') || $course->user_id !== auth()->id()) {
+        //     abort(403, 'Unauthorized action.');
+        // }
+        if (Gate::denies('Actualizar cursos') || $course->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -176,7 +182,7 @@ class CourseController extends Controller
 
         // Verifica si el usuario autenticado tiene el permiso de 'Actualizar cursos'
         // y si es el creador del curso (usuario autenticado debe ser el mismo que el creador del curso)
-        if (Gate::denies('Actualizar cursos') || $course->user_id !== auth()->id()) {
+        if (Gate::denies('Actualizar cursos') || $course->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -226,7 +232,7 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         // Verifica si el usuario tiene permiso y es el creador del curso
-        if (Gate::denies('Eliminar cursos') || $course->user_id !== auth()->id()) { 
+        if (Gate::denies('Eliminar cursos') || $course->user_id !== Auth::id()) { 
             abort(403, 'Unauthorized action.');
         }
         

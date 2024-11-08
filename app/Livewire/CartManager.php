@@ -22,7 +22,8 @@ class CartManager extends Component
     public function checkout()
     {
         // Verifica si el usuario está autenticado
-        if (auth()->check()) {
+        // if (auth()->check()) {
+        if (Auth::check()) {
             $cartContent = Cart::instance('shopping')->content();
 
             foreach ($cartContent as $item) {

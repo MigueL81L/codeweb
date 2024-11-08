@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class CourseStatus extends Component
 {
@@ -101,9 +102,11 @@ class CourseStatus extends Component
     public function completed()
     {
         if ($this->current->completed) {
-            $this->current->users()->detach(auth()->user()->id);
+            // $this->current->users()->detach(auth()->user()->id);
+            $this->current->users()->detach(Auth::id());
         } else {
-            $this->current->users()->attach(auth()->user()->id);
+            // $this->current->users()->attach(auth()->user()->id);
+            $this->current->users()->attach(Auth::id());
         }
 
         $this->current = Lesson::find($this->current->id);
