@@ -102,13 +102,14 @@
                                 
                                 <td class="border px-4 py-2 text-center">
                                     <div x-data="{ open: false }" class="relative">
-                                        <div @click="open = !open" class="bg-blue-500 text-white font-bold py-2 px-4 rounded cursor-pointer">
-                                            Permisos de {{ $role->name }}
-                                        </div>
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
+                                            Ver Permisos
+                                        </button>
                                         <ul x-show="open" @click.away="open = false" 
-                                            class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-50" style="display: none;">
-                                            @foreach ($role->permissions as $permission)
-                                                <li class="px-4 py-2">{{ $permission->name }}</li>
+                                            class="absolute left-0 w-full mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50" 
+                                            style="display: none;">
+                                            @foreach($role->permissions as $permission)
+                                                <li class="px-4 py-2 text-sm">{{ $permission->name }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
