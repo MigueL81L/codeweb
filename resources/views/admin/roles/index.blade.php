@@ -99,7 +99,7 @@
                                             Ver Permisos
                                         </button>
                                         <ul x-show="open" @click.away="open = false" 
-                                            class="absolute left-0 w-full mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50" 
+                                            class="absolute left-0 w-full mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-full" 
                                             style="display: none;">
                                             @foreach($role->permissions as $permission)
                                                 <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
