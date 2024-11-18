@@ -36,7 +36,7 @@
                                     </button>
                                 </a>
 
-                                <form action="{{ route('admin.prices.destroy', $price) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este Precio?')"  class="inline-block ml-2">
+                                <form action="{{ route('admin.prices.destroy', $price) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este Precio? Esta acción eliminará todos los cursos asociados y sus recursos.')"  class="inline-block ml-2">
                                     @method('delete')
                                     @csrf
                                     <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded inline-block mt-2 mr-1 sm:mt-0 sm:mr-0" type="submit">Eliminar</button>

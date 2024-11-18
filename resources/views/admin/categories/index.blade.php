@@ -43,7 +43,7 @@
                                         </button>
                                     </a>
 
-                                    <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta Categoría?')" class="inline-block ml-2">
+                                    <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta Categoría? Esta acción eliminará todos los cursos asociados y sus recursos.')" class="inline-block ml-2">
                                         @method('delete')
                                         @csrf
                                         <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded inline-block mt-2 mr-1"  type="submit">Eliminar</button>
