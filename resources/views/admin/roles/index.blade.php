@@ -105,8 +105,8 @@
                                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
                                             Lista de Permisos
                                         </button>
-                                        <ul x-show="open" @click.away="open = false" 
-                                            class="absolute left-0 mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-10 w-56" style="display: none;">
+                                        <ul x-show="open" @click.away="open = false"
+                                        class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-10" style="display: none;">
                                             @foreach($role->permissions as $permission)
                                                 <li class="px-4 py-2 hover:bg-gray-700">{{ $permission->name }}</li>
                                             @endforeach
