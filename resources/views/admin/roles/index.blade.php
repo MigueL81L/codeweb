@@ -92,7 +92,7 @@
                     <thead>
                         <tr>
                             <th class="px-4 py-2 text-center">Nombre</th>
-                            <th class="px-4 py-2 text-center">Permisos</th> <!-- Título Cambiado a Permisos -->
+                            <th class="px-4 py-2 text-center">Permisos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,35 +101,17 @@
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
                                 <td class="border px-4 py-2 text-center">
-                                    {{-- <div x-data="{ open: false }" class="relative">
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
-                                            Ver Permisos
-                                        </button>
-                                        <ul x-show="open" @click.away="open = false" class="absolute left-0 mt-2 bg-white border border-gray-300 shadow-md z-10 w-56" x-transition>
-                                            <li class="p-2">
-                                                <strong>Permisos de {{ $role->name }}:</strong>
-                                                <ul>
-                                                    @foreach($role->permissions as $permission)
-                                                        <li>{{ $permission->name }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div> --}}
-
-
-                                    <div class="dropdown" x-data="{ open: false }">
-                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded dropdown-toggle" type="button" data-bs-toggle="dropdown" @click="open = !open"
-                                            aria-expanded="false">
+                                    <div class="relative" x-data="{ open: false }">
+                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
                                             Lista de Permisos
                                         </button>
-                                        <ul class="dropdown-menu bg-white" x-show="open" @click.away="open = false">
+                                        <ul x-show="open" @click.away="open = false" 
+                                            class="absolute left-0 mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-10 w-56" style="display: none;">
                                             @foreach($role->permissions as $permission)
-                                                <li class="dropdown-item">{{ $permission->name }}</li>
+                                                <li class="px-4 py-2 hover:bg-gray-700">{{ $permission->name }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
-
                                 </td>
                             </tr>
                         @empty
