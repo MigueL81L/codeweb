@@ -101,7 +101,7 @@
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
                                 <td class="border px-4 py-2 text-center">
-                                    <div x-data="{ open: false }" class="relative">
+                                    {{-- <div x-data="{ open: false }" class="relative">
                                         <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
                                             Ver Permisos
                                         </button>
@@ -115,7 +115,21 @@
                                                 </ul>
                                             </li>
                                         </ul>
+                                    </div> --}}
+
+
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            Lista de Permisos
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            @foreach($role->permissions as $permission)
+                                                <li class="dropdown-item">{{ $permission->name }}</li>
+                                            @endforeach
+                                        </ul>
                                     </div>
+
                                 </td>
                             </tr>
                         @empty
