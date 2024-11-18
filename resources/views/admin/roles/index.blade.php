@@ -88,7 +88,7 @@
                     </a>
                 </div>
 
-                <table class="mx-auto sm:w-full">
+                <table class="mx-auto sm:w-full relative">
                     <thead>
                         <tr>
                             <th class="px-4 py-2 text-center">Nombre</th>
@@ -106,10 +106,10 @@
                                             Ver Permisos
                                         </button>
                                         <ul x-show="open" @click.away="open = false" 
-                                            class="absolute left-0 w-full mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50" 
+                                            class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-50" 
                                             style="display: none;">
                                             @foreach($role->permissions as $permission)
-                                                <li class="px-4 py-2 text-sm">{{ $permission->name }}</li>
+                                                <li class="px-4 py-2 hover:bg-gray-700 cursor-default">{{ $permission->name }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
