@@ -252,8 +252,9 @@ class CourseController extends Controller
                     Storage::delete($lesson->video_path);
                 }
     
-                if ($lesson->image_path && Storage::exists($lesson->image_path)) {
-                    Storage::delete($lesson->image_path);
+                // Eliminar el documento si existe
+                if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+                    Storage::delete($lesson->document_path);
                 }
     
                 $lesson->delete();

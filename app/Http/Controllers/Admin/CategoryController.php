@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -110,15 +112,73 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // public function destroy(Category $category)
+    // {
+
+    //     // Verifica si el usuario autenticado tiene el permiso de 'Listar roles'
+    //     if (Gate::denies('Eliminar categoria')) {
+    //         abort(403, 'Unauthorized action.');
+    //     }
+
+    //     $category->delete();
+    //     return redirect()->route('admin.categories.index')->with('info', 'La Categoría se eliminó satisfactoriamente!');
+    // }
+
     public function destroy(Category $category)
     {
-
-        // Verifica si el usuario autenticado tiene el permiso de 'Listar roles'
         if (Gate::denies('Eliminar categoria')) {
             abort(403, 'Unauthorized action.');
         }
-
-        $category->delete();
-        return redirect()->route('admin.categories.index')->with('info', 'La Categoría se eliminó satisfactoriamente!');
+    
+        try {
+            // Iterar y eliminar cada curso asociado a la categoría
+            $category->courses->each(function ($course) {
+                // Eliminar imagen del curso si existe
+                if ($course->courseImage && Storage::exists($course->courseImage->path)) {
+                    Storage::delete($course->courseImage->path);
+                    $course->courseImage->delete();
+                }
+    
+                // Eliminar reviews, goals y requirements
+                $course->reviews()->delete();
+                $course->goals()->delete();
+                $course->requirements()->delete();
+    
+                // Eliminar sections y their lessons
+                $course->sections->each(function ($section) {
+                    $section->lessons->each(function ($lesson) {
+                        // Eliminar videos y documentos de lecciones
+                        if ($lesson->video_path && Storage::exists($lesson->video_path)) {
+                            Storage::delete($lesson->video_path);
+                        }
+    
+                        if ($lesson->document_path && Storage::exists($lesson->document_path)) {
+                            Storage::delete($lesson->document_path);
+                        }
+    
+                        $lesson->delete();
+                    });
+    
+                    $section->delete();
+                });
+    
+                // Eliminar video del curso si existe
+                if ($course->video_path && Storage::exists($course->video_path)) {
+                    Storage::delete($course->video_path);
+                }
+    
+                // Finalmente, eliminar el curso
+                $course->delete();
+            });
+    
+            // Ahora eliminar la categoría
+            $category->delete();
+    
+            return redirect()->route('admin.categories.index')->with('info', 'La Categoría y sus cursos asociados fueron eliminados satisfactoriamente!');
+        } catch (\Exception $e) {
+            // Registro y manejo de errores
+            Log::error('Error al eliminar la categoría y sus cursos: ' . $e->getMessage());
+            return back()->withErrors(['msg' => 'Error al eliminar la categoría y cursos: ' . $e->getMessage()]);
+        }
     }
 }
