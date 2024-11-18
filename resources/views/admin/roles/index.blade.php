@@ -107,13 +107,13 @@
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
                                 <td class="border px-4 py-2 text-center">
-                                    <div x-data="{ open: false }" class="relative">
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
-                                            Ver Permisos
-                                        </button>
-                                        
-                                        <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 bg-white border border-gray-300 shadow-md z-10 w-56">
-                                            <div class="p-4 text-gray-700">
+                                    <div x-data="{ open: false }">
+                                        <!-- Caja desplegable -->
+                                        <div class="flex flex-col items-start">
+                                            <div class="cursor-pointer bg-blue-500 text-white font-bold py-2 px-4 rounded" @click="open = !open">
+                                                <span>Ver Permisos</span>
+                                            </div>
+                                            <div x-show="open" x-transition class="mt-2 w-56 bg-white border border-gray-300 shadow-md z-10 p-4">
                                                 <strong>Permisos de {{ $role->name }}:</strong>
                                                 <ul>
                                                     @foreach($role->permissions as $permission)
