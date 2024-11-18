@@ -77,6 +77,12 @@
     ]
 ]">
 
+    @if(session('info'))
+        <div class="bg-blue-500 text-white px-4 py-2 w-full shadow-md mb-2">
+            <strong>Éxito! </strong>{{ session('info') }}
+        </div>
+    @endif
+
     <div>
 
         <div class="card-body">
@@ -101,11 +107,12 @@
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
                                 <td class="border px-4 py-2 text-center">
-                                    <div class="relative">
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="togglePermissions('{{ $role->id }}')">
+                                    <div x-data="{ open: false }" class="relative">
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
                                             Ver Permisos
                                         </button>
-                                        <div id="permissions-{{ $role->id }}" class="absolute left-0 mt-2 hidden bg-white border border-gray-300 shadow-md z-10">
+                                        
+                                        <div x-show="open" @click.away="open = false" class="absolute left-0 mt-2 bg-white border border-gray-300 shadow-md z-10 w-56">
                                             <div class="p-4 text-gray-700">
                                                 <strong>Permisos de {{ $role->name }}:</strong>
                                                 <ul>
@@ -129,20 +136,4 @@
         </div>
     </div>
 
-    <script>
-        function togglePermissions(roleId) {
-            const permissionsDiv = document.getElementById(`permissions-${roleId}`);
-            const isVisible = permissionsDiv.classList.contains('hidden');
-            permissionsDiv.classList.toggle('hidden', !isVisible);
-            permissionsDiv.classList.toggle('block', isVisible);
-
-            // Close on outside click
-            document.addEventListener('click', function(event) {
-                if (!permissionsDiv.contains(event.target) && !event.target.matches('button')) {
-                    permissionsDiv.classList.add('hidden');
-                    permissionsDiv.classList.remove('block');
-                }
-            }, { once: true }); // Remove listener after first click
-        }
-    </script>
 </x-admin-layout>
