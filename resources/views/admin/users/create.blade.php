@@ -18,12 +18,20 @@
                 <div class="mb-4">
                     <label for="name" class="block text-sm font-medium text-gray-700">Nombre del Usuario</label>
                     <input type="text" name="name" id="name" placeholder="Escriba un nombre" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ old('name') }}">
+                    
+                    @error('name')
+                        <span class="text-red-600 mt-2 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <!-- Email del Usuario -->
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">Email del Usuario</label>
                     <input type="email" name="email" id="email" placeholder="Escriba un email" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ old('email') }}">
+                
+                    @error('email')
+                        <span class="text-red-600 mt-2 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <!-- Roles del Usuario -->
