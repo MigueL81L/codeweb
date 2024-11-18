@@ -102,14 +102,15 @@
                                 
                                 <td class="border px-4 py-2 text-center">
                                     <div x-data="{ open: false }" class="relative">
-                                        <select @click="open = !open" class="h-10 w-full border-gray-300 rounded-lg bg-gray-800 text-white cursor-default" @focus="open = true" @blur="open = false">
-                                            <option value="" class="py-2">Permisos de {{ $role->name }}</option>
-                                            <template x-show="open">
-                                                @foreach($role->permissions as $permission)
-                                                    <option value="{{ $permission->id }}" class="bg-gray-800 text-white">{{ $permission->name }}</option>
-                                                @endforeach
-                                            </template>
-                                        </select>
+                                        <div @click="open = !open" class="bg-blue-500 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                                            Permisos de {{ $role->name }}
+                                        </div>
+                                        <ul x-show="open" @click.away="open = false" 
+                                            class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-10" style="display: none;">
+                                            @foreach ($role->permissions as $permission)
+                                                <li class="px-4 py-2">{{ $permission->name }}</li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </td>
                             </tr>
