@@ -101,17 +101,16 @@
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
                                 <td class="border px-4 py-2 text-center">
-                                    <div class="relative" x-data="{ open: false }" @click.away="open = false">
-                                        <select @click="open = !open" class="h-10 w-full border-gray-300 rounded-lg bg-gray-800 text-white cursor-pointer" x-ref="permissionSelect">
-                                            <option value="" class="py-2">Permisos de {{ $role->name }}:</option>
-                                            <template x-if="open">
-                                                <ul class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-10">
-                                                    @foreach ($role->permissions as $permission)
-                                                        <li class="px-4 py-2 hover:bg-gray-700 cursor-default">{{ $permission->name }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </template>
-                                        </select>
+                                    <div x-data="{ open: false }" class="relative" @click.away="open = false">
+                                        <div @click="open = !open" class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                            <span x-show="!open">Permisos de {{ $role->name }}</span>
+                                            <span x-show="open">Cerrar Permisos</span>
+                                        </div>
+                                        <ul x-show="open" class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-10" style="display: none;">
+                                            @foreach($role->permissions as $permission)
+                                                <li class="px-4 py-2 hover:bg-gray-700 cursor-default">{{ $permission->name }}</li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </td>
                             </tr>
