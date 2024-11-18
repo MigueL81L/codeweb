@@ -106,7 +106,7 @@
                                             Permisos de {{ $role->name }}
                                         </div>
                                         <ul x-show="open" @click.away="open = false" 
-                                            class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-10" style="display: none;">
+                                            class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-50" style="display: none;">
                                             @foreach ($role->permissions as $permission)
                                                 <li class="px-4 py-2">{{ $permission->name }}</li>
                                             @endforeach
