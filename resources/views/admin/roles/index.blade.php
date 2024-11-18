@@ -1,4 +1,4 @@
-<x-admin-layout :breadcrumb="[
+{{-- <x-admin-layout :breadcrumb="[
     [
         'name' => 'Panel de Control',
         'url' => route('admin.dashboard'),
@@ -64,4 +64,85 @@
             </div>
         </div>
     </div>
+</x-admin-layout> --}}
+
+<x-admin-layout :breadcrumb="[
+    [
+        'name' => 'Panel de Control',
+        'url' => route('admin.dashboard'),
+    ],
+    [
+        'name' => 'Lista de Roles',
+        'url' => route('admin.roles.index'),
+    ]
+]">
+
+    <div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <div class="flex items-center sm:justify-start py-4">
+                    <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center" href="{{ route('admin.roles.create') }}">
+                        Crear Rol
+                    </a>
+                </div>
+
+                <table class="mx-auto sm:w-full">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 text-center">Nombre</th>
+                            <th class="px-4 py-2 text-center">Permisos</th> <!-- Título Cambiado a Permisos -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($roles as $role)
+                            <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
+                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
+                                
+                                <td class="border px-4 py-2 text-center">
+                                    <div class="relative">
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="togglePermissions('{{ $role->id }}')">
+                                            Ver Permisos
+                                        </button>
+                                        <div id="permissions-{{ $role->id }}" class="absolute left-0 mt-2 hidden bg-white border border-gray-300 shadow-md z-10">
+                                            <div class="p-4 text-gray-700">
+                                                <strong>Permisos de {{ $role->name }}:</strong>
+                                                <ul>
+                                                    @foreach($role->permissions as $permission)
+                                                        <li>{{ $permission->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3" class="border px-4 py-2 text-center">No hay ningún rol registrado</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePermissions(roleId) {
+            const permissionsDiv = document.getElementById(`permissions-${roleId}`);
+            const isVisible = permissionsDiv.classList.contains('hidden');
+            permissionsDiv.classList.toggle('hidden', !isVisible);
+            permissionsDiv.classList.toggle('block', isVisible);
+
+            // Close on outside click
+            document.addEventListener('click', function(event) {
+                if (!permissionsDiv.contains(event.target) && !event.target.matches('button')) {
+                    permissionsDiv.classList.add('hidden');
+                    permissionsDiv.classList.remove('block');
+                }
+            }, { once: true }); // Remove listener after first click
+        }
+    </script>
 </x-admin-layout>
