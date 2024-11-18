@@ -123,7 +123,7 @@
                                             aria-expanded="false">
                                             Lista de Permisos
                                         </button>
-                                        <ul class="dropdown-menu" x-show="open" @click.away="open = false">
+                                        <ul class="dropdown-menu bg-white border border-gray-300 shadow-md z-10 w-56" x-show="open" @click.away="open = false">
                                             @foreach($role->permissions as $permission)
                                                 <li class="dropdown-item">{{ $permission->name }}</li>
                                             @endforeach
