@@ -118,12 +118,12 @@
                                     </div> --}}
 
 
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    <div class="dropdown" x-data="{ open: false }">
+                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded dropdown-toggle" type="button" data-bs-toggle="dropdown" @click="open = !open"
                                             aria-expanded="false">
                                             Lista de Permisos
                                         </button>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" x-show="open" @click.away="open = false">
                                             @foreach($role->permissions as $permission)
                                                 <li class="dropdown-item">{{ $permission->name }}</li>
                                             @endforeach
