@@ -92,7 +92,7 @@
                     <thead>
                         <tr>
                             <th class="px-4 py-2 text-center">Nombre</th>
-                            <th class="px-4 py-2 text-center">Permisos</th>
+                            <th class="px-4 py-2 text-center">Permisos</th> <!-- Título Cambiado a Permisos -->
                         </tr>
                     </thead>
                     <tbody>
@@ -100,26 +100,17 @@
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
-                                {{-- <td class="border px-4 py-2 text-center">
-                                    <div class="relative" x-data="{ open: false }">
-                                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
-                                            Lista de Permisos
-                                        </button>
-                                        <ul x-show="open" @click.away="open = false"
-                                        class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-20" style="display: none;">
-                                            @foreach($role->permissions as $permission)
-                                                <li class="px-4 py-2 hover:bg-gray-700">{{ $permission->name }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </td> --}}
                                 <td class="border px-4 py-2 text-center">
-                                    <div class="relative">
-                                        <select class="h-10 w-full border-gray-300 rounded-lg bg-gray-800 text-white cursor-default select-none" disabled> <!-- Deshabilitado y con estilo -->
+                                    <div class="relative" x-data="{ open: false }" @click.away="open = false">
+                                        <select @click="open = !open" class="h-10 w-full border-gray-300 rounded-lg bg-gray-800 text-white cursor-pointer" x-ref="permissionSelect">
                                             <option value="" class="py-2">Permisos de {{ $role->name }}:</option>
-                                            @foreach($role->permissions as $permission)
-                                                <option value="{{ $permission->id }}">{{$permission->name}}</option>
-                                            @endforeach
+                                            <template x-if="open">
+                                                <ul class="absolute left-0 w-full mt-2 bg-gray-800 text-white border border-gray-600 shadow-lg z-10">
+                                                    @foreach ($role->permissions as $permission)
+                                                        <li class="px-4 py-2 hover:bg-gray-700 cursor-default">{{ $permission->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </template>
                                         </select>
                                     </div>
                                 </td>
