@@ -81,13 +81,6 @@
 
         <div class="card-body">
             <div class="table-responsive">
-
-                <div class="flex items-center sm:justify-start py-4">
-                    <a class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded text-center" href="{{ route('admin.roles.create') }}">
-                        Crear Rol
-                    </a>
-                </div>
-
                 <table class="mx-auto sm:w-full">
                     <thead>
                         <tr>
@@ -109,7 +102,7 @@
                                             class="absolute left-0 w-full mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50" 
                                             style="display: none;">
                                             @foreach($role->permissions as $permission)
-                                                <li class="px-4 py-2 text-sm">{{ $permission->name }}</li>
+                                                <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
