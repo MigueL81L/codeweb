@@ -57,8 +57,8 @@ class UserController extends Controller
         }
     
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name' => 'required|string|max:255|unique:users,name',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'role' => 'required|exists:roles,id', // Cambiar 'roles' por 'role'
             'password' => 'required|string|min:8',
         ]);
@@ -131,7 +131,7 @@ class UserController extends Controller
 
         //No debo permitir que un adeministrador pueda modificar la password o el email de un usuario, puesto que si pudiera, podría hacerse con la cuenta del usuario
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users,name,' . $user->id,
             'role' => 'required|exists:roles,id', 
         ]);
 

@@ -54,7 +54,7 @@ class LevelController extends Controller
         }
 
         $validatedData = $request->validate([
-            'name' => 'required|string|max:25',
+            'name' => 'required|string|max:25|unique:levels,name',
         ]);
     
         $levelData = [
@@ -101,7 +101,7 @@ class LevelController extends Controller
         }
 
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:25|unique:levels,name,' . $level->id,
         ]);
     
         $level->update([

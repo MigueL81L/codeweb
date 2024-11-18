@@ -53,7 +53,7 @@ class PriceController extends Controller
         }
 
         $validatedData = $request->validate([
-            'value' => 'required|numeric',
+            'value' => 'required|numeric|unique:prices,value',
         ]);
 
         $priceData = [
@@ -100,7 +100,7 @@ class PriceController extends Controller
         }
 
         $validatedData = $request->validate([
-            'value' => 'required|numeric',
+            'value' => 'required|numeric|unique:prices,value,' . $price->id,
         ]);
 
         $price->update([
