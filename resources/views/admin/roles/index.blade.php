@@ -90,7 +90,7 @@
                     </thead>
                     <tbody>
                         @forelse ($roles as $role)
-                            <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
+                            {{-- <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
                                 <td class="border px-4 py-2 text-center">
@@ -105,6 +105,26 @@
                                             }" 
                                             class="absolute left-0 lg:left-auto lg:right-0 mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg"
                                             style="display: none;">
+                                            @foreach($role->permissions as $permission)
+                                                <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr> --}}
+                            <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
+                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
+                                <td class="border px-4 py-2 text-center">
+                                    <div x-data="{ open: false, isAdmin: '{{ $role->name === "Administrador" }}' }" class="relative">
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
+                                            Ver Permisos
+                                        </button>
+                                        <ul x-show="open" @click.away="open = false"
+                                            :class="{
+                                                'grid grid-cols-2': isAdmin,
+                                            }"
+                                            class="absolute left-0 mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg"
+                                            style="width: calc(100% + 2 * 1rem); left: -1rem;">
                                             @foreach($role->permissions as $permission)
                                                 <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
                                             @endforeach
