@@ -91,24 +91,17 @@
                     <tbody>
                         @forelse ($roles as $role)
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
-                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
+                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
                                 
                                 <td class="border px-4 py-2 text-center relative">
-                                    <div x-data="{ open: false }">
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
-                                            Ver Permisos
-                                        </button>
-                                    </div>
+                                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="togglePermissions(this)">
+                                        Ver Permisos
+                                    </button>
                                 </td>
                             </tr>
-                            <tr x-show="open" class="w-full">
+                            <tr class="w-full hidden">
                                 <td colspan="2" class="p-0">
-                                    <ul 
-                                        :class="{
-                                            'grid grid-cols-2': '{{ $role->name }}' === 'Administrador',
-                                            'grid grid-cols-1': '{{ $role->name }}' !== 'Administrador'
-                                        }"
-                                        class="bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg w-full">
+                                    <ul class="permissions-list bg-white text-gray-800 shadow-lg z-50 rounded-lg w-full {{ $role->name == 'Administrador' ? 'grid grid-cols-3' : 'grid grid-cols-1'}}">
                                         @foreach($role->permissions as $permission)
                                             <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
                                         @endforeach
@@ -125,5 +118,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function togglePermissions(button) {
+            const row = button.closest('tr').nextElementSibling; // El tr que contiene la lista de permisos
+            row.classList.toggle('hidden'); // Alterna la visibilidad de la fila de permisos
+
+            // Cierra otras filas de permisos abiertas
+            document.querySelectorAll('tr.w-full').forEach(tr => {
+                if (tr !== row && !tr.classList.contains('hidden')) {
+                    tr.classList.add('hidden');
+                }
+            });
+        }
+
+        // Optionally, close all permissions panels when clicking elsewhere on the page
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('table')) {
+                document.querySelectorAll('tr.w-full').forEach(tr => tr.classList.add('hidden'));
+            }
+        });
+    </script>
 
 </x-admin-layout>
