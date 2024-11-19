@@ -10,7 +10,7 @@
     </div>
 @endif
 
-<div >
+<div class="h-screen">
     <div class="card-body">
         <div class="table-responsive">
             <div class="flex items-center sm:justify-start py-4">
