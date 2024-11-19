@@ -99,8 +99,8 @@
                                             Ver Permisos
                                         </button>
                                         <ul x-show="open" @click.away="open = false" 
-                                            :class="{'grid grid-cols-2 w-full': isAdmin, 'w-full': !isAdmin}" 
-                                            class="absolute left-0 mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg"
+                                            :class="{'grid grid-cols-2 sm:w-full': isAdmin, 'sm:w-full': !isAdmin}" 
+                                            class="absolute left-0 sm:w-[200%] mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg"
                                             style="display: none;">
                                             @foreach($role->permissions as $permission)
                                                 <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
