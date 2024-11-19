@@ -84,8 +84,8 @@
                 <table class="mx-auto sm:w-full">
                     <thead>
                         <tr>
-                            <th class="px-4 py-2 text-center">Nombre</th>
-                            <th class="px-4 py-2 text-center">Permisos</th>
+                            <th class="w-1/3 px-4 py-2 text-center">Nombre</th>
+                            <th class="w-2/3 px-4 py-2 text-center">Permisos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,7 +101,7 @@
                             </tr>
                             <tr class="w-full hidden">
                                 <td colspan="2" class="p-0">
-                                    <ul class="permissions-list bg-white text-gray-800 shadow-lg z-50 rounded-lg w-full {{ $role->name == 'Administrador' ? 'grid grid-cols-3' : 'grid grid-cols-1'}}">
+                                    <ul class="permissions-list bg-white text-gray-800 shadow-lg z-50 rounded-lg w-full grid {{ $role->name == 'Administrador' ? 'grid-cols-3' : 'grid-cols-1'}}">
                                         @foreach($role->permissions as $permission)
                                             <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
                                         @endforeach
@@ -132,7 +132,7 @@
             });
         }
 
-        // Optionally, close all permissions panels when clicking elsewhere on the page
+        // Close all permissions panels when clicking elsewhere on the page
         document.addEventListener('click', function(event) {
             if (!event.target.closest('table')) {
                 document.querySelectorAll('tr.w-full').forEach(tr => tr.classList.add('hidden'));
