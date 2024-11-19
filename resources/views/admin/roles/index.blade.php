@@ -89,7 +89,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($roles as $role)
+                        @forelse ($roles->sortByDesc('id') as $role)
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
 
@@ -101,7 +101,7 @@
                             </tr>
                             <tr class="w-full hidden">
                                 <td colspan="2" class="p-0">
-                                    <ul class="bg-white text-gray-800 shadow-lg z-50 rounded-lg w-full grid grid-cols-3">
+                                    <ul class="bg-white text-gray-800 shadow-lg z-50 rounded-lg w-full grid grid-cols-2">
                                         @foreach($role->permissions as $permission)
                                             <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
                                         @endforeach
