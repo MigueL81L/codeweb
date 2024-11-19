@@ -16,7 +16,7 @@
     </div>
 @endif
 
-<div class="h-auto sm:h-screen">
+<div >
 
     <div class="card-body">
         <div class="table-responsive">

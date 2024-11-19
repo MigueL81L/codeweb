@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <div class="sm:h-screen">
+    <div >
 
         <div class="card-body">
             <div class="table-responsive">
@@ -77,7 +77,7 @@
     ]
 ]">
 
-    <div class="sm:h-screen">
+    <div >
 
         <div class="card-body">
             <div class="table-responsive">

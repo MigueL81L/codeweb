@@ -12,7 +12,7 @@
             </div>
         @endif
 
-    <div class="sm:h-screen">
+    <div >
         <div class="table-responsive overflow-x-auto">
                 
                 <!-- Contenedor Flex para los botones y el menú desplegable -->
