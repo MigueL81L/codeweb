@@ -83,13 +83,13 @@
                 <table class="table-auto mx-auto sm:w-full">
                     <thead>
                         <tr>
-                            <!-- Usamos Tailwind para ajustar el ancho -->
-                            <th class="w-1/3 px-4 py-2 text-center">Nombre</th> <!-- 1 de 3 partes -->
-                            <th class="w-2/3 px-4 py-2 text-center">Permisos</th> <!-- 2 de 3 partes -->
+                            <th class="w-1/3 px-4 py-2 text-center">Nombre</th>
+                            <th class="w-2/3 px-4 py-2 text-center">Permisos</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($roles as $role)
+                        <!-- Itera los roles en orden descendente por ID -->
+                        @forelse ($roles->sortByDesc('id') as $role)
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
 
@@ -97,7 +97,7 @@
                                     <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
                                         Ver Permisos
                                     </button>
-                                    <div x-show="open" @click.away="open = false" class="absolute left-0 mt-1 w-full bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg">
+                                    <div x-show="open" @click.away="open = false" class="absolute left-0 mt-1 w-full bg-white text-gray-800 shadow-lg z-50 rounded-lg">
                                         <ul :class="{'grid grid-cols-2': '{{ $role->name }}' === 'Administrador', 'grid grid-cols-1': '{{ $role->name }}' !== 'Administrador'}" class="w-full">
                                             @foreach($role->permissions as $permission)
                                                 <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
