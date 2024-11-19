@@ -103,7 +103,7 @@
                                 <td colspan="2" class="p-0">
                                     <ul class="bg-white text-gray-800 shadow-lg z-50 rounded-lg w-full grid grid-cols-2">
                                         @foreach($role->permissions as $permission)
-                                            <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
+                                            <li class="px-4 py-2 text-base font-semibold text-center">{{ $permission->name }}</li>
                                         @endforeach
                                     </ul>
                                 </td>
