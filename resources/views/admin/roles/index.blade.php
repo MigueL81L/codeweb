@@ -78,7 +78,6 @@
 ]">
 
     <div class="h-screen">
-
         <div class="card-body">
             <div class="table-responsive">
                 <table class="mx-auto sm:w-full">
@@ -90,22 +89,20 @@
                     </thead>
                     <tbody>
                         @forelse ($roles as $role)
-                            <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
-                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
-                                
+                            <tr x-data="{ open: false }" class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
+                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
+
                                 <td class="border px-4 py-2 text-center relative">
-                                    <div x-data="{ open: false }">
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
-                                            Ver Permisos
-                                        </button>
-                                    </div>
+                                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
+                                        Ver Permisos
+                                    </button>
                                 </td>
                             </tr>
-                            <tr x-show="open" class="w-full">
+                            <tr x-show="open" class="w-full" @click.away="open = false">
                                 <td colspan="2" class="p-0">
                                     <ul 
                                         :class="{
-                                            'grid grid-cols-2': '{{ $role->name }}' === 'Administrador',
+                                            'grid grid-cols-3': '{{ $role->name }}' === 'Administrador',
                                             'grid grid-cols-1': '{{ $role->name }}' !== 'Administrador'
                                         }"
                                         class="bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg w-full">
