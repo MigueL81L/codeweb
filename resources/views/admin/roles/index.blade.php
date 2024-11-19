@@ -85,7 +85,7 @@
                     <thead>
                         <tr>
                             <th class="px-4 py-2 text-center">Nombre</th>
-                            <th class="px-4 py-2 text-center">Permisos</th> <!-- Título Cambiado a Permisos -->
+                            <th class="px-4 py-2 text-center">Permisos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,12 +94,13 @@
                                 <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
                                 
                                 <td class="border px-4 py-2 text-center">
-                                    <div x-data="{ open: false }" class="relative">
+                                    <div x-data="{ open: false, isAdmin: '{{ $role->name === "Administrador" }}' }" class="relative">
                                         <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
                                             Ver Permisos
                                         </button>
                                         <ul x-show="open" @click.away="open = false" 
-                                            class="absolute left-0 w-full mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg" 
+                                            :class="{'grid grid-cols-2 w-full': isAdmin, 'w-full': !isAdmin}" 
+                                            class="absolute left-0 mt-1 bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg"
                                             style="display: none;">
                                             @foreach($role->permissions as $permission)
                                                 <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
