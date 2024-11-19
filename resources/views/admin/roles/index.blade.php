@@ -78,32 +78,41 @@
 ]">
 
     <div class="h-screen">
+
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table-auto mx-auto sm:w-full">
+                <table class="mx-auto sm:w-full">
                     <thead>
                         <tr>
-                            <th class="w-1/3 px-4 py-2 text-center">Nombre</th>
-                            <th class="w-2/3 px-4 py-2 text-center">Permisos</th>
+                            <th class="px-4 py-2 text-center">Nombre</th>
+                            <th class="px-4 py-2 text-center">Permisos</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Itera los roles en orden descendente por ID -->
-                        @forelse ($roles->sortByDesc('id') as $role)
+                        @forelse ($roles as $role)
                             <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }}">
-                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td>
-
-                                <td class="border px-4 py-2 text-center relative" x-data="{ open: false }">
-                                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
-                                        Ver Permisos
-                                    </button>
-                                    <div x-show="open" @click.away="open = false" class="absolute left-0 mt-1 w-full bg-white text-gray-800 shadow-lg z-50 rounded-lg">
-                                        <ul :class="{'grid grid-cols-2': '{{ $role->name }}' === 'Administrador', 'grid grid-cols-1': '{{ $role->name }}' !== 'Administrador'}" class="w-full">
-                                            @foreach($role->permissions as $permission)
-                                                <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
-                                            @endforeach
-                                        </ul>
+                                <td class="border px-4 py-2 text-center">{{ $role->name }}</td> 
+                                
+                                <td class="border px-4 py-2 text-center relative">
+                                    <div x-data="{ open: false }">
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="open = !open">
+                                            Ver Permisos
+                                        </button>
                                     </div>
+                                </td>
+                            </tr>
+                            <tr x-show="open" class="w-full">
+                                <td colspan="2" class="p-0">
+                                    <ul 
+                                        :class="{
+                                            'grid grid-cols-2': '{{ $role->name }}' === 'Administrador',
+                                            'grid grid-cols-1': '{{ $role->name }}' !== 'Administrador'
+                                        }"
+                                        class="bg-white text-gray-800 border border-gray-600 shadow-lg z-50 rounded-lg w-full">
+                                        @foreach($role->permissions as $permission)
+                                            <li class="px-4 py-2 text-base font-semibold">{{ $permission->name }}</li>
+                                        @endforeach
+                                    </ul>
                                 </td>
                             </tr>
                         @empty
