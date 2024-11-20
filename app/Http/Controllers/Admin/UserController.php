@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Course;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Actions\Fortify\PasswordValidationRules;
 
 
 class UserController extends Controller
 {
+    use PasswordValidationRules; // Añade el trait de la validación definida en app/Actions/Fortify/PasswordValidationRules.php
     /**
      * Display a listing of the resource.
      */
@@ -60,7 +62,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255|unique:users,name',
             'email' => 'required|string|email|max:255|unique:users,email',
             'role' => 'required|exists:roles,id', // Cambiar 'roles' por 'role'
-            'password' => 'required|string|min:8',
+            'password' => $this->passwordRules(), // Usar las reglas definidas previamente en PasswordValidationRules.php
         ]);
     
         $userData = [

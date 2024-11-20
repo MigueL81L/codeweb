@@ -51,6 +51,10 @@
                 <div class="mb-4">
                     <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
                     <input type="password" name="password" id="password" placeholder="Escriba una contraseña" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                
+                    @error('password')
+                        <span class="text-red-600 mt-2 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <!-- Botón de Enviar -->
