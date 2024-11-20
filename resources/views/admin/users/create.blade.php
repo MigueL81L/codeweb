@@ -73,7 +73,7 @@
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Crear Usuario</button>
                     
                     <!-- Botón de Cancelar -->
-                    <button type="button" onclick="window.location='{{ route('admin.users.index') }}'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Cancelar</button>
+                    <button type="button" onclick="window.location='{{ route('admin.users.index') }}'" class="btn btn-danger">Cancelar</button>
                 </div>
             </form>
         </div>
