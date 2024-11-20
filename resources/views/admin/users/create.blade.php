@@ -57,6 +57,16 @@
                     @enderror
                 </div>
 
+                <!-- Confirmar Contraseña del Usuario -->
+                <div class="mb-4">
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirme la contraseña" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    
+                    @error('password_confirmation')
+                        <span class="text-red-600 mt-2 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+
                 <!-- Botón de Enviar -->
                 <div class="mb-4">
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Crear Usuario</button>
