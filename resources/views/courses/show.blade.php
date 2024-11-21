@@ -192,7 +192,7 @@
                 <h1 class="font-bold text-3xl mb-4 text-center mt-2">Cursos Similares</h1>
                 @if ($similares->count()!=0)
                     @foreach ($similares as $similar)
-                        <article class="flex mb-6">
+                        {{-- <article class="flex mb-6">
                             <img class="h-32 w-40 object-cover ml-4" src="{{$similar->image}}" alt="">
 
                             <div class="ml-3">
@@ -216,12 +216,44 @@
                                     <p class="text-gray-500 text-sm mr-1">Sin reseñas</p>
                                 @endif
 
+                                <a href="{{ route('courses.show', $similar) }}" class="btn-block mt-4 btn btn-primary">
+                                    Ir al Curso
+                                </a>  
                             </div>
+                        </article> --}}
 
-                            <!-- Botón "Ir al Curso" -->
-                            <a href="{{ route('courses.show', $similar) }}" class="btn-block mt-4 btn btn-primary">
-                                Ir al Curso
-                            </a>  
+                        <article class="mb-6">
+                            <div class="flex">
+                                <figure class="h-32 w-40">
+                                    <img class="h-full w-full object-cover" src="{{ $similar->image }}" alt="">
+                                </figure>
+                        
+                                <div class="ml-3 flex flex-col justify-between">
+                                    <h1 class="font-bold text-black-500">{{ Str::limit($similar->title, 30) }}</h1>
+                        
+                                    <div class="flex items-center mb-2 mt-2">
+                                        @if ($similar->teacher->profile_photo_path)
+                                            <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{ $similar->teacher->name }}" class="rounded-full h-10 w-10 object-cover shadow-lg">
+                                        @else
+                                            <div class="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">
+                                                <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
+                                            </div>
+                                        @endif
+                                        <p class="text-gray-700 text-sm ml-2">Prof. {{ $similar->teacher->name }}</p>
+                                    </div>
+                        
+                                    @if ($similar->reviews_count > 0)
+                                        <p class="text-sm"><i class="fas fa-star mr-1 text-yellow-400">{{ " " . $similar->rating }}</i></p>
+                                    @else
+                                        <p class="text-gray-500 text-sm mr-1">Sin reseñas</p>
+                                    @endif
+                                </div>
+                            </div>
+                            
+                            <!-- Botón "Ir al Curso" en un bloque independiente -->
+                            <div class="mt-4">
+                                <a href="{{ route('courses.show', $similar) }}" class="btn btn-primary btn-block">Ir al Curso</a>
+                            </div>
                         </article>
                     @endforeach
                 @else
