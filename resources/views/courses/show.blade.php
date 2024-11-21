@@ -279,8 +279,8 @@
                             </div>
                         
                             <!-- Botón "Ir al Curso" en un bloque independiente -->
-                            <div class="mt-4 w-full">
-                                <button type="button" onclick="window.location='{{ route('courses.show', $similar)}}'"  class="btn btn-blue w-full uppercase mb-4">
+                            <div class="mt-4 w-full flex justify-center">
+                                <button type="button" onclick="window.location='{{ route('courses.show', $similar)}}'"  class="btn btn-blue w-4/5 uppercase mb-4">
                                     Ir al curso
                                 </button>
                             </div>
