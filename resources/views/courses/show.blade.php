@@ -216,11 +216,12 @@
                                     <p class="text-gray-500 text-sm mr-1">Sin reseñas</p>
                                 @endif
 
-                                <!-- Botón "Ir al Curso" -->
-                                <a href="{{ route('courses.show', $similar) }}" class="btn-block mt-4 btn btn-primary">
-                                    Ir al Curso
-                                </a>  
                             </div>
+
+                            <!-- Botón "Ir al Curso" -->
+                            <a href="{{ route('courses.show', $similar) }}" class="btn-block mt-4 btn btn-primary">
+                                Ir al Curso
+                            </a>  
                         </article>
                     @endforeach
                 @else
