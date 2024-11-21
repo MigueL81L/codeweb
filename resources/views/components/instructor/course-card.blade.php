@@ -54,7 +54,7 @@
         <!--Botón normal azul, clase persona. btn btn-primary-->
         <!--Botón que debe abarcar todo el ancho btn btn-block-->
         <a href="{{route('courses.show', $course)}}" class="btn-block mt-4 btn btn-primary">
-            Ir al Curso
+            Ir al Curso 
         </a>
     </div>
 </article>

@@ -196,7 +196,7 @@
                             <img class="h-32 w-40 object-cover ml-4" src="{{$similar->image}}" alt="">
 
                             <div class="ml-3">
-                                <h1><a class="font-bold text-black-500 cursor-pointer" href="{{route('courses.show', $similar)}}">{{Str::limit($similar->title, 30)}}</a></h1>
+                                <h1 class="font-bold text-black-500">{{ Str::limit($similar->title, 30) }}</h1>
                                 
 
                                 <div class="flex items-center mb-2 mt-2">
@@ -210,12 +210,16 @@
                                     <p class="text-gray-700 text-sm ml-2">Prof. {{$similar->teacher->name}}</p>
                                 </div>
 
-                                    @if ($similar->reviews_count > 0)
-                                        <p class="text-sm"><i class="fas fa-star mr-2 text-yellow-400">{{" " . $similar->rating}}</i></p>
-                                    @else
-                                        <p class="text-gray-500 text-sm mr-1">Sin reseñas</p>
-                                    @endif
-                                
+                                @if ($similar->reviews_count > 0)
+                                    <p class="text-sm"><i class="fas fa-star mr-2 text-yellow-400">{{" " . $similar->rating}}</i></p>
+                                @else
+                                    <p class="text-gray-500 text-sm mr-1">Sin reseñas</p>
+                                @endif
+
+                                <!-- Botón "Ir al Curso" -->
+                                <a href="{{ route('courses.show', $similar) }}" class="btn-block mt-4 btn btn-primary">
+                                    Ir al Curso
+                                </a>  
                             </div>
                         </article>
                     @endforeach
