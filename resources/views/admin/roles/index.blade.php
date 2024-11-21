@@ -1,4 +1,4 @@
-{{-- <x-admin-layout :breadcrumb="[
+<x-admin-layout :breadcrumb="[
     [
         'name' => 'Panel de Control',
         'url' => route('admin.dashboard'),
@@ -64,9 +64,9 @@
             </div>
         </div>
     </div>
-</x-admin-layout> --}}
+</x-admin-layout>
 
-<x-admin-layout :breadcrumb="[
+{{-- <x-admin-layout :breadcrumb="[
     [
         'name' => 'Panel de Control',
         'url' => route('admin.dashboard'),
@@ -140,4 +140,4 @@
         });
     </script>
 
-</x-admin-layout>
+</x-admin-layout> --}}
