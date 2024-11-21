@@ -40,9 +40,13 @@
 
                 </div>
 
-                <!-- Botón de Enviar -->
+                
                 <div class="mb-4">
+                    <!-- Botón de Enviar -->
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Actualizar Categoría</button>
+
+                    <!-- Botón de Cancelar -->
+                    <button type="button" onclick="window.location='{{ route('admin.categories.index') }}'" class="btn btn-danger ml-2">Cancelar</button>
                 </div>
             </form>
         </div>
