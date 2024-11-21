@@ -85,8 +85,8 @@
                 <table class="mx-auto sm:w-full">
                     <thead>
                         <tr>
-                            <th class="w-1/3 px-4 py-2 text-center">Nombre</th>
-                            <th class="w-2/3 px-4 py-2 text-center">Permisos</th>
+                            <th class="w-1/2 px-4 py-2 text-center">Nombre</th>
+                            <th class="w-1/2 px-4 py-2 text-center">Permisos</th>
                         </tr>
                     </thead>
                     <tbody>
