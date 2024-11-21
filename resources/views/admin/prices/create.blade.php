@@ -33,12 +33,12 @@
                 </div>
 
                 
-                <div class="mb-4">
+                <div class="mb-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
                     <!-- Botón de Enviar -->
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Crear Precio</button>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0">Crear Precio</button>
 
                     <!-- Botón de Cancelar -->
-                    <button type="button" onclick="window.location='{{ route('admin.prices.index') }}'" class="btn btn-danger ml-2">Cancelar</button>
+                    <button type="button" onclick="window.location='{{ route('admin.prices.index') }}'" class="btn btn-danger">Cancelar</button>
                 </div>
             </form>
         </div>
