@@ -276,7 +276,7 @@
                         
                                     <div class="flex items-center mb-2 mt-2 justify-center">
                                         @if ($similar->teacher->profile_photo_path)
-                                            <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{ $similar->teacher->name }}" class="rounded-lg h-12 w-12 object-cover shadow-lg">
+                                            <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{ $similar->teacher->name }}" class="rounded-lg h-12 w-13 object-cover shadow-lg">
                                         @else
                                             <div class="h-12 w-12 bg-gray-200 rounded-lg flex items-center justify-center">
                                                 <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
@@ -287,7 +287,7 @@
                                     <p class="text-gray-700 text-sm text-center">Prof. {{ $similar->teacher->name }}</p>
                         
                                     @if ($similar->reviews_count > 0)
-                                        <p class="text-sm text-center"><i class="fas fa-star ml-2 text-yellow-400">{{ $similar->rating }}</i></p>
+                                        <p class="text-sm text-center"><i class="fas fa-star text-yellow-400"><span class="ml-2">{{ $similar->rating }}</span></i></p>
                                     @else
                                         <p class="text-gray-500 text-sm text-center">Sin reseñas</p>
                                     @endif
