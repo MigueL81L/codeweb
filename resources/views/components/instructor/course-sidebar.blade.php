@@ -48,7 +48,7 @@
 
             <!-- Botón de Cancelar -->
             <div class="text-center">
-                <button type="button" onclick="window.location='{{ route('instructor.courses.index') }}'" class="btn btn-danger mt-4 sm:w-1/2 lg:w-full">
+                <button type="button" onclick="window.location='{{ route('instructor.courses.index') }}'" class="btn btn-danger mt-4 w-1/2 sm:w-full">
                     Cancelar
                 </button>
             </div>
