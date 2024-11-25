@@ -262,7 +262,7 @@
 
                         </article> --}}
 
-                        <article class="w-full mb-4">
+                        <article class="w-full mb-6">
                             <!-- Primer Bloque: Imagen y Datos -->
                             <div class="flex w-full mb-1">
                                 <!-- Imagen -->
@@ -295,7 +295,7 @@
                         
                             <!-- Segundo Bloque: Botón -->
                             <div class="w-full flex justify-center">
-                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-1/2 uppercase">
+                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-full mr-2 ml-2 uppercase">
                                     Ir al curso
                                 </button>
                             </div>
