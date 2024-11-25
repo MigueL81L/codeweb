@@ -11,7 +11,7 @@
     <div class="card-body">
         <!--Mediante el helper Str y el método limit, limito los títulos a como mucho 40
             caracteres. A partir del caracter nº41 me mostrará ...-->
-        <h1 class="card-title">{{Str::limit($course->title,40)}}</h1>
+        <h1 class="card-title">{{Str::limit($course->title,6)}}</h1>
 
         @if ($course->teacher) <!-- Verifica si hay un profesor asignado al curso -->
         <p class=" text-gray-500 text-sm mb-2">Prof: {{ $course->teacher->name }}</p> <!-- Accede al nombre del profesor -->
