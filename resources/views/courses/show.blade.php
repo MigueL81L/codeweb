@@ -266,7 +266,7 @@
                             <!-- Primer Bloque: Imagen y Datos -->
                             <div class="flex w-full mb-1">
                                 <!-- Imagen -->
-                                <figure class="flex items-center justify-center w-1/2 ml-2">
+                                <figure class="flex items-center justify-center w-1/2">
                                     <img class="h-32 w-40 object-cover" src="{{ $similar->image }}" alt="">
                                 </figure>
                         
@@ -278,7 +278,7 @@
                                         @if ($similar->teacher->profile_photo_path)
                                             <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{ $similar->teacher->name }}" class="rounded-full h-10 w-10 object-cover shadow-lg">
                                         @else
-                                            <div class="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">
+                                            <div class="h-12 w-12 bg-gray-200 rounded-lg flex items-center justify-center">
                                                 <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
                                             </div>
                                         @endif
@@ -287,7 +287,7 @@
                                     <p class="text-gray-700 text-sm text-center">Prof. {{ $similar->teacher->name }}</p>
                         
                                     @if ($similar->reviews_count > 0)
-                                        <p class="text-sm text-center"><i class="fas fa-star mr-2 text-yellow-400">{{ $similar->rating }}</i></p>
+                                        <p class="text-sm text-center"><i class="fas fa-star mr-4 text-yellow-400">{{ $similar->rating }}</i></p>
                                     @else
                                         <p class="text-gray-500 text-sm text-center">Sin reseñas</p>
                                     @endif
@@ -296,7 +296,7 @@
                         
                             <!-- Segundo Bloque: Botón -->
                             <div class="w-full flex justify-center">
-                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-full uppercase">
+                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-full uppercase text-sm">
                                     Ir al curso
                                 </button>
                             </div>
