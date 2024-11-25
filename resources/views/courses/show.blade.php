@@ -266,7 +266,7 @@
                             <!-- Primer Bloque: Imagen y Datos -->
                             <div class="flex w-full mb-1">
                                 <!-- Imagen -->
-                                <figure class="flex items-center justify-center w-1/2 ml-2>
+                                <figure class="flex items-center justify-center w-1/2 ml-2">
                                     <img class="h-32 w-40 object-cover" src="{{ $similar->image }}" alt="">
                                 </figure>
                         
