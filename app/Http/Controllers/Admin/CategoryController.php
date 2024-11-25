@@ -109,20 +109,6 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('info', 'La Categoría se actualizó satisfactoriamente!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(Category $category)
-    // {
-
-    //     // Verifica si el usuario autenticado tiene el permiso de 'Listar roles'
-    //     if (Gate::denies('Eliminar categoria')) {
-    //         abort(403, 'Unauthorized action.');
-    //     }
-
-    //     $category->delete();
-    //     return redirect()->route('admin.categories.index')->with('info', 'La Categoría se eliminó satisfactoriamente!');
-    // }
 
     public function destroy(Category $category)
     {

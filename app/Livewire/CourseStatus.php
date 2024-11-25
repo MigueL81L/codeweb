@@ -102,10 +102,8 @@ class CourseStatus extends Component
     public function completed()
     {
         if ($this->current->completed) {
-            // $this->current->users()->detach(auth()->user()->id);
             $this->current->users()->detach(Auth::id());
         } else {
-            // $this->current->users()->attach(auth()->user()->id);
             $this->current->users()->attach(Auth::id());
         }
 
@@ -113,7 +111,7 @@ class CourseStatus extends Component
         $this->course = Course::find($this->course->id);
     }
 
-    //Méto para establecer la barra de progreso en el course
+    //Método para establecer la barra de progreso en el course
     public function getAdvanceProperty()
     {
         $completedCount = $this->lfs->filter(function ($lesson) {

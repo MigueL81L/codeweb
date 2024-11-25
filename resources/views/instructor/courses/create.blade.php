@@ -87,11 +87,7 @@
                     <img id="imgPreview" class="w-full aspect-video object-cover object-center"/>
                 </div>
 
-                {{-- <div class="flex justify-end">
-                    <x-button>
-                        Crear Curso
-                    </x-button>
-                </div> --}}
+
                 <div class="flex justify-between">
                     <!-- Botón de Cancelar -->
                     <button type="button" onclick="window.location='{{ route('instructor.courses.index') }}'" class="btn btn-danger">

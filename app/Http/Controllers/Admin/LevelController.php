@@ -111,20 +111,6 @@ class LevelController extends Controller
         return redirect()->route('admin.levels.index')->with('info', 'El nivel se actualizó satisfactoriamente!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(Level $level)
-    // {
-
-    //     // Verifica si el usuario autenticado tiene el permiso de 'Listar roles'
-    //     if (Gate::denies('Eliminar nivel')) {
-    //         abort(403, 'Unauthorized action.');
-    //     }
-
-    //     $level->delete();
-    //     return redirect()->route('admin.levels.index')->with('info', 'El nivel se eliminó satisfactoriamente!');
-    // }
 
         public function destroy(Level $level)
     {

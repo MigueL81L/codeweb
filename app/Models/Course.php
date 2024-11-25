@@ -123,16 +123,6 @@ class Course extends Model
         );
     }
 
-    //Método accesor para encontrar la fecha que el user compra el course
-    // public function dateOfAcquisition()
-    // {
-    //     $record = DB::table('course_user')
-    //         ->where('course_id', $this->id)
-    //         ->where('user_id', auth()->id())
-    //         ->first();
-
-    //     return $record ? Carbon::parse($record->created_at) : null;
-    // }
 
     public function dateOfAcquisition()
     {
@@ -156,12 +146,6 @@ class Course extends Model
         return $this->hasMany(Review::class);
     }
 
-    //Relación de cursos con usuarios, mediante la tabla course_user
-    //Relación uno a muchos, inversa
-    // public function teacher(){
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
-    // En el modelo Course.php
     public function teacher()
     {
         return $this->belongsTo(User::class, 'user_id');

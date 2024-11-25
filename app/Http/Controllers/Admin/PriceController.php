@@ -110,20 +110,6 @@ class PriceController extends Controller
         return redirect()->route('admin.prices.index')->with('info', 'El precio se actualizó satisfactoriamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(Price $price)
-    // {
-
-    //     // Verifica si el usuario autenticado tiene el permiso de 'Listar roles'
-    //     if (Gate::denies('Eliminar precio')) {
-    //         abort(403, 'Unauthorized action.');
-    //     }
-
-    //     $price->delete();
-    //     return redirect()->route('admin.prices.index')->with('info', 'El precio se eliminó satisfactoriamente');
-    // }
 
     public function destroy(Price $price)
 {

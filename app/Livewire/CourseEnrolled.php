@@ -65,10 +65,8 @@ class CourseEnrolled extends Component
 
     public function enrolled(){
         //Esta el usuario autenticado?
-        // if(auth()->check()){
         if (Auth::check()) {
             //Compra el curso y matricúlate
-            // $this->course->students()->attach(auth()->user()->id);
             $this->course->students()->attach(Auth::id()); 
 
             //El curso ya está comprado, por tanto eliminalo del carrito
