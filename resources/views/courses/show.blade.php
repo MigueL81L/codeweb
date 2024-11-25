@@ -261,17 +261,17 @@
                             </div>
 
                         </article> --}}
-                        
+
                         <article class="w-full">
                             <!-- Primer Bloque: Imagen y Datos -->
-                            <div class="flex flex-col w-full mb-4">
+                            <div class="flex w-full mb-4">
                                 <!-- Imagen -->
-                                <figure class="flex items-center justify-center mb-2">
+                                <figure class="flex items-center justify-center w-1/2">
                                     <img class="h-32 w-40 object-cover" src="{{ $similar->image }}" alt="">
                                 </figure>
                         
                                 <!-- Datos del Profesor -->
-                                <div class="flex flex-col items-center">
+                                <div class="flex flex-col items-center justify-center w-1/2">
                                     <h1 class="font-bold text-black-500">{{ Str::limit($similar->title, 30) }}</h1>
                         
                                     <div class="flex items-center mb-2 mt-2 justify-center">
