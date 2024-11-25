@@ -42,6 +42,16 @@
                         @endforeach
                     </ul>
             </nav>
+
+            <!-- Separador horizontal -->
+            <hr class="my-4">
+
+            <!-- Botón de Cancelar -->
+            <div class="text-center lg:text-left">
+                <button type="button" onclick="window.location='{{ route('instructor.courses.index') }}'" class="btn btn-danger mt-4 w-full lg:w-auto">
+                    Cancelar
+                </button>
+            </div>
         </aside>
 
         <div class="col-span-1 lg:col-span-4">
