@@ -276,7 +276,7 @@
                         
                                     <div class="flex items-center mb-2 mt-2 justify-center">
                                         @if ($similar->teacher->profile_photo_path)
-                                            <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{ $similar->teacher->name }}" class="rounded-lg h-12 w-13 object-cover shadow-lg">
+                                            <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{ $similar->teacher->name }}" class="rounded-lg h-12 w-12 object-cover shadow-lg">
                                         @else
                                             <div class="h-12 w-12 bg-gray-200 rounded-lg flex items-center justify-center">
                                                 <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
