@@ -47,8 +47,8 @@
             <hr class="my-4">
 
             <!-- Botón de Cancelar -->
-            <div class="text-center lg:text-left">
-                <button type="button" onclick="window.location='{{ route('instructor.courses.index') }}'" class="btn btn-danger mt-4 w-full lg:w-auto">
+            <div class="text-center">
+                <button type="button" onclick="window.location='{{ route('instructor.courses.index') }}'" class="btn btn-danger mt-4 sm:w-1/2 lg:w-full">
                     Cancelar
                 </button>
             </div>
