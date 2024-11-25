@@ -218,7 +218,7 @@
                                     <p class="text-gray-700 text-sm text-center">Prof. {{ $similar->teacher->name }}</p>
                         
                                     @if ($similar->reviews_count > 0)
-                                        <p class="text-sm text-center"><i class="fas fa-star text-yellow-400"><span class="ml-2 text-gray-500">{{ $similar->rating }}</span></i></p>
+                                        <p class="text-sm text-center"><i class="fas fa-star text-yellow-400"><span class="ml-1 text-gray-500">{{ $similar->rating }}</span></i></p>
                                     @else
                                         <p class="text-gray-500 text-sm text-center">Sin reseñas</p>
                                     @endif
