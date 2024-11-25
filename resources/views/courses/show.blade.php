@@ -222,7 +222,7 @@
                             </div>
                         </article> --}}
 
-                        <article class="mb-6">
+                        <article class="mb-6 flex max-w-full">
                             {{-- <div class="w-full">
                                 <figure class="h-32 w-40">
                                     <img class="h-full w-full object-cover" src="{{ $similar->image }}" alt="">
@@ -280,7 +280,7 @@
                         
                             <!-- Botón "Ir al Curso" en un bloque independiente -->
                             <div class="mt-4 w-full flex justify-center ml-4 mr-4">
-                                <button type="button" onclick="window.location='{{ route('courses.show', $similar)}}'"  class="btn btn-blue w-4/5 uppercase mb-4">
+                                <button type="button" onclick="window.location='{{ route('courses.show', $similar)}}'"  class="btn btn-blue w-full uppercase mb-4">
                                     Ir al curso
                                 </button>
                             </div>
