@@ -249,14 +249,14 @@
                                     @endif
                                 </div>
                             </div> --}}
-                            <div class="flex mb-6 w-full">
+                            <div class="flex mb-6 w-full mr-2 ml-2">
                                 <!-- Columna Izquierda - Imagen -->
                                 <figure class="flex items-center justify-center w-1/2"> <!-- Columna ocupando la mitad -->
                                     <img class="h-32 w-40 object-cover" src="{{ $similar->image }}" alt="">
                                 </figure>
                                 
                                 <!-- Columna Derecha - Contenido -->
-                                <div class="flex flex-col justify-center w-1/2 ml-3"> <!-- Columna ocupando la mitad -->
+                                <div class="flex flex-col justify-center w-1/2"> <!-- Columna ocupando la mitad -->
                                     <h1 class="font-bold text-black-500 text-center">{{ Str::limit($similar->title, 30) }}</h1>
                             
                                     <div class="flex items-center mb-2 mt-2 justify-center"> <!-- Centrándolo dentro del div -->
@@ -279,7 +279,7 @@
                             </div>
                         
                             <!-- Botón "Ir al Curso" en un bloque independiente -->
-                            <div class="mt-4 w-full flex justify-center">
+                            <div class="mt-4 w-full flex justify-center ml-4 mr-4">
                                 <button type="button" onclick="window.location='{{ route('courses.show', $similar)}}'"  class="btn btn-blue w-4/5 uppercase mb-4">
                                     Ir al curso
                                 </button>
