@@ -203,7 +203,7 @@
                         
                                 <!-- Datos del Profesor -->
                                 <div class="flex flex-col items-center justify-center w-1/2">
-                                    <h1 class="font-bold text-gray-500 text-center">{{ Str::limit($similar->title, 15) }}</h1>
+                                    <h1 class="font-bold text-gray-500 text-center">{{ Str::limit($similar->title, 12) }}</h1>
                         
                                     <div class="flex items-center mb-2 mt-2 justify-center">
                                         @if ($similar->teacher->profile_photo_path)
