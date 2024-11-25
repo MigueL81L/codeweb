@@ -262,11 +262,11 @@
 
                         </article> --}}
 
-                        <article class="w-full">
+                        <article class="w-full mb-4">
                             <!-- Primer Bloque: Imagen y Datos -->
-                            <div class="flex w-full mb-4">
+                            <div class="flex w-full mb-1">
                                 <!-- Imagen -->
-                                <figure class="flex items-center justify-center w-1/2">
+                                <figure class="flex items-center justify-center w-1/2 ml-2>
                                     <img class="h-32 w-40 object-cover" src="{{ $similar->image }}" alt="">
                                 </figure>
                         
@@ -295,7 +295,7 @@
                         
                             <!-- Segundo Bloque: Botón -->
                             <div class="w-full flex justify-center">
-                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-4/5 uppercase mb-4">
+                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-1/2 uppercase">
                                     Ir al curso
                                 </button>
                             </div>
