@@ -188,7 +188,7 @@
                 </div>
             </section>
 
-            <aside class="hidden lg:block mb-4 bg-white shadow-lg rounded overflow-hidden">
+            <aside class="hidden lg:block mb-4 bg-white shadow-lg rounded overflow-hidden card">
                 <h1 class="font-bold text-3xl mb-4 text-center mt-2">Cursos Similares</h1>
                 @if ($similares->count()!=0)
                     @foreach ($similares as $similar)
@@ -262,7 +262,7 @@
 
                         </article> --}}
 
-                        <article class="w-full mb-6">
+                        <article class="w-full mb-6 card-body">
                             <!-- Primer Bloque: Imagen y Datos -->
                             <div class="flex w-full mb-1">
                                 <!-- Imagen -->
@@ -282,8 +282,9 @@
                                                 <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
                                             </div>
                                         @endif
-                                        <p class="text-gray-700 text-sm ml-2">Prof. {{ $similar->teacher->name }}</p>
+                                        
                                     </div>
+                                    <p class="text-gray-700 text-sm text-center">Prof. {{ $similar->teacher->name }}</p>
                         
                                     @if ($similar->reviews_count > 0)
                                         <p class="text-sm text-center"><i class="fas fa-star mr-2 text-yellow-400">{{ $similar->rating }}</i></p>
@@ -295,7 +296,7 @@
                         
                             <!-- Segundo Bloque: Botón -->
                             <div class="w-full flex justify-center">
-                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-full mr-2 ml-2 uppercase">
+                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-full uppercase">
                                     Ir al curso
                                 </button>
                             </div>
