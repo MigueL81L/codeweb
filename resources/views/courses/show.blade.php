@@ -222,33 +222,8 @@
                             </div>
                         </article> --}}
 
-                        <article class="mb-6 flex max-w-full">
-                            {{-- <div class="w-full">
-                                <figure class="h-32 w-40">
-                                    <img class="h-full w-full object-cover" src="{{ $similar->image }}" alt="">
-                                </figure>
-                            
-                                <div class="ml-3 flex flex-col justify-between">
-                                    <h1 class="font-bold text-black-500">{{ Str::limit($similar->title, 30) }}</h1>
-                            
-                                    <div class="flex items-center mb-2 mt-2">
-                                        @if ($similar->teacher->profile_photo_path)
-                                            <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{ $similar->teacher->name }}" class="rounded-full h-10 w-10 object-cover shadow-lg">
-                                        @else
-                                            <div class="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">
-                                                <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
-                                            </div>
-                                        @endif
-                                        <p class="text-gray-700 text-sm ml-2">Prof. {{ $similar->teacher->name }}</p>
-                                    </div>
-                            
-                                    @if ($similar->reviews_count > 0)
-                                        <p class="text-sm"><i class="fas fa-star mr-2 text-yellow-400">{{ " " . $similar->rating }}</i></p>
-                                    @else
-                                        <p class="text-gray-500 text-sm mr-1">Sin reseñas</p>
-                                    @endif
-                                </div>
-                            </div> --}}
+                        {{-- <article class="mb-6 flex max-w-full">
+
                             <div class="flex mb-6 w-full mr-2 ml-2">
                                 <!-- Columna Izquierda - Imagen -->
                                 <figure class="flex items-center justify-center w-1/2"> <!-- Columna ocupando la mitad -->
@@ -285,7 +260,48 @@
                                 </button>
                             </div>
 
+                        </article> --}}
+                        
+                        <article class="w-full">
+                            <!-- Primer Bloque: Imagen y Datos -->
+                            <div class="flex flex-col w-full mb-4">
+                                <!-- Imagen -->
+                                <figure class="flex items-center justify-center mb-2">
+                                    <img class="h-32 w-40 object-cover" src="{{ $similar->image }}" alt="">
+                                </figure>
+                        
+                                <!-- Datos del Profesor -->
+                                <div class="flex flex-col items-center">
+                                    <h1 class="font-bold text-black-500">{{ Str::limit($similar->title, 30) }}</h1>
+                        
+                                    <div class="flex items-center mb-2 mt-2 justify-center">
+                                        @if ($similar->teacher->profile_photo_path)
+                                            <img src="{{ asset('storage/app/public/' . $similar->teacher->profile_photo_path) }}" alt="{{ $similar->teacher->name }}" class="rounded-full h-10 w-10 object-cover shadow-lg">
+                                        @else
+                                            <div class="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">
+                                                <span class="font-semibold text-gray-600">{{ strtoupper(substr($similar->teacher->name, 0, 1)) }}</span>
+                                            </div>
+                                        @endif
+                                        <p class="text-gray-700 text-sm ml-2">Prof. {{ $similar->teacher->name }}</p>
+                                    </div>
+                        
+                                    @if ($similar->reviews_count > 0)
+                                        <p class="text-sm text-center"><i class="fas fa-star mr-2 text-yellow-400">{{ $similar->rating }}</i></p>
+                                    @else
+                                        <p class="text-gray-500 text-sm text-center">Sin reseñas</p>
+                                    @endif
+                                </div>
+                            </div>
+                        
+                            <!-- Segundo Bloque: Botón -->
+                            <div class="w-full flex justify-center">
+                                <button type="button" onclick="window.location='{{ route('courses.show', $similar) }}'" class="btn btn-blue w-4/5 uppercase mb-4">
+                                    Ir al curso
+                                </button>
+                            </div>
                         </article>
+
+
                     @endforeach
                 @else
                     <p class="text-gray-700 text-base text-center mb-4">En este momento, no hay cursos similares a este</p>
