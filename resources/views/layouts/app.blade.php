@@ -72,7 +72,7 @@
         
                     // Cambiar solo para tamaños de pantalla pequeños
                     if (width < 640) {
-                        document.getElementById('selectedCategories').options[0].text = "Categor.";
+                        document.getElementById('selectedCategories').options[0].text = "Categoría"; 
                         document.getElementById('selectedPrices').options[0].text = "Precio";
                         document.getElementById('selectedLevels').options[0].text = "Nivel";
                     } else {

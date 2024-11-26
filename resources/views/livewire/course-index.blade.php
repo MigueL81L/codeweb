@@ -7,7 +7,7 @@
                 <div class="flex flex-col items-center w-1/3 px-2">
                     <form wire:submit.prevent="filterCategories" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
-                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 w-full border-gray-300 rounded-lg">
+                            <select wire:model="selectedCategories" id="selectedCategories" name="selectedCategories" class="h-10 w-full border-gray-300 rounded-lg text-xs sm:text-sm md:text-base lg:text-lg">
                                 <option class="py-2" value="">Seleccione una Categoría</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -15,7 +15,7 @@
                             </select>
                         </div>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-                            <i class="fas fa-th-list text-xs mr-2"></i>
+                            <i class="fas fa-th-list text-xs mr-2"></i> 
                             Filtrar
                         </button>
                     </form>
@@ -25,7 +25,7 @@
                 <div class="flex flex-col items-center w-1/3 px-2">
                     <form wire:submit.prevent="filterPrices" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
-                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 w-full border-gray-300 rounded-lg">
+                            <select wire:model="selectedPrices" id="selectedPrices" name="selectedPrices" class="h-10 w-full border-gray-300 rounded-lg text-xs sm:text-sm md:text-base lg:text-lg">
                                 <option class="py-2" value="">Seleccione un Precio</option>
                                 @foreach($prices as $price)
                                     <option value="{{$price->id}}">{{$price->value}}</option>
@@ -43,7 +43,7 @@
                 <div class="flex flex-col items-center w-1/3 px-2">
                     <form wire:submit.prevent="filterLevels" class="flex flex-col items-center space-y-2 lg:justify-center">
                         <div class="flex-grow w-full">
-                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 w-full border-gray-300 rounded-lg">
+                            <select wire:model="selectedLevels" id="selectedLevels" name="selectedLevels" class="h-10 w-full border-gray-300 rounded-lg text-xs sm:text-sm md:text-base lg:text-lg">
                                 <option class="py-2" value="">Seleccione el Nivel</option>
                                 @foreach($levels as $level)
                                     <option value="{{$level->id}}">{{$level->name}}</option>
