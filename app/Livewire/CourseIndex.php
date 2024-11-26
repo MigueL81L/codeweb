@@ -109,13 +109,13 @@ class CourseIndex extends Component
                 });
             }
             
+            // Obtener cursos filtrados con paginación (esto es lo que cambia)
+            $courses = $coursesQuery->latest('id')->paginate(8); // Se paginará siempre la colección filtrada
+        
             // Comprobar si hay resultados después de aplicar los filtros
-            if ($coursesQuery->count() === 0) {
+            if ($courses->count() === 0) {
                 $mensaje = "No hay cursos disponibles con los criterios seleccionados.";
             } 
-            
-            // Obtener cursos filtrados sin paginación
-            $courses = $coursesQuery->latest('id')->get();
             
         } else {
             // Si no hay filtros, paginar la colección completa
