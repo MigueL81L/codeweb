@@ -16,7 +16,7 @@
         <div class="table-responsive overflow-x-auto">
                 
                 <!-- Contenedor Flex para los botones y el menú desplegable -->
-                <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 sm:space-y-0">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-4 space-y-4 sm:space-y-0">
 
                     <div class="flex items-center space-y-4 sm:space-x-4"> 
                         <form wire:submit.prevent="filterUsers" class="flex items-center relative text-gray-600 space-x-4">
