@@ -20,7 +20,7 @@
 
                     <div class="flex items-center space-y-4 sm:space-x-4"> 
                         <form wire:submit.prevent="filterUsers" class="flex items-center relative text-gray-600 space-x-4">
-                            <select wire:model="selectedRoles" class="h-10 border-gray-300 rounded-lg w-full sm:w-auto text-center">
+                            <select wire:model="selectedRoles" class="h-12 border-gray-300 rounded-lg w-full sm:w-auto text-center">
                                 <option value="">Roles</option>
                                 @foreach($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -39,7 +39,7 @@
                         </form>
                     </div>
 
-                    <button type="button" onclick="window.location='{{ route('admin.users.create') }}'" class="bg-green-500 text-white hover:bg-green-700 h-12 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center ml-4">
+                    <button type="button" onclick="window.location='{{ route('admin.users.create') }}'" class="bg-green-500  hover:bg-green-600 text-white font-bold py-2 px-4 h-12 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center ml-4">
                         Crear Nuevo Usuario
                     </button>
                 </div>
