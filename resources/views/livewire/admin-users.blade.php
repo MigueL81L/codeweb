@@ -39,9 +39,9 @@
                         </form>
                     </div>
 
-                    <a href="{{ route('admin.users.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold h-12 py-2 px-4 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
+                    <button type="button" onclick="window.location='{{ route('admin.users.create') }}'" class="btn btn-primary h-12 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
                         Crear Nuevo Usuario
-                    </a>
+                    </button>
                 </div>
 
                 <form class="pt-2 relative mx-auto text-gray-600 w-full" autocomplete="off">
