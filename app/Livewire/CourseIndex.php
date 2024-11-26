@@ -109,7 +109,7 @@ class CourseIndex extends Component
                 });
             }
             
-            $courses = $coursesQuery->latest('id')->get();
+            $courses = $coursesQuery->latest('id')->paginate(100);
         
             // Comprobar si hay resultados después de aplicar los filtros
             if ($courses->count() === 0) {
