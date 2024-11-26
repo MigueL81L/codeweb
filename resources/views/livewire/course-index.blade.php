@@ -19,7 +19,7 @@
                             Filtrar
                         </button>
 
-                        <button type="button" wire:click="resetCategory" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full mt-2">
+                        <button type="button" wire:click="resetCategory" class="btn btn-danger btn-block mt-2">
                             <i class="fas fa-th-list text-xs mr-2"></i>
                             Reset
                         </button>
@@ -42,7 +42,7 @@
                             Filtrar
                         </button>
 
-                        <button type="button" wire:click="resetPrice" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full mt-2">
+                        <button type="button" wire:click="resetPrice" class="btn btn-danger btn-block mt-2">
                             <i class="fas fa-euro-sign text-xs mr-2"></i>
                             Reset
                         </button>
@@ -65,7 +65,7 @@
                             Filtrar
                         </button>
 
-                        <button type="button" wire:click="resetLevel" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full mt-2">
+                        <button type="button" wire:click="resetLevel" class="btn btn-danger btn-block mt-2">
                             <i class="fas fa-filter text-xs mr-2"></i>
                             Reset
                         </button>
