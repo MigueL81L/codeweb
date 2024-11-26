@@ -30,14 +30,6 @@ class CourseIndex extends Component
     public $selectedPrices = [];
     public $selectedPrice = null;
     public $p = null;
-
-    public $b = null;
-    public $c = null;
-
-    public $g = null;
-
-    public $w = true;
-
     public $isFiltered = false;
 
     public function resetLevel()
@@ -76,41 +68,11 @@ class CourseIndex extends Component
         $mensaje = "";
     
         $coursesQuery = Course::where('status', 3);
-    
-        // if (!is_null($this->a)) {
-        //     $coursesQuery->whereHas('level', function ($query) {
-        //         $query->where('id', $this->a);
-        //     });
-        //     $this->isFiltered = true;
-        //     if ($coursesQuery->count() === 0) {
-        //         $mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
-        //     }
-        // }
-        
-        // if (!is_null($this->f)) {
-        //     $coursesQuery->whereHas('category', function ($query) {
-        //         $query->where('id', $this->f);
-        //     });
-        //     $this->isFiltered = true;
-        //     if ($coursesQuery->count() === 0) {
-        //         $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
-        //     }
-        // }
 
-        // if (!is_null($this->p)) {
-        //     $coursesQuery->whereHas('price', function ($query) {
-        //         $query->where('id', $this->p);
-        //     });
-        //     $this->isFiltered = true;
-        //     if ($coursesQuery->count() === 0) {
-        //         $mensaje = "Todavía no tenemos Cursos en ese Rango de Precios. En breve podrás disponer de los mejores!";
-        //     }
-        // }
-    
-        // $courses = $this->isFiltered ? $coursesQuery->latest('id')->get() : $coursesQuery->latest('id')->paginate(8)->withQueryString();
 
           // Aplicar filtros si están presentes
         if ($this->isFiltered) {
+
             // Filtrado por nivel
             if (!is_null($this->a)) {
                 $coursesQuery->whereHas('level', function ($query) {
@@ -155,93 +117,64 @@ class CourseIndex extends Component
         ]);
     }
     
-    public function filterLevels()
-    {
-        $this->resetCategory();
-        $this->resetPrice();
-        $this->page = 1;
+public function filterLevels()
+{
+    // Reiniciar a la primera página
+    $this->page = 1;
 
-        if (!is_array($this->selectedLevels)) {
-            $this->selectedLevels = ($this->selectedLevels !== '') ? [$this->selectedLevels] : [];
-        }
+    // Limpiar otros filtros
+    $this->resetCategory(); 
+    $this->resetPrice(); 
 
-        foreach ($this->selectedLevels as $level) {
-            if ($level != null && $level != '') {
-                $i = (int) $level; 
-                $l = Level::find($i); 
-                $this->selectedLevel = $l;
-                break;
-            }
-        }
-
-        if ($this->selectedLevel) {
-            $this->a = $this->selectedLevel->id;
-        } else {
-            $this->a = null;
-        }
-
-        $filteredCourses = collect();
-
-        if ($this->a != null) {
-            $filteredCourses = Course::whereHas('level', function ($query) {
-                $query->where('id', $this->a);
-            })->paginate(8);
-        }
-
-        $this->b = count($filteredCourses);
-        $this->resetPage();
-
-        return $filteredCourses; 
+    // Si selecciona múltiples niveles y asegura que se manejen como tal
+    if (!is_array($this->selectedLevels)) {
+        $this->selectedLevels = ($this->selectedLevels !== '') ? [$this->selectedLevels] : [];
     }
+
+    // Obtener el primer nivel seleccionado
+    $this->selectedLevel = count($this->selectedLevels) > 0 ? Level::find($this->selectedLevels[0]) : null;
+
+    // Establecer la variable `a` basada en la selección actual
+    $this->a = $this->selectedLevel ? $this->selectedLevel->id : null;
+
+    // Establecer `isFiltered` a verdadero porque estamos aplicando un filtro
+    $this->isFiltered = !is_null($this->a);
+
+    // Reiniciar la paginación
+    $this->resetPage(); 
+}
 
     public function updatedSelectedLevels()
     {
         $this->resetPage();
     }
 
-    protected function getFilteredCourses()
-    {
-        return Course::where('status', 3)
-            ->latest('id')
-            ->paginate(8);
-    }
 
     public function filterCategories()
     {
-        $this->resetLevel();
-        $this->resetPrice();
+        // Reiniciar a la primera página
         $this->page = 1;
-
+    
+        // Limpiar otros filtros
+        $this->resetLevel(); 
+        $this->resetPrice(); 
+    
+        // Si selecciona múltiples categorías y asegura que se manejen como tal
         if (!is_array($this->selectedCategories)) {
             $this->selectedCategories = ($this->selectedCategories !== '') ? [$this->selectedCategories] : [];
         }
-
-        foreach ($this->selectedCategories as $category) {
-            if ($category != null && $category != '') {
-                $y = Category::find($category); 
-                $this->selectedCategory = $y;
-                break;
-            }
-        }
-
-        if ($this->selectedCategory) {
-            $this->f = $this->selectedCategory->id;
-        } else {
-            $this->f = null;
-        }
-
-        $filteredCourses = collect();
-
-        if ($this->f != null) {
-            $filteredCourses = Course::whereHas('category', function ($query) {
-                $query->where('id', $this->f);
-            })->paginate(8);
-        }
-        $this->g = count($filteredCourses);
-
-        $this->resetPage();
+    
+        // Obtener la primera categoría seleccionada
+        $this->selectedCategory = count($this->selectedCategories) > 0 ? Category::find($this->selectedCategories[0]) : null;
+    
+        // Establecer la variable `f` basada en la selección actual
+        $this->f = $this->selectedCategory ? $this->selectedCategory->id : null;
+    
+        // Establecer `isFiltered` a verdadero porque estamos aplicando un filtro
+        $this->isFiltered = !is_null($this->f);
         
-        return $filteredCourses;
+        // Reiniciar la paginación
+        $this->resetPage();
     }
 
     public function updatedSelectedCategories()
@@ -251,39 +184,29 @@ class CourseIndex extends Component
     
     public function filterPrices()
     {
-        $this->resetLevel();
-        $this->resetCategory();
+        // Reiniciar a la primera página
         $this->page = 1;
-
+    
+        // Limpiar otros filtros
+        $this->resetLevel(); 
+        $this->resetCategory(); 
+    
+        // Si selecciona múltiples precios y asegura que se manejen como tal
         if (!is_array($this->selectedPrices)) {
             $this->selectedPrices = ($this->selectedPrices !== '') ? [$this->selectedPrices] : [];
         }
-
-        foreach ($this->selectedPrices as $price) {
-            if ($price != null && $price != '') {
-                $z = Price::find($price); 
-                $this->selectedPrice = $z;
-                break;
-            }
-        }
-
-        if ($this->selectedPrice) {
-            $this->p = $this->selectedPrice->id;
-        } else {
-            $this->p = null;
-        }
-
-        $filteredCourses = collect();
-
-        if ($this->p != null) {
-            $filteredCourses = Course::whereHas('price', function ($query) {
-                $query->where('id', $this->p);
-            })->paginate(8);
-        }
+    
+        // Obtener el primer precio seleccionado
+        $this->selectedPrice = count($this->selectedPrices) > 0 ? Price::find($this->selectedPrices[0]) : null;
+    
+        // Establecer la variable `p` basada en la selección actual
+        $this->p = $this->selectedPrice ? $this->selectedPrice->id : null;
+    
+        // Establecer `isFiltered` a verdadero porque estamos aplicando un filtro
+        $this->isFiltered = !is_null($this->p);
         
+        // Reiniciar la paginación
         $this->resetPage();
-        
-        return $filteredCourses;
     }
 
     public function updatedSelectedPrices()
