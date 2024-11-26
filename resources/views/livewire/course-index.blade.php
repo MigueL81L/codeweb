@@ -84,11 +84,16 @@
             @endforeach
         </div>
 
-        @unless($isFiltered) <!--Mostrar paginación solo si la colección, no está filtrada-->
+        {{-- @unless($isFiltered) <!--Mostrar paginación solo si la colección, no está filtrada-->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-8">
                 {{ $courses->links('pagination::tailwind') }}
             </div>
-        @endunless
+        @endunless --}}
+
+        <!-- Mostrar la paginación siempre -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-8">
+            {{ $courses->links('pagination::tailwind') }}
+        </div>
 
     @else
         <div class="bg-gray-100 rounded-lg p-4 text-center w-full">
