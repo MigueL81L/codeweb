@@ -27,7 +27,7 @@ class CourseMatriculados extends Component
     public $selectedPrices = [];
     public $selectedPrice = null;
     public $p = null;
-    
+
     public $isFiltered = false;
 
     public function resetLevel()
@@ -92,49 +92,51 @@ class CourseMatriculados extends Component
         $coursesQuery = Course::whereHas('students', function($query) {
             $query->where('users.id', Auth::id());
         });
-
+    
         // Verificar si la colección está vacía después de la consulta inicial.
         if ($coursesQuery->count() === 0) {
             $mensaje = "¡Aún no estás matriculado en ningún curso! ¡Explora nuestros cursos y matricúlate!";
-        }else{
-            // Aplicar filtros si están presentes
-            if ($this->isFiltered) {
-
-                // Filtrado por nivel
-                if (!is_null($this->a)) {
-                    $coursesQuery->whereHas('level', function ($query) {
-                        $query->where('id', $this->a);
-                    });
-                }
-                
-                // Filtrado por categoría
-                if (!is_null($this->f)) {
-                    $coursesQuery->whereHas('category', function ($query) {
-                        $query->where('id', $this->f);
-                    });
-                }
-
-                // Filtrado por precio
-                if (!is_null($this->p)) {
-                    $coursesQuery->whereHas('price', function ($query) {
-                        $query->where('id', $this->p);
-                    });
-                }
-                
-                // Obtener cursos filtrados sin paginación
-                $courses = $coursesQuery->latest('id')->get();
-            
-                // Comprobar si hay resultados después de aplicar los filtros
-                if ($courses->count() === 0) {
-                    $mensaje = "No hay cursos disponibles con los criterios seleccionados.";
-                } 
-                
-            } else {
-                // Si no hay filtros, paginar la colección completa
-                $courses = $coursesQuery->latest('id')->paginate(8)->withQueryString();
-            }
         }
 
+
+          // Aplicar filtros si están presentes
+        if ($this->isFiltered) {
+
+            // Filtrado por nivel
+            if (!is_null($this->a)) {
+                $coursesQuery->whereHas('level', function ($query) {
+                    $query->where('id', $this->a);
+                });
+            }
+            
+            // Filtrado por categoría
+            if (!is_null($this->f)) {
+                $coursesQuery->whereHas('category', function ($query) {
+                    $query->where('id', $this->f);
+                });
+            }
+
+            // Filtrado por precio
+            if (!is_null($this->p)) {
+                $coursesQuery->whereHas('price', function ($query) {
+                    $query->where('id', $this->p);
+                });
+            }
+            
+            // Obtener cursos filtrados sin paginación
+            $courses = $coursesQuery->latest('id')->get();
+        
+            // Comprobar si hay resultados después de aplicar los filtros
+            if ($courses->count() === 0) {
+                $mensaje = "No hay cursos disponibles con los criterios seleccionados.";
+            } 
+            
+        } else {
+            // Si no hay filtros, paginar la colección completa
+            $courses = $coursesQuery->latest('id')->paginate(8)->withQueryString();
+        }
+
+    
         return view('livewire.course-matriculados', [
             'levels' => $levels,
             'categories' => $categories,
