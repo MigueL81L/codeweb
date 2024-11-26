@@ -37,7 +37,10 @@ class CourseIndex extends Component
         $this->selectedLevels = [];
         $this->selectedLevel = null;
         $this->a = null; 
-        $this->isFiltered = false;         // Indicar que no hay filtros activos
+
+        // Solo desactiva el filtrado para niveles
+        $this->isFiltered = !($this->f || $this->p); // Verifica si hay filtros activos
+
         $this->resetPage(); 
     }
     
@@ -46,7 +49,10 @@ class CourseIndex extends Component
         $this->selectedCategories = [];
         $this->selectedCategory = null;
         $this->f = null;
-        $this->isFiltered = false;         // Indicar que no hay filtros activos
+
+        // Solo desactiva el filtrado para categorías
+        $this->isFiltered = !($this->a || $this->p); // Verifica si hay filtros activos
+
         $this->resetPage(); 
     }
     
@@ -55,7 +61,10 @@ class CourseIndex extends Component
         $this->selectedPrices = [];
         $this->selectedPrice = null;
         $this->p = null;
-        $this->isFiltered = false;         // Indicar que no hay filtros activos
+
+        // Solo desactiva el filtrado para precios
+        $this->isFiltered = !($this->a || $this->f); // Verifica si hay filtros activos
+        
         $this->resetPage(); 
     }
 
