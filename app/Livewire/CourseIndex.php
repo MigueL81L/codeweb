@@ -109,8 +109,7 @@ class CourseIndex extends Component
                 });
             }
             
-            // Obtener cursos filtrados con paginación (esto es lo que cambia)
-            $courses = $coursesQuery->latest('id')->paginate(8); // Se paginará siempre la colección filtrada
+            $courses = $coursesQuery->latest('id')->get();
         
             // Comprobar si hay resultados después de aplicar los filtros
             if ($courses->count() === 0) {
