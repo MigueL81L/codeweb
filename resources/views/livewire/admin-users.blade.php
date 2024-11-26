@@ -39,7 +39,7 @@
                         </form>
                     </div>
 
-                    <button type="button" onclick="window.location='{{ route('admin.users.create') }}'" class="btn btn-primary h-12 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
+                    <button type="button" onclick="window.location='{{ route('admin.users.create') }}'" class="bg-green-500 text-white hover:bg-green-700 h-12 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center ml-4">
                         Crear Nuevo Usuario
                     </button>
                 </div>
