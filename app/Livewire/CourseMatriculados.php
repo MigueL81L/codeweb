@@ -10,9 +10,11 @@ use App\Models\Price;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
-class CourseMatriculados extends Component
+class CourseMatriculados extends Component 
 {
     use WithPagination;
+
+    public $page;
 
     public $selectedLevels = [];
     public $selectedLevel = null;
@@ -25,101 +27,148 @@ class CourseMatriculados extends Component
     public $selectedPrices = [];
     public $selectedPrice = null;
     public $p = null;
-
+    
     public $isFiltered = false;
 
     public function resetLevel()
     {
-        $this->selectedLevels = [];
-        $this->selectedLevel = null;
-        $this->a = null; 
+        // Verificar si hay algún filtrado activo
+        if ($this->isFiltered) {
+            // Comprobar si el filtrado activo corresponde a un nivel
+            if (!is_null($this->a)) {
+                // Si corresponde, limpiar las selecciones
+                $this->selectedLevels = [];
+                $this->selectedLevel = null;
+                $this->a = null; 
+                // Redirigir a la vista de índice
+                return redirect()->route('courses.matriculados'); // Cambia "courses.index" según tu ruta
+            }
+        }
+        // Si no hay filtrado por niveles, no hacer nada
     }
     
     public function resetCategory()
     {
-        $this->selectedCategories = [];
-        $this->selectedCategory = null;
-        $this->f = null;
+        // Verificar si hay algún filtrado activo
+        if ($this->isFiltered) {
+            // Comprobar si el filtrado activo corresponde a una categoría
+            if (!is_null($this->f)) {
+                // Si corresponde, limpiar las selecciones
+                $this->selectedCategories = [];
+                $this->selectedCategory = null;
+                $this->f = null;
+                // Redirigir a la vista de índice
+                return redirect()->route('courses.matriculados'); // Cambia "courses.index" según tu ruta
+            }
+        }
+        // Si no hay filtrado por categorías, no hacer nada
     }
     
     public function resetPrice()
     {
-        $this->selectedPrices = [];
-        $this->selectedPrice = null;
-        $this->p = null;
+        // Verificar si hay algún filtrado activo
+        if ($this->isFiltered) {
+            // Comprobar si el filtrado activo corresponde a un precio
+            if (!is_null($this->p)) {
+                // Si corresponde, limpiar las selecciones
+                $this->selectedPrices = [];
+                $this->selectedPrice = null;
+                $this->p = null;
+                // Redirigir a la vista de índice
+                return redirect()->route('courses.matriculados'); // Cambia "courses.index" según tu ruta
+            }
+        }
+        // Si no hay filtrado por precios, no hacer nada
     }
 
     public function render()
-{
-    $levels = Level::all();
-    $categories = Category::all();
-    $prices = Price::all();
+    {
+        $levels = Level::all();
+        $categories = Category::all();
+        $prices = Price::all(); // Obtener precios
 
-    $mensaje = "";  // Mensaje inicial como cadena vacía.
-
-    $coursesQuery = Course::whereHas('students', function($query) {
-        $query->where('users.id', Auth::id());
-    });
-
-    // Verificar si la colección está vacía después de la consulta inicial.
-    if ($coursesQuery->count() === 0) {
-        $mensaje = "¡Aún no estás matriculado en ningún curso! ¡Explora nuestros cursos y matricúlate!";
-    }
-
-    if (!is_null($this->a)) {
-        $coursesQuery->whereHas('level', function ($query) {
-            $query->where('id', $this->a);
-        });
-        $this->isFiltered = true;
-        if ($coursesQuery->count() === 0) {
-            $mensaje = "No te has matriculado en cursos de este nivel. ¡A que esperas, tenemos los mejores cursos! ¡Matriculate ya!";
-        }
-    }
+        $mensaje = "";
     
-    if (!is_null($this->f)) {
-        $coursesQuery->whereHas('category', function ($query) {
-            $query->where('id', $this->f);
+        $coursesQuery = Course::whereHas('students', function($query) {
+            $query->where('users.id', Auth::id());
         });
-        $this->isFiltered = true;
+
+        // Verificar si la colección está vacía después de la consulta inicial.
         if ($coursesQuery->count() === 0) {
-            $mensaje = "No te has matriculado en cursos de esta categoría. ¡A que esperas, tenemos los mejores cursos! ¡Matriculate ya!";
+            $mensaje = "¡Aún no estás matriculado en ningún curso! ¡Explora nuestros cursos y matricúlate!";
+        }else{
+            // Aplicar filtros si están presentes
+            if ($this->isFiltered) {
+
+                // Filtrado por nivel
+                if (!is_null($this->a)) {
+                    $coursesQuery->whereHas('level', function ($query) {
+                        $query->where('id', $this->a);
+                    });
+                }
+                
+                // Filtrado por categoría
+                if (!is_null($this->f)) {
+                    $coursesQuery->whereHas('category', function ($query) {
+                        $query->where('id', $this->f);
+                    });
+                }
+
+                // Filtrado por precio
+                if (!is_null($this->p)) {
+                    $coursesQuery->whereHas('price', function ($query) {
+                        $query->where('id', $this->p);
+                    });
+                }
+                
+                // Obtener cursos filtrados sin paginación
+                $courses = $coursesQuery->latest('id')->get();
+            
+                // Comprobar si hay resultados después de aplicar los filtros
+                if ($courses->count() === 0) {
+                    $mensaje = "No hay cursos disponibles con los criterios seleccionados.";
+                } 
+                
+            } else {
+                // Si no hay filtros, paginar la colección completa
+                $courses = $coursesQuery->latest('id')->paginate(8)->withQueryString();
+            }
         }
+
+        return view('livewire.course-matriculados', [
+            'levels' => $levels,
+            'categories' => $categories,
+            'prices' => $prices,
+            'courses' => $courses,
+            'mensaje' => $mensaje,
+        ]);
     }
-
-    if (!is_null($this->p)) {
-        $coursesQuery->whereHas('price', function ($query) {
-            $query->where('id', $this->p);
-        });
-        $this->isFiltered = true;
-        if ($coursesQuery->count() === 0) {
-            $mensaje = "No te has matriculado en cursos en este rango de precios. ¡A que esperas, tenemos los mejores cursos! ¡Matriculate ya!";
-        }
-    }
-
-    $courses = $this->isFiltered ? $coursesQuery->latest('id')->get() : $coursesQuery->latest('id')->paginate(8)->withQueryString();
-
-    return view('livewire.course-matriculados', compact('levels', 'categories', 'prices', 'courses', 'mensaje'));
-}
-
     
     public function filterLevels()
     {
-        $this->resetCategory();
-        $this->resetPrice();
+        // Reiniciar a la primera página
+        $this->page = 1;
 
+        // Limpiar otros filtros
+        $this->resetCategory(); 
+        $this->resetPrice(); 
+
+        // Si selecciona múltiples niveles y asegura que se manejen como tal
         if (!is_array($this->selectedLevels)) {
             $this->selectedLevels = ($this->selectedLevels !== '') ? [$this->selectedLevels] : [];
         }
 
-        foreach ($this->selectedLevels as $level) {
-            if ($level != null && $level != '') {
-                $this->selectedLevel = Level::find((int)$level);
-                break;
-            }
-        }
+        // Obtener el primer nivel seleccionado
+        $this->selectedLevel = count($this->selectedLevels) > 0 ? Level::find($this->selectedLevels[0]) : null;
 
+        // Establecer la variable `a` basada en la selección actual
         $this->a = $this->selectedLevel ? $this->selectedLevel->id : null;
-        $this->resetPage();
+
+        // Establecer `isFiltered` a verdadero porque estamos aplicando un filtro
+        $this->isFiltered = !is_null($this->a);
+
+        // Reiniciar la paginación
+        $this->resetPage(); 
     }
 
     public function updatedSelectedLevels()
@@ -127,23 +176,31 @@ class CourseMatriculados extends Component
         $this->resetPage();
     }
 
+
     public function filterCategories()
     {
-        $this->resetLevel();
-        $this->resetPrice();
-
+        // Reiniciar a la primera página
+        $this->page = 1;
+    
+        // Limpiar otros filtros
+        $this->resetLevel(); 
+        $this->resetPrice(); 
+    
+        // Si selecciona múltiples categorías y asegura que se manejen como tal
         if (!is_array($this->selectedCategories)) {
             $this->selectedCategories = ($this->selectedCategories !== '') ? [$this->selectedCategories] : [];
         }
-
-        foreach ($this->selectedCategories as $category) {
-            if ($category != null && $category != '') {
-                $this->selectedCategory = Category::find((int)$category);
-                break;
-            }
-        }
-
+    
+        // Obtener la primera categoría seleccionada
+        $this->selectedCategory = count($this->selectedCategories) > 0 ? Category::find($this->selectedCategories[0]) : null;
+    
+        // Establecer la variable `f` basada en la selección actual
         $this->f = $this->selectedCategory ? $this->selectedCategory->id : null;
+    
+        // Establecer `isFiltered` a verdadero porque estamos aplicando un filtro
+        $this->isFiltered = !is_null($this->f);
+        
+        // Reiniciar la paginación
         $this->resetPage();
     }
 
@@ -154,21 +211,28 @@ class CourseMatriculados extends Component
     
     public function filterPrices()
     {
-        $this->resetLevel();
-        $this->resetCategory();
-
+        // Reiniciar a la primera página
+        $this->page = 1;
+    
+        // Limpiar otros filtros
+        $this->resetLevel(); 
+        $this->resetCategory(); 
+    
+        // Si selecciona múltiples precios y asegura que se manejen como tal
         if (!is_array($this->selectedPrices)) {
             $this->selectedPrices = ($this->selectedPrices !== '') ? [$this->selectedPrices] : [];
         }
-
-        foreach ($this->selectedPrices as $price) {
-            if ($price != null && $price != '') {
-                $this->selectedPrice = Price::find((int)$price);
-                break;
-            }
-        }
-
+    
+        // Obtener el primer precio seleccionado
+        $this->selectedPrice = count($this->selectedPrices) > 0 ? Price::find($this->selectedPrices[0]) : null;
+    
+        // Establecer la variable `p` basada en la selección actual
         $this->p = $this->selectedPrice ? $this->selectedPrice->id : null;
+    
+        // Establecer `isFiltered` a verdadero porque estamos aplicando un filtro
+        $this->isFiltered = !is_null($this->p);
+        
+        // Reiniciar la paginación
         $this->resetPage();
     }
 
@@ -177,9 +241,3 @@ class CourseMatriculados extends Component
         $this->resetPage();
     }
 }
-
-
-
-
-
-
