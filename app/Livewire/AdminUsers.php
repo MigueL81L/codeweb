@@ -2,7 +2,7 @@
 
 
 
-namespace App\Livewire;
+namespace App\Livewire; 
 
 use Livewire\Component;
 use App\Models\User;
@@ -66,6 +66,17 @@ class AdminUsers extends Component
 
         // Si se selecciona solo un rol, entonces aplica el filtro
         $this->resetPage(); // Reinicia la paginación al aplicar un nuevo filtro
+    }
+
+    // Método para el botón Reset del filtrado por roles
+     public function resetRoles()
+    {
+        // Solo limpiar la selección de roles si estaba filtrada
+        if (!empty($this->selectedRoles)) {
+            $this->selectedRoles = [];
+            // Redirigir al usuario a la vista de índice
+            return redirect()->route('admin.users.index'); // Cambia esto si es necesario
+        }
     }
 
 

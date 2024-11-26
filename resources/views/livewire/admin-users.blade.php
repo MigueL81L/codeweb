@@ -7,7 +7,7 @@
         @endif
 
         @if (session('warning'))
-            <div class="bg-yellow-500 text-white px-4 py-2 w-full shadow-md mb-2">
+            <div class="bg-yellow-500 text-white px-4 py-2 w-full shadow-md mb-2"> 
                 <strong>Advertencia! </strong>{{ session('warning') }}
             </div>
         @endif
@@ -28,6 +28,12 @@
                             <button type="submit" class="bg-gray-500 hover:bg-gray-600 text-white font-bold h-10 py-2 px-4 rounded w-full sm:w-auto">
                                 <i class="fas fa-user-cog"></i>
                                 Filtrar
+                            </button>
+
+                            <!-- Botón Reset para Filtrar por Roles -->
+                            <button type="button" wire:click="resetRoles" class="bg-red-500 hover:bg-red-700 text-white font-bold h-10 py-2 px-4 rounded w-full sm:w-auto">
+                                <i class="fas fa-undo text-xs mr-2"></i>
+                                Reset Roles
                             </button>
                         </form>
                     </div>
