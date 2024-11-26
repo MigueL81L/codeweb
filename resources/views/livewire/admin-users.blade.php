@@ -31,7 +31,7 @@
                             </button>
 
                             <!-- Botón Reset para Filtrar por Roles -->
-                            <button type="button" wire:click="resetRoles" class="btn btn-danger btn-block mt-2">
+                            <button type="button" wire:click="resetRoles" class="bg-gray-500 hover:bg-gray-600 text-white font-bold h-10 py-2 px-4 rounded w-full sm:w-auto">
                                 <i class="fas fa-undo text-xs mr-2"></i>
                                 Reset Roles
                             </button>
