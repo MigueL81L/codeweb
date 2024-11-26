@@ -45,6 +45,8 @@ class CourseIndex extends Component
         $this->selectedLevels = [];
         $this->selectedLevel = null;
         $this->a = null; 
+        $this->isFiltered = false;         // Indicar que no hay filtros activos
+        $this->resetPage(); 
     }
     
     public function resetCategory()
@@ -52,6 +54,8 @@ class CourseIndex extends Component
         $this->selectedCategories = [];
         $this->selectedCategory = null;
         $this->f = null;
+        $this->isFiltered = false;         // Indicar que no hay filtros activos
+        $this->resetPage(); 
     }
     
     public function resetPrice()
@@ -59,6 +63,8 @@ class CourseIndex extends Component
         $this->selectedPrices = [];
         $this->selectedPrice = null;
         $this->p = null;
+        $this->isFiltered = false;         // Indicar que no hay filtros activos
+        $this->resetPage(); 
     }
 
     public function render()
@@ -71,37 +77,74 @@ class CourseIndex extends Component
     
         $coursesQuery = Course::where('status', 3);
     
-        if (!is_null($this->a)) {
-            $coursesQuery->whereHas('level', function ($query) {
-                $query->where('id', $this->a);
-            });
-            $this->isFiltered = true;
-            if ($coursesQuery->count() === 0) {
-                $mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
-            }
-        }
+        // if (!is_null($this->a)) {
+        //     $coursesQuery->whereHas('level', function ($query) {
+        //         $query->where('id', $this->a);
+        //     });
+        //     $this->isFiltered = true;
+        //     if ($coursesQuery->count() === 0) {
+        //         $mensaje = "Todavía no tenemos Cursos de ese Nivel. En breve podrás disponer de los mejores!";
+        //     }
+        // }
         
-        if (!is_null($this->f)) {
-            $coursesQuery->whereHas('category', function ($query) {
-                $query->where('id', $this->f);
-            });
-            $this->isFiltered = true;
-            if ($coursesQuery->count() === 0) {
-                $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
+        // if (!is_null($this->f)) {
+        //     $coursesQuery->whereHas('category', function ($query) {
+        //         $query->where('id', $this->f);
+        //     });
+        //     $this->isFiltered = true;
+        //     if ($coursesQuery->count() === 0) {
+        //         $mensaje = "Todavía no tenemos Cursos de esta Categoría. En breve podrás disponer de los mejores!";
+        //     }
+        // }
+
+        // if (!is_null($this->p)) {
+        //     $coursesQuery->whereHas('price', function ($query) {
+        //         $query->where('id', $this->p);
+        //     });
+        //     $this->isFiltered = true;
+        //     if ($coursesQuery->count() === 0) {
+        //         $mensaje = "Todavía no tenemos Cursos en ese Rango de Precios. En breve podrás disponer de los mejores!";
+        //     }
+        // }
+    
+        // $courses = $this->isFiltered ? $coursesQuery->latest('id')->get() : $coursesQuery->latest('id')->paginate(8)->withQueryString();
+
+          // Aplicar filtros si están presentes
+        if ($this->isFiltered) {
+            // Filtrado por nivel
+            if (!is_null($this->a)) {
+                $coursesQuery->whereHas('level', function ($query) {
+                    $query->where('id', $this->a);
+                });
             }
+            
+            // Filtrado por categoría
+            if (!is_null($this->f)) {
+                $coursesQuery->whereHas('category', function ($query) {
+                    $query->where('id', $this->f);
+                });
+            }
+
+            // Filtrado por precio
+            if (!is_null($this->p)) {
+                $coursesQuery->whereHas('price', function ($query) {
+                    $query->where('id', $this->p);
+                });
+            }
+            
+            // Comprobar si hay resultados después de aplicar los filtros
+            if ($coursesQuery->count() === 0) {
+                $mensaje = "No hay cursos disponibles con los criterios seleccionados.";
+            } 
+            
+            // Obtener cursos filtrados sin paginación
+            $courses = $coursesQuery->latest('id')->get();
+            
+        } else {
+            // Si no hay filtros, paginar la colección completa
+            $courses = $coursesQuery->latest('id')->paginate(8)->withQueryString();
         }
 
-        if (!is_null($this->p)) {
-            $coursesQuery->whereHas('price', function ($query) {
-                $query->where('id', $this->p);
-            });
-            $this->isFiltered = true;
-            if ($coursesQuery->count() === 0) {
-                $mensaje = "Todavía no tenemos Cursos en ese Rango de Precios. En breve podrás disponer de los mejores!";
-            }
-        }
-    
-        $courses = $this->isFiltered ? $coursesQuery->latest('id')->get() : $coursesQuery->latest('id')->paginate(8)->withQueryString();
     
         return view('livewire.course-index', [
             'levels' => $levels,
