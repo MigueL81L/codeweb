@@ -34,44 +34,53 @@ class CourseIndex extends Component
 
     public function resetLevel()
     {
-        $this->selectedLevels = [];
-        $this->selectedLevel = null;
-        $this->a = null; 
-
-    // Eliminar únicamente el filtro de niveles
-    if (is_null($this->f) && is_null($this->p)) { // Si no hay otros filtros activos
-        $this->isFiltered = false;
-    }
-
-        $this->resetPage(); 
+        // Verificar si hay algún filtrado activo
+        if ($this->isFiltered) {
+            // Comprobar si el filtrado activo corresponde a un nivel
+            if (!is_null($this->a)) {
+                // Si corresponde, limpiar las selecciones
+                $this->selectedLevels = [];
+                $this->selectedLevel = null;
+                $this->a = null; 
+                // Redirigir a la vista de índice
+                return redirect()->route('courses.index'); // Cambia "courses.index" según tu ruta
+            }
+        }
+        // Si no hay filtrado por niveles, no hacer nada
     }
     
     public function resetCategory()
     {
-        $this->selectedCategories = [];
-        $this->selectedCategory = null;
-        $this->f = null;
-
-    // Eliminar únicamente el filtro de categorías
-    if (is_null($this->a) && is_null($this->p)) { // Si no hay otros filtros activos
-        $this->isFiltered = false;
-    }
-
-        $this->resetPage(); 
+        // Verificar si hay algún filtrado activo
+        if ($this->isFiltered) {
+            // Comprobar si el filtrado activo corresponde a una categoría
+            if (!is_null($this->f)) {
+                // Si corresponde, limpiar las selecciones
+                $this->selectedCategories = [];
+                $this->selectedCategory = null;
+                $this->f = null;
+                // Redirigir a la vista de índice
+                return redirect()->route('courses.index'); // Cambia "courses.index" según tu ruta
+            }
+        }
+        // Si no hay filtrado por categorías, no hacer nada
     }
     
     public function resetPrice()
     {
-        $this->selectedPrices = [];
-        $this->selectedPrice = null;
-        $this->p = null;
-
-    // Eliminar únicamente el filtro de precios
-    if (is_null($this->a) && is_null($this->f)) { // Si no hay otros filtros activos
-        $this->isFiltered = false;
-    }
-
-        $this->resetPage(); 
+        // Verificar si hay algún filtrado activo
+        if ($this->isFiltered) {
+            // Comprobar si el filtrado activo corresponde a un precio
+            if (!is_null($this->p)) {
+                // Si corresponde, limpiar las selecciones
+                $this->selectedPrices = [];
+                $this->selectedPrice = null;
+                $this->p = null;
+                // Redirigir a la vista de índice
+                return redirect()->route('courses.index'); // Cambia "courses.index" según tu ruta
+            }
+        }
+        // Si no hay filtrado por precios, no hacer nada
     }
 
     public function render()
@@ -109,7 +118,8 @@ class CourseIndex extends Component
                 });
             }
             
-            $courses = $coursesQuery->latest('id')->paginate(100);
+            // Obtener cursos filtrados sin paginación
+            $courses = $coursesQuery->latest('id')->get();
         
             // Comprobar si hay resultados después de aplicar los filtros
             if ($courses->count() === 0) {
