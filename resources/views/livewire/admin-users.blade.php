@@ -20,7 +20,7 @@
 
                     <div class="flex items-center space-y-4 sm:space-x-4"> 
                         <form wire:submit.prevent="filterUsers" class="flex items-center relative text-gray-600 space-x-4">
-                            <select wire:model="selectedRoles" class="h-12 border-gray-300 rounded-lg w-full sm:w-auto text-center">
+                            <select wire:model="selectedRoles" class="h-12 border-gray-300 rounded-lg w-full sm:w-auto text-center text-xs sm:text-sm md:text-base lg:text-lg">
                                 <option value="">Roles</option>
                                 @foreach($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
