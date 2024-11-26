@@ -26,20 +26,20 @@
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
-                            <button type="submit" class="bg-gray-500 hover:bg-gray-600 text-white font-bold h-10 py-2 px-4 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
+                            <button type="submit" class="bg-gray-500 hover:bg-gray-600 text-white font-bold h-12 py-2 px-4 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
                                 <i class="fas fa-user-cog"></i>
                                 Filtrar
                             </button>
 
                             <!-- Botón Reset para Filtrar por Roles -->
-                            <button type="button" wire:click="resetRoles" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold h-10 py-2 px-4 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
+                            <button type="button" wire:click="resetRoles" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold h-12 py-2 px-4 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
                                 <i class="fas fa-undo text-xs mr-2"></i>
                                 Reset
                             </button>
                         </form>
                     </div>
 
-                    <a href="{{ route('admin.users.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold h-10 py-2 px-4 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
+                    <a href="{{ route('admin.users.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold h-12 py-2 px-4 rounded w-full sm:w-auto text-xs sm:text-sm md:text-base lg:text-lg text-center">
                         Crear Nuevo Usuario
                     </a>
                 </div>
