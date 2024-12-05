@@ -114,10 +114,12 @@
                             <hr>
                             <div x-show="isOpen" x-transition x-cloak>
                                 <p class="text-sm mb-2 sm:mb-0">Descripción: {{$lesson->description ?? 'No existe descripción para esta lección'}}</p>
+                                
                                 @if($lesson->document_path)
                                     <p class="text-sm mb-2 sm:mb-0">
+                                        Documento:
                                         <a href="{{ Storage::url('app/public/' . $lesson->document_path) }}" class="text-blue-600" target="_blank">
-                                            {{"Documento: " . $lesson->document_original_name }}
+                                            {{$lesson->document_original_name }}
                                         </a>
                                     </p>
                                 @else
